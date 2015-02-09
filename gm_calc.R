@@ -14,3 +14,6 @@ licor_gmes <- licorformat_func(licor_gmes)
 
 ###now run time range function if get samples id and time range
 licor_times <- timerange_func(licor_gmes)
+
+
+###load tdl files
