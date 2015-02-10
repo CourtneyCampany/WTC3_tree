@@ -46,13 +46,14 @@ timerange_func <- function(x, dfr){
     max.dt <- max(x$datetime)
     min.dt <- min(x$datetime)
     id<- unique(x$id)
-    newdfr <- data.frame(min=min.dt, max=max.dt,id=id)
-    
+    licor=x$licor
+    newdfr <- data.frame(min=min.dt, max=max.dt,id=id, licor=licor)
   })
   #below needs package 'data.table'
   times <- rbindlist(dfr)
   times2 <- as.data.frame(times)
 }
+
 #tdl formatting function-----------------------------------------------------------------------------------------------
 
 tdlformat_func <- function(x){
@@ -93,3 +94,102 @@ xsicalc_func <- function(x){
   
   return(xsi_calc)
 }
+
+####gmes_func---------------------------------------------------------------------------------------------------------
+gmesdata_func <- function(xsi_dfr, licor_dfr, times_dfr, licorrows=5, whichlicor="f2" ){
+  
+  ###subset licor_dfr by licor used
+  licor_dfr2 <- licor_dfr[licor_dfr$licor == whichlicor,]
+  licor_dfr2 <- droplevels(licor_dfr2)
+  ###subset times_dfr by licor used
+  times_dfr2 <- times_dfr[times_dfr$licor == whichlicor,] 
+  times_dfr2 <- droplevels(times_dfr2)
+  
+  ###use times_dfr to add "sample id" to xsi dfr based datetime interval
+  xsi_dfr$id <- "no_sample"
+  
+  for(i in 1:nrow(times_dfr)){
+    
+    j <- which(xsi_dfr$timeavg >= times_dfr2$min[i] & xsi_dfr$timeavg <= times_dfr2$max[i])
+    xsi_dfr$id[j] <- as.character(times_dfr2$id[i])
+  }
+  
+  xsi_samples <- xsi_dfr[xsi_dfr$id != "no_sample",]
+  #if(any(xsi_samples$xsi >20)) warning ("You have XSI values over the acceptable limit")
+  
+  ###add closest matched licor time "datetime_match" to xsi_dfr with timematch func (min diff)
+  ii<- sapply(1:nrow(xsi_samples), function(i)which.min(timematch(xsi_samples$timeavg[i], licor_dfr2$datetime)))
+  xsi_samples$datetime_match <- licor_dfr2$datetime[ii]
+  
+  thisrow <- as.vector(ii) 
+  delr <- (licorrows-1)/2
+  
+  licor_ids <- lapply(1:length(thisrow), function(k) {
+    id_split <- licor_dfr2[(thisrow[k]-delr):(thisrow[k]+delr),]
+  })
+  
+  ##in each list if # of unique ids isgreater > 1 then null, null will disappear during rbind
+  deleteDoubles <- function(l, varname="id"){
+    
+    ii <- which(sapply(l, function(el)length(unique(el[,varname])) > 1))
+    l[ii] <- NULL
+    return(l)
+  }
+  
+  licor_ids2 <- deleteDoubles(licor_ids)
+  
+  ###mean of each list, convert to dfr, cbind with xsi&DELTA from xsi_dfr (nrow must be equal)
+  licor_ids_datefix <- llply(licor_ids2, function(x) c(x$datetime <- as.numeric(x$datetime), return(x)))
+  licor_ids_agg <- llply(licor_ids_datefix,function(x) summaryBy(.~id+licor, data=x, FUN=mean, keep.names=TRUE))
+  licor_agg_dtfix <- llply(licor_ids_agg, function(x) c(x$datetime <- as.POSIXct(x$datetime,
+                                                                                 origin= '1970-01-01', tz="UTC"), return(x)))
+  
+  licor_agg<- rbind.fill(licor_agg_dtfix)
+  
+  ###now there is the possibility that there will be less licor values than xsi values, 
+  ###must rematch closest time row and then add that rows xsi and delta to new dfr
+  
+  dd<- sapply(1:nrow(licor_agg), function(i)which.min(timematch(licor_agg$datetime[i], xsi_samples$datetime_match)))
+  licor_agg$xsi <- xsi_samples$xsi[dd]
+  licor_agg$DELTA <- xsi_samples$DELTA[dd]
+  return(licor_agg)
+  
+}
+
+####gmescalculation----------------------------------------------------------------------------------------------
+gmcalc_func <- function(x, a=4.4, ab= 2.9, e=30, b=29, f=16.2,del_growth = -8 , delR=-38, 
+                        k25r=0.728, k25g=38.89, Ea_r = 72.311, Ea_g = 20.437,Rgc=8.314472){
+  
+  x$CiCa <- x$Ci/x$CO2R
+  x$a_prime <- (ab*(x$CO2S-x$C2sfc)+a*(x$C2sfc-x$Ci))/(x$CO2S-x$Ci)
+  
+  x$Rd <- k25r * exp(Ea_r*((x$Tleaf+273.15)-298)/(298*Rgc*(x$Tleaf+273.15)))
+  x$Gstar <- k25g * exp(Ea_g*((x$Tleaf+273.15)-298)/(298*Rgc*(x$Tleaf+273.15)))
+  
+  x$rd_term <- e*x$Rd*(x$Ci-x$Gstar)/((x$Photo+x$Rd)*x$CO2S)
+  x$f_term <- f*x$Gstar/x$CO2S
+  
+  x$TleafminusTair <- x$Tleaf - x$Tair
+  x$TblockminusTair <- x$TBlk - x$Tair
+  
+  x$CO2Rdry <- x$CO2R/(1-x$H2OR/1000)
+  x$CO2Sdry <- x$CO2S/(1-x$H2OS/1000)
+  
+  x$t <- (1+x$a_prime/1000)*x$Trmmol/x$CndCO2/1000/2
+  x$t2 <- 1/(1-x$t)
+  x$t3 <- (1+x$t)/(1-x$t)
+  
+  x$Di <- x$a_prime * x$t2+ (x$t3 * b-x$a_prime * x$t2) * x$CiCa
+  x$DiminusDo <- x$Di - x$DELTA
+  
+  x$rd_term2 <- x$t3- x$rd_term
+  x$f_term2 <- x$t3 - x$f_term
+  
+  x$gm <- x$t3 * (b - 1.8 - x$Rd * e / (x$Rd+x$Photo)) * x$Photo/x$CO2S/(x$DiminusDo - x$rd_term2 - x$f_term2)
+  x$gm_bar <- x$gm*100/x$Press
+  return(x)
+}
+#----------------------------------------------------------------------------------------------
+
+
+
