@@ -9,6 +9,8 @@ gmlab <-expression(g[m]~~(mol~m^-2~s^-1))
 lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 arealab <- expression(Leaf~Area~~(cm^2))
+narealab <- expression(N[area]~~(gN~m^-2))
+c13lab <-expression(paste(delta^{13}, "C (\u2030)"))
 ypos <- c(2.5,1,0)
 satlab <- expression(A~~(mu*mol~m^-2~s^-1))
 condlab <- expression(g[s]~~(mol~m^-2~s^-1))

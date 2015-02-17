@@ -6,7 +6,7 @@ library(plyr)
 library(doBy)
 
 ####read licor data and run licor formatting functions------------------------------------------------------------------
-licor_master <- read.csv("raw_data/gm_licor.csv")
+licor_master <- read.csv("raw data/gm_licor.csv")
 
 ####format master licor file, will have two dataframes one with all data, and one with times for matching
 licor_gmes <- chooseidfunc(licor_master, c("campaign" , "chamber",  "leaf",  "light"))
