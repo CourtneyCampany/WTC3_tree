@@ -1,7 +1,7 @@
 #chamber label function--------------------------------------------------------------------------------
 chlab_func <- function(x){
   x$chamber <- ifelse(x$chamber <= 9, paste("0", x$chamber, sep=""), x$chamber)
-  x$chamber <- paste("ch", x$chamber, sep="")
+  x$chamber <- as.factor(paste("ch", x$chamber, sep=""))
   return(x)
 }
 
@@ -192,6 +192,7 @@ add_Month<- function(x){
   x$Month <-ifelse(x$campaign == 4, "Feb", x$Month )
   x$Month <-ifelse(x$campaign == 5, "Mar", x$Month )
   x$Month <-ifelse(x$campaign == 6, "Apr", x$Month )
+  x$Month <- as.factor(x$Month)
   return(x)
 }
 

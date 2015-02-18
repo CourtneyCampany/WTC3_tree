@@ -17,6 +17,7 @@ condlab <- expression(g[s]~~(mol~m^-2~s^-1))
 vpdlab <- "VPD  (kPa)"
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mol~m^-2~s^-1))
+photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
 
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
            expression(paste(AT," " ,"shade")), expression(paste(ET, " " ,"shade")))
