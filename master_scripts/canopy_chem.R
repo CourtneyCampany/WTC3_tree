@@ -33,20 +33,23 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
 # canopy_eleT<- subset(canopy_chem, temp == "elevated")
 # canopy_drought <- subset(canopy_chem, Month %in% c("Mar", "Apr"))
 
-canopy_nodrought <- subset(canopy_chem, drydown != "drought")
 
+####remove drought for now
+canopy_nodrought <- subset(canopy_chem, drydown != "drought")
 canopy_agg <- summaryBy(c13+ lma+ leafN + leafN_area ~ leaf+campaign+temp, data=canopy_nodrought, FUN=c(mean,se))
 
-##plots leaf traits across campaigns
+
+##plots leaf traits across campaigns----------------------------------------------------------------------
 suncols <- c("blue", "red")
 shadecols <- alpha(suncols, .5)
 palette( c("blue", "red"))
-
 Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 
-#c13 over time
-plot(c13.mean ~ campaign, data=canopy_agg,col=tempcols, pch=16, xlab="", ylab= "delta 13C", ylim=c(-35,-25), 
+#c13 through time
+
+windows(8,8)
+plot(c13.mean ~ campaign, data=canopy_agg,col=temp, pch=16, xlab="", ylab= "delta 13C", ylim=c(-35,-25), 
      cex=1.5, axes=FALSE, type='n')
   with(canopy_agg, arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col=suncols,
                           length=0.03, cex=1.5))
@@ -67,7 +70,7 @@ box()
 plot(c13.mean ~ leafN_area.mean, data=canopy_agg, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,3.5), cex=1.25,
      xlab=narealab, ylab=c13lab)
 
-
+windows(8,8)
 plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,4), 
       cex=1.25, xlab=narealab, ylab=c13lab)
 
