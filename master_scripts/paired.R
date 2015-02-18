@@ -1,7 +1,7 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
 #source("scripts/read_data.R")
-source("scripts/plot_objects_paired.R")
+source("master_scripts/plot_objects_paired.R")
 
 
 ###there is no ch10 shade in march, check for this in script and paired comparisons
