@@ -8,7 +8,7 @@ source("master_scripts/plot_objects_paired.R")
 
 #read in gmsunsha
 #gm data, no drought, no shade high
-gm<- read.csv("calculated data/gm_sunsha.csv")
+gm<- read.csv("calculated_data/gm_sunsha.csv")
 gm$variable <- paste(gm$leaf, gm$temp, sep="-")
 
 cl <- (c("yellowgreen", "green4"))

@@ -24,7 +24,7 @@ shatA <- expression(A~~Shade~AT~~(ppm))
 shetA <- expression(A~~Shade~ET~~(ppm))
 
 
-wa<- palette(wes.palette(5, "Zissou"))
+wa<- palette(wes_palette("Zissou",5))
 paircol <- c(wa[3], wa[1],wa[5])
 
 gmlab <-expression(g[m]~~(mol~m^-2~s^-1))

@@ -41,9 +41,17 @@ deltaC<- chooseidfunc(deltaC, c("campaign", "chamber",  "leaf"))
 
 ci_bar <- merge(ci_agg, deltaC[,c(1,7)], all=TRUE)
 
-ci_bar_calc <- function (x, a=4.4, b=29){
-  x$ci_bar <- (x$CO2R *((x$c13-a) / (b-a)))
+ci_bar_calc <- function (x, a=4.4, b=29, c13_source=-8){
+  x$D <- (c13_source-x$c13)/(1+(c13_source/1000))
+  x$ci_bar <- (x$CO2R *((x$D-a) / (b-a)))
+  x$leaf <- as.factor(substring(x$id, 8))
+  x$campaign <- as.factor(substring(x$id, 1, 1))
+  x$chamber <- as.factor(substring(x$id, 3, 6))
   return(x)
 }
 
 ci_bar2 <- ci_bar_calc(ci_bar)
+
+
+
+
