@@ -23,6 +23,9 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
   canopy_chem$leafN_area <- with(canopy_chem, lma *(n_perc/100))
   canopy_chem<- add_campaign(canopy_chem)
 
+###write file
+write.csv(canopy_chem, "calculated_data/leaf_chemistry.csv", row.names=FALSE)
+
 #   #order my month over 2013-14
 #   Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 #   canopy_chem$Month <- factor(canopy_chem$Month, levels = Morder)

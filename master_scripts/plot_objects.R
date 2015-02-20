@@ -1,6 +1,7 @@
 #plot objects----------------------------------------------------
 pchs <- c(1, 16)
 pch4 <- c(16,16, 1, 1)
+pchtri <- c(17,17,2,2)
 cols <- c("blue","red")
 col4 <- c("blue", "red", "blue", "red")
 
@@ -18,6 +19,11 @@ vpdlab <- "VPD  (kPa)"
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
+cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
+cibarlab2 <- expression(bar(Ci)~~(ppm))
+cilab <- expression({Ci^i}[shade-sun]~~(ppm))
+cilab2 <- expression(Ci~~(ppm))
+
 
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
            expression(paste(AT," " ,"shade")), expression(paste(ET, " " ,"shade")))
