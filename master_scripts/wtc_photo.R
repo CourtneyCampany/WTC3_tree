@@ -12,13 +12,15 @@ photo2 <- chooseidfunc(photo, c("campaign" , "chamber",  "leaf",  "light"))
   photo2$leaflight <- as.factor(paste(photo2$leaf,photo2$light, sep="-"))
 
 #remove lights on treatment
-wtc_photo <- photo2[photo2$leaflight == "sun-high" | photo2$leaflight == "shade-low", c(2:5,11:15, 63:64) ]
+wtc_photo <- photo2[photo2$leaflight == "sun-high" | photo2$leaflight == "shade-low", c(2:5,7, 12:16, 64:65) ]
   #add months and treatments
   wtc_photo$campaign <- as.factor(wtc_photo$campaign)
   wtc_photo <- chlab_func(wtc_photo)
   wtc_photo <- add_Month(wtc_photo)
   wtc_photo <- addtrt_func(wtc_photo)
   wtc_photo <- droplevels(wtc_photo)
+
+write.csv(wtc_photo, "calculated_data/gasexchange_basic.csv", row.names=FALSE)
 
 #   #order my month over 2013-14
 #   Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
@@ -33,13 +35,13 @@ test2 <- wtc_photo[wtc_photo$leaf=="shade",]
 ###plotting-----------------------------------------------------------------------------------
 
 ##plots leaf traits across campaigns
-suncols <- c("blue", "red")
-shadecols <- alpha(suncols, .5)
-palette( c("blue", "red"))
+
+shadecols <- alpha(cols, .5)
+
 Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 
-plot(Photo.mean ~ campaign, data=photo_agg, subset=leaf=="sun", pch=16, col=temp, cex=1.5, ylim=c(0, 20), 
+plot(Photo.mean ~ campaign, data=photo_agg, subset=leaf=="sun", pch=16, col=cols, cex=1.5, ylim=c(0, 20), 
      ylab=photolab, xlab="",axes=FALSE)
 points(Photo.mean ~ campaign, data=photo_agg, subset=leaf=="shade", pch=21, bg=shadecols, col="grey30",cex=1.5, ylim=c(0, 20))
 box()

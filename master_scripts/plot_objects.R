@@ -23,8 +23,11 @@ cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
 cibarlab2 <- expression(bar(Ci)~~(ppm))
 cilab <- expression({Ci^i}[shade-sun]~~(ppm))
 cilab2 <- expression(Ci~~(ppm))
+relparlab <- expression(l[shade]:l[sun])
+relnitrolab <- expression(N[shade]:N[sun])
+relklab <- expression(K[shade]:K[sun])
 
-
+templab <- c("AT", "ET")
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
            expression(paste(AT," " ,"shade")), expression(paste(ET, " " ,"shade")))
 

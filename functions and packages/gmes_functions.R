@@ -191,5 +191,7 @@ gmcalc_func <- function(x, a=4.4, ab= 2.9, e=30, b=29, f=16.2,del_growth = -8 , 
 }
 #----------------------------------------------------------------------------------------------
 
+###time match function to find minimum difference between two sets of datetimes------------------------------------
+timematch <- function(time1, time2)abs(time1-time2)
 
 

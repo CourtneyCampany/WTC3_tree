@@ -1,8 +1,10 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
+
+
 treatments <- read.csv("raw data/temp_trt.csv")
 
-#read and formate leaf water potential---------------------------------------------------------------
+#read and format leaf water potential---------------------------------------------------------------
 leafdata <- read.csv("raw data/leaf_data.csv")
 
 wp <- leafdata[, c(1, 3:6)]
@@ -12,7 +14,7 @@ wp_day <- (cast(wp, Month+ chamber + leaf ~ wp_type, value = "water_potential"))
 
 #add treatments------------------------------------------------------------------------------------------------------
 wptrt_func <- function(x){
-  x <- merge(x, treat)
+  x <- merge(x, treatments)
   x$drydown <- ifelse(x$Month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
                       "drought", "control")
   return(x)
@@ -27,20 +29,23 @@ WP <- wptrt_func(wp_day)
 
 
 #read in licor data and extract transpiration-----------------------------------------------------------------------
-licor <- read.csv("raw data/licor_master.csv")
+licor <- read.csv("raw data/gm_licor.csv")
+licor2 <- read.csv("calculated_data/gasexchange_basic.csv")
+
 #there is a extra space somewhere wiht "shade", use str_trim
 library(stringr)
 licor$leaf <- str_trim(licor$leaf)
 
-transp <- licor[,c("campaign", "chamber", "leaf", "PAR", "Trmmol")]
+transp <- licor[,c("campaign", "chamber", "leaf", "light", "Trmmol")]
   transp <- chlab_func(transp)
   transp <- add_Month(transp)
 
-transp_agg <- summaryBy(Trmmol ~ Month +chamber+leaf+PAR, data= transp, FUN=c(mean), keep.names=TRUE)
-  transp_agg$id <- paste(transp_agg$leaf, transp_agg$PAR, sep="-")
+transp_agg <- summaryBy(Trmmol ~ Month +chamber+leaf+light, data= transp, FUN=c(mean), keep.names=TRUE)
+  transp_agg$leaflight <- paste(transp_agg$leaf, transp_agg$light, sep="-")
 
 #remove shade high
-leafK <- subset(transp_agg, transp_agg$id !=  "shade-high")
+leafK <- subset(transp_agg, transp_agg$leaflight !=  "shade-high")
+
 #format transp dfr to match that of WP
   leafK$Month <- as.factor(leafK$Month)
   leafK$chamber<- as.factor(leafK$chamber)
@@ -52,8 +57,8 @@ leafcond <- merge(leafK[,c(1:3, 5)], WP)
 
 leafcond$wpdiff <- with(leafcond, abs(mid_mp - pre_mp))
 leafcond$leafK <- with(leafcond, Trmmol/wpdiff)
-  Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
-  leafcond$Month <- factor(leafcond$Month, levels = Morder)
+#   Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
+#   leafcond$Month <- order(leafcond$Month, levels = Morder)
 
 #write.csv(leafcond, "calculated data/leaf_conductance.csv", row.names=FALSE)
 
@@ -74,6 +79,7 @@ leafK_eleT<- subset(leafcond3, temp == "elevated")
 leafKdrought <- subset(leafcond3, Month %in% c("Mar", "Apr"))
 
 leafK_nodrought <- subset(leafcond3, drydown != "drought")
+write.csv(leafK_nodrought, "calculated_data/leafK_nodrought.csv", row.names=FALSE)
 
 
 #plotting--------------------------------------------------------------------------------------
