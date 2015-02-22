@@ -57,7 +57,7 @@ timerange_func <- function(x, dfr){
 #tdl formatting function-----------------------------------------------------------------------------------------------
 
 tdlformat_func <- function(x){
-  x$calendar <- strptime(x$TIMESTAMP, format = "%d/%m/%Y",  tz="UTC")
+  x$calendar <- strptime(x$TIMESTAMP, format = "%m/%d/%Y",  tz="UTC")
   x$calendar <- as.character(x$calendar)
   x$clock <- as.character(x$TIME)
   x$Date <- paste(x$calendar, x$clock, sep=" ")

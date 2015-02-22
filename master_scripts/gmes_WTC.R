@@ -21,7 +21,6 @@ licor_gmes <- licorformat_func(licor_gmes)
 licor_times <- timerange_func(licor_gmes)
 
 
-
 ####read all tdl files and run tdl formating and xsi functions on each list element-------------------------------------
 names<- list.files(path="tdl_files/",pattern="csv",full.names=TRUE)
 
@@ -31,6 +30,7 @@ tdl_files <- llply(list.files(path="tdl_files/",pattern="csv",full.names=TRUE),f
 
 ####format tdl data (will be csv covering a day and a ref/sample line with samples within)
 tdl_formatted <- llply(tdl_files, tdlformat_func)
+
 
 ####calculatre xsi/Delta with times by licor id
 xsi_face <- llply(tdl_formatted, function(x)  xsicalc_func(x))
@@ -44,19 +44,21 @@ names2 <- gsub(".csv", "", names2)
 xsi_dfr2 <- setNames(xsi_dfr, names2)
 list2env(lapply(xsi_dfr2, as.data.frame), .GlobalEnv)
 
-###testing
 
-x<- read.csv("tdl_files/tdl_oct_ch1.csv")
-test <- tdlformat_func(x)
+#####Testing
+#oct22
+oct_ch1 <- gmesdata_func(tdl_oct_ch1, licor_gmes, licor_times, licorrows=1,whichlicor="H4")
+gm_oct_ch1<- gmcalc_func(oct_ch1 )
 
-xsi_test <- xsicalc_func(test)
-xsi_dfr <- data.frame(xsi_test)
 
-names2 <- gsub("tdl_files/", "", names[1])
-names2 <- gsub(".csv", "", names2)
 
-xsi_dfr2 <- setNames(xsi_dfr, names2)
-list2env(xsi_dfr2, as.data.frame, .GlobalEnv)
 
-test2 <- gmesdata_func(xsi_dfr, licor_gmes, licor_times, licorrows=5,whichlicor="h4")
+
+
+
+
+
+
+
+
 
