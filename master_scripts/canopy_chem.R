@@ -68,10 +68,15 @@ box()
 
 #ablineclip(massgm_lm, lty=2, x1=xmin, x2=xmax)
 
+palette(c("yellowgreen", "green4"))
 
 ###c13 vs Narea
+windows(7,5)
 plot(c13.mean ~ leafN_area.mean, data=canopy_agg, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,3.5), cex=1.25,
      xlab=narealab, ylab=c13lab)
+legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5,inset = 0.03)  
+dev.copy2pdf(file="master_scripts/figures/c13_nitro.pdf")
+dev.off()
 
 windows(8,8)
 plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,4), 

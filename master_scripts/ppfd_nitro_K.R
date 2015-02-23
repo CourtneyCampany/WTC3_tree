@@ -25,8 +25,6 @@ leafk <- read.csv("calculated_data/leafK_nodrought.csv")
 
 
 ####merge leaf N with PAR---------------------------------------------------------------------------------
-
-
 par_nitro <- merge(leaf_par3, leafN2[,c(1:3, 8:9, 12:13)])
 
 test <- dlply(par_nitro, .(chamber, Month))
@@ -44,6 +42,8 @@ leaf_sp2 <- ddply(par_K, .(chamber, Month), function(x) rbind.fill(
 ##plot didtribution of N and Leaf K as a function of relative PPFD on shade and sun leaves
 
 ##nitro
+windows(7,5)
+
 plot(n_diff~par_diff,data=leaf_sp, col=cols, pch=16, cex=1.5, ylim=c(0,1.2), xlim=c(0, 1.2),
      xlab=relparlab, ylab="")
 title(ylab=relnitrolab, mgp=ypos)
@@ -51,10 +51,18 @@ abline(0,1, lty=2)
 
 legend("bottomright", templab, pch=16, col=cols,pt.cex=1.5,inset = 0.03)  
 
+dev.copy2pdf(file= "master_scripts/figures/relativenitro.pdf")
+dev.off()
+
 ##leafK
+windows(7,5)
 plot(k_diff~par_diff,data=leaf_sp2, col=cols, pch=16, cex=1.5, ylim=c(0,4), xlim=c(0, 4),
      xlab=relparlab, ylab="")
 title(ylab=relklab, mgp=ypos)
 abline(0,1, lty=2)
 
 legend("bottomright", templab, pch=16, col=cols, pt.cex=1.5, inset = 0.03)
+
+
+dev.copy2pdf(file= "master_scripts/figures/relativeK.pdf")
+dev.off()

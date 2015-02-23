@@ -21,13 +21,14 @@ parlab <- expression(PPFD~~(mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
 cibarlab2 <- expression(bar(Ci)~~(ppm))
-cilab <- expression({Ci^i}[shade-sun]~~(ppm))
+cilab3 <- expression({Ci^i}[shade-sun]~~(ppm))
 cilab2 <- expression(Ci~~(ppm))
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
 relklab <- expression(K[shade]:K[sun])
 
 templab <- c("AT", "ET")
+leaflab <- c("shade", "sun")
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
            expression(paste(AT," " ,"shade")), expression(paste(ET, " " ,"shade")))
 

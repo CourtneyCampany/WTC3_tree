@@ -1,9 +1,9 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
-source("scripts/plot_objects.R")
+source("master_scripts/plot_objects.R")
 
 par <- read.csv("raw data/par.csv")
-treat <- read.csv("raw data/chamber_trt.csv")
+treatments <- read.csv("raw data/chamber_trt.csv")
 
 #format function
 par<- parformat(par)
@@ -17,10 +17,12 @@ parbar$month <- factor(parbar$month, levels = Morder)
 levels(parbar$month)
 
 
-png(filename = "output/presentations/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
+#png(filename = "output/presentations/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
+
+windows(7,5)
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
       half.errbar=FALSE)
 title(ylab=parlab, mgp=ypos)
-#dev.copy2pdf(file="output/ppfd.pdf")
+dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
 dev.off()
 

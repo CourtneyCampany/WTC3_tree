@@ -76,13 +76,15 @@ ci_sp <- ddply(ci_bar4, .(pair_id, chamber), function(x) rbind.fill(
 palette(c("blue", "red"))
 
 
-
+windows(7,5)
 plot(ci_diff~cibar_diff,data=ci_sp, col=temp, pch=16, cex=1.5, ylim=c(-200,200), xlim=c(-150, 150),
      xlab=cibarlab, ylab="")
-title(ylab=cilab, mgp=ypos)
+title(ylab=cilab3, mgp=ypos)
 abline(h=0, lty=2)
 abline(v=0, lty=2)
 legend("bottomright", templab, pch=16, col=palette(),pt.cex=1.5,inset = 0.03)  
+dev.copy2pdf(file="master_scripts/figures/CI_sunshade.pdf")
+dev.off()
 
 
 #### treatment averages across season if Cibar and CI plotted against Narea
@@ -119,6 +121,7 @@ title(ylab=cilab, mgp=ypos)
 
 legend("bottomleft", leglab2 ,pch=pch4,   col=col4, pt.cex=.8,inset = 0.03, title= expression(bar(Ci)), bty="n")  
 legend("topright", leglab2 ,pch=pchtri, col=col4, pt.cex=.8,inset = 0.03, title= "Ci", bty="n")  
-
+dev.copy2pdf(file="master_scripts/figures/Ci_nitro.pdf")
+dev.off()
 
 
