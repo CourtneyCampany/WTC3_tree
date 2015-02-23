@@ -98,7 +98,7 @@ licor_times <- timerange_func(licor_gmes)
 
 
 
-  ####february (#####TIMES with ID are wrong  ch1 mathces ch6)
+  ####february (not working)
 
   feb_names<- list.files(path="tdl_files/february/",pattern="csv",full.names=TRUE)
   feb_names2 <- gsub("tdl_files/february/", "", feb_names)
@@ -115,7 +115,7 @@ licor_times <- timerange_func(licor_gmes)
   xsi_feb_dfr2 <- setNames(xsi_feb_dfr, feb_names2)
 
   ##for now run gmes functions for each licor #
-  xsi_feb_r1 <- xsi_feb_dfr2[c(1,4,7,8,11,12, 10)] 
+  xsi_feb_r1 <- xsi_feb_dfr2[c(1,4,7,8,11,12)] 
   xsi_feb_h4 <- xsi_feb_dfr2[c(2,3,5,6,9,10)] 
 
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
@@ -126,17 +126,24 @@ licor_times <- timerange_func(licor_gmes)
 
 
 zzz <- list()
-for(i in 1:length(xsi_feb_r1)){
-  zzz[[i]] <- gmesdata_func(xsi_feb_r1[[i]], licor_gmes, licor_times, licorrows=1,whichlicor="H4")
+for(i in 1:length(xsi_feb_h4)){
+  zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=3,whichlicor="H4")
   message(i)
 }
 
 
-x <-  data.frame(feb_files[10])
-x2 <-  data.frame(feb_formatted[1])
+x <-  data.frame(feb_files[5])
+x2 <-  tdlformat_func(x)
 x3 <- data.frame(xsicalc_func(x2))
+l
+icor_dfr <- licor_gmes
+times_dfr <- licor_times
+xsi_dfr <- x3
+whichlicor="H4"
+
 x4 <- gmesdata_func(x3, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
-x5 <- gmcalc_func(x4)
+
+
 
   ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="csv",full.names=TRUE)

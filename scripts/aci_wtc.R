@@ -11,7 +11,8 @@ sunaci <- read.csv("raw data/sunaci.csv")
 tdlaci2 <- read.csv("raw data/tdlaci2.csv")
 #read plot summary
 plotsumm <- read.csv("raw data/chamber_trt.csv")
-
+plotsumm$chamber <- as.numeric(plotsumm$chamber)
+plotsumm <- chlab_func(plotsumm)
 
 #fit curves for shade leaves
 shadefit<-fitacis(acishade, "chamber", varnames = list(ALEAF="Photo", Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), 
@@ -59,11 +60,12 @@ sun_coefs <- sun_coefs[chamberorder,]
 #write a df with coefs for sun and shade leaves
 tdlaci <- rbind(sun_coefs, shade_coefs)
 tdlaci <- merge(tdlaci, plotsumm, by = "chamber")
-write.csv(tdlaci, "calculated data/tdl_aci.csv", row.names=FALSE)
+
 
 
 #generate treatment means for vcmax and jmax
 aci_means <- summaryBy(Vcmax+Jmax ~ leaf+temp , data = tdlaci,  FUN=c(mean,se))
+write.csv(aci_means, "calculated_data/tdl_aci.csv", row.names=FALSE)
 bar(Vcmax, c(temp, leaf), tdlaci)
 bar(Jmax, c(temp, leaf), tdlaci)
 
