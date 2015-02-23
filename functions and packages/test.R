@@ -96,7 +96,10 @@ xsicalc_func <- function(x){
 }
 
 ####gmes_func---------------------------------------------------------------------------------------------------------
-gmesdata_func <- function(xsi_dfr, licor_dfr, times_dfr, licorrows=5, whichlicor="f2" ){
+gmesdata_func2 <- function(xsi_dfr, licor_dfr, times_dfr, licorrows=5 ){
+  
+  ##need "licor" column in dataframe
+  whichlicor <- as.character(unique(xsi_dfr$licor))
   
   ###subset licor_dfr by licor used
   licor_dfr2 <- licor_dfr[licor_dfr$licor == whichlicor,]
@@ -193,5 +196,3 @@ gmcalc_func <- function(x, a=4.4, ab= 2.9, e=30, b=29, f=16.2,del_growth = -8 , 
 
 ###time match function to find minimum difference between two sets of datetimes------------------------------------
 timematch <- function(time1, time2)abs(time1-time2)
-
-
