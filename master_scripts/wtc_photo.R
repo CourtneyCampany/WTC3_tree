@@ -12,7 +12,7 @@ photo2 <- chooseidfunc(photo, c("campaign" , "chamber",  "leaf",  "light"))
   photo2$leaflight <- as.factor(paste(photo2$leaf,photo2$light, sep="-"))
 
 #remove lights on treatment
-wtc_photo <- photo2[photo2$leaflight == "sun-high" | photo2$leaflight == "shade-low", c(2:5,7, 12:16, 64:65) ]
+wtc_photo <- photo2[photo2$leaflight == "sun-high" | photo2$leaflight == "shade-low", c(2:5,7, 12:16, 25,64:65) ]
   #add months and treatments
   wtc_photo$campaign <- as.factor(wtc_photo$campaign)
   wtc_photo <- chlab_func(wtc_photo)
@@ -37,7 +37,6 @@ test2 <- wtc_photo[wtc_photo$leaf=="shade",]
 ##plots leaf traits across campaigns
 
 shadecols <- alpha(cols, .5)
-
 Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 
@@ -47,5 +46,6 @@ points(Photo.mean ~ campaign, data=photo_agg, subset=leaf=="shade", pch=21, bg=s
 box()
 axis(1, labels = Morder, at= c(1,2,3,4,5,6))
 axis(2, labels=TRUE)
+
 
 

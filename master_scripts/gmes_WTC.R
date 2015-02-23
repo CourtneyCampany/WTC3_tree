@@ -127,7 +127,7 @@ licor_times <- timerange_func(licor_gmes)
 
 zzz <- list()
 for(i in 1:length(xsi_feb_h4)){
-  zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=3,whichlicor="H4")
+  zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=5,whichlicor="H4")
   message(i)
 }
 
@@ -135,12 +135,6 @@ for(i in 1:length(xsi_feb_h4)){
 x <-  data.frame(feb_files[5])
 x2 <-  tdlformat_func(x)
 x3 <- data.frame(xsicalc_func(x2))
-l
-icor_dfr <- licor_gmes
-times_dfr <- licor_times
-xsi_dfr <- x3
-whichlicor="H4"
-
 x4 <- gmesdata_func(x3, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
 
 

@@ -158,7 +158,7 @@ leafformat <- function(x) {
 
 #gmdata format func--------------------------------------------------
 gmformat <- function(df) {
-  df <- merge(df, treat, all=TRUE)
+  df <- merge(df, treatments, all=TRUE)
   df$chamber <- as.character(df$chamber)
   df$ID <- paste(df$leaf, df$type, sep="-")
   df$ID <- as.factor(df$ID)

@@ -17,25 +17,25 @@ sslab <- c("Shade", "Sun")
 png(filename = "output/presentations/ciA.png", width = 11, height = 8.5, units = "in", res= 400)
 plot(Photo~Ci, data=gm, pch=21, bg=cl[leaf], xlim=c(0,400), ylim=c(0,30), xlab=cilab, ylab="", cex=1.3)
 title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", sslab, pch=21, pt.bg=cl <- (c("yellowgreen", "green4")), pt.cex=2, bg="white",inset = 0.03) 
+legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
 dev.off()
 
 png(filename = "output/presentations/gmA.png", width = 11, height = 8.5, units = "in", res= 400)
 plot(Photo~gm, data=gm, pch=21, bg=cl[leaf], xlim=c(0,1), ylim=c(0,30), xlab=gmlab, ylab="", cex=1.3)
 title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", sslab, pch=21, pt.bg=cl <- (c("yellowgreen", "green4")), pt.cex=2, bg="white",inset = 0.03) 
+legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
 dev.off()
 
 png(filename = "output/presentations/ccA.png", width = 11, height = 8.5, units = "in", res= 400)
 plot(Photo~Cc, data=gm, pch=21, bg=cl[leaf], xlim=c(0,400), ylim=c(0,30), xlab=cclab, ylab="", cex=1.3)
 title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", sslab, pch=21, pt.bg=cl <- (c("yellowgreen", "green4")), pt.cex=2, bg="white",inset = 0.03) 
+legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
 dev.off()
 
 gm$ratio<- with(gm, gm/Cond)
 plot(Photo~ratio, data=gm, pch=21, bg=cl[leaf], xlim=c(0,25), ylim=c(0,30), xlab=cclab, ylab="", cex=1.3)
 title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", sslab, pch=21, pt.bg=cl <- (c("yellowgreen", "green4")), pt.cex=2, bg="white",inset = 0.03) 
+legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
 
 
 #paired id dfr
