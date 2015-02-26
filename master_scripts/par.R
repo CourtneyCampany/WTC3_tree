@@ -16,6 +16,7 @@ parbar <- subset(par_leaf, select = c("par", "month", "leaf_type"))
 parbar$month <- factor(parbar$month, levels = Morder)
 levels(parbar$month)
 
+par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 
 #png(filename = "output/presentations/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
 

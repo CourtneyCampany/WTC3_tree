@@ -38,6 +38,34 @@ par_K<- merge(leaf_par3, leafk[,c(1:3, 7:8, 12)])
 leaf_sp2 <- ddply(par_K, .(chamber, Month), function(x) rbind.fill(
   data.frame(par_diff = x$par[1]/x$par[2], k_diff= x$leafK[1]/x$leafK[2], temp=x$temp[1])))
 
+####merge LeafK with nitro
+nitro_K<- merge(leafN2, leafk[,c(1:3, 7:8, 12)])
+leaf_sp3 <- ddply(nitro_K, .(chamber, Month), function(x) rbind.fill(
+  data.frame(n_diff= x$leafN_area[1]/x$leafN_area[2], k_diff= x$leafK[1]/x$leafK[2], temp=x$temp[1])))
+
+####means testing
+
+Nshade <- leafN[leafN$leaf == "shade",]
+Nsun<- leafN[leafN$leaf == "sun",]
+Kshade <- leafk[leafk$leaf == "shade",]
+Kshade <- droplevels(Kshade)
+Ksun<- leafk[leafk$leaf == "sun",]
+
+Ksh<- Kshade[12]
+
+KN_lm<- lm(Kshade$leafK~ Ksun$leafK)
+summary(KN_lm)
+
+####plotting----------------------------------------------------------------------------------
+
+plot(Nshade$leafN_area ~ Nsun$leafN_area , pch=16,ylim=c(0,5), xlim=c(0, 5))
+abline(0,1, lty=1)
+
+plot(Kshade$leafK ~ Ksun$leafK, pch=16, ylim=c(0,6), xlim=c(0, 6), ylab="Kshade", xlab="Ksun")
+abline(0,1, lty=2)
+ablineclip(KN_lm, lty=3, x1=min(Ksun$leafK), x2=max(Ksun$leafK), col="blue")
+dev.copy2pdf(file= "master_scripts/figures/leafK_sunsha.pdf")
+dev.off()
 
 ##plot didtribution of N and Leaf K as a function of relative PPFD on shade and sun leaves
 
@@ -66,3 +94,17 @@ legend("bottomright", templab, pch=16, col=cols, pt.cex=1.5, inset = 0.03)
 
 dev.copy2pdf(file= "master_scripts/figures/relativeK.pdf")
 dev.off()
+
+
+
+#nitro_K
+plot(n_diff~k_diff,data=leaf_sp3, col=cols, pch=16, cex=1.5, ylim=c(0,4), xlim=c(0, 4),
+     xlab=relklab, ylab="")
+title(ylab=relnitrolab, mgp=ypos)
+abline(0,1, lty=2)
+
+legend("bottomright", templab, pch=16, col=cols, pt.cex=1.5, inset = 0.03)
+
+dev.copy2pdf(file= "master_scripts/figures/KN_sunshade.pdf")
+dev.off()
+

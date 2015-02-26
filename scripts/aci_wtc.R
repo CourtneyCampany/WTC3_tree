@@ -61,6 +61,7 @@ sun_coefs <- sun_coefs[chamberorder,]
 tdlaci <- rbind(sun_coefs, shade_coefs)
 tdlaci <- merge(tdlaci, plotsumm, by = "chamber")
 
+aci_means2 <- summaryBy(Vcmax+Jmax ~ leaf , data = tdlaci,  FUN=c(mean,se))
 
 
 #generate treatment means for vcmax and jmax
