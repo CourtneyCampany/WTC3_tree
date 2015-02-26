@@ -67,6 +67,25 @@ ci_bar4 <- ci_bar3[complete.cases(ci_bar3),]
 ci_bar4 <- ci_bar4[ci_bar4$pair_id != "f",]
 templab <- c("AT", "ET")
 
+###plot sun v shade
+ci_shade <- [leafN$leaf == "shade",]
+ci_sun<- leafN[leafN$leaf == "sun",]
+cib_shade <- ci_bar4[ci_bar4$leaf == "shade",]
+cib_sun<- ci_bar4[ci_bar4$leaf == "sun",]
+
+cib_lm<- lm(cib_shade$ci_bar~ cib_sun$ci_bar)
+summary(cib_lm)
+
+####plotting----------------------------------------------------------------------------------
+
+plot(cib_shade$ci_bar ~ cib_sun$ci_bar , pch=16, ylim=c(0,400), xlim=c(0,400))
+abline(0,1, lty=1)
+
+
+
+
+
+
 test <- dlply(ci_bar4, .(pair_id, chamber))
 ###calculate the difference Ci/Ci_bar between sun and shade leaves by pairwise comparisons-----------------------
 ci_sp <- ddply(ci_bar4, .(pair_id, chamber), function(x) rbind.fill(
