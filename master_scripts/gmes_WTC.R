@@ -124,22 +124,7 @@ licor_times <- timerange_func(licor_gmes)
   feb_gm_h2 <- lapply(feb_r1, gmcalc_func)
   feb_gm_h3 <- lapply(feb_h4, gmcalc_func)
 
-
-zzz <- list()
-for(i in 1:length(xsi_feb_h4)){
-  zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=5,whichlicor="H4")
-  message(i)
-}
-
-
-x <-  data.frame(feb_files[5])
-x2 <-  tdlformat_func(x)
-x3 <- data.frame(xsicalc_func(x2))
-x4 <- gmesdata_func(x3, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
-
-
-
-  ####march
+####march
   mar_names<- list.files(path="tdl_files/march/",pattern="csv",full.names=TRUE)
   mar_names2 <- gsub("tdl_files/march/", "", mar_names)
   mar_names2 <- gsub(".csv", "", mar_names2)
@@ -204,7 +189,56 @@ x4 <- gmesdata_func(x3, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
 
 
 
+#### combine all gm runs into one dfr
+oct <- rbind.fill(oct_H4)
+dec1 <- rbind.fill(dec_h2)
+dec2 <- rbind.fill(dec_h4)
+jan1 <- rbind.fill(jan_h2)
+jan2 <- rbind.fill(jan_h3)
+feb1 <- rbind.fill(feb_r1)
+feb2 <- rbind.fill(feb_h4)
+mar1 <- rbind.fill(mar_h1)
+mar2 <- rbind.fill(mar_h2)
+mar3 <- rbind.fill(mar_h3)
+mar4 <- rbind.fill(mar_h4)
+apr1 <- rbind.fill(apr_h1)
+apr2 <- rbind.fill(apr_h3)
+apr3 <- rbind.fill(apr_h4)
 
+gm_WTC <- rbind.fill(oct, dec1)
+gm_WTC <- rbind.fill(gm_WTC, dec2)
+gm_WTC <- rbind.fill(gm_WTC, jan1)
+gm_WTC <- rbind.fill(gm_WTC, jan2)
+gm_WTC <- rbind.fill(gm_WTC, feb1)
+gm_WTC <- rbind.fill(gm_WTC, feb2)
+gm_WTC <- rbind.fill(gm_WTC, mar1)
+gm_WTC <- rbind.fill(gm_WTC, mar2)
+gm_WTC <- rbind.fill(gm_WTC, mar3)
+gm_WTC <- rbind.fill(gm_WTC, mar4)
+gm_WTC <- rbind.fill(gm_WTC, apr1)
+gm_WTC <- rbind.fill(gm_WTC, apr2)
+gm_WTC <- rbind.fill(gm_WTC, apr3)
+
+###add back pair ids
+pairs2<- chooseidfunc(pairs, c("campaign" , "chamber",  "leaf",  "light"))
+
+gm_WTC_pair <- merge(gm_WTC, pairs2[,6:7])
+
+write.csv(gm_WTC_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+####useful code to save
+
+###deconstrcut id into treatments
+
+test <- gm_WTC_pair
+test$leaf <- gsub("[0-9]-", "",test$id)
+
+create_trts <- function(x) {
+  x$campaign <- as.factor(substr(x$id, 1,1))
+  x$chamber <- as.factor(substr(x$id, 3,4))
+  x$leaf <- substr(x$id, )
+  x$light <- substr(x$id, )
+
+}
 
 
 
@@ -213,6 +247,11 @@ x4 <- gmesdata_func(x3, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
 # list2env(lapply(xsi_dfr2, as.data.frame), .GlobalEnv)
 
 
+# zzz <- list()
+# for(i in 1:length(xsi_feb_h4)){
+#   zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=5,whichlicor="H4")
+#   message(i)
+# }
 
 
 
