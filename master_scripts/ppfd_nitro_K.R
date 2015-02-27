@@ -51,19 +51,42 @@ Kshade <- leafk[leafk$leaf == "shade",]
 Kshade <- droplevels(Kshade)
 Ksun<- leafk[leafk$leaf == "sun",]
 
-Ksh<- Kshade[12]
 
-KN_lm<- lm(Kshade$leafK~ Ksun$leafK)
-summary(KN_lm)
+##simple linear models of sun vs shade leaf nitro and k
+N_lm<- lm(Nshade$leafN_area~ Nsun$leafN_area)
+summary(N_lm)
+Namb_lm <- lm(Nshade[Nshade$temp =="ambient", "leafN_area"] ~Nsun[Nsun$temp =="ambient", "leafN_area"])
+summary(Namb_lm)
+Nelev_lm<- lm(Nshade[Nshade$temp =="elevated", "leafN_area"] ~Nsun[Nsun$temp =="elevated", "leafN_area"])
+summary(Nelev_lm)
+
+
+K_lm<- lm(Kshade$leafK~ Ksun$leafK)
+summary(K_lm)
+Kamb_lm <- lm(Kshade[Kshade$temp =="ambient", "leafK"] ~Ksun[Ksun$temp =="ambient", "leafK"])
+summary(Kamb_lm)
+Kelev_lm<- lm(Kshade[Kshade$temp =="elevated", "leafK"] ~Ksun[Ksun$temp =="elevated", "leafK"])
+summary(Kelev_lm)
 
 ####plotting----------------------------------------------------------------------------------
+palette(c("blue", "red"))
 
-plot(Nshade$leafN_area ~ Nsun$leafN_area , pch=16,ylim=c(0,5), xlim=c(0, 5))
-abline(0,1, lty=1)
+###nitro area sun v shade
+plot(Nshade$leafN_area ~ Nsun$leafN_area , ylim=c(0,5), xlim=c(0, 5), xlab=nsunlab, ylab="", 
+      cex=1.25,col=Nsun$temp)
+  title(ylab=nshadelab, mgp=ypos)
+  abline(0,1, lty=2)
+  ablineclip(Namb_lm, lty=2, lwd=1.5,x1=min(Nsun$leafN_area), x2=max(Nsun$leafN_area), col="blue")
+  ablineclip(Nelev_lm, lty=2, lwd=1.5,x1=min(Nsun$leafN_area), x2=max(Nsun$leafN_area), col="red")
+dev.copy2pdf(file= "master_scripts/figures/leafnitro_sunsha.pdf")
+dev.off()
 
-plot(Kshade$leafK ~ Ksun$leafK, pch=16, ylim=c(0,6), xlim=c(0, 6), ylab="Kshade", xlab="Ksun")
-abline(0,1, lty=2)
-ablineclip(KN_lm, lty=3, x1=min(Ksun$leafK), x2=max(Ksun$leafK), col="blue")
+plot(Kshade$leafK ~ Ksun$leafK, pch=16, ylim=c(0,6), xlim=c(0, 6), ylab="", col=Ksun$temp,
+     xlab=ksunlab ,cex=1.25)
+  title(ylab=kshadelab, mgp=ypos)
+  abline(0,1, lty=2)
+  ablineclip(Kamb_lm, lty=2, x1=min(Ksun$leafK), x2=max(Ksun$leafK), col="blue")
+  ablineclip(Kelev_lm, lty=2, x1=min(Ksun$leafK), x2=max(Ksun$leafK), col="red")
 dev.copy2pdf(file= "master_scripts/figures/leafK_sunsha.pdf")
 dev.off()
 
