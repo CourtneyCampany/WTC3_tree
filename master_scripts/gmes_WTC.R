@@ -1,12 +1,17 @@
 source("functions and packages/gmes_functions.R")
+source("functions and packages/functions.R")
 
 ###required packakges
 library(data.table)
 library(plyr)
 library(doBy)
 
+##read in treatments
+treatments <- read.csv("raw data/temp_trt.csv")
+
 ####read licor data and run licor formatting functions------------------------------------------------------------------
 licor_master <- read.csv("raw data/gm_licor.csv")
+licor_master <- chlab_func(licor_master)
 
 ###remove pair ids for now (?) bind them back after formatting (should beed id, chamber)
 pairs <- licor_master[, 2:7]
@@ -121,8 +126,8 @@ licor_times <- timerange_func(licor_gmes)
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
   feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
 
-  feb_gm_h2 <- lapply(feb_r1, gmcalc_func)
-  feb_gm_h3 <- lapply(feb_h4, gmcalc_func)
+  feb_gm_r1 <- lapply(feb_r1, gmcalc_func)
+  feb_gm_h4 <- lapply(feb_h4, gmcalc_func)
 
 ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="csv",full.names=TRUE)
@@ -190,20 +195,20 @@ licor_times <- timerange_func(licor_gmes)
 
 
 #### combine all gm runs into one dfr
-oct <- rbind.fill(oct_H4)
-dec1 <- rbind.fill(dec_h2)
-dec2 <- rbind.fill(dec_h4)
-jan1 <- rbind.fill(jan_h2)
-jan2 <- rbind.fill(jan_h3)
-feb1 <- rbind.fill(feb_r1)
-feb2 <- rbind.fill(feb_h4)
-mar1 <- rbind.fill(mar_h1)
-mar2 <- rbind.fill(mar_h2)
-mar3 <- rbind.fill(mar_h3)
-mar4 <- rbind.fill(mar_h4)
-apr1 <- rbind.fill(apr_h1)
-apr2 <- rbind.fill(apr_h3)
-apr3 <- rbind.fill(apr_h4)
+oct <- rbind.fill(oct_gm)
+dec1 <- rbind.fill(dec_gm_h2)
+dec2 <- rbind.fill(dec_gm_h4)
+jan1 <- rbind.fill(jan_gm_h2)
+jan2 <- rbind.fill(jan_gm_h3)
+feb1 <- rbind.fill(feb_gm_r1)
+feb2 <- rbind.fill(feb_gm_h4)
+mar1 <- rbind.fill(mar_gm_h1)
+mar2 <- rbind.fill(mar_gm_h2)
+mar3 <- rbind.fill(mar_gm_h3)
+mar4 <- rbind.fill(mar_gm_h4)
+apr1 <- rbind.fill(apr_gm_h1)
+apr2 <- rbind.fill(apr_gm_h3)
+apr3 <- rbind.fill(apr_gm_h4)
 
 gm_WTC <- rbind.fill(oct, dec1)
 gm_WTC <- rbind.fill(gm_WTC, dec2)
@@ -222,27 +227,19 @@ gm_WTC <- rbind.fill(gm_WTC, apr3)
 ###add back pair ids
 pairs2<- chooseidfunc(pairs, c("campaign" , "chamber",  "leaf",  "light"))
 
-gm_WTC_pair <- merge(gm_WTC, pairs2[,6:7])
+gm_wtc_pair <- merge(gm_WTC, pairs2[,c(1:4, 6:7)], by="id")
+##add treatments
+gm_wtc_pair <- merge(gm_wtc_pair, treatments)
 
-write.csv(gm_WTC_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+write.csv(gm_wtc_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+
+#summary
+gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_wtc_pair,FUN=mean, keep.names=TRUE)
+
+
+
+
 ####useful code to save
-
-###deconstrcut id into treatments
-
-test <- gm_WTC_pair
-test$leaf <- gsub("[0-9]-", "",test$id)
-
-create_trts <- function(x) {
-  x$campaign <- as.factor(substr(x$id, 1,1))
-  x$chamber <- as.factor(substr(x$id, 3,4))
-  x$leaf <- substr(x$id, )
-  x$light <- substr(x$id, )
-
-}
-
-
-
-
 # xsi_dfr2 <- setNames(xsi_dfr, names2)
 # list2env(lapply(xsi_dfr2, as.data.frame), .GlobalEnv)
 
