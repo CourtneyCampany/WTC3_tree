@@ -51,7 +51,7 @@ timerange_func <- function(x, dfr){
   })
   #below needs package 'data.table'
   times <- rbindlist(dfr)
-  times2 <- as.data.frame(times)
+  times2  <- unique(as.data.frame(times))
 }
 
 #tdl formatting function-----------------------------------------------------------------------------------------------

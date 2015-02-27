@@ -103,9 +103,8 @@ licor_times <- timerange_func(licor_gmes)
 
 
 
-  ####february (not working)
-
-  feb_names<- list.files(path="tdl_files/february/",pattern="csv",full.names=TRUE)
+  ####february
+   feb_names<- list.files(path="tdl_files/february/",pattern="csv",full.names=TRUE)
   feb_names2 <- gsub("tdl_files/february/", "", feb_names)
   feb_names2 <- gsub(".csv", "", feb_names2)
   
@@ -210,6 +209,8 @@ apr1 <- rbind.fill(apr_gm_h1)
 apr2 <- rbind.fill(apr_gm_h3)
 apr3 <- rbind.fill(apr_gm_h4)
 
+##testing
+
 gm_WTC <- rbind.fill(oct, dec1)
 gm_WTC <- rbind.fill(gm_WTC, dec2)
 gm_WTC <- rbind.fill(gm_WTC, jan1)
@@ -231,7 +232,7 @@ gm_wtc_pair <- merge(gm_WTC, pairs2[,c(1:4, 6:7)], by="id")
 ##add treatments
 gm_wtc_pair <- merge(gm_wtc_pair, treatments)
 
-write.csv(gm_wtc_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+#write.csv(gm_wtc_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
 
 #summary
 gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_wtc_pair,FUN=mean, keep.names=TRUE)
