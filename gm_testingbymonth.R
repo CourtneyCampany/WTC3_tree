@@ -39,30 +39,14 @@ apr_files <- llply(list.files(path="tdl_files/april/",pattern="tdl",full.names=T
 
 apr_formatted <- llply(apr_files, tdlformat_func)
 
-# test <- read.csv("tdl_files/april/tdl_apr_ch8.csv")
-# test2 <-tdlformat_func(test)
-# test3 <- xsicalc_func(test2)
-# test4<- data.frame(test3)
-# test5 <- gmesdata_func(test4, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
-
-# test <- read.csv("tdl_files/april/tdl_apr_ch11.csv")
-# test2 <-tdlformat_func(test)
-# test3 <- xsicalc_func(test2)
-# test4<- data.frame(test3)
-# test5 <- gmesdata_func(test4, licor_gmes, licor_times, licorrows=5, whichlicor="H4")
-# test6 <- gmcalc_func(test5)
-
 xsi_apr <- llply(apr_formatted, function(x)  xsicalc_func(x))
 xsi_apr_dfr <- llply(xsi_apr, function(x) data.frame(x))
-
-#actual file names
 xsi_apr_dfr2 <- setNames(xsi_apr_dfr, apr_names2)
 
 ##for now run gmes functions for each licor #
-xsi_apr_h1 <- xsi_apr_dfr2[c(5,8,12)] 
-xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,6,7,10)] 
-xsi_apr_h4 <- xsi_apr_dfr2[c(3,9,11)]
-
+xsi_apr_h1 <- xsi_apr_dfr2[c(5,8,11)] 
+xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,6,7,9)] 
+xsi_apr_h4 <- xsi_apr_dfr2[c(3,10)] 
 
 apr_h1 <- lapply(xsi_apr_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
 apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))

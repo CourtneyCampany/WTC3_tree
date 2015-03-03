@@ -179,9 +179,9 @@ licor_times <- timerange_func(licor_gmes)
   xsi_apr_dfr2 <- setNames(xsi_apr_dfr, apr_names2)
 
   ##for now run gmes functions for each licor #
-  xsi_apr_h1 <- xsi_apr_dfr2[c(5,8,12)] 
-  xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,6,7,10)] 
-  xsi_apr_h4 <- xsi_apr_dfr2[c(3,9,11)] 
+  xsi_apr_h1 <- xsi_apr_dfr2[c(5,8,11)] 
+  xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,6,7,9)] 
+  xsi_apr_h4 <- xsi_apr_dfr2[c(3,10)] 
 
   apr_h1 <- lapply(xsi_apr_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
