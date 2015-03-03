@@ -10,7 +10,7 @@ library(doBy)
 treatments <- read.csv("raw data/temp_trt.csv")
 
 ####read licor data and run licor formatting functions------------------------------------------------------------------
-licor_master <- read.csv("raw data/gm_licor.csv")
+licor_master <- read.csv("raw data/gm_licor_clean.csv")
 licor_master <- chlab_func(licor_master)
 
 ###remove pair ids for now (?) bind them back after formatting (should beed id, chamber)
@@ -29,11 +29,11 @@ licor_times <- timerange_func(licor_gmes)
 ####read all tdl files and run tdl formating and xsi functions on each list element-------------------------------------
 
   ####october
-  oct_names<- list.files(path="tdl_files/october/",pattern="csv",full.names=TRUE)
+  oct_names<- list.files(path="tdl_files/october/",pattern="tdl",full.names=TRUE)
   oct_names2 <- gsub("tdl_files/october/", "", oct_names)
   oct_names2 <- gsub(".csv", "", oct_names2)
   
-  oct_files <- llply(list.files(path="tdl_files/october/",pattern="csv",full.names=TRUE),function(filename) {
+  oct_files <- llply(list.files(path="tdl_files/october/",pattern="tdl",full.names=TRUE),function(filename) {
    dat=read.csv(filename, header=TRUE)
   })
 
@@ -50,11 +50,11 @@ licor_times <- timerange_func(licor_gmes)
 
 
   ####december
-  dec_names<- list.files(path="tdl_files/december",pattern="csv",full.names=TRUE)
+  dec_names<- list.files(path="tdl_files/december",pattern="tdl",full.names=TRUE)
   dec_names2 <- gsub("tdl_files/december/", "", dec_names)
   dec_names2 <- gsub(".csv", "", dec_names2)
 
-  dec_files <- llply(list.files(path="tdl_files/december/",pattern="csv",full.names=TRUE),function(filename) {
+  dec_files <- llply(list.files(path="tdl_files/december/",pattern="tdl",full.names=TRUE),function(filename) {
     dat=read.csv(filename, header=TRUE)
   })
 
@@ -77,11 +77,11 @@ licor_times <- timerange_func(licor_gmes)
 
 
   ####january
-  jan_names<- list.files(path="tdl_files/january/",pattern="csv",full.names=TRUE)
+  jan_names<- list.files(path="tdl_files/january/",pattern="tdl",full.names=TRUE)
   jan_names2 <- gsub("tdl_files/january/", "", jan_names)
   jan_names2 <- gsub(".csv", "", jan_names2)
 
-  jan_files <- llply(list.files(path="tdl_files/january/",pattern="csv",full.names=TRUE),function(filename) {
+  jan_files <- llply(list.files(path="tdl_files/january/",pattern="tdl",full.names=TRUE),function(filename) {
     dat=read.csv(filename)})
 
   jan_formatted <- llply(jan_files, tdlformat_func)
@@ -104,11 +104,11 @@ licor_times <- timerange_func(licor_gmes)
 
 
   ####february
-   feb_names<- list.files(path="tdl_files/february/",pattern="csv",full.names=TRUE)
+   feb_names<- list.files(path="tdl_files/february/",pattern="tdl",full.names=TRUE)
   feb_names2 <- gsub("tdl_files/february/", "", feb_names)
   feb_names2 <- gsub(".csv", "", feb_names2)
   
-  feb_files <- llply(list.files(path="tdl_files/february/",pattern="csv",full.names=TRUE),function(filename) {
+  feb_files <- llply(list.files(path="tdl_files/february/",pattern="tdl",full.names=TRUE),function(filename) {
     dat=read.csv(filename)})
 
   feb_formatted <- llply(feb_files, tdlformat_func)
@@ -123,17 +123,17 @@ licor_times <- timerange_func(licor_gmes)
   xsi_feb_h4 <- xsi_feb_dfr2[c(2,3,5,6,9,10)] 
 
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
-  feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
+  feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="H4"))
 
   feb_gm_r1 <- lapply(feb_r1, gmcalc_func)
   feb_gm_h4 <- lapply(feb_h4, gmcalc_func)
 
 ####march
-  mar_names<- list.files(path="tdl_files/march/",pattern="csv",full.names=TRUE)
+  mar_names<- list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE)
   mar_names2 <- gsub("tdl_files/march/", "", mar_names)
   mar_names2 <- gsub(".csv", "", mar_names2)
   
-  mar_files <- llply(list.files(path="tdl_files/march/",pattern="csv",full.names=TRUE),function(filename) {
+  mar_files <- llply(list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE),function(filename) {
    dat=read.csv(filename)})
 
   mar_formatted <- llply(mar_files, tdlformat_func)
@@ -163,11 +163,11 @@ licor_times <- timerange_func(licor_gmes)
 
 
   ####april
-  apr_names<- list.files(path="tdl_files/april/",pattern="csv",full.names=TRUE)
+  apr_names<- list.files(path="tdl_files/april/",pattern="tdl",full.names=TRUE)
   apr_names2 <- gsub("tdl_files/april/", "", apr_names)
   apr_names2 <- gsub(".csv", "", apr_names2)
 
-  apr_files <- llply(list.files(path="tdl_files/april/",pattern="csv",full.names=TRUE),function(filename) {
+  apr_files <- llply(list.files(path="tdl_files/april/",pattern="tdl",full.names=TRUE),function(filename) {
    dat=read.csv(filename)})
 
   apr_formatted <- llply(apr_files, tdlformat_func)
@@ -180,8 +180,8 @@ licor_times <- timerange_func(licor_gmes)
 
   ##for now run gmes functions for each licor #
   xsi_apr_h1 <- xsi_apr_dfr2[c(5,8,12)] 
-  xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,10)] 
-  xsi_apr_h4 <- xsi_apr_dfr2[c(3,6,7,9,11)] 
+  xsi_apr_h3 <- xsi_apr_dfr2[c(1,2,4,6,7,10)] 
+  xsi_apr_h4 <- xsi_apr_dfr2[c(3,9,11)] 
 
   apr_h1 <- lapply(xsi_apr_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
@@ -209,7 +209,7 @@ apr1 <- rbind.fill(apr_gm_h1)
 apr2 <- rbind.fill(apr_gm_h3)
 apr3 <- rbind.fill(apr_gm_h4)
 
-##testing
+###master gm dataset
 
 gm_WTC <- rbind.fill(oct, dec1)
 gm_WTC <- rbind.fill(gm_WTC, dec2)
@@ -225,18 +225,38 @@ gm_WTC <- rbind.fill(gm_WTC, apr1)
 gm_WTC <- rbind.fill(gm_WTC, apr2)
 gm_WTC <- rbind.fill(gm_WTC, apr3)
 
+
 ###add back pair ids
 pairs2<- chooseidfunc(pairs, c("campaign" , "chamber",  "leaf",  "light"))
+uniquepair <- unique(pairs2[, 6:7])
+plotsumm_id <- unique(pairs2[, c(1:4, 7)])
+  
+####add plotsummarys and treatments first
+gm_WTC2 <- merge(gm_WTC, plotsumm_id, by="id")
+gm_WTC2 <- merge(gm_WTC2,treatments)
+gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 
-gm_wtc_pair <- merge(gm_WTC, pairs2[,c(1:4, 6:7)], by="id")
-##add treatments
-gm_wtc_pair <- merge(gm_wtc_pair, treatments)
+write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
 
-#write.csv(gm_wtc_pair, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+#leaf types
+sun_gm <- gm_WTC2[gm_WTC2$leaf =="sun",]
+shade_gm <- gm_WTC2[gm_WTC2$leaflight == "shade-low",]
+lightson <- gm_WTC2[gm_WTC2$leaflight == "shade-high",]
 
-#summary
-gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_wtc_pair,FUN=mean, keep.names=TRUE)
+#simple plots through time
+plot(gm~campaign, data=sun_gm, pch=16, col=temp, ylim=c(0, .6), ylab="sun")
+plot(gm~campaign, data=shade_gm, pch=16, col=temp, ylim=c(0, .6), ylab="shade")
+plot(gm~campaign, data=lightson, pch=16, col=temp, ylim=c(0, .6), ylab="shade-high")
 
+#means
+gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_WTC2,FUN=mean, keep.names=TRUE)
+
+
+
+##add pair ids
+gm_wtc_pair <- merge(gm_WTC2, uniquepair)
+
+write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_pair.csv", row.names=FALSE)
 
 
 
