@@ -6,7 +6,7 @@ gmes <- read.csv("calculated_data/gmes_WTC.csv")
 gm_drought <- gmes[gmes$drydown == "drought",]
 
 gm_water <- gmes[gmes$drydown == "control",]
-write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
+#write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
 
 palette(c("blue", "red"))
 ###drought----------------------------------------------------------------------------------------------------
@@ -49,6 +49,51 @@ gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_water,FUN=mean, keep.names=TRUE
 gm_drought_agg <- summaryBy(gm~ temp+leaf+light, data=gm_drought,FUN=mean, keep.names=TRUE)
 
 
+##gm-temp
+gm_ch<- summaryBy(gm+Photo+CTleaf ~id+chamber+temp+leaf+light+leaflight+Month, data=gm_water,FUN=mean, keep.names=TRUE)
+
+palette(c("blue", "red"))
+   
+##photosynthesis and temperature
+plot(Photo~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(15, 40), 
+     ylab="", xlab=leaftlab)
+  points(Photo~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
+  legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+  title(ylab=satlab, mgp=ypos, cex=1.2)
+
+plot(gm~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,.5), xlim=c(15, 40), 
+     ylab="", xlab=leaftlab)
+points(gm~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
+legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+title(ylab=gmlab, mgp=ypos, cex=1.2)
 
 
 
+
+# 
+# ###These presentations plots moved from paired script (generated from old gm)
+# png(filename = "output/presentations/ciA.png", width = 11, height = 8.5, units = "in", res= 400)
+# plot(Photo~Ci, data=gm, pch=21, bg=cl[leaf], xlim=c(0,400), ylim=c(0,30), xlab=cilab, ylab="", cex=1.3)
+# title(ylab=satlab, mgp=ypos, cex=1.2)
+# legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
+# dev.off()
+# 
+# png(filename = "output/presentations/gmA.png", width = 11, height = 8.5, units = "in", res= 400)
+# plot(Photo~gm, data=gm, pch=21, bg=cl[leaf], xlim=c(0,1), ylim=c(0,30), xlab=gmlab, ylab="", cex=1.3)
+# title(ylab=satlab, mgp=ypos, cex=1.2)
+# legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
+# dev.off()
+# 
+# png(filename = "output/presentations/ccA.png", width = 11, height = 8.5, units = "in", res= 400)
+# plot(Photo~Cc, data=gm, pch=21, bg=cl[leaf], xlim=c(0,400), ylim=c(0,30), xlab=cclab, ylab="", cex=1.3)
+# title(ylab=satlab, mgp=ypos, cex=1.2)
+# legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
+# dev.off()
+# 
+# gm$ratio<- with(gm, gm/Cond)
+# plot(Photo~ratio, data=gm, pch=21, bg=cl[leaf], xlim=c(0,25), ylim=c(0,30), xlab=cclab, ylab="", cex=1.3)
+# title(ylab=satlab, mgp=ypos, cex=1.2)
+# legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
+# 
+# 
+# 

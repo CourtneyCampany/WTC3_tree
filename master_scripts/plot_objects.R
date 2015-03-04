@@ -41,6 +41,8 @@ relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
 relklab <- expression(K[shade]:K[sun])
 
+leaftlab <- ("Leaf Temperature  (C)")
+
 templab <- c("AT", "ET")
 leaflab <- c("shade", "sun")
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
