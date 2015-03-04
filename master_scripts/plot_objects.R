@@ -28,10 +28,15 @@ vpdlab <- "VPD  (kPa)"
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
+
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
 cibarlab2 <- expression(bar(Ci)~~(ppm))
 cilab3 <- expression({Ci^i}[shade-sun]~~(ppm))
-cilab2 <- expression(Ci~~(ppm))
+cilab <- expression(C[i]~~(ppm))
+
+cclab <- expression(C[c]~~(ppm))
+cclab2 <- expression(bar(C[c])~~(ppm))
+
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
 relklab <- expression(K[shade]:K[sun])
@@ -46,4 +51,6 @@ leglab2<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET"))
 
 colaci <-c("forestgreen", "forestgreen", "yellowgreen", "yellowgreen")
 
-cilab <- expression(C[i]~~(ppm))
+leaflightlab <- c("shade-high", "shade-low", "sun")
+
+

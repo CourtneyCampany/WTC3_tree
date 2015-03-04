@@ -5,7 +5,7 @@ source("functions and packages/packages.R")
 ###read data--------------------------------------------------------------------------------------------
 
 #gas exchange data
-photo <- read.csv("raw data/gm_licor.csv")
+photo <- read.csv("raw data/gm_licor_clean.csv")
 #plot summary
 treatments <- read.csv("raw data/temp_trt.csv")
 #read in leaf data
@@ -60,6 +60,8 @@ ci_bar2 <- ci_bar_calc(ci_bar)
   
 ##remove drought treatment
 ci_bar3<- ci_bar2[ci_bar2$drydown != "drought",]
+
+write.csv(ci_bar3, "calculated_data/Ci_bar.csv", row.names=FALSE)
 
 
 ###for now remove the pair comparison assocaited with missing gas exchance for 5-ch12-shade

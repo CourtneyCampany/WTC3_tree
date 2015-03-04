@@ -233,26 +233,11 @@ plotsumm_id <- unique(pairs2[, c(1:4, 7)])
   
 ####add plotsummarys and treatments first
 gm_WTC2 <- merge(gm_WTC, plotsumm_id, by="id")
-gm_WTC2 <- merge(gm_WTC2,treatments)
+gm_WTC2 <-add_Month(gm_WTC2)
+gm_WTC2 <- addtrt_func(gm_WTC2)
 gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 
 write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
-
-#leaf types
-sun_gm <- gm_WTC2[gm_WTC2$leaf =="sun",]
-shade_gm <- gm_WTC2[gm_WTC2$leaflight == "shade-low",]
-lightson <- gm_WTC2[gm_WTC2$leaflight == "shade-high",]
-
-#simple plots through time
-plot(gm~campaign, data=sun_gm, pch=16, col=temp, ylim=c(0, .6), ylab="sun")
-plot(gm~campaign, data=shade_gm, pch=16, col=temp, ylim=c(0, .6), ylab="shade")
-plot(gm~campaign, data=lightson, pch=16, col=temp, ylim=c(0, .6), ylab="shade-high")
-
-#means
-gm_agg <- summaryBy(gm~ temp+leaf+light, data=gm_WTC2,FUN=mean, keep.names=TRUE)
-
-
-
 ##add pair ids
 gm_wtc_pair <- merge(gm_WTC2, uniquepair)
 
