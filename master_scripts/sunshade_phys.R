@@ -77,7 +77,7 @@ plot(Photo~Cc, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, yl
   lines(ccsun_seq, ccsun_pred[,3], lty=2, lwd=2, col="forestgreen")
   #shade
   points(Photo~Cc, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-  ablineclip(Acc_sha_lm, lty=1, x1=min(gm_c13[gm_c13$leaflight=="shade-low","Cc"]), 
+  ablineclip(Acc_shade_lm, lty=1, x1=min(gm_c13[gm_c13$leaflight=="shade-low","Cc"]), 
              x2=max(gm_c13[gm_c13$leaflight=="shade-low","Cc"]), col="yellow4", lwd=2)
   lines(ccsha_seq, ccsha_pred[,2], lty=2, lwd=2,col="yellow4")
   lines(ccsha_seq, ccsha_pred[,3], lty=2, lwd=2,col="yellow4")
@@ -231,5 +231,56 @@ legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol)
 
 
 
+sunshadeplot_func(gm_c13$Photo, gm_c13$gm, gm_c13$leaflight)
+
+
+
+
+
+###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
+
+#SUN leaves
+Ags_sun_lm <- lm(Photo~ Cond, data=gm_c13,subset=leaflight=="sun-high")
+summary(Ags_sun_lm)
+confint(Ags_sun_lm)
+visreg(Ags_sun_lm)
+
+#predict
+#get apprpriate vector CC from sun leaves
+gsdat <- gm_c13[gm_c13$leaflight=="sun-high", "Cond"]
+#generate sequence and then predict
+gssun_seq <- seq(min(gsdat), max(gsdat), length=101)
+gssun_pred <- predict.lm(Ags_sun_lm, newdata=data.frame(Cond=gssun_seq), interval="confidence")
+
+#SHADE leaves
+Ags_sha_lm <- lm(Photo~ Cond, data=gm_c13, subset=leaflight=="shade-low")
+summary(Acib_sha_lm)
+confint(Acib_sha_lm)
+visreg(Acib_sha_lm)
+
+#get apprpriate vector CC from sun leaves
+gsdat2 <- gm_c13[gm_c13$leaflight=="shade-low", "Cond"]
+#generate sequence and then predict
+gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
+gssha_pred <- predict.lm(Ags_sha_lm, newdata=data.frame(Cond=gssha_seq), interval="confidence")
+
+
+windows(10,8)
+plot(Photo~Cond, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
+     xlim=c(0,.5), xlab=condlab, ylab="", cex=1.25)
+ablineclip(Ags_sun_lm, lty=1, x1=min(gm_c13[gm_c13$leaf=="sun","Cond"]), x2=max(gm_c13[gm_c13$leaf=="sun","Cond"]), 
+           col="forestgreen", lwd=2)
+lines(gssun_seq, gssun_pred[,2], lty=2, lwd=2, col="forestgreen")
+lines(gssun_seq, gssun_pred[,3], lty=2, lwd=2, col="forestgreen")
+#shade
+points(Photo~Cond, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+
+ablineclip(Ags_sha_lm, lty=1, x1=min(gm_c13[gm_c13$leaflight=="shade-low","Cond"]), 
+           x2=max(gm_c13[gm_c13$leaflight=="shade-low","Cond"]), col="yellow4", lwd=2)
+lines(gssha_seq, gssha_pred[,2], lty=2, lwd=2,col="yellow4")
+lines(gssha_seq, gssha_pred[,3], lty=2, lwd=2,col="yellow4")
+
+title(ylab=satlab, mgp=ypos, cex=1.2)
+legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
 
 
