@@ -84,6 +84,8 @@ plot(Photo~Cc, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, yl
 
   title(ylab=satlab, mgp=ypos, cex=1.2)
   legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+dev.copy2pdf(file="master_scripts/figures/photo_cc.pdf")
+dev.off()
 
 
 ###Photosynthesis vs Ci--------------------------------------------------------------------------------
@@ -131,7 +133,8 @@ plot(Photo~Ci, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, yl
   
   title(ylab=satlab, mgp=ypos, cex=1.2)
   legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-
+dev.copy2pdf(file="master_scripts/figures/photo_ci.pdf")
+dev.off()
 
 
 ###Photosynthesis vs gm-------------------------------------------------------------------------------
@@ -180,7 +183,8 @@ lines(gmsha_seq, gmsha_pred[,3], lty=2, lwd=2,col="yellow4")
 title(ylab=satlab, mgp=ypos, cex=1.2)
 legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
 
-
+dev.copy2pdf(file="master_scripts/figures/photo_gm.pdf")
+dev.off()
 
 
 ###Photosynthesis vs cibar-------------------------------------------------------------------------------
@@ -228,10 +232,12 @@ lines(cibsha_seq, cibsha_pred[,3], lty=2, lwd=2,col="yellow4")
 
 title(ylab=satlab, mgp=ypos, cex=1.2)
 legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+dev.copy2pdf(file="master_scripts/figures/photo_cibar.pdf")
+dev.off()
 
 
+#sunshadeplot_func(gm_c13$Photo, gm_c13$gm, gm_c13$leaflight)
 
-sunshadeplot_func(gm_c13$Photo, gm_c13$gm, gm_c13$leaflight)
 
 
 
@@ -282,5 +288,6 @@ lines(gssha_seq, gssha_pred[,3], lty=2, lwd=2,col="yellow4")
 
 title(ylab=satlab, mgp=ypos, cex=1.2)
 legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-
+dev.copy2pdf(file="master_scripts/figures/photo_gs.pdf")
+dev.off()
 

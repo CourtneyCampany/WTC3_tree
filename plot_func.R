@@ -52,6 +52,8 @@ sunshadeplot_func <- function(v1, v2, treatment, xlab, ylab){
 sunshadeplot_func(gm_c13, gm_c13$Photo, gm_c13$ci_bar, cibarlab, satlab)
 
 
+####TESTING
+
 sunshadeplot_func <- function(v1, v2, treatment){
   
   ##run linear model on two variables for sun and shade
