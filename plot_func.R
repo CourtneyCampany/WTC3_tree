@@ -2,6 +2,9 @@
 ##func
 sunshadeplot_func <- function(v1, v2, treatment, xlab, ylab){
   
+  
+  
+  
   ##run linear model on two variables for sun and shade
   sun_lm <- lm(v1 ~ v2,  subset=treatment=="sun-high")
   sha_lm <- lm(v1 ~ v2,  subset=treatment=="shade-low")
@@ -54,27 +57,39 @@ sunshadeplot_func(gm_c13, gm_c13$Photo, gm_c13$ci_bar, cibarlab, satlab)
 
 ####TESTING
 
-sunshadeplot_func <- function(v1, v2, treatment){
+sunshadeplot_func <- function(v1, v2, treatment, data){
   
+  data$v1 <- eval(substitute(v1), data)
+  data$v2 <- eval(substitute(v2), data)
+  data$treatment <- eval(substitute(treatment), data)
+
   ##run linear model on two variables for sun and shade
-  sun_lm <- lm(v1 ~ v2,  subset=treatment=="sun-high")
-  sha_lm <- lm(v1 ~ v2,  subset=treatment=="shade-low")
+  sun_lm <- lm(v1 ~ v2,  subset=subset(data, treatment=="sun-high"), data=data)
+  sha_lm <- lm(v1 ~ v2,  subset=subset(data, treatment=="shade-low"), data=data)
   
   #vector of v2 data for sun and shade
   v2trt <- data.frame(cbind(v2, treatment))
-#    sunv2 <- v2trt[v2trt$treatment == "sun-high", v2]
-#    shav2 <- v2trt[v2trt$treatment == "shade-low", v2]
-#   return(shav2)
   
-#   #predict v2 sequence for sun and shade
-#   sun_seq <- seq(min(sunv2), max(sunv2), length=101)
-#   sha_seq <- seq(min(shav2), max(shav2), length=101)
-#   
-#   #predict sun shade CI
-#   sun_pred <- predict.lm(sun_lm, newdata=data.frame(v2=sun_seq), interval="confidence")
-#   sha_pred <- predict.lm(sha_lm, newdata=data.frame(v2=sha_seq), interval="confidence")
- 
+  
+   sunv2 <- v2trt[v2trt$treatment == "sun-high", v2]
+   shav2 <- v2trt[v2trt$treatment == "shade-low", v2]
+  return(shav2)
+  
+  #predict v2 sequence for sun and shade
+  sun_seq <- seq(min(sunv2), max(sunv2), length=101)
+  sha_seq <- seq(min(shav2), max(shav2), length=101)
+  
+  #predict sun shade CI
+  sun_pred <- predict.lm(sun_lm, newdata=data.frame(v2=sun_seq), interval="confidence")
+  sha_pred <- predict.lm(sha_lm, newdata=data.frame(v2=sha_seq), interval="confidence")
+  
+  
+return(v2trt)
 }
 
 
-a <-sunshadeplot_func(gm_c13$Photo, gm_c13$gm, gm_c13$leaflight)
+a <-sunshadeplot_func(Photo, gm, leaflight, data=gm_c13)
+
+
+
+
