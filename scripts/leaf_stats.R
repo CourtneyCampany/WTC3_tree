@@ -1,6 +1,6 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
-source("scripts/read_data.R")
+source("master_scripts/read_data.R")
 source("scripts/plot_objects.R")
 
 #run formatting functions

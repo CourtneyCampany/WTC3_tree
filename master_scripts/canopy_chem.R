@@ -26,6 +26,10 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
 ###write file
 write.csv(canopy_chem, "calculated_data/leaf_chemistry.csv", row.names=FALSE)
 
+canopy_agg2 <- summaryBy(c13+ lma+ leafN + leafN_area ~ leaf+campaign+temp, data=canopy_chem, FUN=c(mean,se))
+write.csv(canopy_agg2, "calculated_data/leaftraits_summary.csv",row.names=FALSE)
+                         
+                         
 #   #order my month over 2013-14
 #   Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 #   canopy_chem$Month <- factor(canopy_chem$Month, levels = Morder)
@@ -72,7 +76,7 @@ palette(c("yellowgreen", "green4"))
 
 ###c13 vs Narea
 windows(7,5)
-plot(c13.mean ~ leafN_area.mean, data=canopy_agg, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,3.5), cex=1.25,
+plot(c13.mean ~ leafN_area.mean, data=canopy_agg2, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,3.5), cex=1.25,
      xlab=narealab, ylab=c13lab)
 legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5,inset = 0.03)  
 dev.copy2pdf(file="master_scripts/figures/c13_nitro.pdf")

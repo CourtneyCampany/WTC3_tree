@@ -1,4 +1,6 @@
 source("master_scripts/plot_objects.R")
+source("functions and packages/functions.R")
+library(doBy)
 
 gmes <- read.csv("calculated_data/gmes_WTC.csv")
 
@@ -21,13 +23,15 @@ plot(Photo~gm, data=gm_drought, subset=leaflight=="sun-high", pch=16, col=temp, 
 ###well watered------------------------------------------------------------------------------------------------
 
 ##sun-shade
-plot(Photo~gm, data=gm_water, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), xlab=gmlab)
+plot(Photo~gm, data=gm_water, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), 
+     xlab=gmlab, ylab="")
 points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=1, col=temp)
 legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
 title(ylab=satlab, mgp=ypos, cex=1.2)
 
 ##shade low-high
-plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), xlab=gmlab)
+plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), 
+     xlab=gmlab, ylab="")
 points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=1, col=temp)
 legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
 title(ylab=satlab, mgp=ypos, cex=1.2)
@@ -50,7 +54,8 @@ gm_drought_agg <- summaryBy(gm~ temp+leaf+light, data=gm_drought,FUN=mean, keep.
 
 
 ##gm-temp
-gm_ch<- summaryBy(gm+Photo+CTleaf ~id+chamber+temp+leaf+light+leaflight+Month, data=gm_water,FUN=mean, keep.names=TRUE)
+gm_ch<- summaryBy(gm+Photo+Cond+CTleaf ~id+chamber+temp+leaf+light+leaflight+Month, data=gm_water,FUN=mean,
+                  keep.names=TRUE)
 
 palette(c("blue", "red"))
    
@@ -66,6 +71,31 @@ plot(gm~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim
 points(gm~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
 legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
 title(ylab=gmlab, mgp=ypos, cex=1.2)
+
+
+plot(Photo~gm, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), 
+     ylab="", xlab=gmlab)
+points(Photo~gm, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
+legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+title(ylab=satlab, mgp=ypos, cex=1.2)
+
+plot(gm~Cond, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,.4), xlim=c(0,.4), 
+     ylab="", xlab=gmlab)
+points(gm~Cond, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
+legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+title(ylab=condlab, mgp=ypos, cex=1.2)
+
+###make a table of means and se of gm
+tablenames <- c( "Leaf Type", "Light", "Temperature","Gm", "Gm(se)")
+
+gm_dfr <- summaryBy(gm~ leaf+light+temp, data=gm_water,FUN=c(mean,se))
+names(gm_dfr) <- tablenames
+
+library(xtable)
+
+gm_table <- xtable(gm_dfr)
+digits(gm_table)[4:5] <- 4
+print(gm_table,floating=FALSE)
 
 
 
