@@ -15,8 +15,10 @@ gmes$cc_ci<- with(gmes, Ci/Cc)
 ##need to combine Ci_bar with CC and gm
 
 ###get average by id
-gm_agg <- summaryBy(Photo+Cond+Ci+Cc+gm+VpdL+xsi+DELTA+cc_ci ~ id+leaf +light+temp+leaflight, 
+gm_agg <- summaryBy(Photo+Cond+Ci+Cc+gm+VpdL+xsi+DELTA+cc_ci ~ chamber+id+leaf +light+temp+leaflight, 
                     data=gmes, FUN=mean, keep.names=TRUE)
+
+
 
 ##remove shade-high
 gm_sunsha <- gm_agg[gm_agg$leaflight != "shade-high",]
@@ -28,12 +30,67 @@ gm_sunsha <- gm_agg[gm_agg$leaflight != "shade-high",]
 gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
 
-###plot objects
-#PLot  
-suncol <- alpha("forestgreen", alpha=.75)
-shacol <- alpha("yellow4", alpha=.75)
-leafcol <- c(suncol, shacol)
-leaflab2 <- c("Sun", "Shade")
+  
+###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
+  library(mgcv)
+  library(lme4)
+  
+  ###simple plot use smoothplot from RD and get CI polygon
+  palette(c(shacol, suncol))
+
+  ###try to add 95%ci as dotted line and then turn shading of addpoly lighter
+  
+  ####run gam models and then predict
+  #SUN leaves
+  sunmod <- gam(Photo ~ s(Cond, k=5), data=gm_c13, subset=leaflight=="sun-high")
+  
+  #predict
+  #get apprpriate vector of gs from sun leaves
+  gsdat <- gm_c13[gm_c13$leaflight=="sun-high", "Cond"]
+  #generate sequence and then predict
+  gssun_seq <- seq(min(gsdat), max(gsdat), length=101)
+  gssun_pred <- predict(sunmod, newdata=data.frame(Cond=gssun_seq), se.fit=TRUE)
+  
+  sunupper <- gssun_pred$fit + (1.96*gssun_pred$se.fit)
+  sunlower <- gssun_pred$fit - (1.96*gssun_pred$se.fit)
+  
+  sunupr <- sunmod$family$linkinv(sunupper)
+  sunlwr <- sunmod$family$linkinv(sunlower)
+  
+  #SHADE leaves
+  shamod <- gam(Photo ~ s(Cond, k=5), data=gm_c13, subset=leaflight=="shade-low")
+  
+  #get apprpriate vector CC from sun leaves
+  gsdat2 <- gm_c13[gm_c13$leaflight=="shade-low", "Cond"]
+  #generate sequence and then predict
+  gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
+  gssha_pred <- predict(shamod, newdata=data.frame(Cond=gssha_seq), type="link", se.fit=TRUE)
+  
+  shaupper <- gssha_pred$fit + (2*gssha_pred$se.fit)
+  shalower <- gssha_pred$fit - (2*gssha_pred$se.fit)
+  
+  shaupr <- shamod$family$linkinv(shaupper)
+  shalwr <- shamod$family$linkinv(shalower)
+  
+  ###redo plot
+  
+  windows(10,8)
+  
+  smoothplot(Cond, Photo, leaflight, data=gm_c13, kgam=3,
+             ylim=c(0,25), xlim=c(0,.4), xlab=condlab, ylab="")
+  lines(gssun_seq, sunupr, lty=2, lwd=2,col=suncol)
+  lines(gssun_seq, sunlwr, lty=2, lwd=2,col=suncol)
+  
+  lines(gssha_seq, shaupr, lty=2, lwd=2,col=shacol)
+  lines(gssha_seq, shalwr, lty=2, lwd=2,col=shacol)
+  
+  title(ylab=satlab, mgp=ypos, cex=1.2)
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  dev.copy2pdf(file="master_scripts/figures/photo_gs.pdf")
+  dev.off()
+  
+  
+  
 
 ###Photosynthesis vs Cc--------------------------------------------------------------------------------
 
@@ -236,58 +293,5 @@ dev.copy2pdf(file="master_scripts/figures/photo_cibar.pdf")
 dev.off()
 
 
-#sunshadeplot_func(gm_c13$Photo, gm_c13$gm, gm_c13$leaflight)
 
-
-
-
-
-
-###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
-
-#SUN leaves
-Ags_sun_lm <- lm(Photo~ Cond, data=gm_c13,subset=leaflight=="sun-high")
-summary(Ags_sun_lm)
-confint(Ags_sun_lm)
-visreg(Ags_sun_lm)
-
-#predict
-#get apprpriate vector CC from sun leaves
-gsdat <- gm_c13[gm_c13$leaflight=="sun-high", "Cond"]
-#generate sequence and then predict
-gssun_seq <- seq(min(gsdat), max(gsdat), length=101)
-gssun_pred <- predict.lm(Ags_sun_lm, newdata=data.frame(Cond=gssun_seq), interval="confidence")
-
-#SHADE leaves
-Ags_sha_lm <- lm(Photo~ Cond, data=gm_c13, subset=leaflight=="shade-low")
-summary(Acib_sha_lm)
-confint(Acib_sha_lm)
-visreg(Acib_sha_lm)
-
-#get apprpriate vector CC from sun leaves
-gsdat2 <- gm_c13[gm_c13$leaflight=="shade-low", "Cond"]
-#generate sequence and then predict
-gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
-gssha_pred <- predict.lm(Ags_sha_lm, newdata=data.frame(Cond=gssha_seq), interval="confidence")
-
-
-windows(10,8)
-plot(Photo~Cond, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
-     xlim=c(0,.5), xlab=condlab, ylab="", cex=1.25)
-ablineclip(Ags_sun_lm, lty=1, x1=min(gm_c13[gm_c13$leaf=="sun","Cond"]), x2=max(gm_c13[gm_c13$leaf=="sun","Cond"]), 
-           col="forestgreen", lwd=2)
-lines(gssun_seq, gssun_pred[,2], lty=2, lwd=2, col="forestgreen")
-lines(gssun_seq, gssun_pred[,3], lty=2, lwd=2, col="forestgreen")
-#shade
-points(Photo~Cond, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-
-ablineclip(Ags_sha_lm, lty=1, x1=min(gm_c13[gm_c13$leaflight=="shade-low","Cond"]), 
-           x2=max(gm_c13[gm_c13$leaflight=="shade-low","Cond"]), col="yellow4", lwd=2)
-lines(gssha_seq, gssha_pred[,2], lty=2, lwd=2,col="yellow4")
-lines(gssha_seq, gssha_pred[,3], lty=2, lwd=2,col="yellow4")
-
-title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-dev.copy2pdf(file="master_scripts/figures/photo_gs.pdf")
-dev.off()
 

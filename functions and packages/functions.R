@@ -8,6 +8,96 @@ chlab_func <- function(x){
 # standard error function--------------------------------------------------------------------------------
 se <- function(x) sd(x)/sqrt(length(x))
 
+#leafformat func------------------------------------------------
+leafformat <- function(x) {
+  x$Date <- as.Date(x$Date, format = "%d/%m/%Y")
+  x$Month <- month(x$Date, label=TRUE)
+  x$year <- year(x$Date)
+  x$wp <- with(x, ((water_potential/10)*-1))
+  x <- merge(x, treatments, all=TRUE)
+  x$chamber <- as.character(x$chamber)
+  x$drydown <- ifelse(x$month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+                      "drought", "control")
+  x$lma <- with(x, leaf_mass/leaf_area)
+  x_ss <- subset(x, select= -c(Date, water_potential))
+  monthorder<-order(x_ss$Month, by=x_ss$chamber)
+  x_ss <- x_ss[monthorder,]
+  row.names(x_ss)<-NULL
+  
+  return(x_ss)
+}
+
+
+#gmdata format func--------------------------------------------------
+gmformat <- function(df) {
+  df <- merge(df, treatments, all=TRUE)
+  df$chamber <- as.character(df$chamber)
+  df$ID <- paste(df$leaf, df$type, sep="-")
+  df$ID <- as.factor(df$ID)
+  df$drydown <- ifelse(df$month %in% c("march", "apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+                       "drought", "control")
+  return(df)
+}
+
+#par data format func---------------------------------------------------------------
+parformat <- function(df) {
+  df <- merge(df, treatments, all=TRUE)
+  df$chamber <- as.character(df$chamber)
+  df$ID <- paste(df$leaf_type, df$par_type, sep="-")
+  df$ID <- as.factor(df$ID)
+  df$drydown <- ifelse(df$month %in% c("Mar", "Apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+                       "drought", "control")
+  df$drydown <- as.factor(df$drydown)
+  return(df)
+}
+
+#extract summary data---------------------------------------------------------------
+getp <- function(x)x$p.value
+getdiffmean <- function(m)m$estimate
+
+
+#adds campaign Date and orders by ID and Date-------------------------------------------------------------
+add_Month<- function(x){
+  
+  x$Month <-ifelse(x$campaign == 1, "Oct", x$campaign)
+  x$Month <-ifelse(x$campaign == 2, "Dec", x$Month )
+  x$Month <-ifelse(x$campaign == 3, "Jan", x$Month )
+  x$Month <-ifelse(x$campaign == 4, "Feb", x$Month )
+  x$Month <-ifelse(x$campaign == 5, "Mar", x$Month )
+  x$Month <-ifelse(x$campaign == 6, "Apr", x$Month )
+  x$Month <- as.factor(x$Month)
+  return(x)
+}
+
+add_campaign<- function(x){
+  
+  x$campaign <-ifelse(x$Month == "Oct", 1, x$Month)
+  x$campaign <-ifelse(x$Month == "Dec", 2, x$campaign )
+  x$campaign <-ifelse(x$Month == "Jan", 3, x$campaign )
+  x$campaign <-ifelse(x$Month == "Feb", 4, x$campaign )
+  x$campaign <-ifelse(x$Month == "Mar", 5, x$campaign )
+  x$campaign <-ifelse(x$Month == "Apr", 6, x$campaign )
+  return(x)
+}
+
+
+#add treatments------------------------------------------------------------------------------------------------------
+addtrt_func <- function(x){
+  x <- merge(x, treatments)
+  x$temp <- as.factor(x$temp)
+  x$drydown <- as.factor(ifelse(x$Month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+                                "drought", "control"))
+  return(x)
+}
+
+###function to create a unique sample id from user specific variable column names-----------------------------------
+
+chooseidfunc <- function(dfr, varnames, sep="-"){
+  dfr$id <- as.factor(apply(dfr[,varnames], 1, function(x)paste(x, collapse=sep)))
+  return(dfr)
+}
+
+
 #bar plot function--------------------------------------------------------------------------------
 
 bar <- function(dv, factors, dataframe, percentage=FALSE, errbar=!percentage, half.errbar=TRUE, conf.level=.95, 
@@ -136,101 +226,10 @@ bar <- function(dv, factors, dataframe, percentage=FALSE, errbar=!percentage, ha
 
 
 
-#leafformat func------------------------------------------------
-leafformat <- function(x) {
-  x$Date <- as.Date(x$Date, format = "%d/%m/%Y")
-  x$Month <- month(x$Date, label=TRUE)
-  x$year <- year(x$Date)
-  x$wp <- with(x, ((water_potential/10)*-1))
-  x <- merge(x, treatments, all=TRUE)
-  x$chamber <- as.character(x$chamber)
-  x$drydown <- ifelse(x$month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
-                      "drought", "control")
-  x$lma <- with(x, leaf_mass/leaf_area)
-  x_ss <- subset(x, select= -c(Date, water_potential))
-  monthorder<-order(x_ss$Month, by=x_ss$chamber)
-  x_ss <- x_ss[monthorder,]
-  row.names(x_ss)<-NULL
-  
-  return(x_ss)
-}
 
+###3 functions (fitgam, addpoly, predline, and smooth plot) ----------------------------------------------------------
 
-#gmdata format func--------------------------------------------------
-gmformat <- function(df) {
-  df <- merge(df, treatments, all=TRUE)
-  df$chamber <- as.character(df$chamber)
-  df$ID <- paste(df$leaf, df$type, sep="-")
-  df$ID <- as.factor(df$ID)
-  df$drydown <- ifelse(df$month %in% c("march", "apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
-                       "drought", "control")
-  return(df)
-}
-
-#par data format func---------------------------------------------------------------
-parformat <- function(df) {
-  df <- merge(df, treatments, all=TRUE)
-  df$chamber <- as.character(df$chamber)
-  df$ID <- paste(df$leaf_type, df$par_type, sep="-")
-  df$ID <- as.factor(df$ID)
-  df$drydown <- ifelse(df$month %in% c("Mar", "Apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
-                       "drought", "control")
-  df$drydown <- as.factor(df$drydown)
-  return(df)
-}
-
-#extract summary data---------------------------------------------------------------
-getp <- function(x)x$p.value
-getdiffmean <- function(m)m$estimate
-
-
-#adds campaign Date and orders by ID and Date-------------------------------------------------------------
-add_Month<- function(x){
-  
-  x$Month <-ifelse(x$campaign == 1, "Oct", x$campaign)
-  x$Month <-ifelse(x$campaign == 2, "Dec", x$Month )
-  x$Month <-ifelse(x$campaign == 3, "Jan", x$Month )
-  x$Month <-ifelse(x$campaign == 4, "Feb", x$Month )
-  x$Month <-ifelse(x$campaign == 5, "Mar", x$Month )
-  x$Month <-ifelse(x$campaign == 6, "Apr", x$Month )
-  x$Month <- as.factor(x$Month)
-  return(x)
-}
-
-add_campaign<- function(x){
-  
-  x$campaign <-ifelse(x$Month == "Oct", 1, x$Month)
-  x$campaign <-ifelse(x$Month == "Dec", 2, x$campaign )
-  x$campaign <-ifelse(x$Month == "Jan", 3, x$campaign )
-  x$campaign <-ifelse(x$Month == "Feb", 4, x$campaign )
-  x$campaign <-ifelse(x$Month == "Mar", 5, x$campaign )
-  x$campaign <-ifelse(x$Month == "Apr", 6, x$campaign )
-  return(x)
-}
-
-
-#add treatments------------------------------------------------------------------------------------------------------
-addtrt_func <- function(x){
-  x <- merge(x, treatments)
-  x$temp <- as.factor(x$temp)
-  x$drydown <- as.factor(ifelse(x$Month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
-                      "drought", "control"))
-  return(x)
-}
-
-###function to create a unique sample id from user specific variable column names-----------------------------------
-
-chooseidfunc <- function(dfr, varnames, sep="-"){
-  dfr$id <- as.factor(apply(dfr[,varnames], 1, function(x)paste(x, collapse=sep)))
-  return(dfr)
-}
-
-
-
-###3 functions (fitgam, addpoly, and smooth plot) use for ACi
-
-
-#' Function for smoothplot. Probably not use otherwise.
+###fitgam
 fitgam <- function(X,Y,dfr, k=-1, R=NULL){
   dfr$Y <- dfr[,Y]
   dfr$X <- dfr[,X]
@@ -251,12 +250,32 @@ fitgam <- function(X,Y,dfr, k=-1, R=NULL){
   return(g)
 }
 
-addpoly <- function(x,y1,y2,col=alpha("lightgrey",0.8),...){
+
+####addpoly
+addpoly <- function(x,y1,y2,col=alpha("floralwhite",0.95),...){
   ii <- order(x)
   y1 <- y1[ii]
   y2 <- y2[ii]
   x <- x[ii]
   polygon(c(x,rev(x)), c(y1, rev(y2)), col=col, border=NA,...)
+}
+
+
+####predline
+predline <- function(fit, from=NULL, to=NULL, ...){
+  
+  if(is.null(from))from <- min(fit$model[,2], na.rm=TRUE)
+  if(is.null(to))to <- max(fit$model[,2], na.rm=TRUE)
+  
+  newdat <- data.frame(X = seq(from,to, length=101))
+  
+  nm <- names(coef(fit))
+  names(newdat)[1] <- nm[length(nm)]
+  
+  pred <- as.data.frame(predict(fit, newdat, se.fit=TRUE, interval="confidence")$fit)
+  
+  addpoly(newdat[[1]], pred$lwr, pred$upr)
+  ablinepiece(fit, from=from, to=to, ...)
 }
 
 
