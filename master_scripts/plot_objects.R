@@ -1,3 +1,5 @@
+library(scales)
+
 #plot objects----------------------------------------------------
 pchs <- c(1, 16)
 pch4 <- c(16,16, 1, 1)
@@ -51,7 +53,14 @@ leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")
 leglab2<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")),
             expression(paste(Shade,"-" ,"AT")), expression(paste(Shade, "-" ,"ET")))
 
-colaci <-c("forestgreen", "forestgreen", "yellowgreen", "yellowgreen")
+###sun shade colors
+suncol <- alpha("forestgreen", alpha=.75)
+shacol <- alpha("yellow4", alpha=.75)
+leafcol <- c(suncol, shacol)
+leaflab2 <- c("Sun", "Shade")
+
+colaci <-c(suncol, suncol, shacol, shacol)
+
 
 leaflightlab <- c("shade-high", "shade-low", "sun")
 
