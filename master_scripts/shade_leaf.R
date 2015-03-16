@@ -19,10 +19,10 @@ print(aci_table,floating=FALSE)
   library(plantecophys)
 
   #simulate ACi curves for each leaf, ambient and elevated T
-  sunAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[3,3], Jmax=aci_leaf[3,4])
-  sunET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[4,3], Jmax=aci_leaf[4,4])
-  shaAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[1,3], Jmax=aci_leaf[1,4])
-  shaET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[2,3], Jmax=aci_leaf[2,4])
+  sunAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[3,3], Jmax=aci_leaf[3,4],PPFD=1408)
+  sunET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[4,3], Jmax=aci_leaf[4,4], PPFD=1408)
+  shaAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[1,3], Jmax=aci_leaf[1,4], PPFD=375)
+  shaET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=aci_leaf[2,3], Jmax=aci_leaf[2,4],PPFD=375)
 
 #plot
 plot(sunAT_sim$Ci, sunAT_sim$ALEAF, col="forestgreen", pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=2)
@@ -44,6 +44,7 @@ plot(c13.mean ~ leafN_area.mean, data=leaftraits, pch=16, col=as.factor(leaf), y
 legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5,inset = 0.03)  
 
 
+
 ####PPFD-----------------------------------------------------------------------------------------------
 par <- read.csv("raw data/par.csv")
 treatments <- read.csv("raw data/chamber_trt.csv")
@@ -56,7 +57,7 @@ Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 #data format for bar
 parbar <- subset(par_leaf, select = c("par", "month", "leaf_type"))
-parbar$month <- factor(parbar$month, levels = Morder)
+#parbar$month <- factor(parbar$month, levels = Morder)
 
 
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
@@ -64,15 +65,19 @@ bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", y
 title(ylab=parlab, mgp=ypos)
 
 
-###SLA---------------------------------------------------------------------------------------------------
 
-#run formatting functions
-leaf <- addtrt_func(leaf)
-leaf$sla <- with(leaf, leaf_area/leaf_mass)
+###LMA--------------------------------------------------------------------------------------------------
+lma <- read.csv("calculated_data/leaf_chemistry.csv")
 
-###mean sla by chamber and campaing
-leaf_agg <- summaryBy(leaf_mass+leaf_area+sla ~ Month+chamber+leaf+temp, data=leaf,FUN=mean, keep.names=TRUE)
-leaf_agg <- add_campaign(leaf_agg)
+#data format for bar
+lmabar <- subset(lma, select = c("lma", "Month", "leaf"))
+  lmabar$Month <- factor(lmabar$Month, levels = Morder)
 
-leaf_agg2 <- summaryBy(leaf_mass+leaf_area+sla ~ leaf+temp, data=leaf,FUN=c(mean,se))
+bar(lma, c(leaf, Month), lmabar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 185), half.errbar=FALSE)
+title(ylab=lmalab, mgp=ypos)
 
+##table summ by treatment
+  lma_agg <- summaryBy(lma~ leaf+temp+drydown, data=lma, FUN=c(mean,se))
+  lma_agg2 <- summaryBy(lma~ leaf+temp, data=lma, FUN=c(mean,se))
+  
+  lma_table <- xtable(lma_agg2)
