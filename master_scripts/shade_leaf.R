@@ -3,9 +3,6 @@ source("master_scripts/plot_objects.R")
 library(doBy)
 library(xtable)
 
-#wtc treatments
-treatments <- read.csv("raw data/temp_trt.csv")
-
 
 ###aci graph and table---------------------------------------------------------------------------------
 aci_leaf <- read.csv("calculated_data/tdl_aci.csv")
@@ -13,7 +10,7 @@ aci_leaf <- read.csv("calculated_data/tdl_aci.csv")
 aci_table <- xtable(aci_leaf)
 digits(aci_table)[c(3,5:6)] <- 3
 digits(aci_table)[c(4)] <- 4
-print(aci_table,floating=FALSE)
+print(aci_table,floating=FALSE,include.rownames=F)
 
 #simulated curves
   library(plantecophys)
