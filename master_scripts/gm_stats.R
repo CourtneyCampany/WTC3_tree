@@ -29,11 +29,16 @@ points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=1, col=temp)
 legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
 title(ylab=satlab, mgp=ypos, cex=1.2)
 
+
+lightscol <- alpha("darkorange2", .75)
+lightlab <- c(lightscol,shacol)
+lightleg <- c("High light", "Low light")
 ##shade low-high
-plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), 
-     xlab=gmlab, ylab="")
-points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=1, col=temp)
-legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=lightscol, ylim=c(0,25), xlim=c(0,.4), 
+     xlab=gmlab, ylab="", cex=1.25)
+points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=16, col=shacol, cex=1.25)
+legend("topright", lightleg, pch=16,inset = 0.02, col=lightlab) 
+legend("topleft", "Shade Leaves", bty='n') 
 title(ylab=satlab, mgp=ypos, cex=1.2)
 
 
@@ -60,20 +65,35 @@ gm_ch<- summaryBy(gm+Photo+Cond+CTleaf ~id+chamber+temp+leaf+light+leaflight+Mon
 palette(c("blue", "red"))
    
 ##photosynthesis and temperature
-plot(Photo~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(15, 40), 
-     ylab="", xlab=leaftlab)
-  points(Photo~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
-  legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
-  title(ylab=satlab, mgp=ypos, cex=1.2)
+gmt_sun_lm <- lm(gm~ CTleaf, data=gm_water,subset=leaflight=="sun-high")
+  sundat <- gm_water[gm_water$leaflight=="sun-high", "CTleaf"]
+  sun_seq <- seq(min(sundat), max(sundat), length=101)
+  sun_pred <- predict.lm(gmt_sun_lm, newdata=data.frame(CTleaf=sun_seq), interval="confidence")
+  
+gmt_sha_lm <- lm(gm~ CTleaf, data=gm_water,subset=leaflight=="shade-low")
+  shadat <- gm_water[gm_water$leaflight=="shade-low", "CTleaf"]
+  sha_seq <- seq(min(shadat), max(shadat), length=101)
+  sha_pred <- predict.lm(gmt_sha_lm, newdata=data.frame(CTleaf=sha_seq), interval="confidence")
 
-plot(gm~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,.5), xlim=c(15, 40), 
+plot(gm~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,.4), xlim=c(15, 40), 
      ylab="", xlab=leaftlab)
-points(gm~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
-legend("topright", templab, pch=16,inset = 0.03, col=palette()) 
+  
+  ablineclip(gmt_sun_lm, lty=1, x1=min(gm_water[gm_water$leaf=="sun","CTleaf"]), 
+             x2=max(gm_water[gm_water$leaf=="sun","CTleaf"]), col="forestgreen", lwd=2)
+  lines(sun_seq, sun_pred[,2], lty=2, lwd=2, col="forestgreen")
+  lines(sun_seq, sun_pred[,3], lty=2, lwd=2, col="forestgreen")
+  #shade
+  points(gm~CTleaf, data=gm_ch, subset=leaflight=="shade-low",pch=16, col=shacol)
+  ablineclip(gmt_sha_lm, lty=1, x1=min(gm_water[gm_water$leaf=="sun","CTleaf"]), 
+             x2=max(gm_water[gm_water$leaf=="sun","CTleaf"]), col="yellow4", lwd=2)
+  lines(sha_seq, sha_pred[,2], lty=2, lwd=2, col="yellow4")
+  lines(sha_seq, sha_pred[,3], lty=2, lwd=2, col="yellow4")
+  
+legend("topright", c("sun", "shade"), pch=16,inset = 0.03, col=leafcol) 
 title(ylab=gmlab, mgp=ypos, cex=1.2)
 
 
-plot(Photo~gm, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=temp, ylim=c(0,25), xlim=c(0,.5), 
+plot(Photo~gm, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), xlim=c(0,.5), 
      ylab="", xlab=gmlab)
 points(Photo~gm, data=gm_ch, subset=leaflight=="shade-low",pch=1, col=temp)
 legend("topright", templab, pch=16,inset = 0.03, col=palette()) 

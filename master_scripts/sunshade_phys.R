@@ -47,15 +47,14 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   #predict
   #get apprpriate vector of gs from sun leaves
   gsdat <- gm_c13[gm_c13$leaflight=="sun-high", "Cond"]
+  
   #generate sequence and then predict
   gssun_seq <- seq(min(gsdat), max(gsdat), length=101)
   gssun_pred <- predict(sunmod, newdata=data.frame(Cond=gssun_seq), se.fit=TRUE)
   
-  sunupper <- gssun_pred$fit + (1.96*gssun_pred$se.fit)
-  sunlower <- gssun_pred$fit - (1.96*gssun_pred$se.fit)
-  
-  sunupr <- sunmod$family$linkinv(sunupper)
-  sunlwr <- sunmod$family$linkinv(sunlower)
+  #ci and model fit
+  sunupr <- gssun_pred$fit + (2*gssun_pred$se.fit)
+  sunlwr <- gssun_pred$fit - (2*gssun_pred$se.fit)
   
   #SHADE leaves
   shamod <- gam(Photo ~ s(Cond, k=5), data=gm_c13, subset=leaflight=="shade-low")
@@ -66,28 +65,30 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
   gssha_pred <- predict(shamod, newdata=data.frame(Cond=gssha_seq), type="link", se.fit=TRUE)
   
-  shaupper <- gssha_pred$fit + (2*gssha_pred$se.fit)
-  shalower <- gssha_pred$fit - (2*gssha_pred$se.fit)
+  shaupr <- gssha_pred$fit + (2*gssha_pred$se.fit)
+  shalwr <- gssha_pred$fit - (2*gssha_pred$se.fit)
   
-  shaupr <- shamod$family$linkinv(shaupper)
-  shalwr <- shamod$family$linkinv(shalower)
-  
-  ###redo plot
-  
+  ###plot
   windows(10,8)
+  plot(Photo~Cond, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
+       xlim=c(0,.4), xlab=condlab, ylab="", cex=1.25)
   
-  smoothplot(Cond, Photo, leaflight, data=gm_c13, kgam=3,
-             ylim=c(0,25), xlim=c(0,.4), xlab=condlab, ylab="")
   lines(gssun_seq, sunupr, lty=2, lwd=2,col=suncol)
   lines(gssun_seq, sunlwr, lty=2, lwd=2,col=suncol)
+  lines(gssun_seq, gssun_pred$fit, lty=1, lwd=2,col=suncol)
   
+  #shade
+  points(Photo~Cond, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
   lines(gssha_seq, shaupr, lty=2, lwd=2,col=shacol)
   lines(gssha_seq, shalwr, lty=2, lwd=2,col=shacol)
+  lines(gssha_seq, gssha_pred$fit, lty=1, lwd=2,col=shacol)
   
+
   title(ylab=satlab, mgp=ypos, cex=1.2)
   legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
   dev.copy2pdf(file="master_scripts/figures/photo_gs.pdf")
   dev.off()
+
   
   
   
