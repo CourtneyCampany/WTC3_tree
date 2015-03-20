@@ -38,13 +38,16 @@ title(ylab=satlab, mgp=ypos, cex=1.2)
 legend("topright", sslab, pch=21, pt.bg=cl, pt.cex=2, bg="white",inset = 0.03) 
 
 
+#gm data----------------------------------------------------------------------------------------
+
 #paired id dfr
 idDF <- data.frame(id = unique(gm$id))
 
-#library(reshape)
-#gmCst <- cast(gm_id, id ~ variable, value= "gm")
+#summary of spot measurements for each id
+gm_id <- summaryBy(gm~ variable+id, data=gm, FUN=c(mean), keep.names=TRUE)
+gm_sp <- dlply(gm_id, .(variable), function(x) merge(x, idDF, all = TRUE))
 
-#gm data----------------------------------------------------------------------------------------
+
 
 #make an emptyr plot for presentation
 png(filename = "output/presentations/emptyplot.png", width = 11, height = 8.5, units = "in", res= 400)
@@ -59,22 +62,6 @@ title(ylab=cilab, mgp=ypos, cex=1.2)
 legend("topright", pairlab, pch=21, pt.bg=paircol, pt.cex=2,bg="white",inset = 0.03)  
 dev.off()
 
-
-x <- rnorm(100)
-y <- x + rnorm(100)
-lmfit <- lm(y~x)
-plot(x,y,xlim=c(-3.5,3.5))
-ablineclip(lmfit,x1=-2,x2=2,lty=2)
-ablineclip(h=0,x1=-2,x2=2,lty=3,col="red")
-ablineclip(v=0,y1=-2.5,y2=1.5,lty=4,col="green")
-
-
-
-
-
-#summary of spot measurements for each id
-gm_id <- summaryBy(gm~ variable+id, data=gm, FUN=c(mean), keep.names=TRUE)
-gm_sp <- dlply(gm_id, .(variable), function(x) merge(x, idDF, all = TRUE))
 
 plot(gm_sp[[4]][,3]~gm_sp[[3]][,3], pch=21, bg=wa[3], cex=2.5, ylab="", xlab=suatgm, xlim=c(0,1), ylim=c(0,1)) 
 abline(0,1, lty=2)

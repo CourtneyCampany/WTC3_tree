@@ -1,0 +1,11 @@
+acc_sun <- read.csv("calculated_data/bootstrap/acc_sun.csv")
+acc_sha <- read.csv("calculated_data/bootstrap/acc_sha.csv")
+aci_sun <- read.csv("calculated_data/bootstrap/aci_sun.csv")
+aci_sha <- read.csv("calculated_data/bootstrap/aci_sha.csv") 
+agm_sun <- read.csv("calculated_data/bootstrap/agm_sun.csv")
+agm_sha <- read.csv("calculated_data/bootstrap/agm_sha.csv") 
+acib_sun <- read.csv("calculated_data/bootstrap/acib_sun.csv")
+acib_sha <- read.csv("calculated_data/bootstrap/acib_sha.csv")  
+
+sundat <- read.csv("calculated_data/bootstrap/sundat.csv")
+shadat<- read.csv("calculated_data/bootstrap/shadat.csv")  

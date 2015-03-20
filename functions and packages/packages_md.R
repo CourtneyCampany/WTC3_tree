@@ -1,0 +1,8 @@
+library(doBy)
+library(pander)
+library(plyr)
+library(mgcv)
+library(lme4)
+library(lmerTest)
+library(plotrix)
+library(plantecophys)
