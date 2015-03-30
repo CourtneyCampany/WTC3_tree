@@ -76,7 +76,7 @@ pander(gm_agg2,caption="Well Watered")
 pander(gm_dr2,caption="Drought")
 ```
 
-* This figure shows the instantaneous response of g<sub>m</sub> in shade leaves when the lights are 'turned on'
+
 
 ```{r gm lights on}
 #plot low vs high light shade leaves
@@ -87,8 +87,7 @@ plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=lights
   legend("topleft", "Shade Leaves", bty='n') 
   title(ylab=satlab, mgp=ypos, cex=1.2)
 ```
-
-* Here is a simple version of the paired comparisons.  Only shade low light and sun leaves are used (watered and drought treatments together). All leaf types are compared to sun leaves at ambient temperature treatment (x axis)
+* This figure shows the instantaneous response of g<sub>m</sub> in shade leaves when the lights are 'turned on'
 
 ```{r gm paired, fig.height=10}
 wa<- palette(wes_palette("Zissou",5))
@@ -133,8 +132,7 @@ plot(gm_sp[[2]][,3]~gm_sp[[3]][,3], pch=21, bg=wa[5], cex=2.5, ylab="", xlim=c(0
 abline(0,1, lty=2)
 legend(.4,.45, pairlab[3], pch=21, pt.bg=paircol[3], pt.cex=2,bg="white",inset = 0.06) 
 ```
-
-* Here we see a slight reduction in g<sub>m</sub> with increase in temperature, but only in sun leaves
+* Here is a simple version of the paired comparisons.  Only shade low light and sun leaves are used (watered and drought treatments together). All leaf types are compared to sun leaves at ambient temperature treatment (x axis)
 
 ```{r gm temp}
 gm_ch<- summaryBy(gm+Photo+Cond+CTleaf ~id+chamber+temp+leaf+light+leaflight+Month, data=gm_water,FUN=mean,
@@ -168,6 +166,7 @@ plot(gm~CTleaf, data=gm_ch, subset=leaflight=="sun-high", pch=16, col=suncol, yl
 legend("topleft", c("sun", "shade"), pch=16,inset = 0.03, col=leafcol) 
 title(ylab=gmlab, mgp=ypos, cex=1.2)
 ```
+* Here we see a slight reduction in g<sub>m</sub> with increase in temperature, but only in sun leaves
 
 ### <u>Leaf Physiology</u>
 * Below are figures of sun and shade leaf physiology, keeping it simple by ignoring the temperature treatment. We can address that later.
@@ -318,7 +317,7 @@ legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol)
 
 This set of figures attempts to show how sun and shade leaves were fundamentally different.  
 
-* ACi curves were measured at saturating light for both sun and shade leaves.   
+  
 
 ```{r, results='asis'}
 aci_leaf <- read.csv("calculated_data/tdl_aci.csv")
@@ -329,9 +328,8 @@ aci_leaf2 <- aci_leaf[,c(1,2,3,5,4,6)]
 panderOptions("digits", 3)
 pander(aci_leaf2, caption="Leaf Biochemistry")
 ```    
-
+* ACi curves were measured at saturating light for both sun and shade leaves. 
   
-* Here are predicted ACi curves for leaf types with temperature treatments. Both Vc<sub>max</sub> and J<sub>max</sub> are reduced in shade leaves with little effect of the temperature treatment. ACi curves were taken once towards the end of the experiment on well watered trees.    
 
 ```{r,results='asis'}
   #simulate ACi curves for each leaf, ambient and elevated T
@@ -348,11 +346,9 @@ plot(sunAT_sim$Ci, sunAT_sim$ALEAF, col="forestgreen", pch=21,  cex=1.1,xlab=cil
   legend("bottomright", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.03)
   title(ylab=satlab, mgp=ypos)
 ```
+* Here are predicted ACi curves for leaf types with temperature treatments. Both Vc<sub>max</sub> and J<sub>max</sub> are reduced in shade leaves with little effect of the temperature treatment. ACi curves were taken once towards the end of the experiment on well watered trees.
 
 
-* This figure shows the relationship between leaf N on an area basis and ${\delta}$^13^C between leaf types (chamber means).
-
-    
 ```{r,results='asis'}
 ##this has droughtleaves
 palette(c("yellowgreen", "green4"))
@@ -362,10 +358,9 @@ plot(c13.mean ~ leafN_area.mean, data=leaftraits, pch=16, col=as.factor(leaf), y
 legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5,inset = 0.03)  
 
 ```
+* This figure shows the relationship between leaf N on an area basis and ${\delta}$^13^C between leaf types (chamber means).
 
-* Next is the light environment in which gas exchange measurements for sun and shade leaves were measured.  This data was generated with a handheld par sensor for each individual leaf and verified with ceptometer readings within the canopy at the height of the measured leaf. There was a ~75% reduction in PPFD from sun to shave leaves.
 
-* The second figure shows leaf mass area for each gas exchange campaign.  Surprisingly, not very different. 
 
 ```{r,results='asis'}
  #format function
@@ -382,8 +377,12 @@ legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5
  bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
      half.errbar=FALSE)
  title(ylab=parlab, mgp=ypos)
- 
- ###LMA--------------------------------------------------------------------------------------------------
+```
+
+* Next is the light environment in which gas exchange measurements for sun and shade leaves were measured.  This data was generated with a handheld par sensor for each individual leaf and verified with ceptometer readings within the canopy at the height of the measured leaf. There was a ~75% reduction in PPFD from sun to shave leaves.
+
+```{r}
+ ###LMA-
  lma <- read.csv("calculated_data/leaf_chemistry.csv")
  
  #data format for bar
@@ -392,5 +391,6 @@ legend("bottomright", leaflab, pch=16, col=c("yellowgreen", "green4"),pt.cex=1.5
  
  bar(lma, c(leaf, Month), lmabar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 185), half.errbar=FALSE)
  title(ylab=lmalab, mgp=ypos)
-  
 ```
+
+* The second figure shows leaf mass area for each gas exchange campaign.  Surprisingly, not very different. 
