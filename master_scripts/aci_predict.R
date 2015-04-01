@@ -69,8 +69,8 @@ Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
   #simulate ACi curves for each leaf, ambient and elevated T
   sunAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[3,3], Jmax=jvc[3,4],PPFD=mean(sun$PARi))
   sunET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[4,3], Jmax=jvc[4,4], PPFD=mean(sun$PARi))
-  shaAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=375)
-  shaET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=375)
+  shaAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=mean(shade$PARi))
+  shaET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=mean(shade$PARi))
   
   
   windows(10,8)
