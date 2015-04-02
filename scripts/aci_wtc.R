@@ -60,6 +60,9 @@ sun_coefs <- sun_coefs[chamberorder,]
 #write a df with coefs for sun and shade leaves
 tdlaci <- rbind(sun_coefs, shade_coefs)
 tdlaci <- merge(tdlaci, plotsumm, by = "chamber")
+test <- tdlaci[-c(8, 13),]
+
+write.csv(test, "calculated_data/aciparameters.csv", row.names=FALSE)
 
 aci_means2 <- summaryBy(Vcmax+Jmax ~ leaf , data = tdlaci,  FUN=c(mean,se))
 
