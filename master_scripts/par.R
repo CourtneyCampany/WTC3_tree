@@ -26,4 +26,3 @@ bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", y
 title(ylab=parlab, mgp=ypos)
 dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
 dev.off()
-
