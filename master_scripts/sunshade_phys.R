@@ -26,6 +26,9 @@ gm_sunsha <- gm_agg[gm_agg$leaflight != "shade-high",]
 ##merge
 gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
+  #add total conductance to CO2
+  gm_c13$gmgs <- with(gm_c13, gm+Cond)
+  
 
   
 ###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
@@ -92,7 +95,7 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   sundat <- gm_c13[gm_c13$leaflight =="sun-high",]
   shadat <- gm_c13[gm_c13$leaflight =="shade-low",]
   
-  ##make dfrs for each comprison for simplicity with bootstrapping
+  ##make dfrs for each comparison for simplicity with bootstrapping
   acc_sun <- sundat[, c("Photo", "Cc", "chamber")]
   acc_sha<- shadat[, c("Photo", "Cc", "chamber")]
   
@@ -104,6 +107,9 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   
   acib_sun <- sundat[, c("Photo", "ci_bar", "chamber")]
   acib_sha<- shadat[, c("Photo", "ci_bar", "chamber")]
+  
+  gmgs_sun <- sundat[, c("Photo", "gmgs", "chamber")]
+  gmgs_sha<- shadat[, c("Photo", "gmgs", "chamber")]
   
   ###Photosynthesis vs Cc
   
@@ -260,6 +266,47 @@ title(ylab=satlab, mgp=ypos, cex=1.2)
 legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
 dev.copy2pdf(file="master_scripts/figures/photo_cibar.pdf")
 dev.off()
+  
+###Photosynthesis vs total conductance to CO2-------------------------------------------------------------
+
+  #SUN
+  gmgs_sun_lm <- lmer(Photo~ gmgs + (1|chamber), data=gmgs_sun)
+  
+  boot_gmgsun <- bootMer(gmgs_sun_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+  gmgs_sun$lcl <- apply(boot_gmgsun$t, 2, quantile, 0.025)
+  gmgs_sun$ucl <- apply(boot_gmgsun$t, 2, quantile, 0.975)
+  gmgs_sun$pred <- predict(gmgs_sun_lm, re.form=NA)
+  gmgs_sun <- arrange(gmgs_sun, gmgs)
+  
+  gmgs_sha_lm <- lmer(Photo~ gmgs + (1|chamber), data=gmgs_sha)
+  
+  boot_gmgssha <- bootMer(gmgs_sha_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+  gmgs_sha$lcl <- apply(boot_gmgssha$t, 2, quantile, 0.025)
+  gmgs_sha$ucl <- apply(boot_gmgssha$t, 2, quantile, 0.975)
+  gmgs_sha$pred <- predict(gmgs_sha_lm, re.form=NA)
+  gmgs_sha <- arrange(gmgs_sha, gmgs)
+  
+  ##plot
+  windows(10,8)
+  plot(Photo~gmgs, data=sundat, pch=16, col=suncol, ylim=c(0,25), 
+       xlim=c(0,.8), xlab=totcondlab, ylab="", cex=1.25)
+  #shade
+  points(Photo~gmgs, data=shadat, pch=16, col=shacol, cex=1.25)
+  with(gmgs_sun, {
+    lines(gmgs, lcl, lty=2, lwd=2,col="forestgreen")
+    lines(gmgs, ucl, lty=2, lwd=2,col="forestgreen")
+    lines(gmgs, pred, lty=1, lwd=2,col="forestgreen")
+  })
+  with(gmgs_sha, {
+    lines(gmgs, lcl, lty=2, lwd=2,col="yellow4")
+    lines(gmgs, ucl, lty=2, lwd=2,col="yellow4")
+    lines(gmgs, pred, lty=1, lwd=2,col="yellow4")
+  })
+  title(ylab=satlab, mgp=ypos, cex=1.2)
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  dev.copy2pdf(file="master_scripts/figures/totalcond.pdf")
+  dev.off()
+  
 
 
 #####write calculated dfrs with bootstraop intervals for use later
