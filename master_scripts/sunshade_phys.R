@@ -28,7 +28,6 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
   #add total conductance to CO2
   gm_c13$gmgs <- with(gm_c13, gm+Cond)
-  
 
   
 ###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
@@ -307,7 +306,52 @@ dev.off()
   dev.copy2pdf(file="master_scripts/figures/totalcond.pdf")
   dev.off()
   
-
+###try with gam
+  
+  #SUN leaves
+  gmgs_sun_mod <- gam(Photo ~ s(gmgs, k=10), data=gm_c13, subset=leaflight=="sun-high")
+  
+  #predict
+  #get apprpriate vector of gs from sun leaves
+  gmgs_dat <- gm_c13[gm_c13$leaflight=="sun-high", "gmgs"]
+  
+  #generate sequence and then predict
+  gmgs_sun_seq <- seq(min(gmgs_dat), max(gmgs_dat), length=101)
+  gmgs_sun_pred <- predict(gmgs_sun_mod, newdata=data.frame(gmgs=gmgs_sun_seq), se.fit=TRUE)
+  
+  #ci and model fit
+  gmgs_sunupr <- gmgs_sun_pred$fit + (2*gmgs_sun_pred$se.fit)
+  gmgs_sunlwr <- gmgs_sun_pred$fit - (2*gmgs_sun_pred$se.fit)
+  
+  #SHADE leaves
+  gmgs_shamod <- gam(Photo ~ s(gmgs, k=10), data=gm_c13, subset=leaflight=="shade-low")
+  
+  #get apprpriate vector CC from sun leaves
+  gmgs_dat2 <- gm_c13[gm_c13$leaflight=="shade-low", "gmgs"]
+  #generate sequence and then predict
+  gmgs_sha_seq <- seq(min(gmgs_dat2), max(gmgs_dat2), length=101)
+  gmgs_sha_pred <- predict(gmgs_shamod, newdata=data.frame(gmgs=gmgs_sha_seq), type="link", se.fit=TRUE)
+  
+  gmgs_shaupr <- gmgs_sha_pred$fit + (2*gmgs_sha_pred$se.fit)
+  gmgs_shalwr <- gmgs_sha_pred$fit - (2*gmgs_sha_pred$se.fit)
+  
+  ###plot
+  windows(10,8)
+  plot(Photo~gmgs, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
+       xlim=c(0,.6), xlab=condlab, ylab="", cex=1.25)
+  
+  lines(gmgs_sun_seq, gmgs_sunupr, lty=2, lwd=2,col=suncol)
+  lines(gmgs_sun_seq, gmgs_sunlwr, lty=2, lwd=2,col=suncol)
+  lines(gmgs_sun_seq, gmgs_sun_pred$fit, lty=1, lwd=2,col=suncol)
+  
+  #shade
+  points(Photo~gmgs, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  lines(gmgs_sha_seq, gmgs_shaupr, lty=2, lwd=2,col=shacol)
+  lines(gmgs_sha_seq, gmgs_shalwr, lty=2, lwd=2,col=shacol)
+  lines(gmgs_sha_seq, gmgs_sha_pred$fit, lty=1, lwd=2,col=shacol)
+  title(ylab=satlab, mgp=ypos, cex=1.2)
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  
 
 #####write calculated dfrs with bootstraop intervals for use later
 write.csv(acc_sun, "calculated_data/bootstrap/acc_sun.csv", row.names=FALSE)
