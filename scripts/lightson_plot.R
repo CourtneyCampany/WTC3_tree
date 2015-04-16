@@ -119,3 +119,17 @@ l_ply(wet_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$
                                   type='l', col="blue", lty=3, lwd=2))
   l_ply(dry_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
                                   type='l', col="red", lty=3, lwd=2))
+  
+  
+  
+####  mixed effect model to test if lights on
+  library(lme4)
+  library(lmerTest)
+  
+ lightson_lm <-  lmer(Photo~ gm + (gm|id), data=gm_water, subset=leaflight=="shade-high")
+ lightsoff_lm <-  lmer(Photo~ gm + (gm|id), data=gm_water, subset=leaflight=="shade-low")
+
+summary(lightson_lm)
+summary(lightsoff_lm)
+  
+  
