@@ -125,11 +125,24 @@ l_ply(wet_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$
 ####  mixed effect model to test if lights on
   library(lme4)
   library(lmerTest)
-  
- lightson_lm <-  lmer(Photo~ gm + (gm|id), data=gm_water, subset=leaflight=="shade-high")
- lightsoff_lm <-  lmer(Photo~ gm + (gm|id), data=gm_water, subset=leaflight=="shade-low")
 
-summary(lightson_lm)
-summary(lightsoff_lm)
+  gmwater_agg <- summaryBy(Photo +gm ~ id+Month+temp+drydown+chamber+leaflight, data=gm_water,FUN=mean, keep.names=TRUE)
+  gm_water_agg2 <- gmwater_agg[gmwater_agg$leaflight != "sun-high",]  
+  gm_water_agg2$rowseq <- seq(1:nrow(gm_water_agg2))
+  gm_water_agg2 <- droplevels(gm_water_agg2) 
+  
+  rowrm <- c(9,36,39,102)
+  gm_water_agg3 <- gm_water_agg2[! gm_water_agg2$rowseq %in% c(9, 36,39, 102),] 
+  gm_water_sp <- dlply(gm_water_agg3, .(leaflight), function(x) c(x$pairid <- seq(1:nrow(x)), return(x)))
+
+  gm_water_agg4 <- rbind.fill(gm_water_sp) 
+  gm_water_agg4$pairid2 <- as.factor(paste("a", gm_water_agg4$pairid, sep="-"))
+
+  #run model with id (pairid) used as random effect
+  lightson_mod <-  lmer(Photo~ gm + (gm|pairid2), data=gm_water_agg4)
+
+
+summary(lightson_mod)
+
   
   
