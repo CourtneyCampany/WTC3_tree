@@ -15,10 +15,11 @@ Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 parbar <- subset(par_leaf, select = c("par", "month", "leaf_type"))
 parbar$month <- factor(parbar$month, levels = Morder)
 levels(parbar$month)
+parbar$leaf_type <- gsub("s", "S", parbar$leaf_type)
+
 
 par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 
-#png(filename = "output/presentations/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
 
 windows(7,5)
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
@@ -26,3 +27,18 @@ bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", y
 title(ylab=parlab, mgp=ypos)
 dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
 dev.off()
+
+
+###for png
+png(filename = "makepngs/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
+
+bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="",  ylim=c(0, 2000), 
+    half.errbar=FALSE, mar=c(5,5,2,2), ylab=parlab, cex.axis=1.25, cex.lab = 1.5, cex.names=1.5)
+
+dev.off()
+
+bar(Cond, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.20),
+    mar=c(5,5,2,0), ylab=condlab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
+
+
+

@@ -22,6 +22,7 @@ leafN <- read.csv("calculated_data/leaf_chemistry.csv")
 
 #leafK
 leafk <- read.csv("calculated_data/leafK_nodrought.csv")
+leafk$leaf <- gsub("s", "S", leafk$leaf)
 
 
 ####merge leaf N with PAR---------------------------------------------------------------------------------
@@ -70,6 +71,14 @@ summary(Kelev_lm)
 
 ####plotting----------------------------------------------------------------------------------
 palette(c("blue", "red"))
+leafK_lab <- expression(Leaf~K~~(mmol~H[2]*O~m^-2~s^-1~MPa^-1))
+
+bar(leafK, leaf, leafk, col=c("yellowgreen", "green4"), ylim=c(0, 4),xlab="", 
+    ylab=leafK_lab,half.errbar=FALSE, mar=c(5,5,2,2), 
+    cex.axis=1.25, cex.label= 1.5, cex.names=1.5)
+
+
+
 
 ###nitro area sun v shade
 plot(Nshade$leafN_area ~ Nsun$leafN_area , ylim=c(0,5), xlim=c(0, 5), xlab=nsunlab, ylab="", 

@@ -27,7 +27,7 @@ ypos <- c(2.5,1,0)
 satlab <- expression(A~~(mu*mol~m^-2~s^-1))
 
 condlab <- expression(g[s]~~(mol~m^-2~s^-1))
-totcondlab <- expression(Total~Conductance~to~CO^-2~~(mol~m^-2~s^-1))
+totcondlab <- expression(Total~Conductance~to~CO[2]~~(mol~m^-2~s^-1))
 
 vpdlab <- "VPD  (kPa)"
 ratelab <- expression(mol~m^-2~s^-1)

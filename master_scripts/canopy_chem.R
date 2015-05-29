@@ -53,6 +53,18 @@ palette( c("blue", "red"))
 Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 
+
+###simple figure on Narea
+canopy_nodrought$leaf <- gsub("s", "S", canopy_nodrought$leaf)
+narea_agg <- summaryBy(leafN_area ~ leaf, data=canopy_nodrought, FUN=c(mean,se))
+
+png(filename = "makepngs/narea.png", width = 11, height = 8.5, units = "in", res= 400)
+
+bar(leafN_area, leaf, canopy_nodrought, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0,3),
+    mar=c(5,5,2,2), ylab=narealab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
+dev.off()
+
+
 #c13 through time
 
 windows(8,8)
