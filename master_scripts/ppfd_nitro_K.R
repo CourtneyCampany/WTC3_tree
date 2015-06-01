@@ -75,7 +75,7 @@ leafK_lab <- expression(Leaf~K~~(mmol~H[2]*O~m^-2~s^-1~MPa^-1))
 
 bar(leafK, leaf, leafk, col=c("yellowgreen", "green4"), ylim=c(0, 4),xlab="", 
     ylab=leafK_lab,half.errbar=FALSE, mar=c(5,5,2,2), 
-    cex.axis=1.25, cex.label= 1.5, cex.names=1.5)
+    cex.axis=1.25, cex.lab= 1.5, cex.names=1.5)
 
 
 
