@@ -1,0 +1,109 @@
+---
+title: "Project management and workflow"
+author: Remko Duursma
+date: 17 April 2015
+output: ioslides_presentation
+---
+
+## Reproducible research
+
+- Organize your work so that you have **everything** in a script
+- The script reproduces all of your work, when run from a **clean workspace**
+- Outputs (figures, processed datasets) are **disposable**, your scripts can always re-produce the output
+
+![](chamber.jpg)
+
+
+## A few key principles (1)
+
+- Organize code and data in a single folder for each 'project'
+- Do not mix code for separate projects
+- Keep raw (original) data in a sub-folder, and **never modify raw data**
+
+- Use *projects* in Rstudio to manage files and your workspace
+
+
+## A few key principles (2)
+
+- Write functions as much as possible
+- Keep code that defines functions separate from other code
+- Use a logical folder structure to organize files in a project (example later, and see Chapter 11)
+
+![](../screenshots/folderstructure.png)
+
+## Project size
+
+- Try to avoid very large projects, instead split them into more **manageable chunks**. 
+
+- As a rule of thumb, a 'project' is about the size of the analysis for a single manuscript.
+
+- Over time, projects always have the tendency to grow in size. If you archive old work, try to get used to: 
+    + **deleting garbage** code and/or files that have accumulated
+    + **completely starting over**. Sometimes it is best to reorganize your work completely.
+
+
+## Folder structure
+
+To keep raw data separate from scripts, functions, and outputs, a good folder structure is important. Below is an example, but this is of course flexible, and depends on the type of project.  
+
+
+![](../screenshots/folderstructuresmall.png)  
+  
+In this simple example, we keep functions and scripts in the `R` folder, the raw data files (normally as CSV) in `rawdata`, and output is sent to the `output` folder. 
+
+
+## Working with folders
+
+### Reading raw data
+
+```{r, eval=FALSE}
+allom <- read.csv("rawdata/allometry.csv")
+```
+
+### Saving a pdf
+
+```{r, eval=FALSE}
+pdf("output/Figure1.pdf")
+plot(height ~ diameter, data=allom)
+dev.off()
+```
+
+
+## Calling other scripts {.smaller}
+
+I like to have a single 'master script', that loads other scripts that do particular bits, like read and clean the raw data, make figures, and fit linear models. This script may look like the following.
+
+```{r eval=FALSE}
+# Load packages
+library(gplots)
+library(car)
+
+# Load functions
+source("R/functions.R")
+
+# Read raw data and add new variables
+source("R/readdata.R")
+
+# Make figures
+source("R/figures.R")
+
+# Do stats
+source("R/linearmodels.R")
+```
+
+
+## Projects in Rstudio
+
+Finally, I strongly recommend using **projects in Rstudio**. 
+
+- When you setup a project, a small file is added to your folder (e.g. `myproject.Rproj`)
+- When you open the project, you start with a clean workspace, in the correct working directory
+- So no more: `setwd()` and `rm(list=ls())` in your scripts
+- This still works when you move the entire folder to a new location
+
+
+
+
+
+
+
