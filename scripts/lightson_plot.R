@@ -30,6 +30,18 @@ gm_water_agg4$pairid2 <- as.factor(paste("a", gm_water_agg4$pairid, sep="-"))
 #run model with id (pairid) used as random effect
 lightson_mod <-  lmer(Photo~ gm + (gm|pairid2), data=gm_water_agg4)
 
+# Average relationship, by averaging group-wise slopes and intercepts
+lightson_mod <- lmList(Photo ~ gm|pairid2, data=gm_water_agg4)
+with(gm_water_agg4, plot(gm, Photo, col=leaflight))
+b <- colMeans(coef(lightson_mod))
+abline(b[1], b[2])
+
+abline(lm(Photo ~ gm, data=gm_water_agg4), col="red")
+
+
+
+
+
 
 summary(lightson_mod)
 
