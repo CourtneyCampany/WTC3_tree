@@ -24,10 +24,10 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
   canopy_chem<- add_campaign(canopy_chem)
 
 ###write file
-write.csv(canopy_chem, "calculated_data/leaf_chemistry.csv", row.names=FALSE)
+#write.csv(canopy_chem, "calculated_data/leaf_chemistry.csv", row.names=FALSE)
 
 canopy_agg2 <- summaryBy(c13+ lma+ leafN + leafN_area ~ leaf+campaign+temp, data=canopy_chem, FUN=c(mean,se))
-write.csv(canopy_agg2, "calculated_data/leaftraits_summary.csv",row.names=FALSE)
+#write.csv(canopy_agg2, "calculated_data/leaftraits_summary.csv",row.names=FALSE)
                          
                          
 #   #order my month over 2013-14
@@ -61,7 +61,7 @@ narea_agg <- summaryBy(leafN_area ~ leaf, data=canopy_nodrought, FUN=c(mean,se))
 png(filename = "makepngs/narea.png", width = 11, height = 8.5, units = "in", res= 400)
 
 bar(leafN_area, leaf, canopy_nodrought, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0,3),
-    mar=c(5,5,2,2), ylab=narealab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
+    mar=c(5,7,2,2), ylab=narealab, cex.axis=1.75, cex.lab = 2, cex.names=2,legend = FALSE)
 dev.off()
 
 

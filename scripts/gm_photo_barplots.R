@@ -41,12 +41,12 @@ png(filename = "makepngs/gmphoto_bar.png", width = 11, height = 8.5, units = "in
 par(mfrow=c(1,2))
 
 bar(gm, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2),
-    mar=c(5,5,2,0), ylab=gmlab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
+    mar=c(5,7,2,0), ylab=gmlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
 
 bar(Photo, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
-    mar=c(5,0,2,5), ylab="", cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5, yaxt='n')
-axis(side=4, labels=TRUE, cex.axis=1.25)
-mtext(photolab, side=4, mgp=c(3, 1, 0), line=3,cex=1.5)
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4, line=4,cex=2)
 
 dev.off()
 
@@ -57,13 +57,13 @@ png(filename = "makepngs/lightson_bar.png", width = 11, height = 8.5, units = "i
 par(mfrow=c(1,2))
 
 bar(gm, light, gm_lightson_id, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2),
-    mar=c(5,5,2,0), ylab=gmlab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
-text(.7, .19, "Shade Leaves", cex=1.5)
+    mar=c(5,7,2,0), ylab=gmlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+text(.8, .19, "Shade Leaves", cex=2)
 
 bar(Photo, light, gm_lightson_id, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
-    mar=c(5,0,2,5), ylab="", cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5, yaxt='n')
-axis(side=4, labels=TRUE, cex.axis=1.25)
-mtext(photolab, side=4, mgp=c(3, 1, 0), line=3,cex=1.5)
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
 
 dev.off()
 
@@ -75,12 +75,12 @@ png(filename = "makepngs/gsphoto_bar.png", width = 11, height = 8.5, units = "in
 par(mfrow=c(1,2))
 
 bar(Cond, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.20),
-    mar=c(5,5,2,0), ylab=condlab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
+    mar=c(5,7,2,0), ylab=condlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
 
 bar(Photo, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
-    mar=c(5,0,2,5), ylab="", cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5, yaxt='n')
-axis(side=4, labels=TRUE, cex.axis=1.25)
-mtext(photolab, side=4, mgp=c(3, 1, 0), line=3,cex=1.5)
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
 
 dev.off()
 

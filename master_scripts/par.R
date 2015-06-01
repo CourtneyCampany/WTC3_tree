@@ -33,12 +33,13 @@ dev.off()
 png(filename = "makepngs/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
 
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="",  ylim=c(0, 2000), 
-    half.errbar=FALSE, mar=c(5,5,2,2), ylab=parlab, cex.axis=1.25, cex.lab = 1.5, cex.names=1.5)
+    half.errbar=FALSE, mar=c(5,7,2,2), ylab=parlab, cex.axis=1.75, cex.lab = 2, cex.names=2,
+    legend = FALSE)
+legend("topleft", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
+       bty='n', cex=2)
 
 dev.off()
 
-bar(Cond, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.20),
-    mar=c(5,5,2,0), ylab=condlab, cex.axis=1.25, cex.lab = 1.5, legend=F, cex.names=1.5)
 
-
+ 
 

@@ -124,20 +124,21 @@ Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
  ###png
   png(filename = "makepngs/aci_sunsha.png", width = 11, height = 8.5, units = "in", res= 400)
   
-  par(mar=c(5,5,2,2), cex.lab=1.5)
+  par(mar=c(5,7,2,2), cex.lab=2)
   
-  plot(Photo~Ci ,data= acishade_clean, pch=16, col=shacol50, ylim=c(0, 35), xlim=c(0,2000), xlab=cilab, 
-       ylab=photolab, cex.axis=1.25)
-  points(Photo~Ci ,data= shade_redo, pch=16, col=shacol50)
-  points(Photo~Ci ,data= sunaci_clean2, pch=16, col=suncol50)
-  points(Photo~Ci ,data= tdlaci2, pch=16, col=suncol50)
+  plot(Photo~Ci ,data= acishade_clean, pch=16, col=shacol50, ylim=c(0, 35), xlim=c(0,2000), xlab="", 
+       ylab=photolab, cex.axis=1.75, cex=1.5)
+  points(Photo~Ci ,data= shade_redo, pch=16, col=shacol50, cex=1.5)
+  points(Photo~Ci ,data= sunaci_clean2, pch=16, col=suncol50, cex=1.5)
+  points(Photo~Ci ,data= tdlaci2, pch=16, col=suncol50, cex=1.5)
+  title(xlab=cilab, mgp=c(3.5,1,1))
 
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=3)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3, lty=2)
+  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=3.5)
+  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
+  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5)
+  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
 
-  legend("bottomright", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.03, bty='n',cex=1.25)
+  legend("bottomright", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.02, bty='n',cex=1.75)
 
   dev.off()
   
