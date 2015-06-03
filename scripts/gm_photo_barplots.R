@@ -24,12 +24,13 @@ gm_agg <- summaryBy(gm + Photo + Cond ~ leaf, data=gm_sunsha_id,FUN=c(mean,se))
 
 gm_lightson <-gm_water[gm_water$leaflight != "sun-high",]
 
-gm_lightson_id <- summaryBy(gm +Photo ~ id + leaflight + light+temp,  data=gm_lightson,FUN=mean, keep.names=TRUE)
+gm_lightson_id <- summaryBy(gm +Cond+Photo ~ id + leaflight + light+temp,  data=gm_lightson,
+                            FUN=mean, keep.names=TRUE)
 gm_lightson_id$leaf <- gsub("s", "S", gm_lightson_id$leaf)
 gm_lightson_id$light <- gsub("high", "Sun-light", gm_lightson_id$light)
 gm_lightson_id$light <- gsub("low", "Shade-light", gm_lightson_id$light)
 
-gm_light_agg <- summaryBy(gm + Photo ~ light, data=gm_lightson_id,FUN=c(mean,se))
+gm_light_agg <- summaryBy(gm + Photo +Cond~ light, data=gm_lightson_id,FUN=c(mean,se))
 
 
 ##figures-----------------------------------------------------------------------------------
@@ -83,5 +84,31 @@ axis(side=4, labels=TRUE, cex.axis=1.75)
 mtext(photolab, side=4,  line=4, cex=2)
 
 dev.off()
+
+##lightson gsphoto
+
+gs_lightson <-gm_water[gm_water$leaflight != "shade-low",]
+
+gs_lightson_id <- summaryBy(Cond+Photo ~ id + leaflight + light+temp,  data=gs_lightson,
+                            FUN=mean, keep.names=TRUE)
+gs_lightson_id$leaf <- gsub("s", "S", gs_lightson_id$leaf)
+gs_lightson_id$leaflight <- gsub("s", "S", gs_lightson_id$leaflight)
+gs_lightson_id$leaflight <- gsub("high", "High", gs_lightson_id$leaflight)
+
+
+#windows(8,5)
+png(filename = "makepngs/lightson_gs.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mfrow=c(1,2))
+
+bar(Cond, leaf, gs_lightson_id, col=c(lightscol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.4),
+    mar=c(5,7,2,0), ylab=condlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+
+bar(Photo, leaf, gs_lightson_id, col=c(lightscol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
+
+dev.off()
+
 
   
