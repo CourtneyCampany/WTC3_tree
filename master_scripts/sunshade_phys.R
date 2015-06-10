@@ -4,7 +4,7 @@ source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
-#read in gm data set (no drought) and Cibar(discrimination)
+#read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 
 Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
 
@@ -14,7 +14,7 @@ gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
   gmes$cc_ci<- with(gmes, Ci/Cc)
 
 ###get average by id
-gm_agg <- summaryBy(Photo+Cond+Ci+Cc+gm+VpdL+xsi+DELTA+cc_ci ~ chamber+id+leaf +light+temp+leaflight, 
+gm_agg <- summaryBy(Photo+Cond+Ci+Trmmol+Cc+gm+VpdL+xsi+DELTA+cc_ci ~ chamber+id+leaf +light+temp+leaflight, 
                     data=gmes, FUN=mean, keep.names=TRUE)
 
 ##remove shade-high
@@ -28,15 +28,16 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
   #add total conductance to CO2
   gm_c13$gmgs <- with(gm_c13, gm+Cond)
-
   
-###Photosynthesis vs gs (need to fit sun with something else)------------------------------------------------
-  ###simple plot use smoothplot from RD and get CI polygon
+  
+  
+####GAM PLOTS (photosynthesis vs gs or transpiration)-------------------------------------------------------------
   palette(c(shacol, suncol))
 
-  ###try to add 95%ci as dotted line and then turn shading of addpoly lighter
   
-  ####run gam models and then predict
+##1: Photosynthesis vs gs 
+  #run gam models and then predict
+  
   #SUN leaves
   sunmod <- gam(Photo ~ s(Cond, k=5), data=gm_c13, subset=leaflight=="sun-high")
   
@@ -66,8 +67,9 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   
   ###plot
   windows(10,8)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
   plot(Photo~Cond, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
-       xlim=c(0,.4), xlab=condlab, ylab="", cex=1.25)
+       xlim=c(0,.4), xlab=condlab, ylab=satlab, cex=1.25)
   
   lines(gssun_seq, sunupr, lty=2, lwd=2,col=suncol)
   lines(gssun_seq, sunlwr, lty=2, lwd=2,col=suncol)
@@ -79,22 +81,70 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   lines(gssha_seq, shalwr, lty=2, lwd=2,col=shacol)
   lines(gssha_seq, gssha_pred$fit, lty=1, lwd=2,col=shacol)
   
-
-  title(ylab=satlab, mgp=ypos, cex=1.2)
-  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
   dev.copy2pdf(file="master_scripts/figures/photo_gs.pdf")
   dev.off()
+ 
+   
+##2: Photosynthesis vs tranpiration
 
-##bootstrap plots of confidence intervals with chamber as random effect---------------------------------
+  #SUN leaves
+  atrans_sun_mod <- gam(Photo ~ s(Trmmol, k=4), data=gm_c13, subset=leaflight=="sun-high")
+  
+  #predict
+  #get apprpriate vector of transpiration from sun leaves
+  atrans_dat <- gm_c13[gm_c13$leaflight=="sun-high", "Trmmol"]
+  
+  #generate sequence and then predict
+  atrans_sun_seq <- seq(min(atrans_dat), max(atrans_dat), length=101)
+  atrans_sun_pred <- predict(atrans_sun_mod, newdata=data.frame(Trmmol=atrans_sun_seq), se.fit=TRUE)
+  
+  #ci and model fit
+  atrans_sunupr <- atrans_sun_pred$fit + (2*atrans_sun_pred$se.fit)
+  atrans_sunlwr <- atrans_sun_pred$fit - (2*atrans_sun_pred$se.fit)
+  
+  #SHADE leaves
+  atrans_shamod <- gam(Photo ~ s(Trmmol, k=4), data=gm_c13, subset=leaflight=="shade-low")
+  
+  #get apprpriate vector transpiration from sun leaves
+  atrans_dat2 <- gm_c13[gm_c13$leaflight=="shade-low", "Trmmol"]
+  #generate sequence and then predict
+  atrans_sha_seq <- seq(min(atrans_dat2), max(atrans_dat2), length=101)
+  atrans_sha_pred <- predict(atrans_shamod, newdata=data.frame(Trmmol=atrans_sha_seq), type="link", se.fit=TRUE)
+  
+  atrans_shaupr <- atrans_sha_pred$fit + (2*atrans_sha_pred$se.fit)
+  atrans_shalwr <- atrans_sha_pred$fit - (2*atrans_sha_pred$se.fit)
+  
+  ###plot
+  windows(10,8)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
+  plot(Photo~Trmmol, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
+       xlim=c(0,6), xlab=trmmollab, ylab=satlab, cex=1.25)
+  
+  lines(atrans_sun_seq, atrans_sunupr, lty=2, lwd=2,col=suncol)
+  lines(atrans_sun_seq, atrans_sunlwr, lty=2, lwd=2,col=suncol)
+  lines(atrans_sun_seq, atrans_sun_pred$fit, lty=1, lwd=2,col=suncol)
+  
+  #shade
+  points(Photo~Trmmol, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  lines(atrans_sha_seq, atrans_shaupr, lty=2, lwd=2,col=shacol)
+  lines(atrans_sha_seq, atrans_shalwr, lty=2, lwd=2,col=shacol)
+  lines(atrans_sha_seq, atrans_sha_pred$fit, lty=1, lwd=2,col=shacol)
+  
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25)  
+  dev.copy2pdf(file="master_scripts/figures/phototransp.pdf")
+  dev.off()
+  
+
+####BOOTSTRAPPING models with confidence intervals and chamber as random effect--------------------------------------
   library(lmerTest)
   library(plyr)
   
-  palette(c(shacol, suncol))
-  
+  ##sun-shade dataframes
   sundat <- gm_c13[gm_c13$leaflight =="sun-high",]
   shadat <- gm_c13[gm_c13$leaflight =="shade-low",]
   
-  ##make dfrs for each comparison for simplicity with bootstrapping
+  ##dfrs for each comparison for simplicity with bootstrapping
   acc_sun <- sundat[, c("Photo", "Cc", "chamber")]
   acc_sha<- shadat[, c("Photo", "Cc", "chamber")]
   
@@ -110,7 +160,8 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   gmgs_sun <- sundat[, c("Photo", "gmgs", "chamber")]
   gmgs_sha<- shadat[, c("Photo", "gmgs", "chamber")]
   
-  ###Photosynthesis vs Cc
+  
+#1: Photosynthesis vs Cc
   
   #SUN
   Acc_sun_lm <- lmer(Photo~ Cc + (1|chamber), data=acc_sun)
@@ -130,7 +181,8 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   acc_sha <- arrange(acc_sha, Cc)
   
   windows(10,10)
-  plot(Photo~Cc, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,350), xlab=cclab, ylab="", cex=1.25)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
+  plot(Photo~Cc, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,350), xlab=cclab, ylab=satlab, cex=1.25)
   points(Photo~Cc, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
   with(acc_sun, {
     lines(Cc, lcl, lty=2, lwd=2,col="forestgreen")
@@ -143,90 +195,90 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
     lines(Cc, pred, lty=1, lwd=2,col="yellow4")
   })
   
-  title(ylab=satlab, mgp=ypos, cex=1.2)
-  legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
   dev.copy2pdf(file="master_scripts/figures/photo_cc.pdf")
   dev.off()
   
 
-###Photosynthesis vs Ci--------------------------------------------------------------------------------
+#2: Photosynthesis vs Ci
+  
+  #SUN
+  Aci_sun_lm <- lmer(Photo~ Ci + (1|chamber), data=aci_sun)
+  
+  boot_acisun <- bootMer(Aci_sun_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+  aci_sun$lcl <- apply(boot_acisun$t, 2, quantile, 0.025)
+  aci_sun$ucl <- apply(boot_acisun$t, 2, quantile, 0.975)
+  aci_sun$pred <- predict(Aci_sun_lm, re.form=NA)
+  aci_sun <- arrange(aci_sun, Ci)
+  
+  Aci_sha_lm <- lmer(Photo~ Ci + (1|chamber), data=aci_sha)
+  
+  boot_accsha <- bootMer(Aci_sha_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+  aci_sha$lcl <- apply(boot_accsha$t, 2, quantile, 0.025)
+  aci_sha$ucl <- apply(boot_accsha$t, 2, quantile, 0.975)
+  aci_sha$pred <- predict(Aci_sha_lm, re.form=NA)
+  aci_sha <- arrange(aci_sha, Ci)
+  
+  windows(10,10)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
+  plot(Photo~Ci, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,350), xlab=cclab, ylab=satlab, cex=1.25)
+  points(Photo~Ci, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  with(aci_sun, {
+    lines(Ci, lcl, lty=2, lwd=2,col="forestgreen")
+    lines(Ci, ucl, lty=2, lwd=2,col="forestgreen")
+    lines(Ci, pred, lty=1, lwd=2,col="forestgreen")
+  })
+  with(aci_sha, {
+    lines(Ci, lcl, lty=2, lwd=2,col="yellow4")
+    lines(Ci, ucl, lty=2, lwd=2,col="yellow4")
+    lines(Ci, pred, lty=1, lwd=2,col="yellow4")
+  })
 
-#SUN
-Aci_sun_lm <- lmer(Photo~ Ci + (1|chamber), data=aci_sun)
-
-boot_acisun <- bootMer(Aci_sun_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
-aci_sun$lcl <- apply(boot_acisun$t, 2, quantile, 0.025)
-aci_sun$ucl <- apply(boot_acisun$t, 2, quantile, 0.975)
-aci_sun$pred <- predict(Aci_sun_lm, re.form=NA)
-aci_sun <- arrange(aci_sun, Ci)
-
-Aci_sha_lm <- lmer(Photo~ Ci + (1|chamber), data=aci_sha)
-
-boot_accsha <- bootMer(Aci_sha_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
-aci_sha$lcl <- apply(boot_accsha$t, 2, quantile, 0.025)
-aci_sha$ucl <- apply(boot_accsha$t, 2, quantile, 0.975)
-aci_sha$pred <- predict(Aci_sha_lm, re.form=NA)
-aci_sha <- arrange(aci_sha, Ci)
-
-windows(10,10)
-plot(Photo~Ci, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,350), xlab=cclab, ylab="", cex=1.25)
-points(Photo~Ci, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-with(aci_sun, {
-  lines(Ci, lcl, lty=2, lwd=2,col="forestgreen")
-  lines(Ci, ucl, lty=2, lwd=2,col="forestgreen")
-  lines(Ci, pred, lty=1, lwd=2,col="forestgreen")
-})
-with(aci_sha, {
-  lines(Ci, lcl, lty=2, lwd=2,col="yellow4")
-  lines(Ci, ucl, lty=2, lwd=2,col="yellow4")
-  lines(Ci, pred, lty=1, lwd=2,col="yellow4")
-})
-title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-dev.copy2pdf(file="master_scripts/figures/photo_ci.pdf")
-dev.off()
-
-
-###Photosynthesis vs gm-------------------------------------------------------------------------------
-
-#SUN
-Agm_sun_lm <- lmer(Photo~ gm + (1|chamber), data=agm_sun)
-
-  boot_agmsun <- bootMer(Agm_sun_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
-  agm_sun$lcl <- apply(boot_agmsun$t, 2, quantile, 0.025)
-  agm_sun$ucl <- apply(boot_agmsun$t, 2, quantile, 0.975)
-  agm_sun$pred <- predict(Agm_sun_lm, re.form=NA)
-  agm_sun <- arrange(agm_sun, gm)
-
-Agm_sha_lm <- lmer(Photo~ gm + (1|chamber), data=agm_sha)
-
-  boot_agmsha <- bootMer(Agm_sha_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
-  agm_sha$lcl <- apply(boot_agmsha$t, 2, quantile, 0.025)
-  agm_sha$ucl <- apply(boot_agmsha$t, 2, quantile, 0.975)
-  agm_sha$pred <- predict(Agm_sha_lm, re.form=NA)
-  agm_sha <- arrange(agm_sha, gm)
-
-windows(10,10)
-plot(Photo~gm, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,.5), xlab=cclab, ylab="", cex=1.25)
-  points(Photo~gm, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-with(agm_sun, {
-  lines(gm, lcl, lty=2, lwd=2,col="forestgreen")
-  lines(gm, ucl, lty=2, lwd=2,col="forestgreen")
-  lines(gm, pred, lty=1, lwd=2,col="forestgreen")
-})
-with(agm_sha, {
-  lines(gm, lcl, lty=2, lwd=2,col="yellow4")
-  lines(gm, ucl, lty=2, lwd=2,col="yellow4")
-  lines(gm, pred, lty=1, lwd=2,col="yellow4")
-})
-title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-
-dev.copy2pdf(file="master_scripts/figures/photo_gm.pdf")
-dev.off()
+  legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
+  dev.copy2pdf(file="master_scripts/figures/photo_ci.pdf")
+  dev.off()
 
 
-###Photosynthesis vs cibar
+#3: Photosynthesis vs gm
+
+  #SUN
+  Agm_sun_lm <- lmer(Photo~ gm + (1|chamber), data=agm_sun)
+  
+    boot_agmsun <- bootMer(Agm_sun_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+    agm_sun$lcl <- apply(boot_agmsun$t, 2, quantile, 0.025)
+    agm_sun$ucl <- apply(boot_agmsun$t, 2, quantile, 0.975)
+    agm_sun$pred <- predict(Agm_sun_lm, re.form=NA)
+    agm_sun <- arrange(agm_sun, gm)
+  
+  Agm_sha_lm <- lmer(Photo~ gm + (1|chamber), data=agm_sha)
+  
+    boot_agmsha <- bootMer(Agm_sha_lm, FUN=function(x)predict(x, re.form=NA),nsim=999)
+    agm_sha$lcl <- apply(boot_agmsha$t, 2, quantile, 0.025)
+    agm_sha$ucl <- apply(boot_agmsha$t, 2, quantile, 0.975)
+    agm_sha$pred <- predict(Agm_sha_lm, re.form=NA)
+    agm_sha <- arrange(agm_sha, gm)
+  
+  windows(10,10)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
+  plot(Photo~gm, data=sundat, pch=16, col=suncol, ylim=c(0,25), xlim=c(0,.5), xlab=cclab, ylab=satlab, cex=1.25)
+    points(Photo~gm, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  with(agm_sun, {
+    lines(gm, lcl, lty=2, lwd=2,col="forestgreen")
+    lines(gm, ucl, lty=2, lwd=2,col="forestgreen")
+    lines(gm, pred, lty=1, lwd=2,col="forestgreen")
+  })
+  with(agm_sha, {
+    lines(gm, lcl, lty=2, lwd=2,col="yellow4")
+    lines(gm, ucl, lty=2, lwd=2,col="yellow4")
+    lines(gm, pred, lty=1, lwd=2,col="yellow4")
+  })
+
+  legend("topright", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
+  dev.copy2pdf(file="master_scripts/figures/photo_gm.pdf")
+  dev.off()
+
+
+#4: Photosynthesis vs cibar
 
   #SUN
   Acib_sun_lm <- lmer(Photo~ ci_bar + (1|chamber), data=acib_sun)
@@ -246,27 +298,28 @@ dev.off()
   acib_sha <- arrange(acib_sha, ci_bar)
   
 
-windows(10,8)
-plot(Photo~ci_bar, data=sundat, pch=16, col=suncol, ylim=c(0,25), 
-     xlim=c(150,350), xlab=cibarlab2, ylab="", cex=1.25)
-#shade
-points(Photo~ci_bar, data=shadat, pch=16, col=shacol, cex=1.25)
-  with(acib_sun, {
-    lines(ci_bar, lcl, lty=2, lwd=2,col="forestgreen")
-    lines(ci_bar, ucl, lty=2, lwd=2,col="forestgreen")
-    lines(ci_bar, pred, lty=1, lwd=2,col="forestgreen")
-  })
-  with(acib_sha, {
-    lines(ci_bar, lcl, lty=2, lwd=2,col="yellow4")
-    lines(ci_bar, ucl, lty=2, lwd=2,col="yellow4")
-    lines(ci_bar, pred, lty=1, lwd=2,col="yellow4")
-  })
-title(ylab=satlab, mgp=ypos, cex=1.2)
-legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-dev.copy2pdf(file="master_scripts/figures/photo_cibar.pdf")
-dev.off()
+  windows(10,8)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
+  plot(Photo~ci_bar, data=sundat, pch=16, col=suncol, ylim=c(0,25), 
+       xlim=c(150,350), xlab=cibarlab2, ylab=satlab, cex=1.25)
+  #shade
+  points(Photo~ci_bar, data=shadat, pch=16, col=shacol, cex=1.25)
+    with(acib_sun, {
+      lines(ci_bar, lcl, lty=2, lwd=2,col="forestgreen")
+      lines(ci_bar, ucl, lty=2, lwd=2,col="forestgreen")
+      lines(ci_bar, pred, lty=1, lwd=2,col="forestgreen")
+    })
+    with(acib_sha, {
+      lines(ci_bar, lcl, lty=2, lwd=2,col="yellow4")
+      lines(ci_bar, ucl, lty=2, lwd=2,col="yellow4")
+      lines(ci_bar, pred, lty=1, lwd=2,col="yellow4")
+    })
+
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
+  dev.copy2pdf(file="master_scripts/figures/photo_cibar.pdf")
+  dev.off()
   
-###Photosynthesis vs total conductance to CO2-------------------------------------------------------------
+#5: Photosynthesis vs total conductance to CO2
 
   #SUN
   gmgs_sun_lm <- lmer(Photo~ gmgs + (1|chamber), data=gmgs_sun)
@@ -287,8 +340,9 @@ dev.off()
   
   ##plot
   windows(10,8)
+  par(mar=c(5,5,2,2), cex.axis=1.25, cex.lab=1.5)
   plot(Photo~gmgs, data=sundat, pch=16, col=suncol, ylim=c(0,25), 
-       xlim=c(0,.8), xlab=totcondlab, ylab="", cex=1.25)
+       xlim=c(0,.8), xlab=totcondlab, ylab=satlab, cex=1.25)
   #shade
   points(Photo~gmgs, data=shadat, pch=16, col=shacol, cex=1.25)
   with(gmgs_sun, {
@@ -301,58 +355,11 @@ dev.off()
     lines(gmgs, ucl, lty=2, lwd=2,col="yellow4")
     lines(gmgs, pred, lty=1, lwd=2,col="yellow4")
   })
-  title(ylab=satlab, mgp=ypos, cex=1.2)
-  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
   dev.copy2pdf(file="master_scripts/figures/totalcond.pdf")
   dev.off()
   
-###try with gam
-  
-  #SUN leaves
-  gmgs_sun_mod <- gam(Photo ~ s(gmgs, k=10), data=gm_c13, subset=leaflight=="sun-high")
-  
-  #predict
-  #get apprpriate vector of gs from sun leaves
-  gmgs_dat <- gm_c13[gm_c13$leaflight=="sun-high", "gmgs"]
-  
-  #generate sequence and then predict
-  gmgs_sun_seq <- seq(min(gmgs_dat), max(gmgs_dat), length=101)
-  gmgs_sun_pred <- predict(gmgs_sun_mod, newdata=data.frame(gmgs=gmgs_sun_seq), se.fit=TRUE)
-  
-  #ci and model fit
-  gmgs_sunupr <- gmgs_sun_pred$fit + (2*gmgs_sun_pred$se.fit)
-  gmgs_sunlwr <- gmgs_sun_pred$fit - (2*gmgs_sun_pred$se.fit)
-  
-  #SHADE leaves
-  gmgs_shamod <- gam(Photo ~ s(gmgs, k=10), data=gm_c13, subset=leaflight=="shade-low")
-  
-  #get apprpriate vector CC from sun leaves
-  gmgs_dat2 <- gm_c13[gm_c13$leaflight=="shade-low", "gmgs"]
-  #generate sequence and then predict
-  gmgs_sha_seq <- seq(min(gmgs_dat2), max(gmgs_dat2), length=101)
-  gmgs_sha_pred <- predict(gmgs_shamod, newdata=data.frame(gmgs=gmgs_sha_seq), type="link", se.fit=TRUE)
-  
-  gmgs_shaupr <- gmgs_sha_pred$fit + (2*gmgs_sha_pred$se.fit)
-  gmgs_shalwr <- gmgs_sha_pred$fit - (2*gmgs_sha_pred$se.fit)
-  
-  ###plot
-  windows(10,8)
-  plot(Photo~gmgs, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, ylim=c(0,25), 
-       xlim=c(0,.6), xlab=condlab, ylab="", cex=1.25)
-  
-  lines(gmgs_sun_seq, gmgs_sunupr, lty=2, lwd=2,col=suncol)
-  lines(gmgs_sun_seq, gmgs_sunlwr, lty=2, lwd=2,col=suncol)
-  lines(gmgs_sun_seq, gmgs_sun_pred$fit, lty=1, lwd=2,col=suncol)
-  
-  #shade
-  points(Photo~gmgs, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-  lines(gmgs_sha_seq, gmgs_shaupr, lty=2, lwd=2,col=shacol)
-  lines(gmgs_sha_seq, gmgs_shalwr, lty=2, lwd=2,col=shacol)
-  lines(gmgs_sha_seq, gmgs_sha_pred$fit, lty=1, lwd=2,col=shacol)
-  title(ylab=satlab, mgp=ypos, cex=1.2)
-  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-  
-
 #####write calculated dfrs with bootstraop intervals for use later
 write.csv(acc_sun, "calculated_data/bootstrap/acc_sun.csv", row.names=FALSE)
 write.csv(acc_sha, "calculated_data/bootstrap/acc_sha.csv", row.names=FALSE)

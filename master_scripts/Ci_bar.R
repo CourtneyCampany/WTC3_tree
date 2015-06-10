@@ -60,8 +60,10 @@ ci_bar2 <- ci_bar_calc(ci_bar)
   
 ##remove drought treatment
 ci_bar3<- ci_bar2[ci_bar2$drydown != "drought",]
+ci_bar_dry<- ci_bar2[ci_bar2$drydown == "drought",]
 
-write.csv(ci_bar3, "calculated_data/Ci_bar.csv", row.names=FALSE)
+# write.csv(ci_bar3, "calculated_data/Ci_bar.csv", row.names=FALSE)
+# write.csv(ci_bar_dry, "calculated_data/Ci_bar_drought.csv", row.names=FALSE)
 
 
 ###for now remove the pair comparison assocaited with missing gas exchance for 5-ch12-shade

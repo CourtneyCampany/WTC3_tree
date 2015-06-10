@@ -65,23 +65,63 @@ bar(leafN_area, leaf, canopy_nodrought, col=c(shacol, suncol), xlab="", half.err
 dev.off()
 
 
-#c13 through time
+#c13 plots (means and across campaigns)----------------------------------------------------------------------
+
+#means
+mean(canopy_chem[canopy_chem$leaf=="shade", "c13"])
+mean(canopy_chem[canopy_chem$leaf=="sun", "c13"])
+
+bar(c13, leaf, canopy_chem, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(-35, -20),
+    mar=c(5,7,2,2), ylab=c13lab,legend = FALSE)
+
 
 windows(8,8)
-plot(c13.mean ~ campaign, data=canopy_agg,col=temp, pch=16, xlab="", ylab= "delta 13C", ylim=c(-35,-25), 
+par(mar=c(5,5,2,2))
+plot(c13.mean ~ campaign, data=canopy_agg,col=temp, pch=16, xlab="", ylab= c13lab, ylim=c(-35,-25), 
      cex=1.5, axes=FALSE, type='n')
-  with(canopy_agg, arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col=suncols,
-                          length=0.03, cex=1.5))
-  with(canopy_agg, arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col=shadecols,
-                          length=0.03, cex=1.5 ))  
+    #sun-elevated
+    with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+    with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+    
+    points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ],
+           bg="forestgreen", col="red",pch=21, cex=2)
+    
+    #sun-ambient
+    with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+    with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+    
+    points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ],
+           bg="forestgreen", col="blue",pch=21, cex=2)
+    
+    #shade-elevated
+    with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+    with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+    
+    points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ],
+           bg="yellow4", col="red",pch=21, cex=2)
+    
+    #shade-ambient
+    with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+    with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ], 
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+    
+    points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ],
+           bg="yellow4", col="blue",pch=21, cex=2)
 
-  points(c13.mean ~ campaign, data=canopy_agg,bg=shadecols, col="grey30",pch=21,subset=leaf == "shade", cex=1.5)
-  points(c13.mean ~ campaign, data=canopy_agg,col=suncols, pch=16,subset=leaf == "sun", cex=1.5)
 
 axis(1, labels = Morder, at= c(1,2,3,4,5,6))
 axis(2, labels=TRUE)
 box()
 
+
+canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", "c13.mean"]
 #ablineclip(massgm_lm, lty=2, x1=xmin, x2=xmax)
 
 palette(c("yellowgreen", "green4"))
@@ -97,6 +137,12 @@ dev.off()
 windows(8,8)
 plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,4), 
       cex=1.25, xlab=narealab, ylab=c13lab)
+
+
+plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=c(shacol, suncol), ylim=c(-35,-25), xlim=c(0,4), 
+     cex=1.25, xlab=narealab, ylab=c13lab)
+
+
 
 
 

@@ -33,6 +33,7 @@ vpdlab <- "VPD  (kPa)"
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
+trmmollab <- expression(Transpiration~~(mmol~H[2]*O~m^-2~s^-1))
 
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
 cibarlab2 <- expression(bar(Ci)~~(ppm))

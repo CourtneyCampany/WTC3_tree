@@ -6,6 +6,7 @@ gmes <- read.csv("calculated_data/gmes_WTC.csv")
 
 ###for analysis first subset well watered and drought treatments
 gm_drought <- gmes[gmes$drydown == "drought",]
+#write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
 
 gm_water <- gmes[gmes$drydown == "control",]
 #write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
