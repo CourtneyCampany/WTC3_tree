@@ -86,10 +86,6 @@ plot(cib_shade$ci_bar ~ cib_sun$ci_bar , pch=16, ylim=c(0,400), xlim=c(0,400))
 abline(0,1, lty=1)
 
 
-
-
-
-
 test <- dlply(ci_bar4, .(pair_id, chamber))
 ###calculate the difference Ci/Ci_bar between sun and shade leaves by pairwise comparisons-----------------------
 ci_sp <- ddply(ci_bar4, .(pair_id, chamber), function(x) rbind.fill(

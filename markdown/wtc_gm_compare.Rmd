@@ -1,0 +1,90 @@
+---
+title: "Sun vs Shade leaves (WTCIII)"
+author: "Court Campany"
+date: "April 2, 2015"
+output: html_document
+---
+```{r knitr_options , include=FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=6,
+echo=FALSE, message=FALSE,
+fig.align='center', warning=FALSE)
+```
+
+```{r, results='asis'}
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+```{r global data/sourcing , include=FALSE}
+source("functions and packages/packages_md.R")
+source("functions and packages/functions.R")
+source("functions and packages/plot_objects_all.R")
+
+#gm calc from E.globulus
+gmes <- read.csv("calculated_data/gmes_WTC.csv")
+gmpair<- read.csv("calculated_data/gmes_wtc_pair.csv")
+###for analysis first subset well watered and drought treatments
+ gm_drought <- gmes[gmes$drydown == "drought",]
+ gm_water <- gmes[gmes$drydown == "control",]
+ 
+#gm calc from tobacco 
+gmes_tob <- read.csv("calculated_data/gmes_WTC_tobacco.csv")
+gmpair_tob<- read.csv("calculated_data/gmes_wtc_tobacco_pair.csv")
+
+###for analysis first subset well watered and drought treatments
+ gm_drought_tob <- gmes_tob[gmes_tob$drydown == "drought",]
+ gm_water_tob <- gmes_tob[gmes_tob$drydown == "control",]
+ 
+```
+
+#### <u>Mesophyll Conducatnce</u> from Euc parameters
+
+
+```{r,results='asis'}
+###make a table of means and se of gm
+ 
+ gm_agg <- summaryBy(gm~ leaf+light+temp+leaflight, data=gm_water,FUN=c(mean,se))
+   tablenames <- c( "Leaf Type", "Light", "Temperature","leaflight","Gm", "Gm(se)")
+   names(gm_agg) <- tablenames
+  gm_agg2 <- gm_agg[c(3,4,5,6,1,2),]
+  row.names(gm_agg2) <- NULL
+
+panderOptions("digits", 3)
+pander(gm_agg2,caption="Well Watered")
+   
+  gm_dr <- summaryBy(gm~ leaf+light+temp+leaflight, data=gm_drought,FUN=c(mean,se))
+    tablenames <- c( "Leaf Type", "Light", "Temperature","Leaf-Light","Gm", "Gm(se)")
+    names(gm_dr) <- tablenames
+  gm_dr2 <- gm_dr[c(3,4,5,6,1,2),]
+  row.names(gm_dr2) <- NULL
+  
+pander(gm_dr2,caption="Drought")
+```
+
+#### <u>Mesophyll Conducatnce</u> from tobacco parameters
+
+```{r,results='asis'}
+###make a table of means and se of gm
+ 
+ gm_agg_tob <- summaryBy(gm~ leaf+light+temp+leaflight, data=gm_water_tob,FUN=c(mean,se))
+   tablenames <- c( "Leaf Type", "Light", "Temperature","leaflight","Gm", "Gm(se)")
+   names(gm_agg_tob) <- tablenames
+  gm_agg3 <- gm_agg_tob[c(3,4,5,6,1,2),]
+  row.names(gm_agg3) <- NULL
+
+panderOptions("digits", 3)
+pander(gm_agg3,caption="Well Watered")
+   
+  gm_dr_tob <- summaryBy(gm~ leaf+light+temp+leaflight, data=gm_drought_tob,FUN=c(mean,se))
+    tablenames <- c( "Leaf Type", "Light", "Temperature","Leaf-Light","Gm", "Gm(se)")
+    names(gm_dr) <- tablenames
+  gm_dr3 <- gm_dr_tob[c(3,4,5,6,1,2),]
+  row.names(gm_dr3) <- NULL
+  
+pander(gm_dr3,caption="Drought")
+```
+
+
+
+
+

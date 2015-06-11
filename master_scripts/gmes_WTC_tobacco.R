@@ -5,6 +5,7 @@ source("functions and packages/gmes_calc_tobacco.R")
 ####------------------------------------------------------------------------------
  #25C scaler for Rd in the gmes calculation for E.globulus was 0.728 
  # can change for equation but leave tobacco parameters the same????
+ # if so then k25 parameter changes from 1.07 to 0.738 in calc function
 ####------------------------------------------------------------------------------
 
 ###required packakges
@@ -52,7 +53,7 @@ licor_times <- timerange_func(licor_gmes)
 
   ##for now run gmes functions for each licor #
   oct_H4 <- lapply(xsi_oct_dfr2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
-  oct_gm <- lapply(oct_H4, gmcalc_func)
+  oct_gm <- lapply(oct_H4, gmcalc_tob_func)
 
 
   ####december
@@ -78,8 +79,8 @@ licor_times <- timerange_func(licor_gmes)
   dec_h4 <- lapply(xsi_dec_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
   dec_h2 <- lapply(xsi_dec_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
 
-  dec_gm_h4 <- lapply(dec_h4, gmcalc_func)
-  dec_gm_h2 <- lapply(dec_h2, gmcalc_func)
+  dec_gm_h4 <- lapply(dec_h4, gmcalc_tob_func)
+  dec_gm_h2 <- lapply(dec_h2, gmcalc_tob_func)
 
 
   ####january
@@ -104,8 +105,8 @@ licor_times <- timerange_func(licor_gmes)
   jan_h2<- lapply(xsi_jan_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
   jan_h3 <- lapply(xsi_jan_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H3"))
 
-  jan_gm_h2 <- lapply(jan_h2, gmcalc_func)
-  jan_gm_h3 <- lapply(jan_h3, gmcalc_func)
+  jan_gm_h2 <- lapply(jan_h2, gmcalc_tob_func)
+  jan_gm_h3 <- lapply(jan_h3, gmcalc_tob_func)
 
 
 
@@ -131,8 +132,8 @@ licor_times <- timerange_func(licor_gmes)
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
   feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="H4"))
 
-  feb_gm_r1 <- lapply(feb_r1, gmcalc_func)
-  feb_gm_h4 <- lapply(feb_h4, gmcalc_func)
+  feb_gm_r1 <- lapply(feb_r1, gmcalc_tob_func)
+  feb_gm_h4 <- lapply(feb_h4, gmcalc_tob_func)
 
 ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE)
@@ -161,11 +162,10 @@ licor_times <- timerange_func(licor_gmes)
   mar_h1 <- lapply(xsi_mar_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   mar_h4 <- lapply(xsi_mar_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
   
-  mar_gm_h3 <- lapply(mar_h3, gmcalc_func)
-  mar_gm_h2 <- lapply(mar_h2, gmcalc_func)
-  mar_gm_h1 <- lapply(mar_h1, gmcalc_func)
-  mar_gm_h4 <- lapply(mar_h4, gmcalc_func)
-
+  mar_gm_h3 <- lapply(mar_h3, gmcalc_tob_func)
+  mar_gm_h2 <- lapply(mar_h2, gmcalc_tob_func)
+  mar_gm_h1 <- lapply(mar_h1, gmcalc_tob_func)
+  mar_gm_h4 <- lapply(mar_h4, gmcalc_tob_func)
 
 
   ####april
@@ -193,9 +193,9 @@ licor_times <- timerange_func(licor_gmes)
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
   apr_h4 <- lapply(xsi_apr_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
 
-  apr_gm_h1 <- lapply(apr_h1, gmcalc_func)
-  apr_gm_h3 <- lapply(apr_h3, gmcalc_func)
-  apr_gm_h4 <- lapply(apr_h4, gmcalc_func)
+  apr_gm_h1 <- lapply(apr_h1, gmcalc_tob_func)
+  apr_gm_h3 <- lapply(apr_h3, gmcalc_tob_func)
+  apr_gm_h4 <- lapply(apr_h4, gmcalc_tob_func)
 
 
 
@@ -243,11 +243,11 @@ gm_WTC2 <-add_Month(gm_WTC2)
 gm_WTC2 <- addtrt_func(gm_WTC2)
 gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 
-write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
+write.csv(gm_WTC2, "calculated_data/gmes_wtc_tobacco.csv", row.names=FALSE)
 ##add pair ids
 gm_wtc_pair <- merge(gm_WTC2, uniquepair)
 
-write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_pair.csv", row.names=FALSE)
+write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_tobacco_pair.csv", row.names=FALSE)
 
 
 

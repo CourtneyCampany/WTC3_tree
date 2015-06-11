@@ -31,53 +31,10 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
   #add iWUE
   gm_c13$iWUE <- with(gm_c13, Photo/Trmmol)
 
+####GAM PLOTS (photosynthesis vs gs or transpiration)-----------------------------------------------------------
   
-####simple plots first to look at difference between water use efficiency btw sun shade---------------------  
-  
-  ##palette for temp treatment
-  palette(c("blue", "red"))
-  
-  ###VPD between leaf types
-  shadevpd <- gm_c13[gm_c13$leaflight=="shade-low", c("VpdL", "iWUE","id", "chamber", "Month", "temp")]
-  names(shadevpd)[1:2] <- c("vpd_shade", "ITE_shade")
-  sunvpd <- gm_c13[gm_c13$leaflight=="sun-high",  c("VpdL", "iWUE", "id", "chamber", "Month", "temp")]
-  names(sunvpd)[1:2] <- c("vpd_sun", "ITE_sun")
-  vpd_tree <- merge(shadevpd, sunvpd, by=c("chamber", "Month", "temp"))
-
-  plot(vpd_shade~ vpd_sun, data=vpd_tree, ylab="vpd_sun", xlab="vpd_shade", ylim=c(0, 4), xlim=c(0,4),
-       col=as.factor(temp), pch=16, cex=1.5)
-  abline(0,1)
-  
-  plot(ITE_shade~ ITE_sun, data=vpd_tree, ylab="ITE_sun", xlab="ITE_shade", ylim=c(0, 15), xlim=c(0,15),
-       col=as.factor(temp), pch=16, cex=1.5)
-  abline(0,1)
-  
-  ##palette for sun shade
+##palette for sun shade
   palette(c(shacol, suncol))
-  
-  plot(Cond~Trmmol, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25, xlim=c(0,6), ylim=c(0,.4))
-    points(Cond~Trmmol, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-    
-  plot(Cond~VpdL, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25, xlim=c(0,5), ylim=c(0,.4))
-    points(Cond~VpdL, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25) 
-    
-  bar(iWUE, c(leaf, temp), gm_c13, col=c("yellowgreen", "green4"),half.errbar=FALSE, mar=c(5,7,2,2), 
-      legend = FALSE, ylim=c(0,10))
-  legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
-           bty='n', cex=1.25)  
-  
-  bar(iWUE,leaf, gm_c13, col=c("yellowgreen", "green4"),half.errbar=FALSE, mar=c(5,7,2,2), 
-      legend = FALSE, ylim=c(0,10), xlab="")
-  legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
-         bty='n', cex=1.25) 
-  
-  plot(iWUE~VpdL, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25, xlim=c(0,4), ylim=c(0,20))
-  points(iWUE~VpdL, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25) 
-  legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
-         bty='n', cex=1.25) 
-  
-  
-####GAM PLOTS (photosynthesis vs gs or transpiration)-------------------------------------------------------------
   
 ##1: Photosynthesis vs gs 
   #run gam models and then predict

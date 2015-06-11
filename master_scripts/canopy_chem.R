@@ -77,49 +77,50 @@ bar(c13, leaf, canopy_chem, col=c(shacol, suncol), xlab="", half.errbar=FALSE, y
 
 windows(8,8)
 par(mar=c(5,5,2,2))
-plot(c13.mean ~ campaign, data=canopy_agg,col=temp, pch=16, xlab="", ylab= c13lab, ylim=c(-35,-25), 
-     cex=1.5, axes=FALSE, type='n')
+plot(c13.mean ~ campaign, data=canopy_agg,col=temp, pch=16, xlab="", ylab= c13lab, ylim=c(-33,-25), 
+     cex=1.5, cex.lab=1.5,axes=FALSE, type='n')
     #sun-elevated
     with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="grey75",length=0.03, cex=2.25))
     with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="grey75",length=0.03, cex=2.25))
     
     points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", ],
-           bg="forestgreen", col="red",pch=21, cex=2)
+           bg="grey75", col="red",pch=21, cex=2.25, lwd=1.9)
     
     #sun-ambient
     with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="grey75",length=0.03, cex=2.25))
     with(canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="forestgreen",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="grey75",length=0.03, cex=2.25))
     
     points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="ambient", ],
-           bg="forestgreen", col="blue",pch=21, cex=2)
+           bg="grey75", col="blue",pch=21, cex=2.25, lwd=1.9)
     
     #shade-elevated
     with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="grey25",length=0.03, cex=2.25))
     with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="grey25",length=0.03, cex=2.25))
     
     points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="elevated", ],
-           bg="yellow4", col="red",pch=21, cex=2)
+           bg="grey25", col="red",pch=21, cex=2.25, lwd=1.9)
     
     #shade-ambient
     with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean+c13.se, angle=90, col="grey25",length=0.03, cex=2.25))
     with(canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ], 
-         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="yellow4",length=0.03, cex=1.5))
+         arrows(campaign, c13.mean, campaign, c13.mean-c13.se, angle=90, col="grey25",length=0.03, cex=2.25))
     
     points(c13.mean ~ campaign, data=canopy_agg[canopy_agg$leaf=="shade" & canopy_agg$temp=="ambient", ],
-           bg="yellow4", col="blue",pch=21, cex=2)
+           bg="grey25", col="blue",pch=21, cex=2.25, lwd=1.9)
 
 
 axis(1, labels = Morder, at= c(1,2,3,4,5,6))
 axis(2, labels=TRUE)
 box()
-
+dev.copy2pdf(file="master_scripts/figures/c13.pdf")
+dev.off()
 
 canopy_agg[canopy_agg$leaf=="sun" & canopy_agg$temp=="elevated", "c13.mean"]
 #ablineclip(massgm_lm, lty=2, x1=xmin, x2=xmax)
