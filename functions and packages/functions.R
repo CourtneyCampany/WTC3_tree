@@ -417,3 +417,11 @@ smoothplot <- function(x,y,g=NULL,data,
   return(invisible(fits))
 }
 
+#-----------------------------------------------------------------------
+add_trend_line <- function(x,y,d,col, ...){
+  
+  fit <- lm(d[[y]] ~ d[[x]])
+  ablineclip(fit, lwd=2, col=d$leaf, lty=ltys[d$leaf],
+             x1=min(d[[x]]), x2=max(d[[x]]), ...)
+}
+#------------------------------------------------------------------------
