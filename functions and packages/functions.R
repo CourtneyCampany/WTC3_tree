@@ -1,5 +1,6 @@
 #chamber label function--------------------------------------------------------------------------------
 chlab_func <- function(x){
+  x$chamber <- as.numeric(x$chamber)
   x$chamber <- ifelse(x$chamber <= 9, paste("0", x$chamber, sep=""), x$chamber)
   x$chamber <- as.factor(paste("ch", x$chamber, sep=""))
   return(x)

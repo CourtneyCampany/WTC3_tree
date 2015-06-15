@@ -15,6 +15,12 @@ gmes$cc_ci<- with(gmes, Ci/Cc)
 gm_agg <- summaryBy(Photo+Cond+Ci+Trmmol+Cc+gm+VpdL+xsi+DELTA+cc_ci ~ chamber+id+leaf +light+temp+leaflight+Month, 
                     data=gmes, FUN=mean, keep.names=TRUE)
 
+#add iWUE
+gm_agg$iWUE <- with(gm_agg, Photo/Trmmol)
+
+##write Iwue to 
+write.csv(gm_agg[, c(1,3,5:7,18)], "calculated_data/ITE.csv", row.names = FALSE)
+
 ##remove shade-high
 gm_sunsha <- gm_agg[gm_agg$leaflight != "shade-high",]
 gm_sunsha <- droplevels(gm_sunsha)
@@ -26,8 +32,7 @@ gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
 gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
 #add total conductance to CO2
 gm_c13$gmgs <- with(gm_c13, gm+Cond)
-#add iWUE
-gm_c13$iWUE <- with(gm_c13, Photo/Trmmol)
+
 
 
 ####simple plots first to look at difference between water use efficiency btw sun shade---------------------  

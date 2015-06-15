@@ -3,7 +3,8 @@ source("functions and packages/packages.R")
 source("master_scripts/plot_objects.R")
 
 par <- read.csv("raw data/par.csv")
-treatments <- read.csv("raw data/chamber_trt.csv")
+
+treatments <- read.csv("raw data/temp_trt.csv")
 
 #format function
 par<- parformat(par)
@@ -12,14 +13,30 @@ par_leaf <- subset(par, ID !="shade-high")
 Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 #data format for bar
-parbar <- subset(par_leaf, select = c("par", "month", "leaf_type"))
+parbar <- par_leaf[ , c(2:3,5)]
 parbar$month <- factor(parbar$month, levels = Morder)
 levels(parbar$month)
 parbar$leaf_type <- gsub("s", "S", parbar$leaf_type)
 
-
 par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 
+###Stats---------------------------------------------------------------------------------------------------------
+library(visreg)
+library(multcomp)
+library(nlme)
+
+#examite data with boxplots, then remove any outliers
+boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="sun",])
+boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="shade",])
+
+
+###lma not different between leaf types or temp treatment.
+par_leaf <- lme(par ~ leaf_type, random=~1|chamber, data=par_leaf)
+summary(par_leaf)
+anova(par_leaf)
+
+
+###PLOTTING------------------------------------------------------------------------------------------------
 
 windows(7,5)
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 

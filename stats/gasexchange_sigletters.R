@@ -18,6 +18,13 @@ library(multcomp)
 library(nlme)
 
 #Photosynthesis
+photo_agg <- summaryBy(Photo+Cond+gm ~ leaf, data=ge_wet[ge_wet$leaflight != "shade-high",] , FUN=c(mean,se))
+
+A_leaf <- lme(Photo~ leaf, random=~1|chamber, data=ge_wet, subset=leaflight != "shade-high")
+summary(A_leaf)
+anova(A_leaf)
+visreg(A_leaf)
+
 A_sun_temp <- lme(Photo ~ temp ,random=~1|chamber, data=ge_wet, subset=leaflight=="sun-high")
   summary(A_sun_temp)
   anova(A_sun_temp)
@@ -27,12 +34,6 @@ A_sha_temp <- lme(Photo ~ temp ,random=~1|chamber, data=ge_wet, subset=leaflight
   summary(A_sha_temp)
   anova(A_sha_temp)
   visreg(A_sha_temp)
-
-A_leaf <- lme(Photo~ leaf, random=~1|chamber, data=ge_wet, subset=leaflight != "shade-high")
-  summary(A_leaf)
-  anova(A_leaf)
-  visreg(A_leaf)
-  
   
 Photo_mod <- lme(Photo ~ leaf * temp, random=~1|chamber, data=ge_wet, subset=leaflight != "shade-high")  
   summary(Photo_mod)
@@ -60,7 +61,12 @@ gm_leaf <- lme(gm~ leaf, random=~1|chamber, data=ge_wet, subset=leaflight != "sh
   anova(A_leaf)
   visreg(A_leaf)
 
-#stomatal conducatnce
+#stomatal conducatnce----------------------------------------------------------------------------
+gs_leaf <- lme(Cond~ leaf, random=~1|chamber, data=ge_wet, subset=leaflight != "shade-high")
+  summary(gs_leaf)
+  anova(gs_leaf)
+  visreg(gs_leaf)
+  
 gs_sun_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_wet, subset=leaflight=="sun-high")
   summary(gs_sun_temp)
   anova(gs_sun_temp)
@@ -71,7 +77,21 @@ gs_sha_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_wet, subset=leaflight
   anova(gs_sha_temp)
   visreg(gs_sha_temp)
   
-gs_leaf <- lme(Cond~ leaf, random=~1|chamber, data=ge_wet, subset=leaflight != "shade-high")
-  summary(gs_leaf)
-  anova(gs_leaf)
-  visreg(gs_leaf)
+#ITE----------------------------------------------------------------------------
+ITE <- read.csv("calculated_data/ITE.csv")  
+  
+  ite_leaf <- lme(iWUE~ leaf, random=~1|chamber, data=ITE, subset=leaflight != "shade-high")
+  summary(ite_leaf)
+  anova(ite_leaf)
+  visreg(ite_leaf)
+  
+  ite_sun_temp <- lme(iWUE ~ temp ,random=~1|chamber, data=ITE, subset=leaflight=="sun-high")
+  summary(ite_sun_temp)
+  anova(ite_sun_temp)
+  visreg(ite_sun_temp)
+  
+  ite_sha_temp <- lme(iWUE ~ temp ,random=~1|chamber, data=ITE, subset=leaflight=="shade-low")
+  summary(ite_sha_temp)
+  anova(ite_sha_temp)
+  visreg(ite_sha_temp)
+  

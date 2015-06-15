@@ -43,8 +43,19 @@ ge_table3 <- cbind(ge_vars, ge1)
 ###add sigletters
 
 
-####water light
   
+#####vaiarbles with no shade high light
+####leafk, PAR, ACI, 
+  
+aci <- read.csv("calculated_data/aciparameters.csv")
+  
+  aci_agg <- summaryBy(Jmax +Vcmax ~ leaf + temp, data=aci, FUN=c(mean,se))
+
+leafk <- read.csv("calculated_data/leafK_nodrought.csv")
+
+  leafk_agg <- summaryBy(leafK ~ leaf + temp, data=leafk, FUN=c(mean,se))
+  
+leaftab <- merge(aci_agg, leafk_agg)  
   
   
   
