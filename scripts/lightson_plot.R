@@ -3,6 +3,8 @@ source("functions and packages/functions.R")
 source("functions and packages/plot_objects_all.R")
 treatments <- read.csv("raw data/temp_trt.csv")
 
+library(plotrix)
+
 gmes <- read.csv("calculated_data/gmes_WTC.csv")
 gmpair<- read.csv("calculated_data/gmes_wtc_pair.csv")
 gmwet <- read.csv("calculated_data/gmes_wellwatered.csv")
@@ -38,13 +40,18 @@ abline(b[1], b[2])
 
 abline(lm(Photo ~ gm, data=gm_water_agg4), col="red")
 
+##seperate of temp treatments
+lightson_mod_at <- lmList(Photo ~ gm|pairid2, data=gm_water_agg4, subset=temp=="ambient")
+b_at <- colMeans(coef(lightson_mod_at))
+lightson_mod_et <- lmList(Photo ~ gm|pairid2, data=gm_water_agg4, subset=temp=="elevated")
+b_et <- colMeans(coef(lightson_mod_et))
 
-
-
-
-
-summary(lightson_mod)
-
+plot(Photo.high~gm.high, data=wet_pair3,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
+     xlab=gmlab, ylab="", cex=1.5)
+  points(Photo.low~gm.low, data=wet_pair3,pch=16, col=shacol, cex=1.5)
+  ablineclip(b_at[1], b_at[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="blue")
+  ablineclip(b_et[1], b_et[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="red")
+  
 
 #####plots with lines between paired points---------------------------------------------------------------
 
@@ -109,52 +116,59 @@ dry_et <- dry_pair3[dry_pair3$temp == "elevated",]
   dry_et_sp <- split(dry_et, cumsum(1:nrow(dry_et)))
 
 ###Well watered
+library(scales)  
+atcol <- alpha("blue", alpha=.25)
+etcol <- alpha("red", alpha=.25)
+    
 windows(10,8)
 plot(Photo.high~gm.high, data=wet_pair3,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
-     xlab=gmlab, ylab="", cex=1.5)
+     xlab=gmlab, ylab="", cex=1.5, type='n')
+
+  l_ply(wet_at_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
+                                    type='l', col=atcol, lty=3, lwd=1))
+  l_ply(wet_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
+                                    type='l', col=etcol, lty=3, lwd=1))
+
   points(Photo.low~gm.low, data=wet_pair3,pch=16, col=shacol, cex=1.5)
+  points(Photo.high~gm.high, data=wet_pair3,pch=16, col=lightscol, cex=1.5)
+           
+  ablineclip(b_at[1], b_at[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="blue")
+  ablineclip(b_et[1], b_et[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="red")
 
-#l_ply(light_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-#                    type='l', col="black", lty=1, lwd=1))
-
-l_ply(wet_at_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-                    type='l', col="blue", lty=3, lwd=2))
-l_ply(wet_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-                    type='l', col="red", lty=3, lwd=2))
 
 ###drought
-  plot(Photo.high~gm.high, data=dry_pair2,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
-       xlab=gmlab, ylab="", cex=1.5)
-  points(Photo.low~gm.low, data=dry_pair2, pch=16, col=shacol, cex=1.5)
-  
-  #l_ply(light_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-  #                    type='l', col="black", lty=1, lwd=1))
-  
-  l_ply(dry_at_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-                                  type='l', col="blue", lty=3, lwd=2))
-  l_ply(dry_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
-                                  type='l', col="red", lty=3, lwd=2))
+#   plot(Photo.high~gm.high, data=dry_pair2,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
+#        xlab=gmlab, ylab="", cex=1.5)
+#   points(Photo.low~gm.low, data=dry_pair2, pch=16, col=shacol, cex=1.5)
+#   
+#   #l_ply(light_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
+#   #                    type='l', col="black", lty=1, lwd=1))
+#   
+#   l_ply(dry_at_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
+#                                   type='l', col="blue", lty=3, lwd=2))
+#   l_ply(dry_et_sp,  function(x) lines(x=c(x$gm.low,x$gm.high) , y=c(x$Photo.low,x$Photo.high),
+#                                   type='l', col="red", lty=3, lwd=2))
   
   
   
 
   #plot low vs high light shade leaves-----------------------------------------------------------------------------
-  
-  ##water
-  plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.4), 
-       xlab=gmlab, ylab="", cex=1.25)
-  points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=16, col=shacol, cex=1.25)
-  legend("topright", lightleg, pch=16,inset = 0.02, col=lightlab) 
-  legend("topleft", "Shade Leaves (well watered)", bty='n') 
-  title(ylab=satlab, mgp=ypos, cex=1.2)
-  
-  ##drought
-  plot(Photo~gm, data=gm_drought, subset=leaflight=="shade-high", pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.4), 
-       xlab=gmlab, ylab="", cex=1.25)
-  points(Photo~gm, data=gm_drought, subset=leaflight=="shade-low",pch=16, col=shacol, cex=1.25)
-  legend("topright", lightleg, pch=16,inset = 0.02, col=lightlab) 
-  legend("topleft", "Shade Leaves (drought)", bty='n') 
-  title(ylab=satlab, mgp=ypos, cex=1.2)
+#   
+#   ##water
+#   plot(Photo~gm, data=gm_water, subset=leaflight=="shade-high", pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.4), 
+#        xlab=gmlab, ylab="", cex=1.25)
+#   points(Photo~gm, data=gm_water, subset=leaflight=="shade-low",pch=16, col=shacol, cex=1.25)
+#   legend("topright", lightleg, pch=16,inset = 0.02, col=lightlab) 
+#   legend("topleft", "Shade Leaves (well watered)", bty='n') 
+#   title(ylab=satlab, mgp=ypos, cex=1.2)
+#   
+#   ##drought
+#   plot(Photo~gm, data=gm_drought, subset=leaflight=="shade-high", pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.4), 
+#        xlab=gmlab, ylab="", cex=1.25)
+#   points(Photo~gm, data=gm_drought, subset=leaflight=="shade-low",pch=16, col=shacol, cex=1.25)
+#   legend("topright", lightleg, pch=16,inset = 0.02, col=lightlab) 
+#   legend("topleft", "Shade Leaves (drought)", bty='n') 
+#   title(ylab=satlab, mgp=ypos, cex=1.2)
   
   
   

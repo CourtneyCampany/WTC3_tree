@@ -44,3 +44,7 @@ ge_table3 <- cbind(ge_vars, ge1)
 
 
 ####water light
+  
+  
+  
+  
