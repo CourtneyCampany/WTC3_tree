@@ -30,30 +30,6 @@ Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
 
   ##merge
   gm_c13 <- merge(gm_sunsha, Ci_bar[, c(2,8)], by="id")
-  gm_c13$Cc_bar <- with(gm_c13, ci_bar-Photo/gm)
-  
-  
-  ###Photosynthesis vs Ci--------------------------------------------------------------------------------
-  
-  #SUN leaves
-  Aci_sun_lm <- lm(Photo~ Ci, data=gm_c13,subset=leaflight=="sun-high")
-  
-  #predict
-  #get apprpriate vector CC from sun leaves
-  cidat <- gm_c13[gm_c13$leaflight=="sun-high", "Ci"]
-  #generate sequence and then predict
-  cisun_seq <- seq(min(cidat), max(cidat), length=101)
-  cisun_pred <- predict.lm(Aci_sun_lm, newdata=data.frame(Ci=cisun_seq), interval="confidence")
-  
-  #SHADE leaves
-  Aci_shade_lm <- lm(Photo~ Ci, data=gm_c13, subset=leaflight=="shade-low")
-  
-  #get apprpriate vector CC from sun leaves
-  cidat2 <- gm_c13[gm_c13$leaflight=="shade-low", "Ci"]
-  #generate sequence and then predict
-  cisha_seq <- seq(min(cidat2), max(cidat2), length=101)
-  cisha_pred <- predict.lm(Aci_shade_lm, newdata=data.frame(Ci=cisha_seq), interval="confidence")
-
 
     
 ####use plant ecophys to predict aci curve--------------------------------------------------------------------------
