@@ -72,74 +72,102 @@ Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
   shaAT_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=mean(shade$PARi))
   shaET_sim <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=mean(shade$PARi))
   
+  ###test altering jmax and vcamx at 1800 and at shade light to get better git 
+  shaAT_sim2 <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[1,3]*.7, Jmax=jvc[1,4]*.7, PPFD=mean(1800))
+  shaET_sim2 <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[2,3]*.7, Jmax=jvc[2,4]*.7, PPFD=mean(1800))
   
-#   windows(10,8)
-#   plot(sunAT_sim$Ci, sunAT_sim$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=2)
-#   points(sunET_sim$Ci, sunET_sim$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2, lty=2)
-#   points(shaAT_sim$Ci, shaAT_sim$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2)
-#   points(shaET_sim$Ci, shaET_sim$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2, lty=2)
-#   
-#   points(Photo~Ci, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
-#   points(Photo~Ci, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25)
-#   
-#   legend("topleft", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.03)
-#   legend("bottomright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
-#   title(ylab=satlab, mgp=ypos)
-#   
-#   dev.copy2pdf(file="master_scripts/figures/aci_predict.pdf")
-#   dev.off()
+  shaAT_sim3 <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[1,3]*1.75, Jmax=jvc[1,4]*1.75, PPFD=mean(shade$PARi))
+  shaET_sim3 <- Aci(Ci=seq(50,1000,length=101), Vcmax=jvc[2,3]*1.75, Jmax=jvc[2,4]*1.75,PPFD=mean(shade$PARi))
+  
+  
+  ###testing aci fit to data---------------------------------------------------------------------------------------
+  par(mar=c(5,5,2,2))
+  plot(Photo~Ci, data=gm_c13, type='n', xlim=c(0, 1000), ylim=c(0, 30),xlab=cilab, ylab=satlab)
+  points(Photo~Ci, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  
+  points(shaAT_sim$Ci, shaAT_sim$ALEAF, col=shacol, pch=21,  cex=1.1, type="l", lwd=2)
+  points(shaET_sim$Ci, shaET_sim$ALEAF, col=shacol, pch=21,  cex=1.1, type="l", lwd=2, lty=2)
+  
+  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col="blue", pch=21,  cex=1.1, type="l", lwd=2)
+  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col="blue", pch=21,  cex=1.1, type="l", lwd=2, lty=2)
+  
+  points(shaAT_sim3$Ci, shaAT_sim3$ALEAF, col="orange", pch=21,  cex=1.1, type="l", lwd=2)
+  points(shaET_sim3$Ci, shaET_sim3$ALEAF, col="orange", pch=21,  cex=1.1, type="l", lwd=2, lty=2)
+  
+  
+  legend("topleft", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.03)
+  legend("bottomright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+
+  
+  
+  ###aci curves at current light with saturating light parameters, plus gas exchange
+  windows(10,8)
+  par(mar=c(5,5,2,2))
+  plot(sunAT_sim$Ci, sunAT_sim$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab=satlab, type="l", lwd=2)
+  points(sunET_sim$Ci, sunET_sim$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2, lty=2)
+  points(shaAT_sim$Ci, shaAT_sim$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2)
+  points(shaET_sim$Ci, shaET_sim$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=2, lty=2)
+  
+  points(Photo~Ci, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25)
+  points(Photo~Ci, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25)
+  
+  legend("topleft", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.03)
+  legend("bottomright", leaflab2, pch=16,inset = 0.03, col=leafcol) 
+  
+  dev.copy2pdf(file="master_scripts/figures/aci_predict.pdf")
+  dev.off()
   
   
   
 ####make png figure for talk that also plots points from licor------------------------------------------------  
-  
-  #read ACi datasets 
-  acishade <- read.csv("raw data/shadeaci.csv")
-  #clean from previous script
-  acishade_clean <- acishade[acishade$chamber != "ch02",]
-  acishade_clean <- acishade_clean[acishade_clean$chamber != "ch07",]
-  acishade_clean <- acishade_clean[acishade_clean$chamber != "ch09",]
-  acishade_clean <- acishade_clean[acishade_clean$chamber != "ch11",]
-
-  shade_redo <- read.csv("raw data/shadeaci_redo.csv")
-  
-  sunaci <- read.csv("raw data/sunaci.csv")
-  #clean from previous script
-  sunaci_clean <- sunaci[sunaci$chamber != "ch06", ]
-  sunaci_clean2 <- sunaci_clean[sunaci_clean$chamber != "ch04", ]
-  
-  tdlaci2 <- read.csv("raw data/tdlaci2.csv")
-
-  library(scales)
-  shacol50 <- alpha(shacol, alpha=.5)
-  suncol50 <- alpha(suncol, alpha=.5)
-  
-  #simulate ACi curves at 1800 par
-  sunAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[3,3], Jmax=jvc[3,4],PPFD=1800)
-  sunET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[4,3], Jmax=jvc[4,4], PPFD=1800)
-  shaAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=1800)
-  shaET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=1800)
-
-  
- ###png
-  png(filename = "makepngs/aci_sunsha.png", width = 11, height = 8.5, units = "in", res= 400)
-  
-  par(mar=c(5,7,2,2), cex.lab=2)
-  
-  plot(Photo~Ci ,data= acishade_clean, pch=16, col=shacol50, ylim=c(0, 35), xlim=c(0,2000), xlab="", 
-       ylab=photolab, cex.axis=1.75, cex=1.5)
-  points(Photo~Ci ,data= shade_redo, pch=16, col=shacol50, cex=1.5)
-  points(Photo~Ci ,data= sunaci_clean2, pch=16, col=suncol50, cex=1.5)
-  points(Photo~Ci ,data= tdlaci2, pch=16, col=suncol50, cex=1.5)
-  title(xlab=cilab, mgp=c(3.5,1,1))
-
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=3.5)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
-
-  legend("bottomright", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.02, bty='n',cex=1.75)
-
-  dev.off()
+#   
+#   #read ACi datasets 
+#   acishade <- read.csv("raw data/shadeaci.csv")
+#   #clean from previous script
+#   acishade_clean <- acishade[acishade$chamber != "ch02",]
+#   acishade_clean <- acishade_clean[acishade_clean$chamber != "ch07",]
+#   acishade_clean <- acishade_clean[acishade_clean$chamber != "ch09",]
+#   acishade_clean <- acishade_clean[acishade_clean$chamber != "ch11",]
+# 
+#   shade_redo <- read.csv("raw data/shadeaci_redo.csv")
+#   
+#   sunaci <- read.csv("raw data/sunaci.csv")
+#   #clean from previous script
+#   sunaci_clean <- sunaci[sunaci$chamber != "ch06", ]
+#   sunaci_clean2 <- sunaci_clean[sunaci_clean$chamber != "ch04", ]
+#   
+#   tdlaci2 <- read.csv("raw data/tdlaci2.csv")
+# 
+#   library(scales)
+#   shacol50 <- alpha(shacol, alpha=.5)
+#   suncol50 <- alpha(suncol, alpha=.5)
+#   
+#   #simulate ACi curves at 1800 par
+#   sunAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[3,3], Jmax=jvc[3,4],PPFD=1800)
+#   sunET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[4,3], Jmax=jvc[4,4], PPFD=1800)
+#   shaAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=1800)
+#   shaET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=1800)
+# 
+#   
+#  ###png
+#   png(filename = "makepngs/aci_sunsha.png", width = 11, height = 8.5, units = "in", res= 400)
+#   
+#   par(mar=c(5,7,2,2), cex.lab=2)
+#   
+#   plot(Photo~Ci ,data= acishade_clean, pch=16, col=shacol50, ylim=c(0, 35), xlim=c(0,2000), xlab="", 
+#        ylab=photolab, cex.axis=1.75, cex=1.5)
+#   points(Photo~Ci ,data= shade_redo, pch=16, col=shacol50, cex=1.5)
+#   points(Photo~Ci ,data= sunaci_clean2, pch=16, col=suncol50, cex=1.5)
+#   points(Photo~Ci ,data= tdlaci2, pch=16, col=suncol50, cex=1.5)
+#   title(xlab=cilab, mgp=c(3.5,1,1))
+# 
+#   points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab=cilab, ylab="", type="l", lwd=3.5)
+#   points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
+#   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5)
+#   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, pch=21,  cex=1.1,xlab="Ci", ylab="", type="l", lwd=3.5, lty=2)
+# 
+#   legend("bottomright", leglab2, lty=c(1,2,1,2), lwd=2,col=colaci, pt.bg=col4,inset = 0.02, bty='n',cex=1.75)
+# 
+#   dev.off()
   
   
