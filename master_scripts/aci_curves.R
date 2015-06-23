@@ -44,9 +44,9 @@ treatments <- read.csv("raw data/temp_trt.csv")
 
   
  ###png
-  #png(filename = "markdown/aci_curves.png", width = 11, height = 8.5, units = "in", res= 400)
+  png(filename = "markdown/aci_curves.png", width = 11, height = 8.5, units = "in", res= 400)
   
-  windows(11,8.5)
+  #windows(11,8.5)
   par(mar=c(5,7,2,2), cex.lab=2, las=1)
   
   plot(Photo~Ci ,data= acishade_clean, col=shacol50, ylim=c(0, 39), xlim=c(0,2000), xlab="", 
@@ -69,7 +69,7 @@ treatments <- read.csv("raw data/temp_trt.csv")
 
   par(fig=c(0.45, 0.975, 0.05,0.5), new=T, cex=1, las=1, cex.axis=1.25)
     
-  plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(0,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
+  plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
   axis(2, mgp=c(3, .5, 0))
   axis(1, mgp=c(3, .5, 0))
 
@@ -83,7 +83,7 @@ treatments <- read.csv("raw data/temp_trt.csv")
   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5)
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5, lty=2)
   
-  dev.copy2pdf(file="master_scripts/figures/aci_curves.pdf")
+  #dev.copy2pdf(file="master_scripts/figures/aci_curves.pdf")
   dev.off()
   
   

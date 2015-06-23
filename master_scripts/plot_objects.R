@@ -21,7 +21,6 @@ ksunlab <- expression(Leaf[sun]~Hyrdaulic~Conductance~~(units))
 kshadelab <- expression(Leaf[shade]~Hyrdaulic~Conductance~~(units))
 
 
-
 c13lab <-expression(paste(delta^{13}, "C (\u2030)"))
 ypos <- c(2.5,1,0)
 satlab <- expression(A~~(mu*mol~m^-2~s^-1))
@@ -30,6 +29,8 @@ condlab <- expression(g[s]~~(mol~m^-2~s^-1))
 totcondlab <- expression(Total~Conductance~to~CO[2]~~(mol~m^-2~s^-1))
 
 vpdlab <- "VPD  (kPa)"
+itelab <- expression(ITE~~(mu*mol~CO[2]~mmol~H[2]*O^-1))
+
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))

@@ -1,0 +1,17 @@
+---
+title: "WTCIII-Figures"
+author: "Court Campany"
+date: "June 23, 2015"
+output: html_document
+---
+
+![ciN](ppfd.png)
+
+* Figure 1. Here is the light environment in which gas exchange measurements for sun and shade leaves were measured.  
+
+This data was generated with a handheld par sensor for each individual leaf and verified with ceptometer readings within the canopy at the height of the measured leaf. There was a ~75% reduction in PPFD from sun to shave leaves.
+
+
+![aci](aci_curves.png)
+
+* ACi curves were measured at saturating light for both sun and shade leaves. Both Vc<sub>max</sub> and J<sub>max</sub> are reduced in shade leaves with little effect of the temperature treatment(AT/ET). ACi curves were taken once towards the end of the experiment on well watered trees
