@@ -4,6 +4,7 @@ source("functions and packages/plot_objects_all.R")
 treatments <- read.csv("raw data/temp_trt.csv")
 
 library(plotrix)
+library(plyr)
 
 gmes <- read.csv("calculated_data/gmes_WTC.csv")
 gmpair<- read.csv("calculated_data/gmes_wtc_pair.csv")
@@ -119,8 +120,11 @@ dry_et <- dry_pair3[dry_pair3$temp == "elevated",]
 library(scales)  
 atcol <- alpha("blue", alpha=.25)
 etcol <- alpha("red", alpha=.25)
+
+
     
-windows(10,8)
+windows(8,8)
+png(filename = "markdown/lightson.png", width = 11, height = 8.5, units = "in", res= 400)
 plot(Photo.high~gm.high, data=wet_pair3,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
      xlab=gmlab, ylab="", cex=1.5, type='n')
 
@@ -132,10 +136,15 @@ plot(Photo.high~gm.high, data=wet_pair3,  pch=16, col=lightscol, ylim=c(0,30), x
   points(Photo.low~gm.low, data=wet_pair3,pch=16, col=shacol, cex=1.5)
   points(Photo.high~gm.high, data=wet_pair3,pch=16, col=lightscol, cex=1.5)
            
-  ablineclip(b_at[1], b_at[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="blue")
-  ablineclip(b_et[1], b_et[2], x1=min(wet_pair3$gm.low), x2=wet_pair3$gm.high, lty=2, lwd=2, col="red")
+  ablineclip(b_at[1], b_at[2], x1=min(wet_pair3$gm.low), x2=max(wet_pair3$gm.high), lty=2, lwd=2, col="blue")
+  ablineclip(b_et[1], b_et[2], x1=min(wet_pair3$gm.low), x2=max(wet_pair3$gm.high), lty=2, lwd=2, col="red")
 
-
+  legend("topleft", leaflab2, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1.25) 
+  legend("bottomright", c("AT", "ET"), lty=2,inset = 0.03, col=c("blue", "red"), bty='n', cex=1.25) 
+  
+  #dev.copy2pdf(file="master_scripts/figures/lightson.pdf")
+  dev.off()
+  
 ###drought
 #   plot(Photo.high~gm.high, data=dry_pair2,  pch=16, col=lightscol, ylim=c(0,30), xlim=c(0,.3), 
 #        xlab=gmlab, ylab="", cex=1.5)

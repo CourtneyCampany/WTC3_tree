@@ -64,17 +64,28 @@ points(Cond~Trmmol, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shac
 plot(Cond~VpdL, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25, xlim=c(0,5), ylim=c(0,.4))
 points(Cond~VpdL, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25) 
 
+
+windows(8,8)
+#png(filename = "makepngs/ite_bar.png", width = 11, height = 8.5, units = "in", res= 400)
 bar(iWUE, c(leaf, temp), gm_c13, col=c("yellowgreen", "green4"),half.errbar=FALSE, mar=c(5,7,2,2), 
     legend = FALSE, ylim=c(0,10))
 legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
        bty='n', cex=1.25)  
+dev.copy2pdf(file="master_scripts/figures/ite_bar.pdf")
+dev.off()
 
 bar(iWUE,leaf, gm_c13, col=c("yellowgreen", "green4"),half.errbar=FALSE, mar=c(5,7,2,2), 
     legend = FALSE, ylim=c(0,10), xlab="")
 legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
        bty='n', cex=1.25) 
 
+windows(8,8)
+#png(filename = "makepngs/ite_vpd.png", width = 11, height = 8.5, units = "in", res= 400)
 plot(iWUE~VpdL, data=gm_c13, subset=leaflight=="sun-high", pch=16, col=suncol, cex=1.25, xlim=c(0,4), ylim=c(0,20))
 points(iWUE~VpdL, data=gm_c13, subset=leaflight=="shade-low", pch=16, col=shacol, cex=1.25) 
 legend("topright", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
        bty='n', cex=1.25) 
+dev.copy2pdf(file="master_scripts/figures/ite_vpd.pdf")
+dev.off()
+
+

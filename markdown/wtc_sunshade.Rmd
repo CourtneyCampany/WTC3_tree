@@ -354,4 +354,14 @@ legend("bottomright", leaflab2, pch=16, col=c("green4","yellow4"),inset = 0.03)
  title(ylab=lmalab, mgp=ypos)
 ```
 
-* This figure shows leaf mass area for each gas exchange campaign.  Surprisingly, not very different between leaf types. 
+* This figure shows leaf mass area for each gas exchange campaign.  Surprisingly, not very different between leaf types.
+
+
+![ciN](ci_narea.png)
+![shadehigh](lightson.png)
+![itebar](ite_bar.png)
+![itevpd](ite_vpd.png)
+
+
+
+

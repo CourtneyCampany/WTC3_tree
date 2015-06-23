@@ -47,12 +47,20 @@ palette(c(shacol, suncol))
 
 greyalpha <- alpha("grey95", alpha=.75)
 
+legcols <- c(shacol, suncol)
+legpchs <- c(1, 16)
+leaflabel <- c( "Sun", "Shade")
+leaflabel2 <- c( cibarlab2,cilab)
 
-windows(8.8)
+windows(8,8)
+png(filename = "makepngs/ci_narea.png", width = 11, height = 8.5, units = "in", res= 400)
 par(mar=c(5,5,2,2), cex=1.5)
-plot(Ci ~ leafN_area, data=ci_narea, col=as.factor(leaf), pch=16, ylim=c(0, 400), xlim=c(0,5), ylab=cilab, xlab=narealab)
+plot(Ci ~ leafN_area, data=ci_narea, col=as.factor(leaf), pch=16, ylim=c(0, 400), xlim=c(0,6), ylab=cilab, xlab=narealab)
 points(ci_bar ~ leafN_area, data=ci_narea,pch=21, col=as.factor(leaf), bg=greyalpha)
-dev.copy2pdf(file="master_scripts/figures/ci_narea.pdf")
+
+legend("topright", leaflabel, pch=16,inset = 0.03, col=leafcol, bty='n', cex=1) 
+legend("bottomright", leaflabel2, pch=legpchs,inset = 0.03,  bty='n', cex=1) 
+#dev.copy2pdf(file="master_scripts/figures/ci_narea.pdf")
 dev.off()
 
 
