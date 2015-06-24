@@ -13,7 +13,7 @@ lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 
 arealab <- expression(Leaf~Area~~(cm^2))
-narealab <- expression(N[area]~~(gN~m^-2))
+narealab <- expression(Leaf~Nitrogen[area]~~(gN~m^-2))
 nsunlab <- expression(Leaf[sun]~Nitrogen[area]~~(gN~m^-2))
 nshadelab <- expression(Leaf[shade]~Nitrogen[area]~~(gN~m^-2))
 
@@ -21,7 +21,7 @@ ksunlab <- expression(Leaf[sun]~Hyrdaulic~Conductance~~(units))
 kshadelab <- expression(Leaf[shade]~Hyrdaulic~Conductance~~(units))
 
 
-c13lab <-expression(paste(delta^{13}, "C (\u2030)"))
+c13lab <-expression(paste(Leaf~delta^{13}, "C  (\u2030)"))
 ypos <- c(2.5,1,0)
 satlab <- expression(A~~(mu*mol~m^-2~s^-1))
 
@@ -66,7 +66,16 @@ leaflab2 <- c("Sun", "Shade")
 
 colaci <-c(suncol, suncol, shacol, shacol)
 
-
 leaflightlab <- c("shade-high", "shade-low", "sun")
 
+
+###lights on shade cols
+leaflightlab <- c("shade-high", "shade-low", "sun")
+lightscol <- alpha("darkorange2", .75)
+lightlab <- c(lightscol,shacol)
+lightleg <- c("High light", "Low light")
+lightleg2 <- c(expression(paste("High light", "-" ,"AT")), expression(paste("High light", "-" ,"ET")),
+  expression(paste("Low light","-" ,"AT")), expression(paste("Low light", "-" ,"ET")))
+
+collights<-c(lightscol, lightscol, shacol, shacol)
 

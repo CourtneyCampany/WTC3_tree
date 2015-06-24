@@ -136,12 +136,10 @@ dev.copy2pdf(file="master_scripts/figures/c13_nitro.pdf")
 dev.off()
 
 windows(8,8)
+par(mar=c(5,5,2,2), cex=1.25, cex=1.25, las=1)
 plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=as.factor(leaf), ylim=c(-35,-25), xlim=c(0,4), 
       cex=1.25, xlab=narealab, ylab=c13lab)
 
-
-plot(c13 ~ leafN_area, data=canopy_chem, pch=16, col=c(shacol, suncol), ylim=c(-35,-25), xlim=c(0,4), 
-     cex=1.25, xlab=narealab, ylab=c13lab)
 
 
 

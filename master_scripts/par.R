@@ -2,9 +2,9 @@ source("functions and packages/functions.R")
 source("functions and packages/packages.R")
 source("master_scripts/plot_objects.R")
 
-par <- read.csv("raw data/par.csv")
-
-treatments <- read.csv("raw data/temp_trt.csv")
+# par <- read.csv("raw data/par.csv")
+# 
+# treatments <- read.csv("raw data/temp_trt.csv")
 
 #format function
 par<- parformat(par)
@@ -21,29 +21,29 @@ parbar$leaf_type <- gsub("s", "S", parbar$leaf_type)
 par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 
 ###Stats---------------------------------------------------------------------------------------------------------
-library(visreg)
-library(multcomp)
-library(nlme)
+# library(visreg)
+# library(multcomp)
+# library(nlme)
 
 #examite data with boxplots, then remove any outliers
-boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="sun",])
-boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="shade",])
+# boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="sun",])
+# boxplot(par~temp, data=par_leaf[par_leaf$leaf_type =="shade",])
 
 
 ###lma not different between leaf types or temp treatment.
-par_leaf <- lme(par ~ leaf_type, random=~1|chamber, data=par_leaf)
-summary(par_leaf)
-anova(par_leaf)
+# par_leaf <- lme(par ~ leaf_type, random=~1|chamber, data=par_leaf)
+# summary(par_leaf)
+# anova(par_leaf)
 
 
 ###PLOTTING------------------------------------------------------------------------------------------------
 
-windows(7,5)
+#windows(7,5)
 bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
       half.errbar=FALSE)
 title(ylab=parlab, mgp=ypos)
-dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
+# dev.off()
 
 
 ###for png

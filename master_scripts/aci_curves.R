@@ -1,9 +1,9 @@
-library(scales)
+# source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# 
+# treatments <- read.csv("raw data/temp_trt.csv") 
 
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-
-treatments <- read.csv("raw data/temp_trt.csv") 
 ###make png figure for talk that also plots points from licor------------------------------------------------  
   
   #read ACi datasets 
@@ -44,7 +44,7 @@ treatments <- read.csv("raw data/temp_trt.csv")
 
   
  ###png
-  png(filename = "markdown/aci_curves.png", width = 11, height = 8.5, units = "in", res= 400)
+  #png(filename = "markdown/aci_curves.png", width = 11, height = 8.5, units = "in", res= 400)
   
   #windows(11,8.5)
   par(mar=c(5,7,2,2), cex.lab=2, las=1)
@@ -83,15 +83,15 @@ treatments <- read.csv("raw data/temp_trt.csv")
   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5)
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5, lty=2)
   
-  #dev.copy2pdf(file="master_scripts/figures/aci_curves.pdf")
-  dev.off()
+  #dev.copy2pdf(file="master_scripts/paper_figures/aci_curves.pdf")
+  #dev.off()
   
   
 #   subplot(plot(Photo~Ci ,data= acishade_clean, pch=16, col=shacol50, ylim=c(0, 15), xlim=c(0,300), xlab="", 
 #                ylab="", cex.axis=1, cex=1), x=1500, y=8, size=c(4.5,2.5))
 #   
   #Return par(fig=) to full size for next plot
-  par(fig=c(0,1,0,1))
+  #par(fig=c(0,1,0,1))
   
   
   
