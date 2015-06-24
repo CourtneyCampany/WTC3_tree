@@ -46,7 +46,7 @@ There was a ~75% reduction in PPFD from sun to shave leaves.
 
 ![aci](aci_curves.png)
 
-* Figure2. Predicted photosynthetic CO2 response (ACi))curves for sun and shade leaves at elevated and ambient temperature treatments. Aci curves were developed at 25C and at saturating light (1800 umols m^-1 s^-1). ACi curves were taken once on well watered trees before the initation of the drought treatment.
+* Figure2. Predicted photosynthetic CO2 response (ACi))curves for sun and shade leaves at elevated and ambient temperature treatments. Aci curves were developed at 25°C and at saturating light (1800 umols m^-1 s^-1). ACi curves were taken once on well watered trees before the initation of the drought treatment.
 
 ```{r, results='asis'}
 aci_leaf <- read.csv("calculated_data/tdl_aci.csv")
