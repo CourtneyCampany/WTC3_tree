@@ -35,7 +35,7 @@ write.csv(g1_dat, "calculated_data/g1_leaf.csv", row.names=FALSE)
 
 
 #use nls for g1 ite model-----------------------------------------------------------------------
-g1fits <- nlsList(ite ~ ((Ca*102.3) / 1.6*(g1*sqrt(D)+D))/1000 |id2,
+g1fits <- nlsList(ite ~ (Ca*102.3) / (1.6*(g1*sqrt(D)+D))/1000 |id2,
                   start=list(g1=2), data=gs_dat)
 
 
