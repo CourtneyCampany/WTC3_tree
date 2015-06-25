@@ -26,7 +26,6 @@ par <- read.csv("raw data/par.csv")
 treatments <- read.csv("raw data/chamber_trt.csv")
 ```
 
-
 #### <u>Design</u>
 * WTCIII was a warming experiment with ambient and +3°C warming (n=6).  A drought manipulation was added in the last few months of the experiment but is not included here.
 * Sun leaves were measured in the upper canopy at their current PPFD.  Shade leaves were measured in the lower/middle canopy, first at their current PPFD and then again at sun leaf PPFD as a simulated sunfleck.
@@ -39,7 +38,10 @@ source("master_scripts/par.R")
 ```  
 Figure 1. Local light environment for sun and shade leaves for each gas exchange campaign. Means and standard errors represent 1m integrated PPFD (n=5), measured with a ceptometer, at the canopy height of each selected leaf.
 
-![aci](aci_curves.png)
+
+```{r acicurves, fig.width=8, fig.height=6}
+source("master_scripts/aci_curves.R")
+```  
 Figure2. Predicted photosynthetic CO~2~ response (ACi) curves for sun and shade leaves at elevated and ambient temperature treatments. ACi curves were developed at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). ACi curves were taken once on well watered trees before the initiation of the drought treatment.    
     
 
@@ -53,10 +55,12 @@ panderOptions("digits", 3)
 pander(aci_leaf2, caption = "Table 1.  Biochemical parameters estimated from ACi curves above")
 ```    
 
+
 ```{r wateruse, fig.width=8, fig.height=10}
 source("master_scripts/wateruse.R")
 ```  
-Figure 3. Response of instantaneous water use efficiency (ITE) to leaf vapor pressure deficit (VPD) (a) and response of leaf photosynthesis rates to stomatal conductance (b) for sun and shade leaves at elevated and ambient temperature treatments. For (a)  lines represent predictions from the optimal ITE model with k=0.05 and a specific g1 value for each leaf type and treatment. For (b) dashed lines represent 95% confidence intervals from a general additive model with k=5.
+Figure 3. Response of instantaneous water use efficiency (ITE) to leaf vapor pressure deficit (VPD) (a) and response of leaf photosynthesis rates to stomatal conductance (b) for sun and shade leaves at elevated and ambient temperature treatments. For (a)  lines represent predictions from the optimal ITE model with a g1 value for each leaf type and treatment. For (b) dashed lines represent 95% confidence intervals from a general additive model with k=5.
+
 
 ```{r c13n, fig.width=8, fig.height=6}
 source("master_scripts/c13_Narea.R")
@@ -76,5 +80,13 @@ source("master_scripts/gm_lightson.R")
 Figure 6. Response of photosynthesis to mesophyll conductance following a maximum sunfleck response of shade leaves (a) and overall mean values of mesophyll conductance (c) and photosynthesis (d) to sun flecks in shade leaves with standard errors.  The sunfleck was simulated by increasing the PPFD to the level of the sun leaf in the same chamber. The response of leaf physiology to sun flecks was recorded once both photosynthesis and stomatal conductance were stable in the gas exchange leaf cuvette (ca. 25min).
 
 
+```{r table, results="asis"}
+ge_data <- read.csv("master_scripts/ge_table.csv")
+ge_tab <- ge_data[,1:8]
+
+colnames(ge_tab) <- c("Leaf", "Temperature", "Light Level", "Photosynthesis", "g~s~","g~m~",
+                      "Ci", "Transpiration")
+pandoc.table(ge_tab, caption = "Gas exchange data for sun and shade leaves", split.cells = c(1,1,1,1,1,1,1,1))
+```
 
 

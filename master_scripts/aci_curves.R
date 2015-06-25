@@ -46,28 +46,26 @@ treatments <- read.csv("raw data/temp_trt.csv")
  ###png
   #png(filename = "markdown/aci_curves.png", width = 11, height = 8.5, units = "in", res= 400)
   
-  #windows(11,8.5)
-  par(mar=c(5,7,2,2), cex.lab=2, las=1)
+# windows(8,6)
+  par(mar=c(5,5,2,2), cex.lab=1.25, cex.axis=1, las=1, cex=1.25, cex.lab=1)
   
   plot(Photo~Ci ,data= acishade_clean, col=shacol50, ylim=c(0, 39), xlim=c(0,2000), xlab="", 
-       ylab=photolab, cex.axis=1.75, cex=1.5, pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo, col=shacol50, cex=1.5, pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2,  col=suncol50, cex=1.5, pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2,  col=suncol50, cex=1.5, pch=c(16, 17)[pch=tdlaci2$temp])
+       ylab=photolab, pch=c(16, 17)[pch=acishade_clean$temp])
+  points(Photo~Ci ,data= shade_redo, col=shacol50,  pch=c(16, 17)[pch=shade_redo$temp])
+  points(Photo~Ci ,data= sunaci_clean2,  col=suncol50,  pch=c(16, 17)[pch=sunaci_clean2$temp])
+  points(Photo~Ci ,data= tdlaci2,  col=suncol50,  pch=c(16, 17)[pch=tdlaci2$temp])
   title(xlab=cilab, mgp=c(3.5,1,1))
 
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, cex=1.1,xlab=cilab, ylab="", type="l", lwd=3.5)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, cex=1.1,xlab="", ylab="", type="l", lwd=3.5, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, cex=1.1,xlab="", ylab="", type="l", lwd=3.5)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, cex=1.1,xlab="", ylab="", type="l", lwd=3.5, lty=2)
+  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, cex=1.1,xlab=cilab, ylab="", type="l", lwd=2)
+  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
+  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, cex=1.1,xlab="", ylab="", type="l", lwd=2)
+  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
   
-  legend("topleft", leglab2, pch=c(16,17,16,17), col=colaci,inset = 0.01, bty='n',cex=1.25)
-  legend(x=160, y=40, legend=c("", "" ), lty=c(1,2), lwd=2, col=suncol, bty='n',cex=1.25)
-  legend(x=210, y=37, legend=c("", "" ), lty=c(1,2), lwd=2, col=shacol, bty='n',cex=1.25)
+  legend("topleft", leglab2, pch=c(16,17,16,17), lty=c(1,2,1,2),col=colaci,inset = 0.01, bty='n',cex=.8)
   
 ###inset figure  
 
-  par(fig=c(0.45, 0.975, 0.05,0.5), new=T, cex=1, las=1, cex.axis=1.25)
+  par(fig=c(0.38, 0.975, 0.075,0.55), new=T, cex=1, las=1, cex.axis=1)
     
   plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
   axis(2, mgp=c(3, .5, 0))
@@ -78,10 +76,10 @@ treatments <- read.csv("raw data/temp_trt.csv")
   points(Photo~Ci ,data= sunaci_clean2, col=suncol50, pch=c(16, 17)[pch=sunaci_clean2$temp])
   points(Photo~Ci ,data= tdlaci2, col=suncol50, pch=c(16, 17)[pch=tdlaci2$temp])
   
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol, cex=1,xlab=cilab, ylab="", type="l", lwd=2.5)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol, cex=1,xlab="Ci", ylab="", type="l", lwd=2.5, lty=2)
+  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol,  type="l", lwd=2)
+  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol,  type="l", lwd=2, lty=2)
+  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=shacol,  type="l", lwd=2)
+  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=shacol,  type="l", lwd=2, lty=2)
   
   #dev.copy2pdf(file="master_scripts/paper_figures/aci_curves.pdf")
   #dev.off()

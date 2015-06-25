@@ -21,6 +21,10 @@ ge_dry <- ge_overall[ge_overall$drydown == "drought",]
 ge_table <- ge_wet[ c(6,5,2,4,1,3),]
 
 ge_vars <- ge_table[, 1:3]
+  ge_vars$leaflight <- gsub("sun-", "", ge_vars$leaflight)
+  ge_vars$leaflight <- gsub("shade-", "", ge_vars$leaflight)
+  ge_vars$leaflight <- gsub("high", "High", ge_vars$leaflight)
+  ge_vars$leaflight <- gsub("l", "L", ge_vars$leaflight)
 ge_means <- ge_table[, c(5,6,9,7,8, 10)]
 ge_se <- ge_table[, c(11,12,15,13,14,16)]
 
@@ -42,7 +46,7 @@ ge_table3 <- cbind(ge_vars, ge1)
   
 ###add sigletters
 
-
+write.csv(ge_table3, "master_scripts/ge_table.csv", row.names=FALSE)
   
 #####vaiarbles with no shade high light
 ####leafk, PAR, ACI, 
