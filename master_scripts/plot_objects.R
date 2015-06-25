@@ -67,6 +67,8 @@ leaflab2 <- c("Sun", "Shade")
 
 colaci <-c(suncol, suncol, shacol, shacol)
 
+colaci2 <-c( shacol, shacol,suncol, suncol)
+
 leaflightlab <- c("shade-high", "shade-low", "sun")
 
 
@@ -82,4 +84,6 @@ lightleg3 <- c(expression(paste("Sun light", "-" ,"AT")), expression(paste("Sun 
                expression(paste("Shade light","-" ,"AT")), expression(paste("Shade light", "-" ,"ET")))
 
 collights<-c(lightscol, lightscol, shacol, shacol)
+
+ltys <- c(1,2, 1,2)
 

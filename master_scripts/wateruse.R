@@ -1,6 +1,6 @@
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
-# source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
+source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
@@ -74,10 +74,9 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
      xlim=c(0,4), ylim=c(0,20),  pch=c(16, 17)[pch=ite_sunsha$temp])
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp]) 
   
-#   points(ite_sunat ~ vpdrange, type="l", col=suncol, lwd=2, lty=1)
-#   points(ite_sunet ~ vpdrange, type="l", col=suncol, lwd=2, lty=2)
-#   points(ite_shaat ~ vpdrange, type="l", col=shacol, lwd=2, lty=1)
-#   points(ite_shaet ~ vpdrange, type="l", col=shacol, lwd=2, lty=2)
+  p <- g1_ite[3:6,1]
+  f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
+  for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=2)
   
   text(x=0, y=19.8 ,"(a)", cex=.9)
   
