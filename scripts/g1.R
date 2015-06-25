@@ -39,6 +39,7 @@ g1fits <- nlsList(ite ~ (Ca*102.3) / (1.6*(g1*sqrt(D)+D))/1000 |id2,
                   start=list(g1=2), data=gs_dat)
 
 
+
 g1_ite <- data.frame(coef(g1fits))
 g1_ite$id <- as.character(rownames(g1_ite))
 row.names(g1_ite) <- NULL
@@ -46,5 +47,10 @@ names(g1_ite)[1] <- "g1"
 
 ###sun leaves have low g1, thus high lambda meaning they are more conservative than shade leaves
 
-
+# Figure
+cols <- c("darkorange","forestgreen")
+with(gs_dat, plot(D, ite, pch=19, col=cols[leaf]))
+p <- coef(g1fits)[[1]]
+f <- function(D, g1)(400*102.3) / (1.6*(g1*sqrt(D)+D))/1000
+for(i in 1:6)curve(f(x, p[i]), add=T, col=c(rep(cols[1],4),rep(cols[2],2))[i])
 
