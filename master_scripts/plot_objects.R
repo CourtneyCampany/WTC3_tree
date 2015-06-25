@@ -48,7 +48,8 @@ relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
 relklab <- expression(K[shade]:K[sun])
 
-leaftlab <- ("Leaf Temperature  (C)")
+leaftlab2 <- ("Leaf Temperature  (C)")
+leaftlab = expression(paste("Temperature  (",degree,"C)")) 
 
 templab <- c("AT", "ET")
 leaflab <- c("shade", "sun")
@@ -76,6 +77,9 @@ lightlab <- c(lightscol,shacol)
 lightleg <- c("High light", "Low light")
 lightleg2 <- c(expression(paste("High light", "-" ,"AT")), expression(paste("High light", "-" ,"ET")),
   expression(paste("Low light","-" ,"AT")), expression(paste("Low light", "-" ,"ET")))
+
+lightleg3 <- c(expression(paste("Sun light", "-" ,"AT")), expression(paste("Sun light", "-" ,"ET")),
+               expression(paste("Shade light","-" ,"AT")), expression(paste("Shade light", "-" ,"ET")))
 
 collights<-c(lightscol, lightscol, shacol, shacol)
 

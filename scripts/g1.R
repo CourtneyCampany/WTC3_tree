@@ -44,6 +44,8 @@ g1_ite$id <- as.character(rownames(g1_ite))
 row.names(g1_ite) <- NULL
 names(g1_ite)[1] <- "g1"
 
+write.csv(g1_ite, "calculated_data/g1_ite.csv", row.names=FALSE)
+
 ###sun leaves have low g1, thus high lambda meaning they are more conservative than shade leaves
 
 

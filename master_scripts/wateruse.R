@@ -1,13 +1,13 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
 ####panel a = ITE and VPD
 
 ite <- read.csv("calculated_data/gmes_wellwatered.csv")
-g1_leaf <- read.csv("calculated_data/g1_leaf.csv")
+g1_ite <- read.csv("calculated_data/g1_ite.csv")
 
 ###get average by id
 ite_agg <- summaryBy(Photo+Cond+ Trmmol+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month, 
@@ -25,13 +25,12 @@ k <- 0.5
 Ca <- 400
 Pa <- 102.3
 
-
 vpdrange <- seq(.1, 4, length= 101)
 
-ite_sunat <- ((Ca * Pa) / ((g1_leaf[5,1]* sqrt(vpdrange)) + vpdrange))/1000
-ite_sunet <- ((Ca * Pa) / ((g1_leaf[6,1]* sqrt(vpdrange)) + vpdrange))/1000
-ite_shaat <- ((Ca * Pa) / ((g1_leaf[3,1]* sqrt(vpdrange)) + vpdrange))/1000
-ite_shaet <- ((Ca * Pa) / ((g1_leaf[4,1]* sqrt(vpdrange)) + vpdrange))/1000
+ite_sunat <- ((Ca * Pa) / ((3* sqrt(vpdrange)) + vpdrange))/1000
+ite_sunet <- ((Ca * Pa) / ((g1_ite[6,1]* sqrt(vpdrange)) + vpdrange))/1000
+ite_shaat <- ((Ca * Pa) / ((5* sqrt(vpdrange)) + vpdrange))/1000
+ite_shaet <- ((Ca * Pa) / ((g1_ite[4,1]* sqrt(vpdrange)) + vpdrange))/1000
 
 ###use gam for CI of non-linear relationship between A and gs------------------------------------------------------
 
@@ -53,7 +52,7 @@ sunlwr <- gssun_pred$fit - (2*gssun_pred$se.fit)
 #SHADE leaves
 shamod <- gam(Photo ~ s(Cond, k=5), data=ite_sunsha, subset=leaflight=="shade-low")
 
-#get apprpriate vector CC from sun leaves
+#get apprpriate vector cond from sun leaves
 gsdat2 <- ite_sunsha[ite_sunsha$leaflight=="shade-low", "Cond"]
 #generate sequence and then predict
 gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
@@ -64,8 +63,8 @@ shalwr <- gssha_pred$fit - (2*gssha_pred$se.fit)
 
 
 #### Multi panel plot of WUE --------------------------------------------------------------------------------------------
-
-windows(8,8)
+# 
+# windows(8,8)
 #png(filename = "markdown/wateruse.png", width = 11, height = 8.5, units = "in", res= 400)
 
 par(mfrow=c(2,1))
@@ -75,10 +74,10 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
      xlim=c(0,4), ylim=c(0,20),  pch=c(16, 17)[pch=ite_sunsha$temp])
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp]) 
   
-  points(ite_sunat ~ vpdrange, type="l", col=suncol, lwd=2, lty=1)
-  points(ite_sunet ~ vpdrange, type="l", col=suncol, lwd=2, lty=2)
-  points(ite_shaat ~ vpdrange, type="l", col=shacol, lwd=2, lty=1)
-  points(ite_shaet ~ vpdrange, type="l", col=shacol, lwd=2, lty=2)
+#   points(ite_sunat ~ vpdrange, type="l", col=suncol, lwd=2, lty=1)
+#   points(ite_sunet ~ vpdrange, type="l", col=suncol, lwd=2, lty=2)
+#   points(ite_shaat ~ vpdrange, type="l", col=shacol, lwd=2, lty=1)
+#   points(ite_shaet ~ vpdrange, type="l", col=shacol, lwd=2, lty=2)
   
   text(x=0, y=19.8 ,"(a)", cex=.9)
   
@@ -101,7 +100,7 @@ points(Photo~Cond, data=ite_sunsha, subset=leaflight=="shade-low",col=shacol,pch
   lines(gssha_seq, gssha_pred$fit, lty=1, lwd=2,col=shacol)
   text(x=0, y=19.8, "(b)", cex=.9)
 
-dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
+# dev.off()
   
 

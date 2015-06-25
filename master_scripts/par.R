@@ -1,7 +1,7 @@
-source("functions and packages/functions.R")
-source("functions and packages/packages.R")
-source("master_scripts/plot_objects.R")
-
+# source("functions and packages/functions.R")
+# source("functions and packages/packages.R")
+# source("master_scripts/plot_objects.R")
+# 
 # par <- read.csv("raw data/par.csv")
 # 
 # treatments <- read.csv("raw data/temp_trt.csv")
@@ -39,9 +39,9 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 ###PLOTTING------------------------------------------------------------------------------------------------
 
 #windows(7,5)
-bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="", ylab="", ylim=c(0, 2000), 
-      half.errbar=FALSE)
-title(ylab=parlab, mgp=ypos)
+bar(par, c(leaf_type, month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
+      half.errbar=FALSE, mar=c(5,5,2,2))
+#title(ylab=parlab, mgp=ypos)
 # dev.copy2pdf(file="master_scripts/figures/ppfd.pdf")
 # dev.off()
 

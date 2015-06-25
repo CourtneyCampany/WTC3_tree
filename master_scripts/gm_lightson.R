@@ -21,10 +21,10 @@ par(fig=c(0,1,0.45,1), new=TRUE)
 
 par(mar=c(4,6,2,5), las=1) 
 plot(Photo~gm, data=lightson_agg, subset=leaflight=="shade-high", col=lightscol, ylim=c(5,25), xlim=c(0,0.3), 
-     xlab=gmlab, ylab="", pch=c(16, 17)[pch=lightson_agg$temp],cex=2, cex.axis=1.25, cex.lab=1.25)
-points(Photo~gm, data=lightson_agg, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=lightson_agg$temp], cex=2)
+     xlab=gmlab, ylab="", pch=c(16, 17)[pch=lightson_agg$temp],cex=1.5, cex.axis=1.25, cex.lab=1.25)
+points(Photo~gm, data=lightson_agg, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=lightson_agg$temp], cex=1.5)
 
-legend("topleft", lightleg2, pch=c(16,17,16,17),inset = 0.02, col=collights, bty='n', cex=1.25) 
+legend("topleft", lightleg3, pch=c(16,17,16,17),inset = 0.02, col=collights, bty='n', cex=1) 
 text(x=.3, y=24.5, "(a)", cex=1.25)
 mtext(satlab, side=2, line=3.5, cex=1.25, las=3)
 

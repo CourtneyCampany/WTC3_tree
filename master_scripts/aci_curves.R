@@ -1,8 +1,8 @@
-# source("functions and packages/packages.R")
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
-# 
-# treatments <- read.csv("raw data/temp_trt.csv") 
+source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
+
+treatments <- read.csv("raw data/temp_trt.csv") 
 
 ###make png figure for talk that also plots points from licor------------------------------------------------  
   
