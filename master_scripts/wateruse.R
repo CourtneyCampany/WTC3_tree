@@ -20,17 +20,21 @@ ite_agg$ite <- with(ite_agg, Photo/Trmmol)
 ite_sunsha <- ite_agg[ite_agg$leaflight != "shade-high",]
 ite_sunsha <- droplevels(ite_sunsha)
 
+##dfr with lights on
+ite_lightson <- ite_agg[ite_agg$leaflight == "shade-high",]
+ite_lightson <- droplevels(ite_lightson)
+
 ###add model equation for ITE
-k <- 0.5
-Ca <- 400
-Pa <- 102.3
-
-vpdrange <- seq(.1, 4, length= 101)
-
-ite_sunat <- ((Ca * Pa) / ((3* sqrt(vpdrange)) + vpdrange))/1000
-ite_sunet <- ((Ca * Pa) / ((g1_ite[6,1]* sqrt(vpdrange)) + vpdrange))/1000
-ite_shaat <- ((Ca * Pa) / ((5* sqrt(vpdrange)) + vpdrange))/1000
-ite_shaet <- ((Ca * Pa) / ((g1_ite[4,1]* sqrt(vpdrange)) + vpdrange))/1000
+# k <- 0.5
+# Ca <- 400
+# Pa <- 102.3
+# 
+# vpdrange <- seq(.1, 4, length= 101)
+# 
+# ite_sunat <- ((Ca * Pa) / ((3* sqrt(vpdrange)) + vpdrange))/1000
+# ite_sunet <- ((Ca * Pa) / ((g1_ite[6,1]* sqrt(vpdrange)) + vpdrange))/1000
+# ite_shaat <- ((Ca * Pa) / ((5* sqrt(vpdrange)) + vpdrange))/1000
+# ite_shaet <- ((Ca * Pa) / ((g1_ite[4,1]* sqrt(vpdrange)) + vpdrange))/1000
 
 ###use gam for CI of non-linear relationship between A and gs------------------------------------------------------
 
@@ -61,6 +65,18 @@ gssha_pred <- predict(shamod, newdata=data.frame(Cond=gssha_seq), type="link", s
 shaupr <- gssha_pred$fit + (2*gssha_pred$se.fit)
 shalwr <- gssha_pred$fit - (2*gssha_pred$se.fit)
 
+#SUNFLECK leaves
+fleckmod <- gam(Photo ~ s(Cond, k=5), data=ite_lightson)
+
+#get apprpriate vector cond from sun leaves
+gsfleck <- ite_lightson[, "Cond"]
+#generate sequence and then predict
+gsfleck_seq <- seq(min(gsfleck), max(gsfleck), length=101)
+gsfleck_pred <- predict(fleckmod, newdata=data.frame(Cond=gsfleck_seq), type="link", se.fit=TRUE)
+
+fleckupr <- gsfleck_pred$fit + (2*gsfleck_pred$se.fit)
+flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
+
 
 #### Multi panel plot of WUE --------------------------------------------------------------------------------------------
 # 
@@ -78,6 +94,12 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
   for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=2)
   
+  
+  points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
+  p2 <- g1_ite[1:2,1]
+  f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
+  for(i in 1:2)curve(f(x, p2[i]), add=T, col=lightscol, lty=ltys[i], lwd=2)
+  
   text(x=0, y=19.8 ,"(a)", cex=.9)
   
   legend("topright", leglab2, pch=c(16,17,16,17), col=colaci,inset = 0.01, bty='n',cex=.9)
@@ -85,7 +107,7 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
 
 #2: panel GAM PLOTS (photosynthesis vs gs or transpiration)-----------------------------------------------------------
 par(mar=c(5,5,0,1),cex.axis=.75, cex.lab=.9, cex=1.25, las=1)
-plot(Photo~Cond, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, ylim=c(5,20), 
+plot(Photo~Cond, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, ylim=c(0,25), 
      xlim=c(0,.35), xlab=condlab, ylab=satlab,  pch=c(16, 17)[pch=ite_sunsha$temp])
 
   lines(gssun_seq, sunupr, lty=2, lwd=2,col=suncol)
@@ -97,6 +119,13 @@ points(Photo~Cond, data=ite_sunsha, subset=leaflight=="shade-low",col=shacol,pch
   lines(gssha_seq, shaupr, lty=2, lwd=2,col=shacol)
   lines(gssha_seq, shalwr, lty=2, lwd=2,col=shacol)
   lines(gssha_seq, gssha_pred$fit, lty=1, lwd=2,col=shacol)
+  
+#sunfleck  
+points(Photo~Cond, data=ite_lightson, col=lightscol,pch=c(16, 17)[pch=ite_lightson$temp])
+  lines(gsfleck_seq, fleckupr, lty=2, lwd=2,col=lightscol)
+  lines(gsfleck_seq, flecklwr, lty=2, lwd=2,col=lightscol)
+  lines(gsfleck_seq, gsfleck_pred$fit, lty=1, lwd=2,col=lightscol)
+  
   text(x=0, y=19.8, "(b)", cex=.9)
 
 # dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
