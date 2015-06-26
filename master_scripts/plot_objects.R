@@ -32,7 +32,7 @@ vpdlab <- "VPD  (kPa)"
 itelab <- expression(ITE~~(mu*mol~CO[2]~mmol~H[2]*O^-1))
 
 ratelab <- expression(mol~m^-2~s^-1)
-parlab <- expression(PPFD~~(mol~m^-2~s^-1))
+parlab <- expression(PPFD~~(mu*mol~m^-2~s^-1))
 photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
 trmmollab <- expression(Transpiration~~(mmol~H[2]*O~m^-2~s^-1))
 
@@ -59,31 +59,43 @@ leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")
 leglab2<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")),
             expression(paste(Shade,"-" ,"AT")), expression(paste(Shade, "-" ,"ET")))
 
+leglab3<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")),
+            expression(paste(Shade,"-" ,"AT")), expression(paste(Shade, "-" ,"ET")),
+            expression(paste(Sunfleck,"-" ,"AT")), expression(paste(Sunfleck, "-" ,"ET")))
+
+
+ltys <- c(1,2, 1,2)
+
 ###sun shade colors
 suncol <- alpha("forestgreen", alpha=.75)
 shacol <- alpha("yellow4", alpha=.75)
+lightscol <- alpha("darkorange2", .75)
+
+
 leafcol <- c(suncol, shacol)
 leaflab2 <- c("Sun", "Shade")
+collights<-c(lightscol, lightscol, shacol, shacol)
+
+###color combos for legend etc.
 
 colaci <-c(suncol, suncol, shacol, shacol)
-
 colaci2 <-c( shacol, shacol,suncol, suncol)
-
-leaflightlab <- c("shade-high", "shade-low", "sun")
-
-
-###lights on shade cols
-leaflightlab <- c("shade-high", "shade-low", "sun")
-lightscol <- alpha("darkorange2", .75)
+leafcols <- c(suncol, suncol, shacol, shacol, lightscol, lightscol)
 lightlab <- c(lightscol,shacol)
+
+###lights labels
+leaflightlab <- c("shade-high", "shade-low", "sun")
 lightleg <- c("High light", "Low light")
+
 lightleg2 <- c(expression(paste("High light", "-" ,"AT")), expression(paste("High light", "-" ,"ET")),
   expression(paste("Low light","-" ,"AT")), expression(paste("Low light", "-" ,"ET")))
 
 lightleg3 <- c(expression(paste("Sun light", "-" ,"AT")), expression(paste("Sun light", "-" ,"ET")),
                expression(paste("Shade light","-" ,"AT")), expression(paste("Shade light", "-" ,"ET")))
 
-collights<-c(lightscol, lightscol, shacol, shacol)
+leaflightlab <- c("shade-high", "shade-low", "sun")
 
-ltys <- c(1,2, 1,2)
+
+
+
 

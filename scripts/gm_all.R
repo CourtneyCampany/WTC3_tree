@@ -14,7 +14,7 @@ gm$Cc <- with(gm, Ci-Photo/gm)
 #set data limits to get rid of bad data (upper and lower from Flexas review)
 gm_limit <- subset(gm, gm <= 1.1 & gm >= .05)
 
-write.csv(gm_limit, "gm_limit.csv", row.names=FALSE)
+#write.csv(gm_limit, "gm_limit.csv", row.names=FALSE)
 
 #take some subsets for further anaylses 
 gm_watered <- subset(gm_limit, drydown =="control")
@@ -66,19 +66,6 @@ Agm_sha <- lm(Photo~ gm, data=gm_leaf, leaf=="shade")
 Agm_sha_warm <- lm(Photo~ gm*temp, data=gm_leaf, leaf=="shade")
 summary(Agm_sha)
 summary(Agm_sha_warm)
-
-#gm vs temp
-#sun leaves (no drought)
-Tgm_sun <- lm(gm~ CTleaf, data=gm_leaf, leaf=="sun")
-Tgm_sunwarm <- lm(gm~ CTleaf*temp, data=gm_leaf, leaf=="sun")
-summary(Tgm_sun)
-summary(Tgm_sunwarm)
-
-#shade leaves (no drought)
-Tgm_sha <- lm(gm~ CTleaf, data=gm_leaf, leaf=="shade")
-Tgm_sha_warm <- lm(gm~ CTleaf*temp, data=gm_leaf, leaf=="shade")
-summary(Tgm_sha)
-summary(Tgm_sha_warm)
 
 
 # plot gm vs cond--------------------------------------------------
