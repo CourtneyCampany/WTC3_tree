@@ -33,7 +33,8 @@ library(plotrix)
 aciN_sun_lm <- lm(Vcmax~ leafN_area.mean, data=sun)
 aciN_sha_lm <- lm(Vcmax~ leafN_area.mean, data=shade)
 
-
-plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf), xlim=c(1,4), ylim=c(0, 130), pch=16, cex=1.5)
+windows(8,6)
+plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf), xlim=c(1,4), ylim=c(0, 130), cex=1.5,  
+     pch=c(16, 17)[pch=N_aci$temp])
 ablineclip(aciN_sun_lm, x1=min(sun$leafN_area.mean), x2=max(sun$leafN_area.mean), col=suncol, lwd=2)
 ablineclip(aciN_sha_lm, x1=min(shade$leafN_area.mean), x2=max(shade$leafN_area.mean), col=shacol, lwd=2)
