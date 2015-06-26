@@ -1,0 +1,160 @@
+
+##physiology bar plots of gs, gm and A overall means with sun, shade and lights on
+
+
+
+#panel3/4: photo vs gm barplot
+
+#3:gm 
+par(fig=c(0,0.5,0,.3), new=TRUE)
+
+bar(gm, leaf, gm_sunsha, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2), yaxt="n",
+    mar=c(2,5,1,0), ylab=gmlab, cex.axis=1, cex.lab = 1.25, legend=F, cex.names=1.25,mgp=c(3, .5, 0))
+text(x=2.35, y=.185, "(c)", cex=1.25)
+
+axis(2, mgp=c(3, .5, 0))
+
+
+#4:photo
+
+par(fig=c(0.5,1,0,.3), new=TRUE)
+
+bar(Photo, leaf, gm_sunsha, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20), 
+    mar=c(2,0,1,5), ylab="", cex.axis=1, cex.lab = 1.25, legend=F, cex.names=1.25, yaxt='n',mgp=c(3, .5, 0))
+axis(side=4, labels=TRUE, cex.axis=1, mgp=c(3, .5, 0))
+
+mtext(photolab, side=4, line=3,cex=1.25, las=3)
+text(x=2.35, y=18.5, "(d)", cex=1.25)
+
+
+#gm, lights on
+par(fig=c(0,0.5,0,.45), new=TRUE)
+bar(gm, light, lightson_agg, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2),
+    mar=c(3,6,1,0), ylab="", cex.axis=1.25, cex.lab = 1.25, legend=F, cex.names=1.25)
+text(x=.25, y=.19, "(b)", cex=1.25)
+mtext(gmlab, side=2, line=3.5, cex=1.25, las=3)
+
+par(fig=c(.5,1,0,0.45), new=TRUE)
+bar(Photo, light, lightson_agg, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(3,0,1,5), ylab="", cex.axis=1.25, cex.lab = 1.25, legend=F, cex.names=1.25, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.21)
+mtext(photolab, side=4, line=3.5, cex=1.25, las=3)
+
+text(x=.25, y=19, "(c)", cex=1.25)
+
+
+
+
+
+source("functions and packages/packages_md.R")
+source("functions and packages/functions.R")
+source("functions and packages/plot_objects_all.R")
+
+gmes <- read.csv("calculated_data/gmes_WTC.csv")
+gmpair<- read.csv("calculated_data/gmes_wtc_pair.csv")
+gmwet <- read.csv("calculated_data/gmes_wellwatered.csv")
+Ci_bar <- read.csv("calculated_data/Ci_bar.csv")
+###for analysis first subset well watered and drought treatments
+gm_drought <- gmes[gmes$drydown == "drought",]
+gm_water <- gmes[gmes$drydown == "control",]
+
+
+#sunshade diff
+gm_sunsha <- gm_water[gm_water$leaflight != "shade-high",]
+
+gm_sunsha_id <- summaryBy(gm +Photo + Cond ~ id + leaf + temp,  data=gm_sunsha,FUN=mean, keep.names=TRUE)
+gm_sunsha_id$leaf <- gsub("s", "S", gm_sunsha_id$leaf)
+
+gm_agg <- summaryBy(gm + Photo + Cond ~ leaf, data=gm_sunsha_id,FUN=c(mean,se))
+
+
+###lights on 
+
+gm_lightson <-gm_water[gm_water$leaflight != "sun-high",]
+
+gm_lightson_id <- summaryBy(gm +Cond+Photo ~ id + leaflight + light+temp,  data=gm_lightson,
+                            FUN=mean, keep.names=TRUE)
+gm_lightson_id$leaf <- gsub("s", "S", gm_lightson_id$leaf)
+gm_lightson_id$light <- gsub("high", "Sun-light", gm_lightson_id$light)
+gm_lightson_id$light <- gsub("low", "Shade-light", gm_lightson_id$light)
+
+gm_light_agg <- summaryBy(gm + Photo +Cond~ light, data=gm_lightson_id,FUN=c(mean,se))
+
+
+##figures-----------------------------------------------------------------------------------
+
+#sunshade gmphoto
+
+#windows(8,5)
+png(filename = "makepngs/gmphoto_bar.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mfrow=c(1,2))
+
+bar(gm, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2),
+    mar=c(5,7,2,0), ylab=gmlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+
+bar(Photo, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4, line=4,cex=2)
+
+dev.off()
+
+##lightson gmphoto
+
+#windows(8,5)
+png(filename = "makepngs/lightson_bar.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mfrow=c(1,2))
+
+bar(gm, light, gm_lightson_id, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 0.2),
+    mar=c(5,7,2,0), ylab=gmlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+text(.8, .19, "Shade Leaves", cex=2)
+
+bar(Photo, light, gm_lightson_id, col=c(shacol,lightscol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
+
+dev.off()
+
+
+#sunshade gsphoto
+
+#windows(8,5)
+png(filename = "makepngs/gsphoto_bar.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mfrow=c(1,2))
+
+bar(Cond, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.20),
+    mar=c(5,7,2,0), ylab=condlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+
+bar(Photo, leaf, gm_sunsha_id, col=c(shacol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
+
+dev.off()
+
+##lightson gsphoto
+
+gs_lightson <-gm_water[gm_water$leaflight != "shade-low",]
+
+gs_lightson_id <- summaryBy(Cond+Photo ~ id + leaflight + light+temp,  data=gs_lightson,
+                            FUN=mean, keep.names=TRUE)
+gs_lightson_id$leaf <- gsub("s", "S", gs_lightson_id$leaf)
+gs_lightson_id$leaflight <- gsub("s", "S", gs_lightson_id$leaflight)
+gs_lightson_id$leaflight <- gsub("high", "High", gs_lightson_id$leaflight)
+
+
+#windows(8,5)
+png(filename = "makepngs/lightson_gs.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mfrow=c(1,2))
+
+bar(Cond, leaf, gs_lightson_id, col=c(lightscol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 0.4),
+    mar=c(5,7,2,0), ylab=condlab, cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2)
+
+bar(Photo, leaf, gs_lightson_id, col=c(lightscol, suncol), xlab="", half.errbar=FALSE, ylim=c(0, 20),
+    mar=c(5,0,2,7), ylab="", cex.axis=1.75, cex.lab = 2, legend=F, cex.names=2, yaxt='n')
+axis(side=4, labels=TRUE, cex.axis=1.75)
+mtext(photolab, side=4,  line=4, cex=2)
+
+dev.off()
+
