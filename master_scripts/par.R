@@ -15,8 +15,8 @@ Morder <- c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr")
 
 #data format for bar
 parbar <- par_leaf2[ , c(2:3,5)]
-parbar$month <- factor(parbar$month, levels = Morder)
-levels(parbar$month)
+parbar$Month <- factor(parbar$Month, levels = Morder)
+levels(parbar$Month)
 parbar$leaf_type <- gsub("s", "S", parbar$leaf_type)
 
 par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
@@ -42,7 +42,7 @@ anova(par_mod)
 ###PLOTTING------------------------------------------------------------------------------------------------
 
 windows(8,6)
-bar(par, c(leaf_type, month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
+bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
       half.errbar=FALSE, mar=c(5,5,2,2))
  dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
  dev.off()

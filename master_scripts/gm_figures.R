@@ -32,20 +32,16 @@ gmt_sha <-  read.csv( "master_scripts/bootstrap_results/gmt_sha")
 
 
 ####plotting (3 panel graph of gm data)----------------------------------------------------------------------------------------
- windows(8.5,11)  
-
+windows(8.5,11)  
 par(mfrow=c(2,1))
-#panel1: gm v tleaf
-#par(fig=c(0,1,.65,1), new=TRUE)
 
+#panel1: gm v tleaf
 par(mar=c(5,5,2,2), cex.axis=1, cex.lab=1.25, las=1)
-plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab="", ylab=gmlab, #xaxt="n", yaxt="n",
+plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab=leaftlab, ylab=gmlab, 
      pch=c(16, 17)[pch=gm_sunsha$temp])
 points(gm~CTleaf, data=shadat, col=shacol, cex=1,pch=c(16, 17)[pch=gm_sunsha$temp])
 points(gm~CTleaf, data=fleckdat, col=lightscol, cex=1,pch=c(16, 17)[pch=fleckdat$temp])
 
-# axis(2, mgp=c(3, .5, 0))
-# axis(1, mgp=c(3, .5, 0))
 
 with(gmt_sun, {
   lines(CTleaf, lcl, lty=2, lwd=2,col="forestgreen")
@@ -57,21 +53,18 @@ with(gmt_sha, {
   lines(CTleaf, ucl, lty=2, lwd=2,col="yellow4")
   lines(CTleaf, pred, lty=1, lwd=2,col="yellow4")
 })
-mtext(leaftlab, side=1, line=1.5,cex=1.25)
+
+ablineclip(h=mean(fleckdat$gm), x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col="darkorange2")
+
 text(x=36, y=.34, "(a)", cex=1.25)
 
-
 #panel2: Photosynthesis vs gm
-# par(fig=c(0,1,.3,.65), new=TRUE)
 
-par(mar=c(5,5,2,2), cex.axis=1, cex.lab=1.25, cex=1,las=1)
-plot(Photo~gm, data=sundat,  col=suncol, ylim=c(5,25), xlim=c(0,.35), xlab=gmlab, ylab=satlab,  # xaxt="n", yaxt="n",
+par(mar=c(5,5,0,2), cex.axis=1, cex.lab=1.25, cex=1,las=1)
+plot(Photo~gm, data=sundat,  col=suncol, ylim=c(5,25), xlim=c(0,.35), xlab=gmlab, ylab=satlab,
      pch=c(16, 17)[pch=gm_sunsha$temp])
 points(Photo~gm, data=shadat, col=shacol, pch=c(16, 17)[pch=gm_sunsha$temp])
 points(Photo~gm, data=fleckdat, col=lightscol, pch=c(16, 17)[pch=fleckdat$temp])
-
-# axis(2, mgp=c(3, .5, 0))
-# axis(1, mgp=c(3, .5, 0))
 
 with(agm_sun, {
   lines(gm, lcl, lty=2, lwd=2,col="forestgreen")
@@ -90,13 +83,11 @@ with(agm_fleck, {
   lines(gm, pred, lty=1, lwd=2,col="darkorange2")
 })
 
-#mtext(gmlab, side=1, line=2.25,cex=1.25)
 text(x=.35, y=24.5, "(b)", cex=1.25)
 legend("topleft", leglab3, pch=rep(c(16,17),3), col=leafcols,inset = 0.01, bty='n',cex=1)
 
-
-# dev.copy2pdf(file="master_scripts/paper_figures/gm_figures.pdf")
-# dev.off()
+ dev.copy2pdf(file="master_scripts/paper_figures/gm_figures.pdf")
+ dev.off()
 
 
 

@@ -1,4 +1,4 @@
-month,chamber,leaf_type,par_type,par
+Month,chamber,leaf_type,par_type,par
 Oct,ch01,shade,low,350
 Oct,ch01,shade,high,1075
 Oct,ch01,sun,high,1075

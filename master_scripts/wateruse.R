@@ -80,25 +80,25 @@ flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
 
 #### Multi panel plot of WUE --------------------------------------------------------------------------------------------
 # 
-# windows(8,8)
+windows(8, 12)
 #png(filename = "markdown/wateruse.png", width = 11, height = 8.5, units = "in", res= 400)
 
 par(mfrow=c(2,1))
  
-par(mar=c(5,5,1,1), cex.axis=.75, cex.lab=.9, las=1, cex=1.25)
+par(mar=c(5,5,1,1), cex.axis=.8, cex.lab=.96, las=1, cex=1.25)
 plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=vpdlab, ylab=itelab,
      xlim=c(0,4), ylim=c(0,20),  pch=c(16, 17)[pch=ite_sunsha$temp])
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp]) 
   
   p <- g1_ite[3:6,1]
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
-  for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=2)
+  for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=2,from=min(ite_sunsha$VpdL),to= max(ite_sunsha$VpdL))
   
   
   points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
   p2 <- g1_ite[1:2,1]
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
-  for(i in 1:2)curve(f(x, p2[i]), add=T, col=lightscol, lty=ltys[i], lwd=2)
+  for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=2)
   
   text(x=0, y=19.8 ,"(a)", cex=.9)
   
@@ -106,7 +106,7 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
 
 
 #2: panel GAM PLOTS (photosynthesis vs gs or transpiration)-----------------------------------------------------------
-par(mar=c(5,5,0,1),cex.axis=.75, cex.lab=.9, cex=1.25, las=1)
+par(mar=c(5,5,0,1),cex.axis=.8, cex.lab=.96, cex=1.25, las=1)
 plot(Photo~Cond, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, ylim=c(0,25), 
      xlim=c(0,.35), xlab=condlab, ylab=satlab,  pch=c(16, 17)[pch=ite_sunsha$temp])
 
@@ -126,9 +126,9 @@ points(Photo~Cond, data=ite_lightson, col=lightscol,pch=c(16, 17)[pch=ite_lights
   lines(gsfleck_seq, flecklwr, lty=2, lwd=2,col=lightscol)
   lines(gsfleck_seq, gsfleck_pred$fit, lty=1, lwd=2,col=lightscol)
   
-  text(x=0, y=19.8, "(b)", cex=.9)
+  text(x=0, y=24.8, "(b)", cex=.9)
 
-# dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
-# dev.off()
+dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
+dev.off()
   
 

@@ -46,7 +46,7 @@ parformat <- function(df) {
   df$chamber <- as.character(df$chamber)
   df$ID <- paste(df$leaf_type, df$par_type, sep="-")
   df$ID <- as.factor(df$ID)
-  df$drydown <- ifelse(df$month %in% c("Mar", "Apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+  df$drydown <- ifelse(df$Month %in% c("Mar", "Apr") & df$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
                        "drought", "control")
   df$drydown <- as.factor(df$drydown)
   return(df)
