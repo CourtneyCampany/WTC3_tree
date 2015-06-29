@@ -24,6 +24,7 @@ kshadelab <- expression(Leaf[shade]~Hyrdaulic~Conductance~~(units))
 c13lab <-expression(paste(Leaf~delta^{13}, "C  (\u2030)"))
 ypos <- c(2.5,1,0)
 satlab <- expression(A~~(mu*mol~m^-2~s^-1))
+vclab <- expression(Vc[max]~~(mu*mol~m^-2~s^-1))
 
 condlab <- expression(g[s]~~(mol~m^-2~s^-1))
 totcondlab <- expression(Total~Conductance~to~CO[2]~~(mol~m^-2~s^-1))
