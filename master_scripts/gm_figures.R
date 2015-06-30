@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
@@ -32,7 +32,7 @@ gmt_sha <-  read.csv( "master_scripts/bootstrap_results/gmt_sha")
 
 
 ####plotting (3 panel graph of gm data)----------------------------------------------------------------------------------------
-windows(8.5,11)  
+# windows(8.5,11)  
 par(mfrow=c(2,1))
 
 #panel1: gm v tleaf
@@ -86,8 +86,8 @@ with(agm_fleck, {
 text(x=.35, y=24.5, "(b)", cex=1.25)
 legend("topleft", leglab3, pch=rep(c(16,17),3), col=leafcols,inset = 0.01, bty='n',cex=1)
 
- dev.copy2pdf(file="master_scripts/paper_figures/gm_figures.pdf")
- dev.off()
+#  dev.copy2pdf(file="master_scripts/paper_figures/gm_figures.pdf")
+#  dev.off()
 
 
 

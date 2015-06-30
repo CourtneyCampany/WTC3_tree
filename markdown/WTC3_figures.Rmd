@@ -55,6 +55,11 @@ panderOptions("digits", 3)
 pander(aci_leaf2, caption = "Table 1.  Biochemical parameters estimated from ACi curves above")
 ```    
 
+```{r c13n, fig.width=8, fig.height=6}
+source("master_scripts/leafN_c13_vcmax.R")
+```  
+Figure 4. The relationship between leaf  $\delta$^13^C (a) and Vc~max~ (b) with nitrogen~area~ for sun and shade leaves at elevated and ambient temperature treatments.
+
 
 ```{r wateruse, fig.width=8, fig.height=10}
 source("master_scripts/wateruse.R")
@@ -62,22 +67,26 @@ source("master_scripts/wateruse.R")
 Figure 3. Response of instantaneous water use efficiency (ITE) to leaf vapor pressure deficit (VPD) (a) and response of leaf photosynthesis rates to stomatal conductance (b) for sun and shade leaves at elevated and ambient temperature treatments. For (a)  lines represent predictions from the optimal ITE model with a g1 value for each leaf type and treatment. For (b) dashed lines represent 95% confidence intervals from a general additive model with k=5.
 
 
-```{r c13n, fig.width=8, fig.height=6}
-source("master_scripts/c13_Narea.R")
-```  
-Figure 4. The relationship between leaf  $\delta$^13^C and nitrogen~area~ for sun and shade leaves at elevated and ambient temperature treatments.
-
-
 ```{r gm, fig.width=8, fig.height=10}
 source("master_scripts/gm_figures.R")
 ```  
-Figure 5. Response of mesophyll conductance to leaf temperature (a) and the response of leaf photosynthesis to mesophyll conductance (b) for sun and shade leaves at elevated and ambient temperature treatments.  The mean difference in mesophyll conductance (c) and photosynthesis (d) between sun and shade leaves with standard errors.  For (a) and (b) lines represent 95% confidence intervals generated with bootstrapping methods (n=999) from mixed effect linear model equations with chamber as a random effect.
+Figure 5. Response of mesophyll conductance to leaf temperature (a) and the response of leaf photosynthesis to mesophyll conductance (b) for sun and shade leaves at elevated and ambient temperature treatments. For (a) and (b) lines represent 95% confidence intervals generated with bootstrapping methods (n=999) from mixed effect linear model equations with chamber as a random effect.
 
 
-```{r lights, fig.width=8, fig.height=10}
+```{r lights, fig.width=8, fig.height=6}
 source("master_scripts/gm_lightson.R")
 ```  
-Figure 6. Response of photosynthesis to mesophyll conductance following a maximum sunfleck response of shade leaves (a) and overall mean values of mesophyll conductance (c) and photosynthesis (d) to sun flecks in shade leaves with standard errors.  The sunfleck was simulated by increasing the PPFD to the level of the sun leaf in the same chamber. The response of leaf physiology to sun flecks was recorded once both photosynthesis and stomatal conductance were stable in the gas exchange leaf cuvette (ca. 25min).
+Figure 6. Response of photosynthesis to mesophyll conductance following a maximum sunfleck response of shade leaves. The sunfleck was simulated by increasing the PPFD to the level of the sun leaf in the same chamber. The response of leaf physiology to sun flecks was recorded once both photosynthesis and stomatal conductance were stable in the gas exchange leaf cuvette (ca. 25min).
+
+```{r barplots, fig.width=12, fig.height=6}
+source("master_scripts/physiology_barplots.R")
+```  
+The mean difference in stomatal conductance (a), mesophyll conductance (b) and photosynthesis (c) between sun, shade and shade leaves under high light with standard errors
+
+```{r gmparN, fig.width=8, fig.height=10}
+source("master_scripts/gm_par_nitro.R")
+``` 
+The relationship between mesophyll conductance, leaf PPFD and leaf nitrogen.
 
 
 ```{r table, results="asis"}

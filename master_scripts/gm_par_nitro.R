@@ -1,8 +1,8 @@
-source("functions and packages/functions.R")
-source("functions and packages/packages.R")
-source("master_scripts/plot_objects.R")
-
-treatments <- read.csv("raw data/temp_trt.csv")
+# source("functions and packages/functions.R")
+# source("functions and packages/packages.R")
+# source("master_scripts/plot_objects.R")
+# 
+# treatments <- read.csv("raw data/temp_trt.csv")
 
 ####read and format PAR data----------------------------------------------------------------------------------------------
 par <- read.csv("raw data/par.csv")
@@ -62,55 +62,54 @@ library(visreg)
 # library(lme4)
 # library(lmerTest)
 
-gmpar_sha <- lme(gm~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
-summary(gmpar_sha)
-anova(gmpar_sha)
-visreg(gmpar_sha)  
-
-gmpar_sun <- lme(gm~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
-  summary(gmpar_sun)
-  anova(gmpar_sun)
-  visreg(gmpar_sun)
+# gmpar_sha <- lme(gm~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
+#   summary(gmpar_sha)
+#   anova(gmpar_sha)
+#   visreg(gmpar_sha)  
+# 
+# gmpar_sun <- lme(gm~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
+#   summary(gmpar_sun)
+#   anova(gmpar_sun)
+#   visreg(gmpar_sun)
 gmpar_sun2 <- lm(gm~ par, data=leafdat2, subset=leaflight == "sun-high")
-anova(gmpar_sun, gmpar_sun2)
+# anova(gmpar_sun, gmpar_sun2)
 ###lower AIC with chamber as random but models not different
   
-gmpar_fleck <- lme(gm~ par, random=~1|chamber, data=fleck_dat)
-  summary(gmpar_fleck)
-  anova(gmpar_fleck)
-  visreg(gmpar_fleck)   
+# gmpar_fleck <- lme(gm~ par, random=~1|chamber, data=fleck_dat)
+#   summary(gmpar_fleck)
+#   anova(gmpar_fleck)
+#   visreg(gmpar_fleck)   
 gmpar_fleck2 <- lm(gm~ par, data=fleck_dat)
-anova(gmpar_fleck, gmpar_fleck2)
+# anova(gmpar_fleck, gmpar_fleck2)
 ###lower AIC with chamber as random but models not different
 
 
 ##nitropar
-nitropar_sha <- lme(leafN_area~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
-summary(nitropar_sha)
-anova(nitropar_sha)
-visreg(nitropar_sha)  
-
-nitropar_sun <- lme(leafN_area~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
-summary(nitropar_sha)
-anova(nitropar_sha)
-visreg(nitropar_sha)
+# nitropar_sha <- lme(leafN_area~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
+#   summary(nitropar_sha)
+#   anova(nitropar_sha)
+#   visreg(nitropar_sha)  
+# 
+# nitropar_sun <- lme(leafN_area~ par, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
+#   summary(nitropar_sha)
+#   anova(nitropar_sha)
+#   visreg(nitropar_sha)
 
 ##gmnitro
-gmnitro_sha <- lme(gm~ leafN_area, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
-summary(gmnitro_sha)
-anova(gmnitro_sha)
-visreg(gmnitro_sha)  
-
-gmnitro_sun <- lme(gm~ leafN_area, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
-summary(gmnitro_sun)
-anova(gmnitro_sun)
-visreg(gmnitro_sun)
+# gmnitro_sha <- lme(gm~ leafN_area, random=~1|chamber, data=leafdat2, subset=leaflight == "shade-low")
+#   summary(gmnitro_sha)
+#   anova(gmnitro_sha)
+#   visreg(gmnitro_sha)  
+# 
+# gmnitro_sun <- lme(gm~ leafN_area, random=~1|chamber, data=leafdat2, subset=leaflight == "sun-high")
+#   summary(gmnitro_sun)
+#   anova(gmnitro_sun)
+#   visreg(gmnitro_sun)
 
 
 ####PLOT relationships between gm~Narea, gm~PAR and Narea and Par---------------------------------------------------------------
-library(plotrix)
 
-windows(8, 12)
+# windows(8, 12)
 par(mfrow=c(3,1), las=1, mgp=c(2, .5, 0), cex.lab=.8, cex.axis=.8, cex=1.25)
 
 par(mar=c(3.5,5,1,2))
@@ -151,9 +150,7 @@ ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "leafN_area"]), x1=min(leafda
 
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="sun", "leafN_area"]),  x1=min(leafdat2[leafdat2$leaf=="sun", "par"]),
        x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, col="forestgreen", lwd=2)
-##leaf nitrogen not effected shifts in light within leaf types
-  
 
- dev.copy2pdf(file="master_scripts/paper_figures/gm_nitro_par.pdf")
- dev.off() 
+#  dev.copy2pdf(file="master_scripts/paper_figures/gm_nitro_par.pdf")
+#  dev.off() 
   

@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
@@ -79,8 +79,7 @@ flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
 
 
 #### Multi panel plot of WUE --------------------------------------------------------------------------------------------
-# 
-windows(8, 12)
+# windows(8, 12)
 #png(filename = "markdown/wateruse.png", width = 11, height = 8.5, units = "in", res= 400)
 
 par(mfrow=c(2,1))
@@ -128,7 +127,7 @@ points(Photo~Cond, data=ite_lightson, col=lightscol,pch=c(16, 17)[pch=ite_lights
   
   text(x=0, y=24.8, "(b)", cex=.9)
 
-dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
+# dev.off()
   
 

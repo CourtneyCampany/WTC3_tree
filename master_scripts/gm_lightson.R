@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
 lightson <- gasex[gasex$leaflight != "sun-high",]
@@ -12,13 +12,11 @@ lightson_agg <- summaryBy(Photo+gm~ chamber+id+leaf +light+temp+leaflight, data=
   lightson_agg$light <- gsub("low", "Shade-light", lightson_agg$light)
 
 ###plotting----------------------------------------------------------------------------------------------  
-  
-windows(11,8.5)  
 
 #png(filename = "markdown/gm_lightson.png", width = 11, height = 8.5, units = "in", res= 400)
 
 #par(fig=c(0,1,0.45,1), new=TRUE)
-windows(8,6)
+# windows(8,6)
 par(mar=c(5,5,2,2), las=1, cex=1.25, cex.axis=1.25, cex.lab=1.25) 
 plot(Photo~gm, data=lightson_agg, subset=leaflight=="shade-high", col=lightscol, ylim=c(5,25), xlim=c(0,0.3), 
      xlab=gmlab, ylab=satlab, pch=c(16, 17)[pch=lightson_agg$temp])

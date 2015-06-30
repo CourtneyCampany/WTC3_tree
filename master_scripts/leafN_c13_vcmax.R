@@ -31,8 +31,9 @@ N_aci <- merge(aciparam, Nagg, by= c("chamber", "leaf"))
   
 
 ###plot 13 vs Narea------------------------------------------------------------------------------------------------------
-
-windows(8,8)
+palette(c(shacol, suncol))
+ 
+#windows(8,8)
 par(mfrow=c(2,1))  
   
 #png(filename = "markdown/c13_nitro.png", width = 11, height = 8.5, units = "in", res= 400)
@@ -47,5 +48,5 @@ par(mar=c(5,5,0,2), cex=1.25, las=1,cex.axis=1.25, cex.axis=.8, cex.lab=.96)
 plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(0, 133),xlim=c(0,4.5),
      pch=c(16, 17)[pch=N_aci$temp],xlab=narealab, ylab=vclab)
 
-dev.copy2pdf(file="master_scripts/paper_figures/leafN_c13_vcmax.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/leafN_c13_vcmax.pdf")
+# dev.off()
