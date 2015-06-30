@@ -1,10 +1,10 @@
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
-# source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
+source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
-####panel a = ITE and VPD
+####panel a = ITE and VPD----------------------------------------------------------------------------------------------------
 
 ite <- read.csv("calculated_data/gmes_wellwatered.csv")
 g1_ite <- read.csv("calculated_data/g1_ite.csv")
@@ -24,69 +24,36 @@ ite_sunsha <- droplevels(ite_sunsha)
 ite_lightson <- ite_agg[ite_agg$leaflight == "shade-high",]
 ite_lightson <- droplevels(ite_lightson)
 
-###add model equation for ITE
-# k <- 0.5
-# Ca <- 400
-# Pa <- 102.3
-# 
-# vpdrange <- seq(.1, 4, length= 101)
-# 
-# ite_sunat <- ((Ca * Pa) / ((3* sqrt(vpdrange)) + vpdrange))/1000
-# ite_sunet <- ((Ca * Pa) / ((g1_ite[6,1]* sqrt(vpdrange)) + vpdrange))/1000
-# ite_shaat <- ((Ca * Pa) / ((5* sqrt(vpdrange)) + vpdrange))/1000
-# ite_shaet <- ((Ca * Pa) / ((g1_ite[4,1]* sqrt(vpdrange)) + vpdrange))/1000
+####panel B: 13C and N area--------------------------------------------------------------------------------------------------
+#read data
+treatments <- read.csv("raw data/temp_trt.csv")
 
-###use gam for CI of non-linear relationship between A and gs------------------------------------------------------
+leaf_chem <- read.csv("raw data/leaf_chem.csv")
+leaf_mass <- read.csv("raw data/leaf_data.csv")
 
-#SUN leaves
-sunmod <- gam(Photo ~ s(Cond, k=5), data=ite_sunsha, subset=leaflight=="sun-high")
+#get vcmax per chamber 
+aciparam <- read.csv("calculated_data/aciparameters.csv")
 
-#predict
-#get apprpriate vector of gs from sun leaves
-gsdat <- ite_sunsha[ite_sunsha$leaflight=="sun-high", "Cond"]
+#calculate nitrogen content in leaves
+canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_chem[, 4:8], by=c("Month", "chamber", "leaf"))
+#add treatments  
+canopy_chem <- addtrt_func(canopy_chem)
+canopy_chem$leafN <- with(canopy_chem, leaf_mass *(n_perc/100))
+canopy_chem$lma <- with(canopy_chem, (leaf_mass/leaf_area)*10000) #g/m2
+canopy_chem$leafN_area <- with(canopy_chem, lma *(n_perc/100))
+canopy_chem<- add_campaign(canopy_chem)
 
-#generate sequence and then predict
-gssun_seq <- seq(min(gsdat), max(gsdat), length=101)
-gssun_pred <- predict(sunmod, newdata=data.frame(Cond=gssun_seq), se.fit=TRUE)
+chem_mod <- lm(c13 ~ leafN_area, data=canopy_chem)
+#summary(chem_mod)
 
-#ci and model fit
-sunupr <- gssun_pred$fit + (2*gssun_pred$se.fit)
-sunlwr <- gssun_pred$fit - (2*gssun_pred$se.fit)
-
-#SHADE leaves
-shamod <- gam(Photo ~ s(Cond, k=5), data=ite_sunsha, subset=leaflight=="shade-low")
-
-#get apprpriate vector cond from sun leaves
-gsdat2 <- ite_sunsha[ite_sunsha$leaflight=="shade-low", "Cond"]
-#generate sequence and then predict
-gssha_seq <- seq(min(gsdat2), max(gsdat2), length=101)
-gssha_pred <- predict(shamod, newdata=data.frame(Cond=gssha_seq), type="link", se.fit=TRUE)
-
-shaupr <- gssha_pred$fit + (2*gssha_pred$se.fit)
-shalwr <- gssha_pred$fit - (2*gssha_pred$se.fit)
-
-#SUNFLECK leaves
-fleckmod <- gam(Photo ~ s(Cond, k=5), data=ite_lightson)
-
-#get apprpriate vector cond from sun leaves
-gsfleck <- ite_lightson[, "Cond"]
-#generate sequence and then predict
-gsfleck_seq <- seq(min(gsfleck), max(gsfleck), length=101)
-gsfleck_pred <- predict(fleckmod, newdata=data.frame(Cond=gsfleck_seq), type="link", se.fit=TRUE)
-
-fleckupr <- gsfleck_pred$fit + (2*gsfleck_pred$se.fit)
-flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
-
-
-#### Multi panel plot of WUE --------------------------------------------------------------------------------------------
-# windows(8, 12)
-#png(filename = "markdown/wateruse.png", width = 11, height = 8.5, units = "in", res= 400)
+#### Multi panel plot of WUE and 13C--------------------------------------------------------------------------------------
+windows(8, 12)
 
 par(mfrow=c(2,1))
  
-par(mar=c(5,5,1,1), cex.axis=.8, cex.lab=.96, las=1, cex=1.25)
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=vpdlab, ylab=itelab,
-     xlim=c(0,4), ylim=c(0,20),  pch=c(16, 17)[pch=ite_sunsha$temp])
+     xlim=c(0,4), ylim=c(0,16),  pch=c(16, 17)[pch=ite_sunsha$temp])
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp]) 
   
   p <- g1_ite[3:6,1]
@@ -99,35 +66,21 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
   for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=2)
   
-  text(x=0, y=19.8 ,"(a)", cex=.9)
+  text(x=0, y=15.8 ,"(a)", cex=.1)
   
-  legend("topright", leglab2, pch=c(16,17,16,17), col=colaci,inset = 0.01, bty='n',cex=.9)
+  legend("topright", leglab2, pch=c(16,17,16,17), col=colaci,inset = 0.01, bty='n',cex=.8)
 
 
-#2: panel GAM PLOTS (photosynthesis vs gs or transpiration)-----------------------------------------------------------
-par(mar=c(5,5,0,1),cex.axis=.8, cex.lab=.96, cex=1.25, las=1)
-plot(Photo~Cond, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, ylim=c(0,25), 
-     xlim=c(0,.35), xlab=condlab, ylab=satlab,  pch=c(16, 17)[pch=ite_sunsha$temp])
-
-  lines(gssun_seq, sunupr, lty=2, lwd=2,col=suncol)
-  lines(gssun_seq, sunlwr, lty=2, lwd=2,col=suncol)
-  lines(gssun_seq, gssun_pred$fit, lty=1, lwd=2,col=suncol)
-
-#shade
-points(Photo~Cond, data=ite_sunsha, subset=leaflight=="shade-low",col=shacol,pch=c(16, 17)[pch=ite_sunsha$temp])
-  lines(gssha_seq, shaupr, lty=2, lwd=2,col=shacol)
-  lines(gssha_seq, shalwr, lty=2, lwd=2,col=shacol)
-  lines(gssha_seq, gssha_pred$fit, lty=1, lwd=2,col=shacol)
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+  plot(c13 ~ leafN_area, data=canopy_chem, subset=leaf=="sun",  col=suncol, ylim=c(-33.5,-26), xlim=c(0,4.5),
+       pch=c(16, 17)[pch=canopy_chem$temp], xlab=narealab, ylab=c13lab)
+  points(c13 ~ leafN_area, data=canopy_chem,  subset=leaf=="shade", col=shacol, pch=c(16, 17)[pch=canopy_chem$temp])
+  ablineclip(chem_mod, x1=min(canopy_chem$leafN_area), x2=max(canopy_chem$leafN_area), lwd=2, lty=2 )
   
-#sunfleck  
-points(Photo~Cond, data=ite_lightson, col=lightscol,pch=c(16, 17)[pch=ite_lightson$temp])
-  lines(gsfleck_seq, fleckupr, lty=2, lwd=2,col=lightscol)
-  lines(gsfleck_seq, flecklwr, lty=2, lwd=2,col=lightscol)
-  lines(gsfleck_seq, gsfleck_pred$fit, lty=1, lwd=2,col=lightscol)
-  
-  text(x=0, y=24.8, "(b)", cex=.9)
+  legend("bottomright", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
+  text(x=0, y=-26 ,"(b)", cex=.1)
 
-# dev.copy2pdf(file="master_scripts/paper_figures/wateruse.pdf")
-# dev.off()
+dev.copy2pdf(file="master_scripts/paper_figures/ITE_13c.pdf")
+dev.off()
   
 

@@ -73,4 +73,8 @@ write.csv(aci_means, "calculated_data/tdl_aci.csv", row.names=FALSE)
 bar(Vcmax, c(temp, leaf), tdlaci)
 bar(Jmax, c(temp, leaf), tdlaci)
 
+#generate mean of sun and shade obly
+aci_sunsha <- summaryBy(Vcmax+Jmax ~ leaf , data = tdlaci,  FUN=c(mean,se))
+write.csv(aci_sunsha, "calculated_data/aci_sunsha.csv", row.names=FALSE)
+
 

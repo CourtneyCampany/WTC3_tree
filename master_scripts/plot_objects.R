@@ -45,6 +45,8 @@ cilab <- expression(C[i]~~(ppm))
 cclab <- expression(C[c]~~(ppm))
 cclab2 <- expression(bar(C[c])~~(ppm))
 
+drawdownlab <- expression(paste(CO[2]~drawdown,", ", C[i]-C[c]))
+
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
 relklab <- expression(K[shade]:K[sun])
@@ -64,22 +66,35 @@ leglab3<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET"))
             expression(paste(Shade,"-" ,"AT")), expression(paste(Shade, "-" ,"ET")),
             expression(paste(Sunfleck,"-" ,"AT")), expression(paste(Sunfleck, "-" ,"ET")))
 
+acileg <-  c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")),
+             expression(paste(Shade~High~Light,"-" ,"AT")), expression(paste(Shade~High~Light, "-" ,"ET")))
+
 
 ltys <- c(1,2, 1,2)
 
 ###sun shade colors
 suncol <- alpha("forestgreen", alpha=.75)
-shacol <- alpha("yellow4", alpha=.75)
-lightscol <- alpha("darkorange2", .75)
+shacol <- alpha("sienna3", alpha=.75)
+suncol2 <- "forestgreen"
+shacol2 <- "sienna3"
+lightscol <- alpha("goldenrod2", .75)
+lightscol2 <- "goldenrod2"
 
+shacol50 <- alpha(shacol, alpha=.5)
+suncol50 <- alpha(suncol, alpha=.5)
+lights50col <- alpha(lightscol2, alpha=.5)
+
+#darkorange2
+#yellow4
 
 leafcol <- c(suncol, shacol)
 leaflab2 <- c("Sun", "Shade")
 collights<-c(lightscol, lightscol, shacol, shacol)
+trtcols <-c(suncol2, suncol2, shacol2, shacol2)
 
 ###color combos for legend etc.
 
-colaci <-c(suncol, suncol, shacol, shacol)
+colaci <-c(suncol2, suncol2, lightscol2, lightscol2)
 colaci2 <-c( shacol, shacol,suncol, suncol)
 leafcols <- c(suncol, suncol, shacol, shacol, lightscol, lightscol)
 lightlab <- c(lightscol,shacol)
@@ -95,6 +110,8 @@ lightleg3 <- c(expression(paste("Sun light", "-" ,"AT")), expression(paste("Sun 
                expression(paste("Shade light","-" ,"AT")), expression(paste("Shade light", "-" ,"ET")))
 
 leaflightlab <- c("shade-high", "shade-low", "sun")
+
+sunflecklab <- "Shade \n High Light"
 
 
 
