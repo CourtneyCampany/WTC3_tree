@@ -1,8 +1,8 @@
 ##physiology bar plots of ci, cc, and drawdown
 
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
 
@@ -30,7 +30,7 @@ cols <- c(shacol2, suncol2, lightscol2)
 
 #1: CI
 
-windows(12,6)
+# windows(12,6)
 
 par(mfrow=c(1,3))
 
@@ -38,7 +38,7 @@ bar(Ci, leaflight, gasex_agg, col=cols, half.errbar=FALSE, ylim=c(0, 325),names.
     mar=c(5,5,2,1), ylab=cilab, cex.axis=1.25, cex.lab = 1.5, cex.names=1.5,legend=F)
 abline(v=2.5, lty=5)
 text(x=.25, y=315, "(a)", cex=1.5)
-mtext("Shade", side=1,at=.725, line=2.5 )
+mtext("Shade \n Low Light", side=1,at=.725, line=3.5 )
 mtext("Sun", side=1,at=1.9, line=2.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5 )
 
@@ -47,7 +47,7 @@ bar(Cc, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0, 32
     mar=c(5,5,2,1), ylab=cclab,  cex.axis=1.25, cex.lab = 1.5, cex.names=1.5,legend=F)
 abline(v=2.5, lty=5)
 text(x=.25, y=315, "(b)", cex=1.5)
-mtext("Shade", side=1,at=.725, line=2.5 )
+mtext("Shade \n Low Light", side=1,at=.725, line=3.5 )
 mtext("Sun", side=1,at=1.9, line=2.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5 )
 
@@ -56,9 +56,9 @@ bar(drawdown, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c
     mar=c(5,5,2,2), ylab=drawdownlab,  cex.axis=1.25, cex.lab = 1.5, cex.names=1.5,legend=F)
 abline(v=2.5, lty=5)
 text(x=.25, y=107, "(c)", cex=1.5)
-mtext("Shade", side=1,at=.725, line=2.5  )
+mtext("Shade \n Low Light", side=1,at=.725, line=3.5  )
 mtext("Sun", side=1,at=1.9, line=2.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5)
 
-dev.copy2pdf(file="master_scripts/paper_figures/cicc_bar.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/cicc_bar.pdf")
+# dev.off()

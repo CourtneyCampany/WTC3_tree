@@ -26,6 +26,16 @@ fleckdat <- gm_agg[gm_agg$leaflight == "shade-high",]
 gmt_sun <-   read.csv( "master_scripts/bootstrap_results/gmt_sun")
 gmt_sha <-  read.csv( "master_scripts/bootstrap_results/gmt_sha") 
 
+##confidence interval of mean of sunfleck has there is no temperature effect
+n <- length(fleckdat$gm)
+s <- sd(fleckdat$gm) #sample standard dev
+serr <- s/(sqrt(n)) #standard error estimate
+t <- qt(.975, df=n-1)
+xbar <- mean(fleckdat$gm)
+E <- t*serr #margin of error
+#CI = mean +- E
+ucl_fleck <- xbar+E
+lcl_fleck <- xbar-E
 
 ####plotting (3 panel graph of gm data)----------------------------------------------------------------------------------------
 windows(8,6)  
@@ -48,7 +58,10 @@ with(gmt_sha, {
   lines(CTleaf, pred, lty=1, lwd=2,col=shacol2)
 })
 
-ablineclip(h=mean(fleckdat$gm), x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
+#CI for sunfleck as mean line and CI
+ablineclip(h=mean(fleckdat$gm), x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=1, lwd=2, col=lightscol2)
+ablineclip(h=ucl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
+ablineclip(h=lcl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
 
 
   dev.copy2pdf(file="master_scripts/paper_figures/gm_temp.pdf")

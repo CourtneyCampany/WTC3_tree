@@ -4,8 +4,6 @@ library(scales)
 pchs <- c(1, 16)
 pch4 <- c(16,16, 1, 1)
 pchtri <- c(17,17,2,2)
-cols <- c("blue","red")
-col4 <- c("blue", "red", "blue", "red")
 
 
 gmlab <-expression(g[m]~~(mol~m^-2~s^-1))
@@ -73,19 +71,20 @@ acileg <-  c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")
 ltys <- c(1,2, 1,2)
 
 ###sun shade colors
-suncol <- alpha("forestgreen", alpha=.75)
-shacol <- alpha("sienna3", alpha=.75)
-suncol2 <- "forestgreen"
-shacol2 <- "sienna3"
-lightscol <- alpha("goldenrod2", .75)
-lightscol2 <- "goldenrod2"
+suncol2 <- "#005300"
+shacol2 <- "#61726C"
+lightscol2 <- "#E68A00"
+
+suncol <- alpha(suncol2, alpha=.75)
+shacol <- alpha(shacol2 , alpha=.75)
+
+lightscol <- alpha(lightscol2, .75)
+
 
 shacol50 <- alpha(shacol, alpha=.5)
 suncol50 <- alpha(suncol, alpha=.5)
 lights50col <- alpha(lightscol2, alpha=.5)
 
-#darkorange2
-#yellow4
 
 leafcol <- c(suncol, shacol)
 leaflab2 <- c("Sun", "Shade")
@@ -114,6 +113,6 @@ leaflightlab <- c("shade-high", "shade-low", "sun")
 sunflecklab <- "Shade \n High Light"
 
 
-
-
+alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
+allcols=c(suncol2, shacol2, lightscol2, "black", "black")
 

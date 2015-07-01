@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 library(mgcv)
 library(lme4)
 
@@ -47,7 +47,7 @@ chem_mod <- lm(c13 ~ leafN_area, data=canopy_chem)
 #summary(chem_mod)
 
 #### Multi panel plot of WUE and 13C--------------------------------------------------------------------------------------
-windows(8, 12)
+# windows(8, 12)
 
 par(mfrow=c(2,1))
  
@@ -55,32 +55,32 @@ par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=vpdlab, ylab=itelab,
      xlim=c(0,4), ylim=c(0,16),  pch=c(16, 17)[pch=ite_sunsha$temp])
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp]) 
+  points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
+  ##now add curves
+  p2 <- g1_ite[1:2,1]
+  f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
+  for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=2)
   
   p <- g1_ite[3:6,1]
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
   for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=2,from=min(ite_sunsha$VpdL),to= max(ite_sunsha$VpdL))
   
+  text(x=0, y=15.8 ,"(a)", cex=1)
   
-  points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
-  p2 <- g1_ite[1:2,1]
-  f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
-  for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=2)
-  
-  text(x=0, y=15.8 ,"(a)", cex=.1)
-  
-  legend("topright", leglab2, pch=c(16,17,16,17), col=colaci,inset = 0.01, bty='n',cex=.8)
+  legend("topright", alllab, pch=c(16,16,16,16,17), col=c(suncol2, shacol2, lightscol2, "black", "black"),lty=c(-1,-1,-1,1,2),
+         inset = 0.01, bty='n',cex=.7)
 
-
+##panel2
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   plot(c13 ~ leafN_area, data=canopy_chem, subset=leaf=="sun",  col=suncol, ylim=c(-33.5,-26), xlim=c(0,4.5),
        pch=c(16, 17)[pch=canopy_chem$temp], xlab=narealab, ylab=c13lab)
   points(c13 ~ leafN_area, data=canopy_chem,  subset=leaf=="shade", col=shacol, pch=c(16, 17)[pch=canopy_chem$temp])
   ablineclip(chem_mod, x1=min(canopy_chem$leafN_area), x2=max(canopy_chem$leafN_area), lwd=2, lty=2 )
   
-  legend("bottomright", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
-  text(x=0, y=-26 ,"(b)", cex=.1)
+  legend("bottomright", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.7)
+  text(x=0, y=-26 ,"(b)", cex=1)
 
-dev.copy2pdf(file="master_scripts/paper_figures/ITE_13c.pdf")
-dev.off()
+#  dev.copy2pdf(file="master_scripts/paper_figures/ITE_13c.pdf")
+#  dev.off()
   
 

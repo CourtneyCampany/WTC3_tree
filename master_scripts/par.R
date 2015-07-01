@@ -40,12 +40,11 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 # anova(par_mod2)
 
 ###PLOTTING------------------------------------------------------------------------------------------------
-# 
 # windows(8,6)
 bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
-      half.errbar=FALSE, mar=c(5,5,2,2))
-#  dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
-#  dev.off()
+#       half.errbar=FALSE, mar=c(5,5,2,2))
+#   dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
+#   dev.off()
 
 
 ###for png

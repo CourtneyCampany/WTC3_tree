@@ -67,9 +67,8 @@ nitrovc_mod <- lm(Vcmax~leafN_area.mean, data=N_aci)
 palette(c(shacol2, suncol2))
   
 windows(8,12)
-#par(mfrow=c(1,2), mar=c(5,5,2,2), cex.lab=1.25, cex.axis=1, las=1, cex=1.25, cex.lab=1)
 
-par(fig=c(0, 1, .4, 1), mar=c(5,5,2,2), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
 #panel 1: aci curves with inset
 plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, 
@@ -83,11 +82,11 @@ plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,20
   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2)
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
   
-  legend("topleft", acileg, pch=c(16,17,16,17), lty=c(1,2,1,2),col=colaci,inset = 0.01, bty='n',cex=.8)
+  legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), lty=c(1,1, 1,2),
+         col=c(suncol2, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.8)
   
   ###inset figure  
-
-  par(fig=c(0.38, 0.975, 0.45,0.725), new=T, cex=1, las=1,  cex.axis=.8, cex.lab=1)
+  par(fig=c(0.525, 0.95, 0.6,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, mgp=c(2.5,1,0), tcl=-.25)
     
   plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
   axis(2, mgp=c(3, .5, 0))
@@ -105,12 +104,11 @@ plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,20
 
   
 ###panel 2: leafNarea ~ vcmax
-  
-  par(fig=c(0, 1, 0, 0.4), new=T, mar=c(5,5,0,2),cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-  #par(mar=c(0,5,2,2), cex=1.25, las=1, cex.axis=.8, cex.lab=.96)
-  plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(0, 133),xlim=c(0,4.5),
+par(fig=c(0, 1, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+
+plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xlim=c(1,3.5),
        pch=c(16, 17)[pch=N_aci$temp],xlab=narealab, ylab=vclab)
-  ablineclip(nitrovc_mod, x1=min(N_aci$leafN_area.mean), x2=max(N_aci$leafN_area.mean), lwd=2, lty=2)
+  ablineclip(nitrovc_mod, x1=min(N_aci$leafN_area.mean), x2=max(N_aci$leafN_area.mean), lwd=2, lty=3)
   legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
   
 dev.copy2pdf(file="master_scripts/paper_figures/aci_nitrovcmax.pdf")
