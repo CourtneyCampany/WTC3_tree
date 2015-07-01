@@ -1,6 +1,6 @@
-source("functions and packages/packages.R")
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
 
 treatments <- read.csv("raw data/temp_trt.csv") 
 
@@ -66,7 +66,7 @@ nitrovc_mod <- lm(Vcmax~leafN_area.mean, data=N_aci)
 
 palette(c(shacol2, suncol2))
   
-windows(8,12)
+#windows(8,12)
 
 par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
@@ -85,23 +85,6 @@ plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,20
   legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), lty=c(1,1, 1,2),
          col=c(suncol2, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.8)
   
-  ###inset figure  
-  par(fig=c(0.525, 0.95, 0.6,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, mgp=c(2.5,1,0), tcl=-.25)
-    
-  plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
-  axis(2, mgp=c(3, .5, 0))
-  axis(1, mgp=c(3, .5, 0))
-
-  points(Photo~Ci ,data= acishade_clean, col=lights50col,pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo,col=lights50col, pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2, col=suncol50, pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2, col=suncol50, pch=c(16, 17)[pch=tdlaci2$temp])
-  
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,  type="l", lwd=2)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2,  type="l", lwd=2)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2,  type="l", lwd=2, lty=2)
-
   
 ###panel 2: leafNarea ~ vcmax
 par(fig=c(0, 1, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
@@ -111,6 +94,24 @@ plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xl
   ablineclip(nitrovc_mod, x1=min(N_aci$leafN_area.mean), x2=max(N_aci$leafN_area.mean), lwd=2, lty=3)
   legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
   
-dev.copy2pdf(file="master_scripts/paper_figures/aci_nitrovcmax.pdf")
-dev.off()
+###inset figure  
+  par(fig=c(0.525, 0.95, 0.58,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
+  
+  plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
+  axis(2, mgp=c(3, .5, 0))
+  axis(1, mgp=c(3, 0, 0))
+  
+  points(Photo~Ci ,data= acishade_clean, col=lights50col,pch=c(16, 17)[pch=acishade_clean$temp])
+  points(Photo~Ci ,data= shade_redo,col=lights50col, pch=c(16, 17)[pch=shade_redo$temp])
+  points(Photo~Ci ,data= sunaci_clean2, col=suncol50, pch=c(16, 17)[pch=sunaci_clean2$temp])
+  points(Photo~Ci ,data= tdlaci2, col=suncol50, pch=c(16, 17)[pch=tdlaci2$temp])
+  
+  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,  type="l", lwd=2)
+  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)
+  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2,  type="l", lwd=2)
+  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2,  type="l", lwd=2, lty=2)
+  
+  
+# dev.copy2pdf(file="master_scripts/paper_figures/aci_nitrovcmax.pdf")
+# dev.off()
   

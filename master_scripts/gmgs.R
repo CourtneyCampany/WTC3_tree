@@ -1,6 +1,6 @@
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
-# source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
+source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
@@ -20,7 +20,7 @@ sundat <- gm_sunsha[gm_sunsha$leaflight =="sun-high",]
 shadat <- gm_sunsha[gm_sunsha$leaflight =="shade-low",]
 ##dfr with lights on
 fleckdat <- gm_agg[gm_agg$leaflight == "shade-high",]
-  fleckdat <- droplevels(gm_lightson)
+  fleckdat <- droplevels(fleckdat)
 
 #### GS vs A data: use gam for CI of non-linear relationship between A and gs----------------------------------------
 
@@ -69,12 +69,34 @@ flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
 agm_sun <-   read.csv( "master_scripts/bootstrap_results/agm_sun.csv")
 agm_sha <-  read.csv( "master_scripts/bootstrap_results/agm_sha.csv") 
 agm_fleck <-  read.csv( "master_scripts/bootstrap_results/agm_fleck.csv") 
+##testing stats for random model comparison
+library(nlme)
+##linear model with chamber as random effect
+
+#gmA_sun_mod <- lme(Photo ~ gm ,random=~1|chamber, data=sundat)
+gmA_sun_mod2 <- lm(Photo ~ gm , data=sundat)
+
+#    summary(gmA_sun_mod)
+#    summary(gmA_sun_mod2)
+#    anova(gmA_sun_mod,gmA_sun_mod2)
+
+#   gmA_sha_mod <- lme(Photo~ gm  ,random=~1|chamber, data=shadat)
+gmA_sha_mod2 <- lm(Photo~ gm  ,data=shadat)
+#    summary(gmA_sha_mod)
+#    summary(gmA_sha_mod2)
+#    anova(gmA_sha_mod,gmA_sha_mod2)
+
+#   gmA_fleck_mod <- lme(Photo~ gm  ,random=~1|chamber, data=fleckdat)
+gmA_fleck_mod2 <- lm(Photo~ gm  ,data=fleckdat)
+#    summary(gmA_fleck_mod)
+#    summary(gmA_fleck_mod2)
+#    anova(gmA_fleck_mod,gmA_fleck_mod2)
 
 
 ####PLOTTING: 2 panel figure with gm, gs, A---------------------------------------------------------------------------------
 
 #1: panel Photosynthesis vs gs (gam plots)
-# windows(10, 12)
+ windows(10, 12)
 
 par(mfrow=c(2,1))
 
@@ -94,13 +116,15 @@ plot(Photo~Cond, data=gm_sunsha, subset=leaflight=="sun-high",  col=suncol, ylim
 
   #sunfleck  
   points(Photo~Cond, data=fleckdat, col=lightscol,pch=c(16, 17)[pch=fleckdat$temp])
+
   lines(gsfleck_seq, fleckupr, lty=2, lwd=2,col=lightscol)
   lines(gsfleck_seq, flecklwr, lty=2, lwd=2,col=lightscol)
   lines(gsfleck_seq, gsfleck_pred$fit, lty=1, lwd=2,col=lightscol)
   legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
 
 
-  text(x=.5, y=24.8, "(a)", cex=1)
+  text(x=.5, y=24.5, "(a)", cex=1)
+  
 
 ####panel2: gm vs A
 
@@ -128,10 +152,40 @@ plot(Photo~gm, data=sundat,  col=suncol, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab,
   })
   
   text(x=.5, y=24.5, "(b)", cex=1)
+ 
+  dev.copy2pdf(file="master_scripts/paper_figures/gmgs.pdf")
+ dev.off()
+
+###with smoothplot
+ palette(c(lightscol, shacol, suncol))
+ 
+windows(10, 12)
+par(mfrow=c(2,1))
+#gs
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+smoothplot(Cond, Photo, leaflight,data=gm_agg, kgam=5, R="chamber",
+             linecol=c(lightscol2, shacol2,suncol2), pointcol=c(lightscol, shacol, suncol),
+             xlab=condlab, ylab=satlab,
+             ylim=c(5,25), xlim=c(0,.5))
   
-# dev.copy2pdf(file="master_scripts/paper_figures/gmgs.pdf")
-# dev.off()
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
+text(x=.5, y=24.5, "(a)", cex=1)
 
+#gm
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+plot(Photo~gm, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab, ylab=satlab, 
+       pch=c(16, 17)[pch=gm_sunsha$temp],
+  panel.first=predline(gmA_sun_mod2, col=suncol2,lwd=2),
+  panel.first=predline(gmA_sha_mod2, col=shacol2,lwd=2),
+  panel.first=predline(gmA_fleck_mod2, col=lightscol2,lwd=2))
 
+text(x=.5, y=24.5, "(b)", cex=1)
+dev.copy2pdf(file="master_scripts/paper_figures/gmgs2.pdf")
+dev.off()
+   
+   
 
+  
 
+  
+   

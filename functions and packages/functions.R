@@ -253,7 +253,7 @@ fitgam <- function(X,Y,dfr, k=-1, R=NULL){
 
 
 ####addpoly
-addpoly <- function(x,y1,y2,col=alpha("floralwhite",0.95),...){
+addpoly <- function(x,y1,y2,col=alpha("lightgrey",0.75),...){
   ii <- order(x)
   y1 <- y1[ii]
   y2 <- y2[ii]
@@ -299,7 +299,7 @@ smoothplot <- function(x,y,g=NULL,data,
                        pointcols=NULL,
                        linecols=NULL, 
                        xlab=NULL, ylab=NULL,
-                       polycolor=alpha("lightgrey",0.7),
+                       polycolor=alpha("lightgrey",0.75),
                        plotit=TRUE, add=FALSE,
                        ...){
   

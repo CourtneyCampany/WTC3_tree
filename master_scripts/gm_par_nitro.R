@@ -1,8 +1,8 @@
-# source("functions and packages/functions.R")
-# source("functions and packages/packages.R")
-# source("master_scripts/plot_objects.R")
-# 
-# treatments <- read.csv("raw data/temp_trt.csv")
+source("functions and packages/functions.R")
+source("functions and packages/packages.R")
+source("master_scripts/plot_objects.R")
+
+treatments <- read.csv("raw data/temp_trt.csv")
 
 ####read and format PAR data----------------------------------------------------------------------------------------------
 par <- read.csv("raw data/par.csv")
@@ -108,18 +108,18 @@ gmpar_fleck2 <- lm(gm~ par, data=fleck_dat)
 
 
 ####PLOT relationships between gm~Narea, gm~PAR and Narea and Par---------------------------------------------------------------
-
-# windows(8, 12)
+palette(c(shacol, suncol))
+#windows(8, 12)
 par(mfrow=c(3,1), las=1, mgp=c(2, .5, 0), cex.lab=.8, cex.axis=.8, cex=1.25)
 
 par(mar=c(3.5,5,1,2))
 plot(gm~leafN_area, data=leafdat2, col=leaf, pch=c(16, 17)[pch=leafdat2$temp], ylim=c(0,.4), xlim=c(0,4.5), 
      ylab=gmlab, xlab=narealab)
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "gm"]), x1=min(leafdat2[leafdat2$leaf=="shade", "leafN_area"]),
-           x2=max(leafdat2[leafdat2$leaf=="shade", "leafN_area"]), lty=5, lwd=2, col="yellow4")
+           x2=max(leafdat2[leafdat2$leaf=="shade", "leafN_area"]), lty=5, lwd=2, col=shacol2)
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="sun", "gm"]), x1=min(leafdat2[leafdat2$leaf=="sun", "leafN_area"]),
-           x2=max(leafdat2[leafdat2$leaf=="sun", "leafN_area"]), lty=5, lwd=2, col="forestgreen")
-legend("topleft", leglab3, pch=rep(c(16,17),3), col=leafcols,inset = 0.01, bty='n',cex=.6)
+           x2=max(leafdat2[leafdat2$leaf=="sun", "leafN_area"]), lty=5, lwd=2, col=suncol2)
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.7)
 ##gm does not increase with N across leaf type yet there is still difference
 
 par(mar=c(3.5,5,0,2))  
@@ -128,29 +128,27 @@ plot(gm~par, data=leafdat2, col=leaf, pch=c(16, 17)[pch=leafdat2$temp], ylim=c(0
 points(gm~par, data=fleck_dat, col=lightscol, pch=c(16, 17)[pch=fleck_dat$temp])
 
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "gm"]), x1=min(leafdat2[leafdat2$leaf=="shade", "par"]),
-           x2=max(leafdat2[leafdat2$leaf=="shade", "par"]), lty=5, lwd=2, col="yellow4")
+           x2=max(leafdat2[leafdat2$leaf=="shade", "par"]), lty=5, lwd=2, col=shacol2)
 
 ablineclip(gmpar_fleck2, x1=min(fleck_dat[fleck_dat$leaf=="shade", "par"]),
-           x2=max(fleck_dat[fleck_dat$leaf=="shade", "par"]), lty=5, lwd=2, col="darkorange2")
+           x2=max(fleck_dat[fleck_dat$leaf=="shade", "par"]), lty=5, lwd=2, col=lightscol2)
 
 ablineclip(gmpar_sun2, x1=min(leafdat2[leafdat2$leaf=="sun", "par"]),
-           x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, lwd=2, col="forestgreen")
-
+           x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, lwd=2, col=suncol2)
 
 ##no effect on gm with slight changes to PAR at shade leaves, sunfleck and sun gm the same.  
 ##sun leaves decrease at high par but not sunfleck
-
 
 par(mar=c(3.5,5,0,2))
 plot(leafN_area~par, data=leafdat2, col=leaf, pch=c(16, 17)[pch=leafdat2$temp], ylim=c(0,4.5), xlim=c(0,1800), 
      ylab=narealab, xlab=parlab)
 ###no realtionship between PAR and leafN within leaf types
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "leafN_area"]), x1=min(leafdat2[leafdat2$leaf=="shade", "par"]),
-           x2=max(leafdat2[leafdat2$leaf=="shade", "par"]), lty=5, col="yellow4", lwd=2)
+           x2=max(leafdat2[leafdat2$leaf=="shade", "par"]), lty=5, col=shacol2, lwd=2)
 
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="sun", "leafN_area"]),  x1=min(leafdat2[leafdat2$leaf=="sun", "par"]),
-       x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, col="forestgreen", lwd=2)
+       x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, col=suncol2, lwd=2)
 
-#  dev.copy2pdf(file="master_scripts/paper_figures/gm_nitro_par.pdf")
-#  dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figures/gm_nitro_par.pdf")
+# dev.off() 
   

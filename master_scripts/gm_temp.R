@@ -38,7 +38,7 @@ ucl_fleck <- xbar+E
 lcl_fleck <- xbar-E
 
 ####plotting (3 panel graph of gm data)----------------------------------------------------------------------------------------
-windows(8,6)  
+#windows(8,6)  
 
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab=leaftlab, ylab=gmlab, 
@@ -64,8 +64,8 @@ ablineclip(h=ucl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5,
 ablineclip(h=lcl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
 
 
-  dev.copy2pdf(file="master_scripts/paper_figures/gm_temp.pdf")
-  dev.off()
+#   dev.copy2pdf(file="master_scripts/paper_figures/gm_temp.pdf")
+#   dev.off()
 
 
 
