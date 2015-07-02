@@ -120,6 +120,7 @@ ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "gm"]), x1=min(leafdat2[leafd
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="sun", "gm"]), x1=min(leafdat2[leafdat2$leaf=="sun", "leafN_area"]),
            x2=max(leafdat2[leafdat2$leaf=="sun", "leafN_area"]), lty=5, lwd=2, col=suncol2)
 legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.7)
+text(x=4.5, y=.39, "(a)", cex=1)
 ##gm does not increase with N across leaf type yet there is still difference
 
 par(mar=c(3.5,5,0,2))  
@@ -135,7 +136,7 @@ ablineclip(gmpar_fleck2, x1=min(fleck_dat[fleck_dat$leaf=="shade", "par"]),
 
 ablineclip(gmpar_sun2, x1=min(leafdat2[leafdat2$leaf=="sun", "par"]),
            x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, lwd=2, col=suncol2)
-
+text(x=1795, y=.39, "(b)", cex=1)
 ##no effect on gm with slight changes to PAR at shade leaves, sunfleck and sun gm the same.  
 ##sun leaves decrease at high par but not sunfleck
 
@@ -148,7 +149,7 @@ ablineclip(h=mean(leafdat2[leafdat2$leaf=="shade", "leafN_area"]), x1=min(leafda
 
 ablineclip(h=mean(leafdat2[leafdat2$leaf=="sun", "leafN_area"]),  x1=min(leafdat2[leafdat2$leaf=="sun", "par"]),
        x2=max(leafdat2[leafdat2$leaf=="sun", "par"]), lty=5, col=suncol2, lwd=2)
-
+text(x=1795, y=4.4, "(c)", cex=1)
 # dev.copy2pdf(file="master_scripts/paper_figures/gm_nitro_par.pdf")
 # dev.off() 
   

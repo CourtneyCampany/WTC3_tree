@@ -301,6 +301,7 @@ smoothplot <- function(x,y,g=NULL,data,
                        xlab=NULL, ylab=NULL,
                        polycolor=alpha("lightgrey",0.75),
                        plotit=TRUE, add=FALSE,
+                       pch=16,
                        ...){
   
   fittype <- match.arg(fittype)
@@ -369,10 +370,10 @@ smoothplot <- function(x,y,g=NULL,data,
     }
     
     if(!add){
-      with(data, plot(X, Y, axes=FALSE, pch=16, col=pointcols[G],
+      with(data, plot(X, Y, axes=FALSE, pch=pch, col=pointcols[G],
                       xlab=xlab, ylab=ylab, ...))
     } else {
-      with(data, points(X, Y, pch=16, col=pointcols[G],
+      with(data, points(X, Y, pch=pch, col=pointcols[G],
                         ...))
     }
     

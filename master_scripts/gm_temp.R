@@ -23,49 +23,75 @@ shadat <- gm_sunsha[gm_sunsha$leaflight =="shade-low",]
 fleckdat <- gm_agg[gm_agg$leaflight == "shade-high",]
 
 ##read bootstrapped data previosuly ran from sunshade phys script
-gmt_sun <-   read.csv( "master_scripts/bootstrap_results/gmt_sun")
-gmt_sha <-  read.csv( "master_scripts/bootstrap_results/gmt_sha") 
+# gmt_sun <-   read.csv( "master_scripts/bootstrap_results/gmt_sun")
+# gmt_sha <-  read.csv( "master_scripts/bootstrap_results/gmt_sha") 
 
 ##confidence interval of mean of sunfleck has there is no temperature effect
-n <- length(fleckdat$gm)
-s <- sd(fleckdat$gm) #sample standard dev
-serr <- s/(sqrt(n)) #standard error estimate
-t <- qt(.975, df=n-1)
-xbar <- mean(fleckdat$gm)
-E <- t*serr #margin of error
-#CI = mean +- E
-ucl_fleck <- xbar+E
-lcl_fleck <- xbar-E
+# n <- length(fleckdat$gm)
+# s <- sd(fleckdat$gm) #sample standard dev
+# serr <- s/(sqrt(n)) #standard error estimate
+# t <- qt(.975, df=n-1)
+# xbar <- mean(fleckdat$gm)
+# E <- t*serr #margin of error
+# #CI = mean +- E
+# ucl_fleck <- xbar+E
+# lcl_fleck <- xbar-E
 
 ####plotting (3 panel graph of gm data)----------------------------------------------------------------------------------------
-#windows(8,6)  
-
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab=leaftlab, ylab=gmlab, 
-     pch=c(16, 17)[pch=gm_sunsha$temp])
-points(gm~CTleaf, data=shadat, col=shacol, cex=1,pch=c(16, 17)[pch=gm_sunsha$temp])
-points(gm~CTleaf, data=fleckdat, col=lightscol, cex=1,pch=c(16, 17)[pch=fleckdat$temp])
-
-
-with(gmt_sun, {
-  lines(CTleaf, lcl, lty=2, lwd=2,col=suncol2)
-  lines(CTleaf, ucl, lty=2, lwd=2,col=suncol2)
-  lines(CTleaf, pred, lty=1, lwd=2,col=suncol2)
-})
-with(gmt_sha, {
-  lines(CTleaf, lcl, lty=2, lwd=2,col=shacol2)
-  lines(CTleaf, ucl, lty=2, lwd=2,col=shacol2)
-  lines(CTleaf, pred, lty=1, lwd=2,col=shacol2)
-})
-
-#CI for sunfleck as mean line and CI
-ablineclip(h=mean(fleckdat$gm), x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=1, lwd=2, col=lightscol2)
-ablineclip(h=ucl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
-ablineclip(h=lcl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
+# windows(8,6)  
+# 
+# par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+# plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab=leaftlab, ylab=gmlab, 
+#      pch=c(16, 17)[pch=gm_sunsha$temp])
+# points(gm~CTleaf, data=shadat, col=shacol, cex=1,pch=c(16, 17)[pch=gm_sunsha$temp])
+# points(gm~CTleaf, data=fleckdat, col=lightscol, cex=1,pch=c(16, 17)[pch=fleckdat$temp])
+# 
+# 
+# with(gmt_sun, {
+#   lines(CTleaf, lcl, lty=2, lwd=2,col=suncol2)
+#   lines(CTleaf, ucl, lty=2, lwd=2,col=suncol2)
+#   lines(CTleaf, pred, lty=1, lwd=2,col=suncol2)
+# })
+# with(gmt_sha, {
+#   lines(CTleaf, lcl, lty=2, lwd=2,col=shacol2)
+#   lines(CTleaf, ucl, lty=2, lwd=2,col=shacol2)
+#   lines(CTleaf, pred, lty=1, lwd=2,col=shacol2)
+# })
+# 
+# #CI for sunfleck as mean line and CI
+# ablineclip(h=mean(fleckdat$gm), x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=1, lwd=2, col=lightscol2)
+# ablineclip(h=ucl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
+# ablineclip(h=lcl_fleck, x1=min(fleckdat$CTleaf), x2=max(fleckdat$CTleaf), lty=5, lwd=2, col=lightscol2)
 
 
 #   dev.copy2pdf(file="master_scripts/paper_figures/gm_temp.pdf")
 #   dev.off()
+
+shamod <- lm(gm~CTleaf, data=shadat)
+sunmod <- lm(gm~CTleaf, data=sundat)
+fleckmod <- lm(gm~CTleaf, data=fleckdat)
+
+
+#windows(8,6)  
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+plot(gm~CTleaf, data=sundat,  col=suncol, ylim=c(0,.35), xlim=c(15, 36), xlab=leaftlab, ylab=gmlab, pch="")
+
+predline(fleckmod, col=lightscol2,lwd=2)
+predline(shamod, col=suncol2,lwd=2)
+predline(sunmod, col=shacol2,lwd=2)
+
+points(gm~CTleaf, data=fleckdat, col=lightscol, cex=1,pch=c(16, 17)[pch=fleckdat$temp])
+points(gm~CTleaf, data=sundat, col=suncol, cex=1,pch=c(16, 17)[pch=gm_sunsha$temp])
+points(gm~CTleaf, data=shadat, col=shacol, cex=1,pch=c(16, 17)[pch=gm_sunsha$temp])
+
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
+
+# dev.copy2pdf(file="master_scripts/paper_figures/gm_temp2.pdf")
+# dev.off()
+
+
+
+
 
 
 

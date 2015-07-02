@@ -1,7 +1,7 @@
 # source("functions and packages/functions.R")
 # source("functions and packages/packages.R")
 # source("master_scripts/plot_objects.R")
-# 
+
  par <- read.csv("raw data/par.csv")
  
  treatments <- read.csv("raw data/temp_trt.csv")
@@ -40,11 +40,12 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 # anova(par_mod2)
 
 ###PLOTTING------------------------------------------------------------------------------------------------
-# windows(8,6)
+ #windows(6,6)
+
 bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
-      half.errbar=FALSE, mar=c(5,5,2,2))
-#   dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
-#   dev.off()
+      half.errbar=FALSE, mar=c(4,4,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(2.5,1,0))
+#    dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
+#    dev.off()
 
 
 ###for png

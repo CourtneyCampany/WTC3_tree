@@ -1,6 +1,6 @@
-# source("functions and packages/packages.R")
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
+source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
 
 treatments <- read.csv("raw data/temp_trt.csv") 
 
@@ -61,12 +61,25 @@ Nagg <- summaryBy(leafN_area ~ chamber + leaf, data=canopy_chem)
   
 N_aci <- merge(aciparam, Nagg, by= c("chamber", "leaf"))
 
+# require(lme4)
+# require(lmerTest)
+# library(LMERConvenienceFunctions)
 nitrovc_mod <- lm(Vcmax~leafN_area.mean, data=N_aci)
-#summary(nitrovc_mod)
+# nitrovc_mod2 <- lme(Vcmax~leafN_area.mean, random=~1|chamber,data=N_aci)
+# nitrovc_mod3 <- lmer(Vcmax~leafN_area.mean+ (1|chamber),data=N_aci)
+# anova(nitrovc_mod3)
+# summary(nitrovc_mod3)
+# mcp.fnc(nitrovc_mod3)
+# source("functions and packages/r2glmm.R")
+# rsquared.glmm(nitrovc_mod3)
+# 
+# summary(nitrovc_mod)
+# summary(nitrovc_mod2)
+# anova(nitrovc_mod,nitrovc_mod3)
 
 palette(c(shacol2, suncol2))
   
-#windows(8,12)
+#windows(6,8)
 
 par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
@@ -95,7 +108,7 @@ plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xl
   legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
   
 ###inset figure  
-  par(fig=c(0.525, 0.95, 0.58,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
+  par(fig=c(0.525, 0.95, 0.595,0.76), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
   
   plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
   axis(2, mgp=c(3, .5, 0))
