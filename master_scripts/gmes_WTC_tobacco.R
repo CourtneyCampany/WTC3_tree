@@ -251,16 +251,14 @@ write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_tobacco_pair.csv", row.names=FA
 
 
 
-####useful code to save
-# xsi_dfr2 <- setNames(xsi_dfr, names2)
-# list2env(lapply(xsi_dfr2, as.data.frame), .GlobalEnv)
+###for analysis first subset well watered and drought treatments--------------------------------------------------------
+# gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
+# write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
+
+gm_tob_water <- gm_WTC2[gm_WTC2$drydown == "control",]
+write.csv(gm_tob_water, "calculated_data/gmes_tob_wellwatered.csv", row.names=FALSE)
 
 
-# zzz <- list()
-# for(i in 1:length(xsi_feb_h4)){
-#   zzz[[i]] <- gmesdata_func(xsi_feb_h4[[i]], licor_gmes, licor_times, licorrows=5,whichlicor="H4")
-#   message(i)
-# }
 
 
 

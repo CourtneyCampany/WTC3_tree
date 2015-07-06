@@ -27,7 +27,7 @@ library(pander)
 
 #### <u>Design</u>
 * WTCIII was a warming experiment with ambient and +3°C warming (n=6).  A drought manipulation was added in the last few months of the experiment but is not included here.
-* Sun leaves were measured in the upper canopy at their current PPFD.  Shade leaves were measured in the lower/middle canopy, first at their current PPFD and then again at sun leaf PPFD as a simulated sunfleck.
+* Sun leaves were measured in the upper canopy at their current PPFD.  Shade leaves were measured in the lower/middle canopy, first at their current PPFD and then again at sun leaf PPFD as a simulated sunfleck (Shade-Low light & Shade-High light).
 * New fully expanded leaves were measured. Shade leaves were sampled into the middle canopy as the experiment progressed to avoid issues with leaf age.
 * Leaf physiological measurements were taken at their current temperature (ambient, +3°C). Thus, data below represent a large range of temperatures from 18-35°C.
 
