@@ -1,8 +1,10 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
-source("master_scripts/read_data.R")
 source("master_scripts/plot_objects.R")
 
+gm<- read.csv("raw data/gm_all.csv")
+leaf<- read.csv("raw data/leaf_data.csv")
+treatments <- read.csv("raw data/chamber_trt.csv")
 
 #run formatting functions
 leaf <- leafformat(leaf)
@@ -18,6 +20,11 @@ gm_limit <- subset(gm, gm <= 1.1 & gm >= .05)
 
 #take some subsets for further anaylses 
 gm_watered <- subset(gm_limit, drydown =="control")
+gm_watered2 <- subset(gm_limit2, drydown =="control")
+
+gm_agg <- summaryBy(gm+Photo+Cond ~ ID, data=gm_watered, FUN=c(mean, se))
+gm_agg <- summaryBy(gm+Photo+Cond ~ ID, data=gm_watered2, FUN=c(mean, se))
+
 gm_drydown <- subset(gm_limit, drydown =="drought")
 gm_leaf <- subset(gm_watered, ID !="shade-high")
 gm_shadhi <- subset(gm_watered, ID =="shade-high")

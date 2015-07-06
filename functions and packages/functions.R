@@ -17,7 +17,7 @@ leafformat <- function(x) {
   x$wp <- with(x, ((water_potential/10)*-1))
   x <- merge(x, treatments, all=TRUE)
   x$chamber <- as.character(x$chamber)
-  x$drydown <- ifelse(x$month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
+  x$drydown <- ifelse(x$Month %in% c("Mar", "Apr") & x$chamber %in%c("ch01", "ch03", "ch04", "ch06", "ch08", "ch11"), 
                       "drought", "control")
   x$lma <- with(x, leaf_mass/leaf_area)
   x_ss <- subset(x, select= -c(Date, water_potential))

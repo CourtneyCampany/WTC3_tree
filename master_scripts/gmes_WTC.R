@@ -17,9 +17,9 @@ treatments <- read.csv("raw data/temp_trt.csv")
 
 ####read licor data and run licor formatting functions------------------------------------------------------------------
 licor_master <- read.csv("raw data/gm_licor_clean.csv")
-licor_master <- chlab_func(licor_master)
+  licor_master <- chlab_func(licor_master)   ##this function adds proper chamber label "ch##"
 
-###remove pair ids for now (?) bind them back after formatting (should beed id, chamber)
+###remove pair ids for now (?) bind them back after formatting (should need id, chamber)
 pairs <- licor_master[, 2:7]
 licor2 <- licor_master[, -7]
 
@@ -28,7 +28,7 @@ licor_gmes <- chooseidfunc(licor2, c("campaign" , "chamber",  "leaf",  "light"))
 
 licor_gmes <- licorformat_func(licor_gmes)
 
-###now run time range function if get samples id and time range
+###now run time range function to get samples id and time range
 licor_times <- timerange_func(licor_gmes)
 
 
@@ -246,8 +246,43 @@ gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
 ##add pair ids
 gm_wtc_pair <- merge(gm_WTC2, uniquepair)
-
 write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_pair.csv", row.names=FALSE)
+
+
+###for analysis first subset well watered and drought treatments--------------------------------------------------------
+gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
+write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
+
+gm_water <- gm_WTC2[gm_WTC2$drydown == "control",]
+write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
+
+
+####DATA SUMMARY----------------------------------------------------------------------------------------------------
+
+###mean of ID so no pseudoreplication
+gm_agg <- summaryBy(gm+Photo+Cond ~ id+leaflight+ temp, data=gm_water, FUN=c(mean), keep.names=TRUE)
+##means by leaf and treatment
+gm_agg2 <- summaryBy(gm+Photo+Cond ~ leaflight+ temp, data=gm_agg, FUN=c(mean, se))
+
+
+##set a lower limit to gm (how many spot measurements do they remove?)
+rmgm <- subset(gm_water, gm >= .1)  ###0.05 removes 3 values, 0.075 = 37 values, 0.1  removes 110
+
+rmgm_agg <- summaryBy(gm+Photo+Cond ~ id+leaflight+ temp, data=rmgm, FUN=c(mean), keep.names=TRUE)
+rmgm_agg2 <- summaryBy(gm+Photo+Cond ~ leaflight+ temp, data=rmgm_agg, FUN=c(mean, se))
+
+
+##remove unreasonable xsi values
+rmxsi <- subset(gm_water, xsi <= 25)   ### 25 removes 5 values, 22 removes 38 values
+
+###mean of ID so no pseudoreplication
+rmxsi_agg <- summaryBy(gm+Photo+Cond ~ id+leaflight+ temp, data=rmxsi, FUN=c(mean), keep.names=TRUE)
+##means by leaf and treatment
+rmxsi_agg2 <- summaryBy(gm+Photo+Cond ~ leaflight+ temp, data=rmxsi_agg, FUN=c(mean, se))
+
+
+####regardless of cleaning the story (from means) does not change####
+
 
 
 
