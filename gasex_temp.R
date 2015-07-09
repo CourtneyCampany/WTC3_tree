@@ -26,30 +26,32 @@ gasex_agg$Month <- factor(gasex_agg$Month, levels = Morder)
 ###shade black colors for each month to test
 library(scales)
 ###sun col
-octcol <- alpha(suncol2, alpha=.4)
-deccol <- alpha(suncol2, alpha=.55)
-jancol <- alpha(suncol2, alpha=.65)
-febcol <- alpha(suncol2, alpha=.75)
-marcol <- alpha(suncol2, alpha=.9)
-aprcol <- suncol2
-##shad cols
-octcol2 <- alpha(shacol2, alpha=.4)
-deccol2<- alpha(shacol2, alpha=.55)
-jancol2 <- alpha(shacol2, alpha=.65)
-febcol2 <- alpha(shacol2, alpha=.75)
-marcol2 <- alpha(shacol2, alpha=.9)
-aprcol2 <- shacol2
-#fleck col
-octcol3 <- alpha(lightscol2, alpha=.4)
-deccol3<- alpha(lightscol2, alpha=.55)
-jancol3 <- alpha(lightscol2, alpha=.65)
-febcol3 <- alpha(lightscol2, alpha=.75)
-marcol3 <- alpha(lightscol2, alpha=.9)
-aprcol3 <- lightscol2
+# octcol <- alpha(suncol2, alpha=.4)
+# deccol <- alpha(suncol2, alpha=.55)
+# jancol <- alpha(suncol2, alpha=.65)
+# febcol <- alpha(suncol2, alpha=.75)
+# marcol <- alpha(suncol2, alpha=.9)
+# aprcol <- suncol2
+# ##shad cols
+# octcol2 <- alpha(shacol2, alpha=.4)
+# deccol2<- alpha(shacol2, alpha=.55)
+# jancol2 <- alpha(shacol2, alpha=.65)
+# febcol2 <- alpha(shacol2, alpha=.75)
+# marcol2 <- alpha(shacol2, alpha=.9)
+# aprcol2 <- shacol2
+# #fleck col
+# octcol3 <- alpha(lightscol2, alpha=.4)
+# deccol3<- alpha(lightscol2, alpha=.55)
+# jancol3 <- alpha(lightscol2, alpha=.65)
+# febcol3 <- alpha(lightscol2, alpha=.75)
+# marcol3 <- alpha(lightscol2, alpha=.9)
+# aprcol3 <- lightscol2
 
-fleckalpha <- c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3)
-sunalpha <- c(octcol, deccol, jancol, febcol, marcol, aprcol)
-shaalpha <- c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2)
+# fleckalpha <- c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3)
+# sunalpha <- c(octcol, deccol, jancol, febcol, marcol, aprcol)
+# shaalpha <- c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2)
+
+pchmonth <- c(15, 16, 17, 18, 1,2)
 
 ##graph photo, gm and drawdown by temperature
 windows(8,12)
@@ -58,14 +60,17 @@ par(mfrow=c(3,1))
 par(mar=c(0,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 
 palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
-plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16, ylim=c(5, 25), xlim=c(15,40),
+
+plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=suncol,
+     pch = pchmonth[as.numeric(gasex_agg$Month)], 
+     ylim=c(5, 25), xlim=c(15,40),
      xlab="", ylab=satlab, xaxt="n")
   
   palette(c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2))
-  points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-low",], col=Month, pch=16)
+  points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-low",], col=shacol, pch = pchmonth[as.numeric(gasex_agg$Month)])
   
   palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
-  points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
+  points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=lightscol, pch = pchmonth[as.numeric(gasex_agg$Month)])
 #   legend("topright", Morder, pch=16, col=sunalpha,inset = 0.01, bty='n',cex=.8)
 #   legend("topright", Morder, pch=16, col=sunalpha,inset = 0.01, bty='n',cex=.8)
 #   legend("bottomright", Morder, pch=16, col=fleckalpha,inset = 0.01, bty='n',cex=.8)
