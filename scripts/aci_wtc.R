@@ -68,7 +68,7 @@ aci_means2 <- summaryBy(Vcmax+Jmax ~ leaf , data = tdlaci,  FUN=c(mean,se))
 
 
 #generate treatment means for vcmax and jmax
-aci_means <- summaryBy(Vcmax+Jmax ~ leaf+temp , data = tdlaci,  FUN=c(mean,se))
+aci_means <- summaryBy(Vcmax+Jmax+Rd ~ leaf+temp , data = tdlaci,  FUN=c(mean,se))
 write.csv(aci_means, "calculated_data/tdl_aci.csv", row.names=FALSE)
 bar(Vcmax, c(temp, leaf), tdlaci)
 bar(Jmax, c(temp, leaf), tdlaci)
