@@ -35,9 +35,10 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 # par_mod <- lme(par ~ leaf_type, random=~1|chamber, data=par_leaf2)
 # summary(par_mod)
 # anova(par_mod)
-
+# 
 # par_mod2 <- lme(par ~ leaf_type*temp, random=~1|chamber, data=par_leaf2)
 # anova(par_mod2)
+# summary(par_mod2)
 
 ###PLOTTING------------------------------------------------------------------------------------------------
  #windows(6,6)

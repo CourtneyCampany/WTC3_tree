@@ -129,5 +129,63 @@ shajan <- subset(leafcond, Month == "Jan" & leaf == "shade")
 #sun- jan = ch2 midday wp really high, ch8/5 transpiration low
 #sha - jan = ch 9/2 transpiration too high
 
+###stats on wp and leaf K
+leafK_stats <- droplevels(leafK_nodrought)
 
 
+library(visreg)
+library(multcomp)
+library(nlme)
+
+#examite data with boxplots, then remove any outliers
+boxplot(leafK~temp, data=leafK_stats[leafK_stats$leaf =="sun",])
+boxplot(leafK~temp, data=leafK_stats[leafK_stats$leaf =="shade",])
+
+
+##PAR significantly different between leaves not by temperature treatment
+pre_mod <- lme(pre_mp ~ leaf, random=~1|chamber, data=leafK_stats)
+summary(pre_mod)
+anova(pre_mod)
+
+pre_mod2 <- lme(pre_mp ~ leaf*temp, random=~1|chamber, data=leafK_stats)
+anova(pre_mod2)
+summary(pre_mod2)
+  ##predawn wp not different between at/et or sun/shade
+mid_mod <- lme(mid_mp ~ leaf, random=~1|chamber, data=leafK_stats)
+summary(mid_mod)
+anova(mid_mod)
+
+mid_mod2 <- lme(mid_mp ~ leaf*temp, random=~1|chamber, data=leafK_stats)
+anova(mid_mod2)
+summary(mid_mod2)
+ ##mid wp not different between at/et or sun/shade
+
+e_mod <- lme(Trmmol ~ leaf, random=~1|chamber, data=leafK_stats)
+summary(e_mod)
+anova(e_mod)
+
+e_mod2 <- lme(Trmmol ~ leaf*temp, random=~1|chamber, data=leafK_stats)
+anova(e_mod2)
+summary(e_mod2)
+
+k_mod <- lme(leafK ~ leaf, random=~1|chamber, data=leafK_stats)
+summary(k_mod)
+anova(k_mod)
+
+k_mod2 <- lme(leafK ~ leaf*temp, random=~1|chamber, data=leafK_stats)
+anova(k_mod2)
+summary(k_mod2)
+
+
+Edat <- read.csv("calculated_data/gmes_wellwatered.csv")
+
+###get average by id
+e_agg <- summaryBy(Trmmol ~ chamber+id+leaf +light+temp+leaflight+Month, data=Edat, FUN=mean, keep.names=TRUE)
+e2 <- summaryBy(Trmmol~ chamber+leaf+temp+leaflight+Month, data=e_agg, FUN=mean, keep.names=TRUE)
+
+boxplot(Trmmol~leaflight, data=e_agg)
+
+
+e_leaf <- lme(Trmmol ~ leaflight, random=~1|chamber, data=e2[e2$leaflight != "shade-high",])
+summary(e_leaf)
+anova(e_leaf)

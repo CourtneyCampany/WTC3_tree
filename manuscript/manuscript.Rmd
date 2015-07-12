@@ -1,0 +1,136 @@
+---
+title: Super catchy title of the manuscript goes here
+author: ''
+date: ''
+output:
+  word_document:
+    reference_docx: manuscriptstyle.docx
+  pdf_document: default
+  html_document:
+    number_sections: yes
+csl: global-change-biology.csl
+bibliography: references.bib
+---
+
+\
+Remko A. Duursma^1^, Richard Feynman^2^.
+
+\
+^1^ Hawkesbury Institute for the Environment, University of Western Sydney, Locked Bag 1797, Penrith, NSW, Australia
+
+\
+^2^ INRA, UMR 1391 ISPA, 33140 Villenave d'Ornon, France
+
+\
+*Corresponding author*: 
+Remko Duursma
+E: remkoduursma@gmail.com
+T: +61(0)422096908
+
+
+
+```{r echo=FALSE, message=FALSE, warnings=FALSE}
+# Two useful packages for printing numbers, accessing content of objects.
+library(broom)
+library(reporttools)
+
+# Do calculations here, create objects that we can use throughout the paper.
+
+# Or, place them all in a separate script:
+# source("manuscript_calcs.R")
+
+# Example data
+x <- rnorm(100)
+mydata <- data.frame(x=x, y=x+rnorm(100))
+
+# Linear regression
+lmobj <- lm(y ~ x, data=mydata)
+
+# Shorthand function to print numbers with two decimal points (and retain trailing zeroes)
+f <- function(x, digits=2)sprintf(x, fmt=paste0("%.",digits,"f"))
+
+# Nice function to format P values.
+pval <- function(...)formatPval(..., includeEquality=TRUE)
+
+
+# Set Flag to include figures in text or not.
+includeFigs <- TRUE
+
+# This document can be compiled with the 'Knit Word' button in Rstudio, or:
+# library(rmarkdown)
+# render("manuscript.Rmd", "word_document", "manuscript.docx")
+```
+
+
+
+
+# Abstract {.unnumbered}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula, quam nec tempus consequat, magna enim sodales ex, vitae condimentum urna enim nec libero. Vivamus sit amet lacus quam. Donec imperdiet sodales enim nec convallis. Praesent enim dolor, sagittis quis ex et, dapibus fringilla neque. Ut sed ultricies tortor. Duis ullamcorper dui nibh, ac ultricies arcu consectetur eget. Etiam blandit odio eu nulla sollicitudin, finibus elementum ligula luctus. Nulla lacus justo, bibendum eu justo elementum, varius maximus elit. Proin aliquam velit aliquam tellus ullamcorper, eget elementum magna imperdiet. Vestibulum id nulla erat. Quisque ante nulla, vestibulum ut magna sit amet, lacinia tempus leo. Proin sit amet lorem est.
+
+
+
+
+# Introduction
+
+**Notice how every major section starts on a new page, this is set in the manuscriptstyle.docx template file.** Some things were said [@Xiao2011], and also by Zhu et al. [-@Zhu2012]. Other remarks were made like that [see for example, @Zhang2005]. In conclusion, many things were said [@Zhu2012; @Xiao2011]. We can do subscripts, for example CO~2~, as well as superscripts (e.g., R^2^), and *italics*.
+
+\
+Proin fringilla magna in lobortis finibus. Sed in malesuada lectus. Nulla et diam tincidunt, scelerisque velit in, luctus nisl. Fusce fringilla tellus sit amet ante ullamcorper mattis. Curabitur metus sapien, efficitur elementum finibus sit amet, volutpat eget neque. Morbi id vulputate augue. In vel arcu et augue ullamcorper gravida. Nunc faucibus blandit felis, vitae feugiat mauris posuere sed. Nam quis quam non risus auctor placerat vitae non ex. Fusce at nunc diam. Nam dui libero, tristique in vulputate at, consequat et ante. Aenean consequat metus vitae velit dapibus pretium. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris varius pellentesque ex vel ultricies. Fusce suscipit dapibus lacinia.
+
+\
+Aliquam ut ligula at nulla mattis rutrum. Duis dictum tempus diam ac tincidunt. Vivamus bibendum, augue non bibendum porta, metus orci lacinia justo, vitae consectetur ipsum nisl at libero. In convallis sem id dui blandit, id placerat libero molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed malesuada aliquam risus, pharetra pharetra lorem tincidunt vitae. Ut lobortis lorem eu tortor sollicitudin, et consectetur lorem tincidunt. Morbi ut ligula vitae felis convallis cursus. Fusce placerat nisl et mi imperdiet viverra. In semper nibh sollicitudin tortor commodo pretium. Vestibulum ultricies dignissim sollicitudin. Vivamus tristique pellentesque ante vitae tempor. Morbi facilisis urna vitae sapien blandit feugiat. Integer dapibus ut ex id dignissim.
+
+# Materials and Methods
+
+## Subheader text
+Curabitur suscipit, orci ac luctus pellentesque, lacus quam lobortis leo, sit amet rhoncus arcu dolor in felis. Morbi suscipit ullamcorper velit, vitae facilisis ligula tincidunt eu. Mauris molestie metus metus, sit amet eleifend mi volutpat sit amet. Nam dignissim ipsum eu tellus malesuada dignissim. Integer eleifend id metus vitae eleifend. Aliquam ultricies mi a eros vulputate, sit amet venenatis ante suscipit. Morbi vehicula sed nisi vitae semper. In et libero ac magna tincidunt mattis. Duis et enim eu dui scelerisque ullamcorper. Praesent pulvinar erat vitae bibendum iaculis. Maecenas dignissim ante nec dui vehicula dictum. Donec ac sodales arcu. Morbi nec lacus luctus, ultrices lacus vitae, rutrum justo.
+
+\
+Curabitur suscipit, orci ac luctus pellentesque, lacus quam lobortis leo, sit amet rhoncus arcu dolor in felis. Morbi suscipit ullamcorper velit, vitae facilisis ligula tincidunt eu. Mauris molestie metus metus, sit amet eleifend mi volutpat sit amet. Nam dignissim ipsum eu tellus malesuada dignissim. Integer eleifend id metus vitae eleifend. Aliquam ultricies mi a eros vulputate, sit amet venenatis ante suscipit. Morbi vehicula sed nisi vitae semper. In et libero ac magna tincidunt mattis. Duis et enim eu dui scelerisque ullamcorper. Praesent pulvinar erat vitae bibendum iaculis. Maecenas dignissim ante nec dui vehicula dictum. Donec ac sodales arcu. Morbi nec lacus luctus, ultrices lacus vitae, rutrum justo.
+
+## More methods subheader
+Aliquam ut ligula at nulla mattis rutrum. Duis dictum tempus diam ac tincidunt. Vivamus bibendum, augue non bibendum porta, metus orci lacinia justo, vitae consectetur ipsum nisl at libero. In convallis sem id dui blandit, id placerat libero molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed malesuada aliquam risus, pharetra pharetra lorem tincidunt vitae. Ut lobortis lorem eu tortor sollicitudin, et consectetur lorem tincidunt. Morbi ut ligula vitae felis convallis cursus. Fusce placerat nisl et mi imperdiet viverra. In semper nibh sollicitudin tortor commodo pretium. Vestibulum ultricies dignissim sollicitudin. Vivamus tristique pellentesque ante vitae tempor. Morbi facilisis urna vitae sapien blandit feugiat. Integer dapibus ut ex id dignissim,
+
+\
+(1) 
+$$\tau_d = \bar{Q}_{below} / Q_{above}$$
+
+that was an equation in Latex. 
+
+
+# Results
+
+Our data contains `r nrow(mydata)` rows and X has a standard deviation of `r sd(mydata$x)`. The regression of y on x gave an R^2^ of `r f(summary(lmobj)$r.squared)`. The relationship was significant (P `r pval(glance(lmobj)$p.value)`).
+
+\
+Curabitur semper nisl eu turpis tempus molestie. Suspendisse potenti. Proin laoreet nibh ac nisi iaculis, at efficitur augue tincidunt. Cras mi lectus, maximus a venenatis eget, pellentesque vel erat. Cras tincidunt, quam ultricies feugiat condimentum, velit ligula tincidunt velit, id venenatis lacus risus id sapien. Ut pulvinar quam ut faucibus ultricies. Ut quis enim et eros hendrerit dictum. Nunc tempus magna vel ante convallis pretium. Praesent sit amet risus vestibulum justo ultrices ultricies vel eu metus. In aliquam ultrices diam, ut tempus mi ultrices ut. Sed id lacus ac sem ullamcorper maximus ut eu leo.
+
+\
+Aliquam ut ligula at nulla mattis rutrum. Duis dictum tempus diam ac tincidunt. Vivamus bibendum, augue non bibendum porta, metus orci lacinia justo, vitae consectetur ipsum nisl at libero. In convallis sem id dui blandit, id placerat libero molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed malesuada aliquam risus, pharetra pharetra lorem tincidunt vitae. Ut lobortis lorem eu tortor sollicitudin, et consectetur lorem tincidunt. Morbi ut ligula vitae felis convallis cursus. Fusce placerat nisl et mi imperdiet viverra. In semper nibh sollicitudin tortor commodo pretium. Vestibulum ultricies dignissim sollicitudin. Vivamus tristique pellentesque ante vitae tempor. Morbi facilisis urna vitae sapien blandit feugiat. Integer dapibus ut ex id dignissim.
+
+
+# Discussion
+
+
+Curabitur semper nisl eu turpis tempus molestie. Suspendisse potenti. Proin laoreet nibh ac nisi iaculis, at efficitur augue tincidunt. Cras mi lectus, maximus a venenatis eget, pellentesque vel erat. Cras tincidunt, quam ultricies feugiat condimentum, velit ligula tincidunt velit, id venenatis lacus risus id sapien. Ut pulvinar quam ut faucibus ultricies. Ut quis enim et eros hendrerit dictum. Nunc tempus magna vel ante convallis pretium. Praesent sit amet risus vestibulum justo ultrices ultricies vel eu metus. In aliquam ultrices diam, ut tempus mi ultrices ut. Sed id lacus ac sem ullamcorper maximus ut eu leo.
+
+\
+Aliquam ut ligula at nulla mattis rutrum. Duis dictum tempus diam ac tincidunt. Vivamus bibendum, augue non bibendum porta, metus orci lacinia justo, vitae consectetur ipsum nisl at libero. In convallis sem id dui blandit, id placerat libero molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed malesuada aliquam risus, pharetra pharetra lorem tincidunt vitae. Ut lobortis lorem eu tortor sollicitudin, et consectetur lorem tincidunt. Morbi ut ligula vitae felis convallis cursus. Fusce placerat nisl et mi imperdiet viverra. In semper nibh sollicitudin tortor commodo pretium. Vestibulum ultricies dignissim sollicitudin. Vivamus tristique pellentesque ante vitae tempor. Morbi facilisis urna vitae sapien blandit feugiat. Integer dapibus ut ex id dignissim.
+
+# Acknowledgements {.unnumbered}
+We thank lots of people.
+
+# Figures {.unnumbered}
+
+
+```{r fig.width=8, fig.height=6, echo=FALSE, message=FALSE, eval=includeFigs}
+# Ideally have your figures in functions (figure1() etc.). Just an example here.
+with(mydata, plot(x,y, pch=19))
+```
+
+**Figure 1**. Pretty awesome figure caption.
+
+
+# References {.unnumbered}
+
