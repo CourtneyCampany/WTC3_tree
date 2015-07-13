@@ -97,6 +97,8 @@ wtc_aci <- merge(wtc_aci, treatments, by = "chamber")
 
 coefs <- summaryBy(Vcmax+Jmax+Rd~ leaf+temp, data=wtc_aci, FUN=mean, keep.names = TRUE)
 
+write.csv(coefs, "calculated_data/aci_gm_param.csv", row.names=FALSE)
+
 ####model ACC with above parameters 
 
 ci_seq <- seq(50, 1000, length=101)
@@ -111,18 +113,18 @@ acisunet$Cc <- with(acisunet, Ci - ALEAF / gm_agg[6,3])
 acishaat$Cc <- with(acishaat, Ci - ALEAF / gm_agg[3,3])
 acishaet$Cc <- with(acishaet, Ci - ALEAF / gm_agg[4,3])
 
-###plot of model ACC curves
-windows(8,6)
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=satlab, xlab=cclab)
-  points(ALEAF~Cc, data=acisunet, pch=17, col=suncol2,type='l',lwd=3, lty=2)
-  points(ALEAF~Cc, data=acishaat, pch=16, col=lightscol2,type='l',lwd=3)
-  points(ALEAF~Cc, data=acishaet, pch=16, col=lightscol2,type='l',lwd=3, lty=2)
-  legend("topleft", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
-         col=c(suncol2, suncol2,lightscol2,lightscol2),inset = 0.01, bty='n',cex=.8)
-
-dev.copy2pdf(file="master_scripts/paper_figures/Acc_model.pdf")
-dev.off()
+# ###plot of model ACC curves
+# windows(8,6)
+# par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+# plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=satlab, xlab=cclab)
+#   points(ALEAF~Cc, data=acisunet, pch=17, col=suncol2,type='l',lwd=3, lty=2)
+#   points(ALEAF~Cc, data=acishaat, pch=16, col=lightscol2,type='l',lwd=3)
+#   points(ALEAF~Cc, data=acishaet, pch=16, col=lightscol2,type='l',lwd=3, lty=2)
+#   legend("topleft", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
+#          col=c(suncol2, suncol2,lightscol2,lightscol2),inset = 0.01, bty='n',cex=.8)
+# 
+# dev.copy2pdf(file="master_scripts/paper_figures/Acc_model.pdf")
+# dev.off()
 
 
 

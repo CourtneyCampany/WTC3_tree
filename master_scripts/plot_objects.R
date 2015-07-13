@@ -43,7 +43,11 @@ cilab <- expression(C[i]~~(ppm))
 cclab <- expression(C[c]~~(ppm))
 cclab2 <- expression(bar(C[c])~~(ppm))
 
+deltalab <-(expression(Delta[obs]))  
+cicalab <- "Ci/Ca"
+
 drawdownlab <- expression(paste(CO[2]~drawdown,", ", C[i]-C[c]))
+drawdownlab2 <- expression(paste(CO[2]~drawdown,", ", C[a]-C[i]))
 
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
@@ -114,5 +118,6 @@ sunflecklab <- "Shade \n High Light"
 
 
 alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
+leaflightlab2 <- c("Sun", "Shade-Low Light", "Shade-High Light")
 allcols=c(suncol2, shacol2, lightscol2, "black", "black")
 

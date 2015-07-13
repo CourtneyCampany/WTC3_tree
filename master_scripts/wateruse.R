@@ -43,11 +43,14 @@ canopy_chem$lma <- with(canopy_chem, (leaf_mass/leaf_area)*10000) #g/m2
 canopy_chem$leafN_area <- with(canopy_chem, lma *(n_perc/100))
 canopy_chem<- add_campaign(canopy_chem)
 
-chem_mod <- lm(c13 ~ leafN_area, data=canopy_chem)
-#summary(chem_mod)
+# chem_mod <- lm(c13 ~ leafN_area, data=canopy_chem)
+# summary(chem_mod)
+
+chem_leaf <- lm(c13 ~ leafN_area, data=canopy_chem)
+
 
 #### Multi panel plot of WUE and 13C--------------------------------------------------------------------------------------
-# windows(8, 12)
+ # windows(8, 12)
 
 par(mfrow=c(2,1))
  
@@ -75,7 +78,7 @@ par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   plot(c13 ~ leafN_area, data=canopy_chem, subset=leaf=="sun",  col=suncol, ylim=c(-33.5,-26), xlim=c(0,4.5),
        pch=c(16, 17)[pch=canopy_chem$temp], xlab=narealab, ylab=c13lab)
   points(c13 ~ leafN_area, data=canopy_chem,  subset=leaf=="shade", col=shacol, pch=c(16, 17)[pch=canopy_chem$temp])
-  ablineclip(chem_mod, x1=min(canopy_chem$leafN_area), x2=max(canopy_chem$leafN_area), lwd=2, lty=2 )
+  ablineclip(chem_leaf, x1=min(canopy_chem$leafN_area), x2=max(canopy_chem$leafN_area), lwd=2, lty=2 )
   
   legend("bottomright", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.7)
   text(x=0, y=-26 ,"(b)", cex=1)

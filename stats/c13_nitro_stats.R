@@ -28,6 +28,9 @@ canopy_chem<- add_campaign(canopy_chem)
 chem_mod <- lm(c13 ~ leafN_area, data=canopy_chem)
 summary(chem_mod)
 
+chem_leaf <- lme(c13 ~ leafN_area, random=~1|chamber, data=canopy_chem)
+summary(chem_leaf)
+
 chem_mod2 <- lmer(c13 ~ leafN_area + (1|chamber),data=canopy_chem)
 anova(chem_mod2)
 summary(chem_mod2)
@@ -35,3 +38,17 @@ mcp.fnc(chem_mod2)
 source("functions and packages/r2glmm.R")
 rsquared.glmm(chem_mod2)
 
+
+###13C stats----------------------------------------------------------------------------------------------------
+dC_sun_temp <- lme(c13 ~ temp ,random=~1|chamber, data=canopy_chem, subset=leaf=="sun")
+summary(dC_sun_temp)
+anova(dC_sun_temp)
+
+dC_sha_temp <- lme(c13 ~ temp ,random=~1|chamber, data=canopy_chem, subset=leaf=="shade")
+summary(dC_sha_temp)
+anova(dC_sha_temp)
+
+dC_leaf <- lme(c13~ leaf, random=~1|chamber, data=canopy_chem)
+summary(dC_leaf)
+anova(dC_leaf)
+visreg(dC_leaf)
