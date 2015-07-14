@@ -25,6 +25,10 @@ ge_vars <- ge_table[, 1:3]
   ge_vars$leaflight <- gsub("shade-", "", ge_vars$leaflight)
   ge_vars$leaflight <- gsub("high", "High", ge_vars$leaflight)
   ge_vars$leaflight <- gsub("l", "L", ge_vars$leaflight)
+  ge_vars$leaf <- gsub("s", "S", ge_vars$leaf)
+  ge_vars$temp <- gsub("ambient", "Ambient", ge_vars$temp)
+  ge_vars$temp <- gsub("elevated", "Elevated", ge_vars$temp)
+  
 ge_means <- ge_table[, c(5,6,9,7,8, 10)]
 ge_se <- ge_table[, c(11,12,15,13,14,16)]
 
@@ -48,18 +52,6 @@ ge_table3 <- cbind(ge_vars, ge1)
 
 write.csv(ge_table3, "master_scripts/ge_table.csv", row.names=FALSE)
   
-#####vaiarbles with no shade high light
-####leafk, PAR, ACI, 
-  
-aci <- read.csv("calculated_data/aciparameters.csv")
-  
-  aci_agg <- summaryBy(Jmax +Vcmax ~ leaf + temp, data=aci, FUN=c(mean,se))
 
-leafk <- read.csv("calculated_data/leafK_nodrought.csv")
-
-  leafk_agg <- summaryBy(leafK ~ leaf + temp, data=leafk, FUN=c(mean,se))
-  
-leaftab <- merge(aci_agg, leafk_agg)  
-  
   
   

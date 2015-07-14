@@ -1,5 +1,5 @@
 ---
-title: "Are shade leaves lying in wait? How instantaneous responses of mesophyll conductance to light availability in shade leaves affect theories of optimal canopy carbon gain"
+title: "Are shade leaves lying in wait? How instantaneous responses of mesophyll conductance to light availability in shade leaves impacts canopy carbon gain"
 author: ""
 date: ""
 output:
@@ -63,7 +63,10 @@ library(pander)
 
 # Summary {.unnumbered}
 
-
+* overview
+* method
+* big result
+* implication
 
 # Introduction
 The need to understand and predict carbon uptake in forest ecosystems is crucially important for assessing the impacts of a changing climate. Specifically, this involves accurate upscaling of leaf level measurements to predict whole canopy function. Due to the costs and limitations of efficient light harvesting plants cannot expose all leaves to full sun [@niinemets2010review], making simple upscaling problematic. Incident PPFD declines exponentially with increasing leaf area index, creating a steep light gradient from the canopy top to bottom [@monsi2005factor], and photosynthesis (A) increases with irradiance from shade to sun until biochemical limitation occurs [@evans1995carbon]. Consequently, leaves modify structural and functional properties to efficiently intercept variable light and enhance photosynthetic capacity [@vogelman1996leaves; @valladares2004photosynthetic]. To estimate whole canopy carbon gain it is thus necessary to account for the non-linear response of photosynthesis to light by distinguishing between shaded and sunlit leaves [@de1997simple; @linderson2012up].
@@ -206,6 +209,30 @@ The difference between $\delta$^13^Ce and $\delta$^13^Co was mostly accounted fo
 
 
 photosynthetic capacity: Mesophyll conductance asymmetrically affects key photosynthetic parameters and an assumption of infinite mesophyll conductance leads to underestimation of the maximum carboxylation rate Vcmax, maximum electron transport rate Jmax [@sun2014asymmetrical].
+
+# Tables {.unnumbered}
+
+```{r tablex, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+library(ascii)
+resource_table <- read.csv("master_scripts/resource_table.csv")
+print(ascii(resource_table,  include.rownames=FALSE,
+          colnames =c("Leaf", "Temperature", "LMA", "Narea", "Vcmax", "Jmax", 
+                       "Leaf K", "WP_pre", "WP_mid", "13C")),type="pandoc")
+
+```
+**Table 1.** Canopy resouce distribution among sun and shade leaves under elevated and ambient termperatures
+
+```{r table1, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+library(ascii)
+phystable <- read.csv("master_scripts/ge_table.csv")
+print(ascii(phystable,
+            include.rownames=FALSE,
+            colnames=c("Leaf", "Temperature", "Light", "Photosynthesis", "gs", "gm", 
+                       "Ci", "Transpiration", "VPD")),
+            type='pandoc')
+
+```
+**Table 2.** Mean gas exchange parameters across leaf types with light and temperature treatments
 
 # Figures {.unnumbered}
 
