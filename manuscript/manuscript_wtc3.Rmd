@@ -131,13 +131,50 @@ $$\xi = \frac{C_{e}}{C_{e}-C_{o}}$$
 $\xi$ is the ratio of the CO~2~ entering the well mixed leaf chamber to the CO~2~ draw down by the leaf.
 
 \
-Second, leaf ^13^CO~2~ during C~3~ photosynthesis ($\delta$^13^C) is the resultant discrimination from CO~2~ diffusion from the atmosphere to the site of carboxylation, consisting or a series of fractionation steps described in [@evans1986carbon]. In this experiment, a modified form of this equation presented in [@tazoe2011using] with ternary effect corrections by [@farquhar2012ternary] was used such that:
+Second, leaf ^13^CO~2~ during C~3~ photosynthesis ($\delta$^13^C) is the resultant discrimination from CO~2~ diffusion from the atmosphere to the site of carboxylation, consisting or a series of fractionation steps described in [@evans1986carbon]. In this experiment, a modified form of this equation presented in [@evans2013temperature] with ternary effect corrections by [@farquhar2012ternary] was used such that:
+
+from Evans & Von Caemmerer
+$\Delta$~o~ = $\Delta$~i~ - $\Delta$~gm~ - $\Delta$~e~ - $\Delta$~f~
+where $\Delta$~o~ is the observed discrimation and  $\Delta$~i~, $\Delta$~gm~ , $\Delta$~e~ and $\Delta$~f~ are the contritbutions of fractionataion if C~i~=C~c~, g~m~, respiration and photorespiration, respectively. The equations for each are as follows:
 
 $$
 \begin{aligned}
-\Delta^13 = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}\\
+\Delta = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}\\
             &\frac{1+t}{1-t}\left(b-a'-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}-\\
             &\frac{1+t}{1-t}\left(\frac{eR_D}{(A+R_d)C_a}(C_i-\Gamma_*)\right)- \frac{1+t}{1-t}\left(f\frac{\Gamma_*}{C_a}\right)\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Delta_i = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Delta_gm = &\frac{1+t}{1-t}\left(b-a'-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}-\\
+        
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Delta_e = &\frac{1+t}{1-t}\left(\frac{eR_D}{(A+R_d)C_a}(C_i-\Gamma_*)\right)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Delta = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}\\
+            &\frac{1+t}{1-t}\left(b-a'-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}-\\
+            &\frac{1+t}{1-t}\left(\frac{eR_D}{(A+R_d)C_a}(C_i-\Gamma_*)\right)- \frac{1+t}{1-t}\left(f\frac{\Gamma_*}{C_a}\right)\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Delta_f = & \frac{1+t}{1-t}\left(f\frac{\Gamma_*}{C_a}\right)\\
 \end{aligned}
 $$
 
@@ -193,6 +230,8 @@ leaf 13C with leaf N and what this stands for
 
 ## Stomatal conductance, mesophyll conductance and CO~2~ drawdown
 Mean g~s~ was significantly higher in shade compared to sun leaves (+18%), under their local light environment (P=0.004, Table2).  Following an increase in available light, g~s~ of shade leaves was significantly greater than both shade leaves at low light and sun leaves (P<0.001, Figure 4a). In sun leaves, g~s~ and A showed optimal behavior with diminishing rates of A with highest values of g~s~ (Figure 5a).  However, in shade leaves this relationship was clearly uncoupled.  With increased light availability, both increases in A and g~s~ in shade leaves extened the realtionship of A and g~s~ seen in sun leaves. 
+
+discrimination contributions and \delta vs ci/ca go here
 
 \
 Mean g~m~ was significantly higher in sun compared to shade leaves (+27%), under their local light environment (P=<0.001, Table2).  Following an increase in available light, g~s~ of shade leaves was significantly greater than both shade leaves at low light and sun leaves (P<0.001, Figure 4b). Relationships between g~m~ and A were nearly proportional within leaf types and light treatments (Figure 4b,c). Photosynthesis scaled postively with increases in g~m~ for all leaves and the large increases in g~m~ in shade leaves in high light resulted in the highest rates of A (Figure 5b). No differences in g~s~ nor g~m~ were detected with the warming treatment within leaf types or light treatments. Additionally, neither g~s~ nor g~m~ varied significantly across measurements campaigns (Figures S1b and S2b, respectively) and only a slight negative relationship was detected with g~m~ and increasing leaf temperature.
