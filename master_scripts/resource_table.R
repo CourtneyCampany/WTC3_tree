@@ -5,7 +5,7 @@ treatments <- read.csv("raw data/temp_trt.csv")
 ##sun shade resource data table
 ##means/se by sun/shade and temperature treatment
 
-##variables include:  WP*2, K, Narea, 13C, Vcmax, Jmax
+##variables include:  WP*2, K, Narea, 13C, Vcmax, Jmax, lma
 
 ####aci parameters--------------------------------------------------------------------------------------------------
 aciparam <- read.csv("calculated_data/aciparameters.csv")
@@ -70,8 +70,41 @@ leaf_table2 <- cbind(leaf_table2, v4)
 leaf_table2 <- cbind(leaf_table2, v5)
 leaf_table2 <- cbind(leaf_table2, v6)
 leaf_table2 <- cbind(leaf_table2, v7)
+leaf_table2 <- cbind(leaf_table2, v8)
 
-###add sigletters
+###add sigletters (order of sig letters is shade AT, ET then sun AT:ET)-----------------------------------------------------
+
+sigletter_files <- list.files(path = "master_scripts/sigletters/", pattern="slr", full.names = TRUE)
+##make names of list with file names minus extension
+sigletter_vars <- gsub("master_scripts/sigletters/", "", sigletter_files)
+sigletter_vars <- gsub(".csv", "", sigletter_vars)
+
+sigletter_list <- lapply(sigletter_files, function(x) read.csv(x))
+##add names to list
+names(sigletter_list) <- sigletter_vars
+
+##add treatments
+sigvol <- data.frame(leaf=c("shade", "shade", "sun", "sun"), temp=c("ambient", "elevated", "ambient", "elevated"))
+siglet <- lapply(sigletter_list, function(x) cbind(x, sigvol))
+siglet2 <- lapply(siglet, function(x) as.data.frame(x))
+
+###do I need to match the sigletters order with that of datatable?
+siglet3 <- list()
+for(i in 1:8) {
+  siglet3[[i]] <- siglet2[[i]][c(3,4,1,2),] 
+}
+
+###add sigletters to table--------------------------------------------------------------------------------------------------
+
+leaf_table2[[3]] <- paste(leaf_table2[[3]], siglet3[[4]][,1])
+leaf_table2[[4]] <- paste(leaf_table2[[4]], siglet3[[6]][,1])
+leaf_table2[[5]] <- paste(leaf_table2[[5]], siglet3[[8]][,1])
+leaf_table2[[6]] <- paste(leaf_table2[[6]], siglet3[[2]][,1])
+leaf_table2[[7]] <- paste(leaf_table2[[7]], siglet3[[3]][,1])
+leaf_table2[[8]] <- paste(leaf_table2[[8]], siglet3[[7]][,1])
+leaf_table2[[9]] <- paste(leaf_table2[[9]], siglet3[[5]][,1])
+leaf_table2[[10]] <- paste(leaf_table2[[10]], siglet3[[1]][,1])
+
 
 write.csv(leaf_table2, "master_scripts/resource_table.csv", row.names=FALSE)
 

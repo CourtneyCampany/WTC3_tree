@@ -93,4 +93,37 @@ gm_lightson_siglets2 <- gm_lightson_siglets$mcletters$Letters
 
 visreg(gm_leaf)
 write.csv(gm_lightson_siglets2, "master_scripts/sigletters/sl_gm_lightson.csv", row.names=FALSE)
+
+###vpd-----------------------------------------------------------------------------------------
+vpd_temp <- lme(VpdL ~ temp ,random=~1|chamber, data=lightson)
+summary(vpd_temp)
+anova(vpd_temp)
+visreg(vpd_temp)
+
+vpd_leaf <- lme(VpdL~ tukeyid, random=~1|chamber, data=ge_agg)
+  summary(vpd_leaf)
+  anova(vpd_leaf)
+  visreg(vpd_leaf)
+
+tukey_vpd<- glht(vpd_leaf, linfct = mcp(tukeyid = "Tukey"))
+vpd_lightson_siglets<- cld(tukey_vpd)
+vpd_lightson_siglets2 <- vpd_lightson_siglets$mcletters$Letters
+
+write.csv(vpd_lightson_siglets2, "master_scripts/sigletters/sl_vpd_lightson.csv", row.names=FALSE)
+
+###E-----------------------------------------------------------------------------------------
+e_temp <- lme(Trmmol ~ temp ,random=~1|chamber, data=lightson)
+summary(e_temp)
+anova(e_temp)
+
+e_leaf <- lme(Trmmol~ tukeyid, random=~1|chamber, data=ge_agg)
+summary(e_leaf)
+anova(e_leaf)
+visreg(e_leaf)
+
+tukey_e<- glht(e_leaf, linfct = mcp(tukeyid = "Tukey"))
+e_lightson_siglets<- cld(tukey_e)
+e_lightson_siglets2 <- e_lightson_siglets$mcletters$Letters
+
+write.csv(e_lightson_siglets2, "master_scripts/sigletters/sl_e_lightson.csv", row.names=FALSE)
   
