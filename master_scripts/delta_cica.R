@@ -2,6 +2,10 @@
 # source("master_scripts/plot_objects.R")
 # source("functions and packages/packages.R")
 
+# library(visreg)
+# library(multcomp)
+# library(nlme)
+
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 DELTA <- read.csv("calculated_data/gmes_wellwatered.csv")
 
@@ -15,6 +19,16 @@ palette(c(lightscol, shacol, suncol))
 cica_seq <- seq(min(0,1, length=101))
 
 delta_pred <- (4.4+(27-4.4)*cica_seq)
+
+
+# delta_mod <- lme(DELTA~ CiCa + leaflight, random=~1|chamber, data=DELTA_agg)
+# summary(delta_mod)
+# anova(delta_mod)
+# visreg(delta_mod)
+# 
+# tukey_delta<- glht(delta_mod, linfct = mcp(leaflight = "Tukey"))
+# delta_siglets<- cld(tukey_delta)
+# delta_siglets2 <- delta_siglets$mcletters$Letters
   
  #windows(8,6)
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
