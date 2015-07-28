@@ -105,6 +105,10 @@ leaf_table2[[8]] <- paste(leaf_table2[[8]], siglet3[[7]][,1])
 leaf_table2[[9]] <- paste(leaf_table2[[9]], siglet3[[5]][,1])
 leaf_table2[[10]] <- paste(leaf_table2[[10]], siglet3[[1]][,1])
 
+##add pval at bottom
+
+pval <- as.vector(c("Container Effect (P)",0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973))
+
 
 write.csv(leaf_table2, "master_scripts/resource_table.csv", row.names=FALSE)
 

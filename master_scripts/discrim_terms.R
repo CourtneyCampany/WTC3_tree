@@ -1,6 +1,9 @@
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
-source("master_scripts/plot_objects.R")
+
+library(visreg)
+library(multcomp)
+library(nlme)
 
 ### investigate the relative contributions to the observed leaf delta c13 discrimination
 
@@ -13,18 +16,31 @@ discrim <- read.csv("calculated_data/discrim_wellwatered.csv")
 ###get average by id
 discrim_agg <- summaryBy(gm+ rm_resist+ DiminusDo + delta_i + delta_gm + delta_e + delta_f ~ chamber+id+leaf +light+temp+leaflight+Month, 
                          data=discrim, FUN=mean, keep.names=TRUE)
+discrim_agg$gm_perc <- with(discrim_agg, delta_gm/(delta_gm+delta_e+delta_f))
+discrim_agg$tukeyid <- as.factor(paste(discrim_agg$leaf, discrim_agg$temp, sep="-"))
 
 ##then treatments + Month
-discrim2 <- summaryBy(delta_i + delta_gm + delta_e + delta_f ~ temp+leaflight+Month, data=discrim_agg, 
+discrim2 <- summaryBy(delta_i + delta_gm + delta_e + delta_f+gm_perc ~ temp+leaflight+Month, data=discrim_agg, 
                       FUN=mean, keep.names=TRUE)
 
 ##then treatments 
-discrim3 <- summaryBy(delta_i + delta_gm + delta_e + delta_f ~ temp+leaflight, data=discrim_agg, 
-FUN=mean, keep.names=TRUE)
+discrim3 <- summaryBy(gm_perc ~ temp+leaflight, data=discrim_agg, FUN=c(mean,se))
 
 ##then leaf type only
-discrim4 <- summaryBy(delta_i + delta_gm + delta_e + delta_f ~ leaflight, data=discrim_agg,  FUN=mean, keep.names=TRUE)
+discrim4 <- summaryBy(gm_perc ~ leaflight, data=discrim_agg,  FUN=c(mean,se))
 
+gmcontr <- with(discrim_agg, mean(gm_perc))
+gm_se <- with(discrim_agg, se(gm_perc))
+
+
+
+gmperc_mod <- lme(gm_perc ~ tukeyid ,random=~1|chamber, data=discrim_agg)
+summary(gmperc_mod)
+anova(gmperc_mod)
+visreg(gmperc_mod)
+confint(gmperc_mod)
+
+mod <- glm(gm_perc ~ tukeyid, family="binomial", data=discrim_agg)
 
 
 ###to examine bad data plot gm resistance vs Di-D0 intstead of gm
