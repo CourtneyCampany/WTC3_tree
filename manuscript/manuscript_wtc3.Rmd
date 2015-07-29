@@ -115,7 +115,7 @@ In this study we use *Eucalyptus tereticornis* Sm. trees, planted in climate con
 # Materials and Methods
 
 ## Whole tree chamber experimental design
-Twelve *Eucalyptus tereticornis* seedlings, chosen from a single local Cumberland plain cohort, were planted in March 2013 into 12 whole-tree chambers (WTC) at the Hawkesbury Forest Experiment site near Richmond, NSW, Australia. Each chamber has a maximum height of 10 m and seedlings were grown for 15 months.  A detailed description of the WTC operation and design is available in [@barton2010whole]. Six chambers were set to match outside ambient air temperatures (AT) while the remaining 6 experienced a constant elevated air temperature treatment of +3&deg;C (ET, ). The CO~2~ concentration inside the chamber was set to match outside air, tracking diurnal changes. Due to the temperature treatment air humidity was not explicitly controlled. Trees were watered weekly with 70 L from March 2013 to November 2013.  From December 2013 to final harvest trees were watered fortnightly with the mean monthly (100 yr) rainfall amount.  In February 2013 half of the chambers (3 each of AT and ET) were subjected to a drought treatment by withholding watering. Due to a limited range of data for the drought treatment only well-watered trees are reported here.
+Twelve *Eucalyptus tereticornis* seedlings, chosen from a single local Cumberland plain cohort, were planted in March 2013 into 12 whole-tree chambers (WTC) at the Hawkesbury Forest Experiment site near Richmond, NSW, Australia. Each chamber has a maximum height of 10 m and seedlings were grown for 15 months.  A detailed description of the WTC operation and design is available in [@barton2010whole]. Six chambers were set to match outside ambient air temperatures (AT) while the remaining 6 experienced a constant elevated air temperature treatment of +3&deg;C (ET, Figure `r airvars`). The CO~2~ concentration inside the chamber was set to match outside air, tracking diurnal changes. Due to the temperature treatment air humidity was not explicitly controlled. Trees were watered weekly with 70 L from March 2013 to November 2013.  From December 2013 to final harvest trees were watered fortnightly with the mean monthly (100 yr) rainfall amount.  In February 2013 half of the chambers (3 each of AT and ET) were subjected to a drought treatment by withholding watering. Due to a limited range of data for the drought treatment only well-watered trees are reported here.
 
 \
 Before seedlings were planted into each chamber they were maintained under well watered conditions in 35 L pots and kept inside each chamber. This allowed for seedlings to gain sufficient biomass before planting while also allowing them to acclimate to chamber temperature treatments. Seedlings were planted into each chamber after mean seedling height reached 100 cm.  After 2 months, floors were installed 45 cm from the soil surface.  This enabled chamber fluxes of CO~2~ and H~2~O from the whole tree canopy to be monitored. Gas exchange measurements were initiated in October 2013 when trees had both ample height growth and canopy development for realistic canopy light gradients to be measured.  At this point, trees under AT treatment had a mean diameter of 28.2&pm;1.1 mm, height of 348&pm;15.1 cm and an estimated leaf area of 3.9&pm;0.1 m^2^. For ET treatments trees had a mean diameter of 34.1&pm;2.1 mm, height of 418.3&pm;23.1 cm and an estimated leaf area of 6.2&pm;0.2 m^2^.
@@ -312,8 +312,10 @@ photosynthetic capacity: Mesophyll conductance asymmetrically affects key photos
 **Table 2**. 
 
 # Figures {.unnumbered}
+```{r airvars, fig.width=6, fig.height=8, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/air_vars.R")
+```
 
-**airvars goes here**
 **Figure 1**
 
 ```{r par, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}

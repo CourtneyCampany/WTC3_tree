@@ -1,58 +1,105 @@
+library(plyr)
 library(devtools)
 library(HIEv)
 library(doBy)
 
+
 setToken("u2xEk2wTte3AsdBxGTr5")
 
 #Search HIEv for the ROS weather station data during the pot experiment
-wtc_search <- searchHIEv(filename="WTC", startDate="2013-08-01", endDate="2014-06-01")
+wtc_search <- searchHIEv(filename="wTCMET")
+wtc_search2 <- searchHIEv(filename="OUTMET")
 
-ch01 <- downloadTOA5(filename="WTC01_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch02 <- downloadTOA5(filename="WTC02_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch03 <- downloadTOA5(filename="WTC03_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch04 <- downloadTOA5(filename="WTC04_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch05 <- downloadTOA5(filename="WTC05_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch06 <- downloadTOA5(filename="WTC06_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch07 <- downloadTOA5(filename="WTC07_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch08 <- downloadTOA5(filename="WTC08_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch09 <- downloadTOA5(filename="WTC09_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch10 <- downloadTOA5(filename="WTC10_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch11 <- downloadTOA5(filename="WTC11_Table2", startDate = "2013-09-01",endDate="2014-06-01")
-ch12 <- downloadTOA5(filename="WTC12_Table2", startDate = "2013-09-01",endDate="2014-06-01")
+met_names <- 
 
-ch_list <- list(ch01, ch01, ch03, ch04, ch05, ch06, ch07, ch08, ch09, ch10, ch11, ch12)
+###download both sets met files (PPFD oustide chamber and AIR and )
+oct_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20131001")
+nov_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20131101")
+dec_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20131201")
+jan_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20140101")
+feb_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20140201")
+mar_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20140301")
+apr_met <- downloadCSV(filename="WTC_TEMP_CM_WTCMET_20140401")
 
-test<- ch01[complete.cases(ch01),]
-row.names(test) <- NULL
+oct_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20131001")
+nov_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20131101")
+dec_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20131201")
+jan_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20140101")
+feb_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20140201")
+mar_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20140301")
+apr_met2 <- downloadCSV(filename="WTC_TEMP_CM_OUTMET_20140401")
 
-test2 < test[, c("Date", "PPFD_Avg")]
 
-test_agg <- summaryBy(PPFD_Avg ~ Date, data=ch01,FUN=test)
+chamber_met <- list(oct_met, nov_met, dec_met, jan_met, feb_met, mar_met, apr_met)
+outside_met <- list(oct_met2, nov_met2, dec_met2, jan_met2, feb_met2, mar_met2, apr_met2)
 
-names(test)[4] <- "Temp"
+##function to keep datetime, Tair, RH----------------------------------------------------------------------------------
 
-met_fun <- function(x) {
-  names(x)[4] <- "Temperature"
-   x$ppfd15_mol <- x$PPFD_Avg/1000000
-   x$par15_mol_s <- x$ppfd15_mol*60
-  y <- x[, c("DateTime", "PPFD_Avg", "Temperature", "par15_mol_s","Date")]
-  return(y)
+vars_func <- function(x) {
+  
+    dat<- x[ , c("chamber", "RH_al","DateTime", "Tair_al", "PPFD_Avg")]
+    
+    dat$PPFD_Avg <- ifelse(dat$PPFD_Avg < 0, 0, dat$PPFD_Avg)
+    dat$ppfd_mol <- dat$PPFD_Avg/1000000
+    dat$PPFD15_mol_s <- dat$ppfd_mol*15*60
+    
+    dat$Timestamp <- ymd_hms(dat$DateTime)
+    dat$Date <- as.Date(dat$Timestamp)
+    
+    dat2 <- dat[, c("chamber", "DateTime", "RH_al", "Tair_al", "PPFD15_mol_s", "Date")]
+   return(dat2)
   }
+  
+chams_met <- lapply(chamber_met, vars_func)  
+chams_met2 <- rbind.fill(chams_met)
 
-ch_met <- lapply(ch_list,  met_fun)
+library(plantecophys)
+##use ecophys to conver rh to vpd
+chams_met2$VPD <- RHtoVPD(chams_met2$RH_al, chams_met2$Tair_al)
 
-###get total daily par for each chamber and then save as a dataframe
+###function to keep PPFD-----------------------------------------------------------------------------------------------
 
-daypar <- lapply(ch_met, function(x) aggregate(par15_mol_s ~ Date, data=x,FUN=sum))
+ppfd_fun <- function(x) {
+  
+  dat<- x[ , c("DateTime", "PAR")]
+  
+  dat$PAR <- ifelse(dat$PAR < 0, 0, dat$PAR)
+  dat$ppfd_mol <- dat$PAR/1000000
+  dat$PPFD15_mol_s <- dat$ppfd_mol*15*60
+  
+  dat$Timestamp <- ymd_hms(dat$DateTime)
+  dat$Date <- as.Date(dat$Timestamp)
+  
+  dat2 <- dat[,c("DateTime", "Date", "PPFD15_mol_s")]
+  return(dat2)
+}
 
-with(daypar[[4]], plot(Date, par15_mol_s, type = "l"))
+outside_ppfd <- lapply(outside_met, ppfd_fun)  
+chams_ppfd2 <- rbind.fill(outside_ppfd)
 
-###air temp
 
-airvars_min <- lapply(ch_met, function(x) aggregate(Temperature~Date, data=x, FUN=min))
-airvars_max <- lapply(ch_met, function(x) aggregate(Temperature~Date, data=x, FUN=max))
-airvars_mean <- lapply(ch_met, function(x) aggregate(Temperature~Date, data=x, FUN=mean))
+###get total daily par for each chamber and outside chamber and then save as a dataframe
 
-with(airvars_min[[2]], plot(Date, Temperature, type = "l", col="red"))   
+PPFD_outside <- summaryBy(PPFD15_mol_s~Date, data=chams_ppfd2, FUN=sum, keep.names=TRUE)
+names(PPFD_outside)[2] <- "PPFD_day"
+
+PPFD_chamber <- summaryBy(PPFD15_mol_s~Date+chamber, data=chams_met2, FUN=sum, keep.names=TRUE)
+names(PPFD_chamber)[3] <- "PPFD_day"
+
+#with(PPFD_outside, plot(Date, PPFD15_mol_s, type = "l"))
+with(PPFD_chamber, plot(Date, PPFD15_mol_s, col=chamber))
+
+write.csv(PPFD_outside, "calculated_data/PPFD_outside.csv", row.names=FALSE)
+write.csv(PPFD_chamber, "calculated_data/PPFD_chamber.csv", row.names=FALSE)
+
+
+###air temp, and VPD inside chamber
+met_chamber <- summaryBy(VPD+Tair_al~Date+chamber, data=chams_met2, FUN=c(min, max, mean))
+
+write.csv(met_chamber, "calculated_data/met_chamber.csv", row.names=FALSE)
+
+
+with(met_chamber, plot(Date, Tair_al.max, type = "l", col="red"))   
+with(met_chamber, points(Date, Tair_al.min, type = "l", col="blue")) 
 
 

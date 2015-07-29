@@ -1,94 +1,86 @@
- source("functions and packages/packages.R")
- source("functions and packages/functions.R")
- source("master_scripts/plot_objects.R")
-library(lubridate)
+#  source("functions and packages/packages.R")
+#  source("functions and packages/functions.R")
+#  source("master_scripts/plot_objects.R")
+
+
+ treatments <- read.csv("raw data/temp_trt.csv")
+ #read in calculated met data by chamber
  
-####convert 1min PPFD and temperature readings into plot for manuscript 
+ PPFD_outside<- read.csv("calculated_data/PPFD_outside.csv")
+ PPFD_outside$Date <- as.Date(PPFD_outside$Date)
+  
+ PPFD_chamber<- read.csv("calculated_data/PPFD_chamber.csv")
+  PPFD_chamber$chamber <- gsub("C", "ch", PPFD_chamber$chamber)
+  PPFD_chamber <- merge(PPFD_chamber, treatments)
+  PPFD_chamber$chamber <- as.factor(PPFD_chamber$chamber)
+  PPFD_chamber$Date <- as.Date(PPFD_chamber$Date)
  
-treatments <- read.csv("raw data/temp_trt.csv")
+ met_chamber<- read.csv("calculated_data/met_chamber.csv")
+   met_chamber$chamber <- gsub("C", "ch", met_chamber$chamber)
+  met_chamber <- merge(met_chamber, treatments)
+  met_chamber$Date <- as.Date(met_chamber$Date)
 
-### load data that has been downloaded into met data folder
-met_names<- list.files(path="wtc_met/",pattern="Table2",full.names=TRUE)
+PPFD_chamber_clean <- PPFD_chamber[PPFD_chamber$chamber!="ch03",]
 
-met_names2 <- gsub("wtc_met/", "", met_names)
-met_names2 <- gsub(".dat", "", met_names2)
-met_names2 <- gsub("_Table2", "", met_names2)
-met_names2 <- gsub("WTC", "ch", met_names2)
+PPFD_agg <- summaryBy(PPFD_day~temp+Date, data=PPFD_chamber_clean, FUN=mean, keep.names = TRUE)   
+met_cham_agg <- summaryBy(VPD.max+Tair_al.min+Tair_al.max ~ Date+temp, data=met_chamber, FUN=mean, keep.names = TRUE)
 
-cham <- substr(met_names2, 0,4)
+##3 PANEl plots with PPFD, TEMP, VPD----------------------------------------------------------------
 
-met_files <- llply(list.files(path="wtc_met/",pattern="Table2",full.names=TRUE),function(filename) {
-  dat=read.csv(filename, header=TRUE)
-})
+startday <- as.Date(strptime("10-01-2013", format = "%m-%d-%Y", tz=""))
+xAT <- seq.Date(startday, by="month", length=8,format = "%m-%d-%Y")
+tminlab <- expression(T[min])
+tmaxlab <- expression(T[max])
+templab <- expression(Temperature~~(degree*C))
+vpdmax <- expression(VPD[max]~~(kPa))
 
-
-#actual file names
-met_data <- setNames(met_files, met_names2)
-
-met_fun <- function(x) {
-dat<- x[ -c(1:4), c(1,3:4)]
- names(dat)[1:3] <- c("Timestamp", "PPFD", "Temperature")
- dat$PPFD <- as.numeric(as.character(dat$PPFD))
- dat$Temperature <- as.numeric(as.character(dat$Temperature))
- dat$PPFD <- ifelse(dat$PPFD < 0, 0, dat$PPFD)
- dat$ppfd_mol <- dat$PPFD/1000000
- dat$ppfd_mol_min <- dat$ppfd_mol*60
- 
- dat$Timestamp <- ymd_hms(dat$Timestamp)
- dat$Date <- as.Date(dat$Timestamp)
- 
- dat2 <- dat[, c(1, 3, 5:6)]
-return(dat2)
-}
-
-# test <- met_data[[5]]
-# test2 <- met_fun(test)
-
-met_data <- lapply(met_data,  met_fun)
-
-###add chamber
-for (i in 1:134){
-  met_data[[i]]$chamber <- cham[i]
-}
-
-##make one big dataframe and add treatments
-met_data_all <- rbind.fill(met_data)
-met_data_all <- merge(met_data_all, treatments)
-
-###summary of PPFD and temp data 
-
-PPFD_day <- summaryBy(ppfd_mol_min~Date+chamber+temp, data=met_data_all, FUN=sum, keep.names=TRUE)
-PPFD_day$chamber <- as.factor(PPFD_day$chamber)
-
-temp_day <- summaryBy(Temperature~Date+chamber+temp, data=met_data_all, FUN=c(mean, max, min))
-temp_day$chamber <- as.factor(temp_day$chamber)
-
-###PPFD PLOTs------------------------------------------------------------------------------------------------------------
-
-plot(ppfd_mol_min ~Date, data=PPFD_day, col=chamber)
-
-clean_PPFD <- PPFD_day[PPFD_day$chamber != "ch03",]
-
-plot(ppfd_mol_min ~Date, data=clean_PPFD, col=chamber, pch=16)
-
-with(clean_PPFD[clean_PPFD$chamber == "ch01",], plot(Date, ppfd_mol_min, type = "l", col="red"))
-  points(ppfd_mol_min~Date, type = "l", col="blue", data=clean_PPFD[clean_PPFD$chamber == "ch02",])
+xlim1 <- as.Date(strptime("10-01-2013", format = "%m-%d-%Y", tz=""))
+xlim2 <- as.Date(strptime("05-31-2013", format = "%m-%d-%Y", tz=""))
+xlimdays <- c(xlim1, xlim2)
+dayparlab <- expression(PPFD[day]~~(mols~m^-2~d^-1))
 
 
-##plotting of PPFD
-palette(c("black", "red"))
-plot(ppfd_mol_min ~Date, data=PPFD_day[PPFD_day$chamber!= "ch03",], col=temp, pch=16)
+#windows(7,7)
+par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(2.5,1,0),mfrow=c(3,1),  
+    omi=c(.5,0,0.1,0.1))
 
-plot(ppfd_mol_min ~Date, data=clean_PPFD, type='n')
-palette(rainbow(12))
-for(i in 1:length(unique(clean_PPFD$chamber))){
-  points(ppfd_mol_min ~Date, data=clean_PPFD, col=palette(), type="l")
-}
+#1: PPFD PLOTs
+par(mar=c(0,7,2,2))
+plot(PPFD_day ~ Date, data=PPFD_outside, type='l',col="blue",lwd=2, lty=1,  xlab="", ylab=dayparlab, axes=FALSE)
 
-###TEMP PLOTS------------------------------------------------------------------------------------------------------------
+axis(2)
+axis.Date(1, at=xAT, labels=FALSE)
+box()
+text(x=15979, y=62.5, "(a)", cex=1.51)
 
-palette(c("black", "red"))
-with(temp_day, plot(Date, Temperature.max, col=temp, ylim=c(-5, 50)))
+#2. VPD
+par(mar=c(0,7,0,2))
+plot(VPD.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, ylim=c(0,8.5),
+     xlab="", ylab=vpdmax, axes=FALSE)
+points(VPD.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2)
+axis(2)
+axis.Date(1, at=xAT, labels=FALSE)
+box()
+legend("topright",col=c("black","red"),lty=c(1,2),legend=c( "AT", "ET"),inset=.01,  bty='n',cex=1.51)
+text(x=15979, y=8, "(b)", cex=1.51)
 
-points(Temperature.min ~Date, data=temp_day, col=temp)
+#3:temp plot
+par(mar=c(2,7,0,2))
+plot(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, ylim=c(0, 50),
+     xlab="", ylab=templab, axes=FALSE)
+  points(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2)
+  points(Tair_al.min ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, lty=2)
+  points(Tair_al.min ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2, lty=2)
+
+legend("topright",col=c("black", "black"),lty=c(1,2),legend=c(tmaxlab,tminlab),inset=.01, cex=1.51, bty='n')
+  
+axis(2)
+axis.Date(1, at=xAT, labels=TRUE)
+box()
+text(x=15979, y=48, "(c)", cex=1.51)
+
+ #dev.copy2pdf(file="master_scripts/paper_figures/airvars.pdf")
+ #dev.off()
+
+
 
