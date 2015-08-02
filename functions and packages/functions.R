@@ -141,7 +141,7 @@ bar <- function(dv, factors, dataframe, percentage=FALSE, errbar=!percentage, ha
   if(legend & !percentage){
     if(is.null(legend.text))
       legend.text<-sort(unique(dataframe[[factors[1]]]))
-    args.legend.temp<-list(x="topright", bty=if(!legend.border)"n" else "o",
+    args.legend.temp<-list(x="topleft", pt.cex=2,cex=2, bty=if(!legend.border)"n" else "o",
                            inset=c(0,0))
     if(is.list(args.legend))
       args.legend<-modifyList(args.legend.temp, args.legend)
@@ -150,7 +150,7 @@ bar <- function(dv, factors, dataframe, percentage=FALSE, errbar=!percentage, ha
   } else if(legend & percentage){
     if(is.null(legend.text)) 
       legend.text<-c("1", "0")
-    args.legend.temp<-list(x="topright", bty=if(!legend.border)"n" else "o",
+    args.legend.temp<-list(x="topleft",pt.cex=12,cex=2, bty=if(!legend.border)"n" else "o",
                            inset=c(0,0))
     if(is.list(args.legend))
       args.legend<-modifyList(args.legend.temp, args.legend)

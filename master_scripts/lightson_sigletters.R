@@ -2,12 +2,14 @@ source("functions and packages/functions.R")
 library(doBy)
 
 gasexchange  <- read.csv("calculated_data/gmes_wellwatered.csv")
+  ##calculate CC
+  gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 
 ITE <- read.csv("calculated_data/ITE.csv")  
 ITE$tukeyid <- as.factor(paste(ITE$leaflight, ITE$temp, sep="-"))
 
 ###leaf data
-ge_agg <- summaryBy(Photo+Cond+Ci+Trmmol+gm+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
+ge_agg <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
                     data=gasexchange, FUN=mean, keep.names=TRUE)
 ge_agg$tukeyid <- as.factor(paste(ge_agg$leaflight, ge_agg$temp, sep="-"))
 
@@ -126,4 +128,50 @@ e_lightson_siglets<- cld(tukey_e)
 e_lightson_siglets2 <- e_lightson_siglets$mcletters$Letters
 
 write.csv(e_lightson_siglets2, "master_scripts/sigletters/sl_e_lightson.csv", row.names=FALSE)
+
+
+###ci-----------------------------------------------------------------------------------------
+ci_temp <- lme(Ci ~ temp ,random=~1|chamber, data=lightson)
+summary(ci_temp)
+anova(ci_temp)
+
+ci_leaf <- lme(Ci~ tukeyid, random=~1|chamber, data=ge_agg)
+summary(ci_leaf)
+anova(ci_leaf)
+visreg(ci_leaf)
+
+tukey_ci<- glht(ci_leaf, linfct = mcp(tukeyid = "Tukey"))
+ci_lightson_siglets<- cld(tukey_ci)
+ci_lightson_siglets2 <- ci_lightson_siglets$mcletters$Letters
+
+write.csv(ci_lightson_siglets2, "master_scripts/sigletters/sl_ci_lightson.csv", row.names=FALSE)
+
+###cc-----------------------------------------------------------------------------------------
+cc_temp <- lme(Cc ~ temp ,random=~1|chamber, data=lightson)
+summary(cc_temp)
+anova(cc_temp)
+
+cc_leaf <- lme(Cc~ tukeyid, random=~1|chamber, data=ge_agg)
+summary(cc_leaf)
+anova(cc_leaf)
+visreg(cc_leaf)
+
+tukey_cc<- glht(cc_leaf, linfct = mcp(tukeyid = "Tukey"))
+cc_lightson_siglets<- cld(tukey_cc)
+cc_lightson_siglets2 <- cc_lightson_siglets$mcletters$Letters
+
+write.csv(cc_lightson_siglets2, "master_scripts/sigletters/sl_cc_lightson.csv", row.names=FALSE)
+
+
+
+
+
+
+
+
+
+
+
+
+
   

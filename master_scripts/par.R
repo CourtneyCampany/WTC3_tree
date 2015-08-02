@@ -50,14 +50,9 @@ bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab
 
 
 ###for png
-# png(filename = "markdown/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
-# 
-# bar(par, c(leaf_type, month), parbar, col=c("yellowgreen", "green4"), xlab="",  ylim=c(0, 2000), 
-#     half.errbar=FALSE, mar=c(5,7,2,2), ylab=parlab, cex.axis=1.75, cex.lab = 2, cex.names=2,
-#     legend = FALSE)
-# legend("topleft", c("Shade", "Sun"), pch=22,inset = 0.01, pt.bg=c("yellowgreen", "green4"),
-#        bty='n', cex=2)
-# 
+# png(filename = "makepngs/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
+# bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
+#     half.errbar=FALSE, mar=c(5,6,1,1),las=1,cex.axis=1.5, cex.lab=2, cex.names=2,mgp=c(3.5,1,0))
 # dev.off()
 
 
