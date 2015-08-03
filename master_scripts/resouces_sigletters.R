@@ -36,7 +36,7 @@ write.csv(Jmax_siglets2, "master_scripts/sigletters/slr_jmax.csv", row.names=FAL
 
 #2: Vcmax: no effect of ET
 
-vc_temp <- lme(Vcmax ~ leaf ,random=~1|chamber, data=aciparam)
+vc_temp <- lme(Vcmax ~ temp ,random=~1|chamber, data=aciparam)
   summary(vc_temp)
   anova(vc_temp)
   visreg(vc_temp)

@@ -59,13 +59,33 @@ summary(ite_temp_lo)
 anova(ite_temp_lo)
 visreg(ite_temp_lo)
 
+ite_leaf3 <- lme(iWUE ~ leaflight ,random=~1|chamber, data=ITE)
+summary(ite_leaf3)
+anova(ite_leaf3)
+visreg(ite_leaf3)
+
+ite2 <- ITE[ITE$leaflight != "shade-high",]
+ites2 <- droplevels(ite2)
+ite_leaf2 <- lme(iWUE ~ leaf ,random=~1|chamber, data=ite2)
+summary(ite_leaf2)
+anova(ite_leaf2)
+visreg(ite_leaf2)
 
 ##stomatal conductance-----------------------------------------------------------------------------------------
 
-gs_temp <- lme(Cond ~ temp ,random=~1|chamber, data=lightson)
+gs_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg)
 summary(gs_temp)
 anova(gs_temp)
 
+gs_leaf2 <- lme(Cond ~ leaf ,random=~1|chamber, data=ge_agg[ge_agg$leaflight != "shade-high",])
+summary(gs_leaf2)
+anova(gs_leaf2)
+visreg(gs_leaf2)
+
+gs_leaf3 <- lme(Cond ~ leaflight ,random=~1|chamber, data=ge_agg)
+summary(gs_leaf3)
+anova(gs_leaf3)
+visreg(gs_leaf3)
 
 gs_leaf <- lme(Cond~ tukeyid, random=~1|chamber, data=ge_agg)
 summary(gs_leaf)
@@ -78,11 +98,22 @@ gs_lightson_siglets2 <- gs_lightson_siglets$mcletters$Letters
 
 visreg(gs_leaf)
 write.csv(gs_lightson_siglets2, "master_scripts/sigletters/sl_gs_lightson.csv", row.names=FALSE)
+
+
+
+
+
   
 ###mesophyll conductance-----------------------------------------------------------------------------------------
 gm_temp <- lme(gm ~ temp ,random=~1|chamber, data=lightson)
 summary(gm_temp)
 anova(gm_temp)
+
+gm_leaf2 <- lme(gm ~ leaf ,random=~1|chamber, data=ge_agg[ge_agg$leaflight != "shade-high",])
+summary(gm_leaf2)
+anova(gm_leaf2)
+visreg(gm_leaf2)
+
 
 gm_leaf <- lme(gm~ tukeyid, random=~1|chamber, data=ge_agg)
 summary(gm_leaf)
