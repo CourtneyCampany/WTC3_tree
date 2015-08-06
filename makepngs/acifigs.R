@@ -77,7 +77,7 @@ photoN_mod <- lm(Photo~leafN_area, data=Anitro[Anitro$leaflight != "shade-high",
 
 
 ###plotting------------------------------------------------------------------------------------------------------------------
-palette(c(shacol2, suncol2))
+palette(c(newshade, suncol2))
 
 
 #1: ACI
@@ -88,11 +88,11 @@ png(filename = "makepngs/aci.png", width = 11, height = 8.5, units = "in", res= 
 par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 
 #panel 1: aci curves with inset
-plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, cex=1.5,
+plot(Photo~Ci ,data= acishade_clean, col=lightscol, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, cex=1.5,
      ylab=photolab, pch=c(16, 17)[pch=acishade_clean$temp])
-points(Photo~Ci ,data= shade_redo, col=lights50col,  pch=c(16, 17)[pch=shade_redo$temp],cex=1.5)
-points(Photo~Ci ,data= sunaci_clean2,  col=suncol50,  pch=c(16, 17)[pch=sunaci_clean2$temp],cex=1.5)
-points(Photo~Ci ,data= tdlaci2,  col=suncol50,  pch=c(16, 17)[pch=tdlaci2$temp],cex=1.5)
+points(Photo~Ci ,data= shade_redo, col=lightscol,  pch=c(16, 17)[pch=shade_redo$temp],cex=1.5)
+points(Photo~Ci ,data= sunaci_clean2,  col=suncol,  pch=c(16, 17)[pch=sunaci_clean2$temp],cex=1.5)
+points(Photo~Ci ,data= tdlaci2,  col=suncol,  pch=c(16, 17)[pch=tdlaci2$temp],cex=1.5)
 
 points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,xlab=cilab, ylab="", type="l", lwd=3)
 points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  ylab="", type="l", lwd=3, lty=2)
@@ -110,10 +110,10 @@ plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", y
 axis(2, mgp=c(3, .5, 0))
 axis(1, mgp=c(3, 0, 0))
 
-points(Photo~Ci ,data= acishade_clean, col=lights50col,pch=c(16, 17)[pch=acishade_clean$temp])
-points(Photo~Ci ,data= shade_redo,col=lights50col, pch=c(16, 17)[pch=shade_redo$temp])
-points(Photo~Ci ,data= sunaci_clean2, col=suncol50, pch=c(16, 17)[pch=sunaci_clean2$temp])
-points(Photo~Ci ,data= tdlaci2, col=suncol50, pch=c(16, 17)[pch=tdlaci2$temp])
+points(Photo~Ci ,data= acishade_clean, col=lightscol,pch=c(16, 17)[pch=acishade_clean$temp])
+points(Photo~Ci ,data= shade_redo,col=lightscol, pch=c(16, 17)[pch=shade_redo$temp])
+points(Photo~Ci ,data= sunaci_clean2, col=suncol, pch=c(16, 17)[pch=sunaci_clean2$temp])
+points(Photo~Ci ,data= tdlaci2, col=suncol, pch=c(16, 17)[pch=tdlaci2$temp])
 
 points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,  type="l", lwd=2)
 points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)
@@ -143,7 +143,7 @@ png(filename = "makepngs/photonitro.png", width = 11, height = 8.5, units = "in"
 par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="sun-high",], col=suncol,  xlim=c(0,4), ylim=c(0,25),cex=2.5,
      pch=c(16, 17)[pch=Anitro$temp], ylab=satlab, xlab=narealab)
-points(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="shade-low",], col=shacol,  pch=c(16, 17)[pch=Anitro$temp],cex=2.5)
+points(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="shade-low",], col=newshacol,  pch=c(16, 17)[pch=Anitro$temp],cex=2.5)
 ablineclip(photoN_mod, x1=min(Anitro$leafN_area), x2=max(Anitro$leafN_area), lwd=4, lty=3)
 legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=2)  
 

@@ -51,7 +51,7 @@ png(filename = "makepngs/wue.png", width = 11, height = 8.5, units = "in", res= 
 par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=vpdlab, ylab=itelab,
      xlim=c(0,4), ylim=c(0,16),  pch=c(16, 17)[pch=ite_sunsha$temp],cex=2.5)
-  points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=shacol, pch=c(16, 17)[pch=ite_sunsha$temp],cex=2.5) 
+  points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=newshacol, pch=c(16, 17)[pch=ite_sunsha$temp],cex=2.5) 
   #points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
   ##now add curves
 #   p2 <- g1_ite[1:2,1]
@@ -60,9 +60,9 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
 
   p <- g1_ite[3:6,1]
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
-  for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci2[i], lty=ltys[i], lwd=4,from=min(ite_sunsha$VpdL),to= max(ite_sunsha$VpdL))
+  for(i in 1:4)curve(f(x, p[i]), add=T, col=colaci3[i], lty=ltys[i], lwd=4,from=min(ite_sunsha$VpdL),to= max(ite_sunsha$VpdL))
 
-legend("topright", c("Sun", "Shade", "AT", "ET"), pch=c(16,16,16,17), col=c(suncol2, shacol2, "black", "black"),lty=c(-1,-1,1,2),
-       inset = 0.01, bty='n',cex=2)
+legend("topright", c("Sun", "Shade", "AT", "ET"), pch=c(16,16,16,17), col=c(suncol2, newshade,
+      "black", "black"),lty=c(-1,-1,1,2),inset = 0.01, bty='n',cex=2)
 
 dev.off()

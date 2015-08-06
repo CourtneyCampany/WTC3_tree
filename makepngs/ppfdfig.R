@@ -1,6 +1,6 @@
-# source("functions and packages/functions.R")
-# source("functions and packages/packages.R")
-# source("master_scripts/plot_objects.R")
+ source("functions and packages/functions.R")
+ source("functions and packages/packages.R")
+ source("master_scripts/plot_objects.R")
 
  par <- read.csv("raw data/par.csv")
  
@@ -23,11 +23,12 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 
 
 ###PLOTTING------------------------------------------------------------------------------------------------
+#613E1C
 
 
 ##for png
 png(filename = "makepngs/ppfd.png", width = 11, height = 8.5, units = "in", res= 400)
-bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
+bar(par, c(leaf_type, Month), parbar, col=c(newshacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
     half.errbar=FALSE, mar=c(5,6,1,1),las=1,cex.axis=1.5, cex.lab=2, cex.names=2,mgp=c(3.5,1,0))
 dev.off()
 

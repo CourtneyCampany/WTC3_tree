@@ -79,7 +79,7 @@ gmA_fleck_mod2 <- lm(Photo~ gm  ,data=fleckdat)
 
 
 ###with smoothplot
-palette(c(lightscol, shacol, suncol))
+palette(c(lightscol, newshacol, suncol))
 
 
 ###needs A gs with and without lights-----------------------------------------------------------------------------
@@ -89,10 +89,10 @@ par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(Photo~Cond, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab="", ylab="",pch="")
 par(new=TRUE)
 smoothplot(Cond, Photo, leaflight,data=gm_agg, kgam=5, R="chamber",ylim=c(5,25), xlim=c(0,.5),
-           linecol=c(lightscol2, shacol2,suncol2),pch="", ylab=satlab, xlab=condlab)
+           linecol=c(lightscol2, newshade,suncol2),pch="", ylab=satlab, xlab=condlab)
 points(Photo~Cond, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2.5)
 
-legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=1.75)
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols2,inset = 0.01, bty='n',cex=1.75)
 
 dev.off()
 
@@ -105,10 +105,10 @@ par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(Photo~Cond, data=gm_agg[gm_agg$leaflight!="shade-high",],  col=leaflight, ylim=c(5,25), xlim=c(0,.4), xlab="", ylab="",pch="")
 par(new=TRUE)
 smoothplot(Cond, Photo, leaflight,data=gm_agg[gm_agg$leaflight!="shade-high",], kgam=5, R="chamber",ylim=c(5,25), xlim=c(0,.4),
-           linecol=c(shacol2,suncol2),pch="", ylab=satlab, xlab=condlab)
+           linecol=c(newshade,suncol2),pch="", ylab=satlab, xlab=condlab)
 points(Photo~Cond, data=gm_agg[gm_agg$leaflight!="shade-high",],  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2.5)
 
-legend("topleft", c("Sun", "Shade", "AT", "ET"), pch=c(16,16,16,17), col=c(suncol2, shacol2, "black", "black"),
+legend("topleft", c("Sun", "Shade", "AT", "ET"), pch=c(16,16,16,17), col=c(suncol2, newshade, "black", "black"),
        inset = 0.01, bty='n',cex=1.75)
 
 dev.off()
@@ -120,11 +120,11 @@ png(filename = "makepngs/agm.png", width = 11, height = 8.5, units = "in", res= 
 par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(Photo~gm, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.4), xlab=gmlab, ylab=satlab, pch="")
 predline(gmA_sun_mod2, col=suncol2,lwd=2)
-predline(gmA_sha_mod2, col=shacol2,lwd=2)
+predline(gmA_sha_mod2, col=newshade,lwd=2)
 predline(gmA_fleck_mod2, col=lightscol2,lwd=2)
 points(Photo~gm, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2.5)
 
-legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=1.75)
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols2,inset = 0.01, bty='n',cex=1.75)
 
 dev.off()
 

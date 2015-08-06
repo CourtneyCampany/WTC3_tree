@@ -18,7 +18,7 @@ gasex_agg$leaflight <- factor(gasex_agg$leaflight, levels = leaforder)
 
 #lightson <- gasex_agg[gasex_agg$leaflight != "sun-high",]
 
-cols <- c(shacol2, suncol2, lightscol2)
+cols <- c(newshade, suncol2, lightscol2)
 
 ####PLOTTING-------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ png(filename = "makepngs/agsbar.png", width = 11, height = 8.5, units = "in", re
 par(mfrow=c(1,3))
 
 bar(Cond, leaflight, gasex_agg, col=cols, half.errbar=FALSE, ylim=c(0, 0.3),names.arg=FALSE,xlab="",
-    mar=c(5,6,2,1), ylab=condlab, cex.axis=1.5, cex.lab = 2,legend=F)
+    mar=c(5,6,2,1), ylab=condlab, cex.axis=1.75, cex.lab = 2.25,legend=F)
 abline(v=2.5, lty=5, lwd=2)
 
 # mtext("Shade \n Low Light", side=1,at=.725, line=3.5, cex=1.2 )
@@ -39,16 +39,16 @@ abline(v=2.5, lty=5, lwd=2)
 
 ####mesophyll conductance
 bar(gm, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0, 0.225),names.arg=FALSE,
-    mar=c(5,6,2,1), ylab=gmlab,  cex.axis=1.5, cex.lab = 2, legend=F)
+    mar=c(5,6,2,1), ylab=gmlab,  cex.axis=1.75, cex.lab = 2.25, legend=F)
 abline(v=2.5, lty=5, lwd=2)
 
-mtext("Shade \n Low Light", side=1,at=.725, line=3.5, cex=1.2  )
-mtext("Sun", side=1,at=1.9, line=2.5 , cex=1.2 )
-mtext("Shade \n High Light", side=1,at=3.15, line=3.5, cex=1.2  )
+mtext("Shade \n Low Light", side=1,at=.725, line=3.5, cex=1.5  )
+mtext("Sun", side=1,at=1.9, line=2.5 , cex=1.5 )
+mtext("Shade \n High Light", side=1,at=3.15, line=3.5, cex=1.5  )
 
 ####photosynthesis
 bar(Photo, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0, 20),names.arg=FALSE,
-    mar=c(5,6,2,2), ylab=satlab,  cex.axis=1.5, cex.lab = 2, legend=F)
+    mar=c(5,6,2,2), ylab=satlab,  cex.axis=1.75, cex.lab = 2.25, legend=F)
 abline(v=2.5, lty=5, lwd=2)
 
 # mtext("Shade \n Low Light", side=1,at=.725, line=3.5, cex=1.2 )
