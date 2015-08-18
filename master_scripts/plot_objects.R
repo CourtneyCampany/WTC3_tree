@@ -78,9 +78,11 @@ ltys <- c(1,2, 1,2)
 suncol2 <- "#005300"
 shacol2 <- "#61726C"
 lightscol2 <- "#E68A00"
+newshade <- ("#613E1C")
 
 suncol <- alpha(suncol2, alpha=.75)
 shacol <- alpha(shacol2 , alpha=.75)
+newshacol <- alpha(newshade, alpha=.75)
 
 lightscol <- alpha(lightscol2, .75)
 
@@ -99,6 +101,7 @@ trtcols <-c(suncol2, suncol2, shacol2, shacol2)
 
 colaci <-c(suncol2, suncol2, lightscol2, lightscol2)
 colaci2 <-c( shacol, shacol,suncol, suncol)
+colaci3 <-c( newshade, newshade,suncol, suncol)
 leafcols <- c(suncol, suncol, shacol, shacol, lightscol, lightscol)
 lightlab <- c(lightscol,shacol)
 
@@ -120,4 +123,4 @@ sunflecklab <- "Shade \n High Light"
 alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
 leaflightlab2 <- c("Sun", "Shade-Low Light", "Shade-High Light")
 allcols=c(suncol2, shacol2, lightscol2, "black", "black")
-
+allcols2=c(suncol2, newshade, lightscol2, "black", "black")
