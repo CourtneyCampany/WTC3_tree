@@ -26,25 +26,25 @@ gasex_agg$Month <- factor(gasex_agg$Month, levels = Morder)
 ###shade black colors for each month to test
 library(scales)
 ##sun col
-octcol <- alpha(suncol2, alpha=.4)
-deccol <- alpha(suncol2, alpha=.55)
-jancol <- alpha(suncol2, alpha=.65)
-febcol <- alpha(suncol2, alpha=.75)
-marcol <- alpha(suncol2, alpha=.9)
+octcol <- alpha(suncol2, alpha=.25)
+deccol <- alpha(suncol2, alpha=.4)
+jancol <- alpha(suncol2, alpha=.55)
+febcol <- alpha(suncol2, alpha=.7)
+marcol <- alpha(suncol2, alpha=.85)
 aprcol <- suncol2
 ##shad cols
-octcol2 <- alpha(shacol2, alpha=.4)
-deccol2<- alpha(shacol2, alpha=.55)
-jancol2 <- alpha(shacol2, alpha=.65)
-febcol2 <- alpha(shacol2, alpha=.75)
-marcol2 <- alpha(shacol2, alpha=.9)
+octcol2 <- alpha(shacol2, alpha=.25)
+deccol2<- alpha(shacol2, alpha=.4)
+jancol2 <- alpha(shacol2, alpha=.55)
+febcol2 <- alpha(shacol2, alpha=.7)
+marcol2 <- alpha(shacol2, alpha=.85)
 aprcol2 <- shacol2
 #fleck col
-octcol3 <- alpha(lightscol2, alpha=.4)
-deccol3<- alpha(lightscol2, alpha=.55)
-jancol3 <- alpha(lightscol2, alpha=.65)
-febcol3 <- alpha(lightscol2, alpha=.75)
-marcol3 <- alpha(lightscol2, alpha=.9)
+octcol3 <- alpha(lightscol2, alpha=.25)
+deccol3<- alpha(lightscol2, alpha=.4)
+jancol3 <- alpha(lightscol2, alpha=.55)
+febcol3 <- alpha(lightscol2, alpha=.7)
+marcol3 <- alpha(lightscol2, alpha=.85)
 aprcol3 <- lightscol2
 
 fleckalpha <- c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3)
@@ -53,17 +53,17 @@ shaalpha <- c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2)
 
 pchmonth <- c(15, 16, 17, 18, 1,2)
 
-oct4 <- alpha("black", alpha=.4)
-dec4 <- alpha("black", alpha=.55)
-jan4 <- alpha("black", alpha=.65)
-feb4 <- alpha("black", alpha=.75)
-mar4 <- alpha("black", alpha=.9)
+oct4 <- alpha("black", alpha=.25)
+dec4 <- alpha("black", alpha=.4)
+jan4 <- alpha("black", alpha=.55)
+feb4 <- alpha("black", alpha=.7)
+mar4 <- alpha("black", alpha=.85)
 apr4 <- "black"
 
 legalpha <- c(oct4, dec4, jan4, feb4, mar4, apr4)
 
 ##graph photo, gm and drawdown by temperature
-# windows(8,12)
+#windows(8,12)
 
 par(mfrow=c(3,1))
 par(mar=c(0,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
@@ -111,6 +111,6 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   points(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
   text(x=37.5, y=175, "(c)", cex=.9)
   
-#    dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp1.pdf")
-#    dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp1.pdf")
+# dev.off()
   
