@@ -11,6 +11,7 @@ gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
   gasex$cc_ci<- with(gasex, Ci/Cc)
   ##calculate drawdown
   gasex$drawdown <- with(gasex, Ci-Cc)
+  
 
 ###get average by id
 gasex_agg <- summaryBy(Ci+Cc+drawdown~ chamber+id+leaf +light+temp+leaflight+Month, data=gasex, FUN=mean, keep.names=TRUE)
@@ -22,6 +23,15 @@ gasex_agg <- summaryBy(Ci+Cc+drawdown~ chamber+id+leaf +light+temp+leaflight+Mon
 leaforder <- c("Shade", "Sun", "Sunfleck")  
 gasex_agg$leaflight <- factor(gasex_agg$leaflight, levels = leaforder)
 
+
+# library(visreg)
+# library(multcomp)
+# library(nlme)
+# drawdown_mod <- lme(drawdown~ leaflight, random=~1|chamber, data=gasex_agg)
+# summary(drawdown_mod)
+# anova(drawdown_mod)  
+# visreg(drawdown_mod)
+
 #lightson <- gasex_agg[gasex_agg$leaflight != "sun-high",]
 
 cols <- c(shacol2, suncol2, lightscol2)
@@ -30,7 +40,7 @@ cols <- c(shacol2, suncol2, lightscol2)
 
 #1: CI
 
-# windows(12,6)
+#windows(12,6)
 
 par(mfrow=c(1,3))
 

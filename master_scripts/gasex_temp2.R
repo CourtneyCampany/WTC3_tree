@@ -1,4 +1,3 @@
-# 
 # source("functions and packages/functions.R")
 # source("master_scripts/plot_objects.R")
 # source("functions and packages/packages.R")
@@ -65,7 +64,7 @@ legalpha <- c(oct4, dec4, jan4, feb4, mar4, apr4)
 
 
 ####second set of figures----------------------------------------------------------------------------------------------------
-#windows(8,12)
+#windows(6,10)
 
 par(mfrow=c(3,1))
 par(mar=c(0,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))

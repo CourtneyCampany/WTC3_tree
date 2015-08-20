@@ -41,10 +41,11 @@ par_agg <- summaryBy(par ~ leaf_type, data=parbar, FUN=mean)
 # summary(par_mod2)
 
 ###PLOTTING------------------------------------------------------------------------------------------------
- #windows(6,6)
+#windows(6,6)
 
 bar(par, c(leaf_type, Month), parbar, col=c(shacol,suncol), xlab="", ylab=parlab, ylim=c(0, 2000), 
-      half.errbar=FALSE, mar=c(4,4,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(2.5,1,0))
+      half.errbar=FALSE, mar=c(4,4,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(2.5,1,0),
+      args.legend = list(cex=1, pt.cex=1,inset=.01))
 #    dev.copy2pdf(file="master_scripts/paper_figures/ppfd.pdf")
 #    dev.off()
 

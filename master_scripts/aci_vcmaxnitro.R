@@ -1,6 +1,6 @@
-source("functions and packages/packages.R")
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
 
 treatments <- read.csv("raw data/temp_trt.csv") 
 
@@ -105,7 +105,7 @@ photoN_mod <- lm(Photo~leafN_area, data=Anitro[Anitro$leaflight != "shade-high",
 ###plotting
 palette(c(shacol2, suncol2))
   
-# windows(8,8)
+#windows(8,8)
 
 par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
@@ -123,7 +123,7 @@ plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,20
   
   legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), lty=c(1,1, 1,2),
          col=c(suncol2, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.7)
-  text(x=2045, y=42, "(a)", cex=.7)
+  text(x=2040, y=42, "(a)", cex=.7)
   
 ###panel 2: leafNarea ~ vcmax (bottom left)
 par(fig=c(0, .5, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
@@ -132,7 +132,7 @@ plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xl
        pch=c(16, 17)[pch=N_aci$temp],xlab=narealab, ylab=vclab)
   ablineclip(nitrovc_mod, x1=min(N_aci$leafN_area.mean), x2=max(N_aci$leafN_area.mean), lwd=2, lty=3)
   legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.7)
-  text(x=3.5, y=133, "(b)", cex=.7)
+  text(x=3.475, y=133, "(b)", cex=.7)
   
 ####panel bottom right 
 par(fig=c(.5, 1, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
@@ -141,7 +141,7 @@ plot(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="sun-high",], col=suncol,
   points(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="shade-low",], col=shacol,  pch=c(16, 17)[pch=Anitro$temp])
   ablineclip(photoN_mod, x1=min(Anitro$leafN_area), x2=max(Anitro$leafN_area), lwd=2, lty=3)
   #legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)  
-  text(x=4, y=25, "(c)", cex=.7)
+  text(x=3.95, y=25, "(c)", cex=.7)
  
   
 ###inset figure  
