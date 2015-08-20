@@ -80,7 +80,7 @@ palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
 points(VpdL~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
 text(y=3.5, x=37.5, "(a)", cex=.9)
 legend("topleft", leaflightlab2, pch=16, col=allcols,inset = 0.01, bty='n',cex=.8)
-legend("bottomright", Morder, pch=16, col=legalpha,inset = 0.01, bty='n',cex=.8)
+
 
 ##panel 2: gs
 par(mar=c(0,4,0,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
@@ -94,6 +94,7 @@ points(Cond~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-low",], col=Month
 palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
 points(Cond~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
 text(y=.4, x=37.5, "(b)", cex=.9)
+legend("topleft", Morder, pch=16, col=legalpha,inset = 0.01, bty='n',cex=.8)
 
 ##panel 3: drawdowngs
 par(mar=c(4,4,0,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
