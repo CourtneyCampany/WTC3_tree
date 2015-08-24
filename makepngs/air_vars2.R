@@ -39,9 +39,9 @@ xlim2 <- as.Date(strptime("05-31-2013", format = "%m-%d-%Y", tz=""))
 xlimdays <- c(xlim1, xlim2)
 dayparlab <- expression(PPFD[day]~~(mols~m^-2~d^-1))
 
+png(filename = "makepngs/airvars.png", width = 11, height = 8.5, units = "in", res= 400)
 
-#windows(7,7)
-par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(2.5,1,0),mfrow=c(3,1),  
+par(cex.axis=1.5, cex.lab=2, las=1,mgp=c(2.5,1,0),mfrow=c(3,1),  
     omi=c(.5,0,0.1,0.1))
 
 #1: PPFD PLOTs
@@ -65,9 +65,6 @@ legend("topright",col=c("black","red"),lty=c(1,2),legend=c( "AT", "ET"),inset=.0
 text(x=15979, y=8, "(b)", cex=1.51)
 
 #3:temp plot
-
-png(filename = "makepngs/airvars.png", width = 11, height = 8.5, units = "in", res= 400)
-
 par(mar=c(2,7,0,2))
 plot(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, ylim=c(0, 50),
      xlab="", ylab=templab, axes=FALSE)
@@ -82,7 +79,6 @@ axis.Date(1, at=xAT, labels=TRUE)
 box()
 text(x=15979, y=48, "(c)", cex=1.51)
 
- #dev.copy2pdf(file="master_scripts/paper_figures/airvars.pdf")
 dev.off()
 
 

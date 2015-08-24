@@ -46,17 +46,17 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
 ####plot of WUE
 # windows(8, 12)
 
-png(filename = "makepngs/wue.png", width = 11, height = 8.5, units = "in", res= 400)
+png(filename = "makepngs/wue2.png", width = 11, height = 8.5, units = "in", res= 400)
   
 par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=vpdlab, ylab=itelab,
      xlim=c(0,4), ylim=c(0,16),  pch=c(16, 17)[pch=ite_sunsha$temp],cex=2.5)
   points(ite~VpdL, data=ite_sunsha, subset=leaflight=="shade-low", col=newshacol, pch=c(16, 17)[pch=ite_sunsha$temp],cex=2.5) 
-  #points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp])
+  points(ite~VpdL, data=ite_lightson, col=lightscol, pch=c(16, 17)[pch=ite_lightson$temp],cex=2.5)
   ##now add curves
-#   p2 <- g1_ite[1:2,1]
-#   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
-#   for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=3)
+  p2 <- g1_ite[1:2,1]
+  f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000
+  for(i in 1:2)curve(f(x, p2[i]), from=min(ite_lightson$VpdL),to= max(ite_lightson$VpdL),add=T, col=lightscol, lty=ltys[i], lwd=3)
 
   p <- g1_ite[3:6,1]
   f <- function(VpdL, g1)(400*102.3) / (1.6*(g1*sqrt(VpdL)+VpdL))/1000

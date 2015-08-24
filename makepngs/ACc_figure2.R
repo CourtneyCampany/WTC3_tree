@@ -25,15 +25,15 @@ acishaat$Cc <- with(acishaat, Ci - ALEAF / gm_agg[3,3])
 acishaet$Cc <- with(acishaet, Ci - ALEAF / gm_agg[4,3])
 
 ###plot of model ACC curves
-#windows(8,6)
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+png(filename = "makepngs/acc.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mar=c(5,6,1,1), las=1, cex.axis=1.5, cex.lab=2, mgp=c(3.5,1,0))
 plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=satlab, xlab=cclab)
   points(ALEAF~Cc, data=acisunet,  col=suncol2,type='l',lwd=3, lty=2)
   points(ALEAF~Cc, data=acishaat,  col=lightscol2,type='l',lwd=3)
   points(ALEAF~Cc, data=acishaet,  col=lightscol2,type='l',lwd=3, lty=2)
-  legend("topleft", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
-          col=c(suncol2, suncol2,lightscol2,lightscol2),inset = 0.01, bty='n',cex=.8)
-
+  
+legend("topleft", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
+          col=c(suncol2, suncol2,lightscol2,lightscol2),inset = 0.01, bty='n',cex=1.5)
 
 ###inset as in aci
 par(fig=c(0.45, 0.95, 0.15,0.55), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
@@ -47,6 +47,4 @@ axis(1, mgp=c(3, 0, 0))
   points(ALEAF~Cc, col=lightscol2, data=acishaat, type="l", lwd=2)
   points(ALEAF~Cc, col=lightscol2, data=acishaet, type="l", lwd=2, lty=2)  
 
-
-# dev.copy2pdf(file="master_scripts/paper_figures/Acc_model.pdf")
-# dev.off()
+dev.off()
