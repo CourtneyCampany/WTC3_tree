@@ -1,0 +1,18 @@
+This data contains combined licor and TDL data in order to calculate mesophyll conductance as part of Courtney Campany's PhD dissertation.  This experiment measured mesophyll conductance on sun and shade leaves and shade leaves at high light. Data where taken over 7 months so:
+
+leaf: sun/shade
+light_treatment: high light or low light
+campaign/Month: both respresent the month in which data were taken
+leaflight: combines leaf and light treatments
+licor: which licor was used
+leafid: unique identifier for each measured leaf
+
+columns 12:67 are standard licor 6400 output that can are explained in the following link:
+
+https://sites.google.com/site/hievuws/facilities/glasshouse-s30/collection-codes/variable-metadata#TOC-GX-AMAX-GX-ASAT-GX-RDARK
+
+columns 68:86 are the parameters used to calculate gm with ternary corrections.  Specifics for these parameters can be found in 
+"Temperature response of carbon isotope discrimination and mesophyll conductance in tobacco" by JOHN R. EVANS & SUSANNE VON CAEMMERER. 2013
+
+columns 87:88 are mesophyll conductance in units mols CO2 m2 s-1 and bar
+ 
