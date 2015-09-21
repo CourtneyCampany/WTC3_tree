@@ -20,6 +20,11 @@ ite_agg$ite <- with(ite_agg, Photo/Trmmol)
 ite_sunsha <- ite_agg[ite_agg$leaflight != "shade-high",]
 ite_sunsha <- droplevels(ite_sunsha)
 
+# ite_mod <- lme(ite ~ leaf ,random=~1|chamber, data=ite_sunsha)
+# summary(ite_mod)
+# ite_sun <- mean(ite_sunsha[ite_sunsha$leaf == "sun", "ite"])
+# ite_sha<- mean(ite_sunsha[ite_sunsha$leaf == "shade", "ite"])
+
 ##dfr with lights on
 ite_lightson <- ite_agg[ite_agg$leaflight == "shade-high",]
 ite_lightson <- droplevels(ite_lightson)
