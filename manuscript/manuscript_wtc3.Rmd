@@ -56,7 +56,11 @@ includeFigs <- TRUE
 source("functions and packages/functions.R")
 source("functions and packages/packages.R")
 source("master_scripts/plot_objects.R")
-library(pander)
+library(pixiedust)
+
+##read table ready dataframes
+# resourcetab <- read.csv("master_scripts/resource_table.csv")
+# getab <- read.csv("master_scripts/ge_table.csv")
 
 #treatments <- read.csv("raw data/chamber_trt.csv")
 ```
