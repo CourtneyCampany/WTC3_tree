@@ -48,6 +48,10 @@ leaf_vars <- leaf_table[, 1:2]
   leaf_vars$leaf <- gsub("s", "S", leaf_vars$leaf)
   leaf_vars$temp <- gsub("ambient", "Ambient", leaf_vars$temp)
   leaf_vars$temp <- gsub("elevated", "Elevated", leaf_vars$temp)
+
+leaf_vars2 <-data.frame(Leaf = c("Sun", "", "Shade", ""), Temperature = c("AT", "ET", "AT","ET"))  
+  
+  
 ##split means and SE
 leaf_means <- leaf_table[, 3:10]
 leaf_se <- leaf_table[, 11:18]
@@ -63,7 +67,7 @@ v7 <- data.frame(paste0(sprintf("%3.2f",round(leaf_means[,7], 1)), " (", sprintf
 v8 <- data.frame(paste0(sprintf("%3.1f",round(leaf_means[,8], 1)), " (", sprintf("%1.2f",round(leaf_se[,8],2)),")"))
 
 
-leaf_table2 <- cbind(leaf_vars, v1)
+leaf_table2 <- cbind(leaf_vars2, v1)
 leaf_table2 <- cbind(leaf_table2, v2)
 leaf_table2 <- cbind(leaf_table2, v3)
 leaf_table2 <- cbind(leaf_table2, v4)
@@ -107,12 +111,11 @@ leaf_table2[[10]] <- paste(leaf_table2[[10]], siglet3[[1]][,1])
 
 ##add pval at bottom
 
-pval <- as.vector(c("Container Effect (P)",0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973))
-
+# pval <- as.vector(c("P value","Container Effect",0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973))
+# 
+# test <- rbind(leaf_table2, pval)
 
 write.csv(leaf_table2, "master_scripts/resource_table.csv", row.names=FALSE)
-
-
 
 
 

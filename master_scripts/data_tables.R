@@ -100,7 +100,18 @@ ge_table3[[9]] <- paste(ge_table3[[9]], siglet3[[8]][,1])
 ge_table3[[10]] <- paste(ge_table3[[10]], siglet3[[3]][,1])
 ge_table3[[11]] <- paste(ge_table3[[11]], siglet3[[2]][,1])
 
-write.csv(ge_table3, "master_scripts/ge_table.csv", row.names=FALSE)
+##make a better looking table label format
+ge_vars2 <- data.frame(Leaf=c("Sun", "", "Shade", "","",""), 
+                       Light=c("High", "", "Low", "", "High",""),
+                       Temperature=c("AT", "ET", "AT", "ET", "AT", "ET"))
+
+ge_table4 <- cbind(ge_vars2, ge_table3[,4:11])
+
+
+
+#pvals2 <- c("P value", "",	0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
+
+write.csv(ge_table4, "master_scripts/ge_table.csv", row.names=FALSE)
   
 
   

@@ -59,7 +59,10 @@ source("master_scripts/plot_objects.R")
 library(pixiedust)
 
 ##read table ready dataframes
-# resourcetab <- read.csv("master_scripts/resource_table.csv")
+resourcetab <- read.csv("master_scripts/resource_table.csv", stringsAsFactors = FALSE)
+getab <- read.csv("master_scripts/ge_table.csv", stringsAsFactors = FALSE)
+pval <- c(0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973)
+pval2 <- c(0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
 # getab <- read.csv("master_scripts/ge_table.csv")
 
 #treatments <- read.csv("raw data/chamber_trt.csv")
@@ -302,7 +305,7 @@ If shade leaves "lie in wait" for sunflecks then perhaps we should consider an a
 Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements to the canopy. Although the distribution of resources, such as N and water, define leaf photosynthetic capacity it is the physiological behaviour of individual leaves which actually determine C gain. These findings suggest that current theories of leaf optimal behaviour should be extended to include dynamic light environments, which will have important implications for process based models that predict canopy C gain from rates of leaf photosynthesis. Furthermore, the dynamic nature of g~m~ cannot be simply parameterized in tree growth models and possibly should be excluded until it can be represented properly. Additional empirical data across multiple tree species are needed to determine both the mechanisms and the capacity of g~m~ to rapidly increase CO~2~ drawdown. To improve our ability to predict whole canopy C gain future research should prioritize the incorporation of both sun and shade leaf physiology, which may be optimized differently.
 
 # List of Tables
-**Table 1**. *Eucalyptus tereticornis* leaf traits and the distribution of resources between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, leaf N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Different letters represent significant differences between treatments. The P value represents the overall difference between leaf types and warming treatments.
+**Table 1**. *Eucalyptus tereticornis* leaf traits and the distribution of resources between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, leaf N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and leaf N~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between treatments. The P value represents the overall difference between leaf types and warming treatments.
 
 \
 **Table 2**. Responses of leaf level gas exchange parameters of *Eucalyptus tereticornis* trees between full sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across all gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between treatments. The P value represents the overall difference between leaf types and both light and warming treatments.
@@ -341,10 +344,32 @@ Here we show that dynamic physiological responses of shade leaves to altered lig
 **Figure S3**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign.
 
 # Tables {.unnumbered}
-**Table 1**. 
+**Table 1**. *Eucalyptus tereticornis* leaf traits and the distribution of resources between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, leaf N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf Nitrogen~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between treatments. The P value represents the overall difference between leaf types and warming treatments.
+
+```{r, echo=FALSE}
+resourcetab2 <- rbind(resourcetab, c("P value","", as.character(pval)))
+greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
+
+dust(resourcetab2)+
+  sprinkle_colnames("Leaf", "Temperature", "LMA", "Leaf N~area~", "Vc~max~", "J~max~","K","WP~pre~","WP~mid~", paste0(greeks['delta'],"^13^c")) +
+  sprinkle(rows= 1, part="head",bold=TRUE)+
+  sprinkle_print_method("markdown")
+```
+
 
 \
-**Table 2**. 
+**Table 2**. Responses of leaf level gas exchange parameters of *Eucalyptus tereticornis* trees between full sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across all gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between treatments. The P value represents the overall difference between leaf types and both light and warming treatments.
+
+```{r, echo=FALSE}
+getab2 <- rbind(getab, c("P value","","", as.character(pval2)))
+greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
+
+dust(getab2)+
+  sprinkle_colnames("Leaf", "Light","Temperature", "A", "g~s~", "g~m~", "ITE","E","VPD","C~i~", "C~c~") +
+  sprinkle(rows= 1, part="head",bold=TRUE)+
+  sprinkle_print_method("markdown")
+```
+
 
 # Figures {.unnumbered}
 ```{r airvars, fig.width=5, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
