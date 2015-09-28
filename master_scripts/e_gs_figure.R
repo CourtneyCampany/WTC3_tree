@@ -24,7 +24,8 @@ mcp.fnc(gsE_mod2)
 source("functions and packages/r2glmm.R")
 rsquared.glmm(gsE_mod2)
 
-
+#Across all leaf types and treatments g~s~ was postively correlated with E 
+#(P < 0.001, marginal and conditional R^2^ of 0.69 and 0.76, respectively).
 
 palette(c(lightscol, shacol, suncol))
 
