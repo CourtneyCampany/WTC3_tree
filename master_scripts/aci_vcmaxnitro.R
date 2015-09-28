@@ -103,9 +103,9 @@ photoN_mod <- lm(Photo~leafN_area, data=Anitro[Anitro$leaflight != "shade-high",
 
 
 ###plotting
-palette(c(shacol2, suncol2))
+palette(c(shacol, suncol))
   
-#windows(8,8)
+# windows(8,10)
 
 par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
@@ -122,7 +122,7 @@ plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,20
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
   
   legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), lty=c(1,1, 1,2),
-         col=c(suncol2, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.7)
+         col=c(suncol, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.7)
   text(x=2040, y=42, "(a)", cex=.7)
   
 ###panel 2: leafNarea ~ vcmax (bottom left)
@@ -145,7 +145,7 @@ plot(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="sun-high",], col=suncol,
  
   
 ###inset figure  
-par(fig=c(0.525, 0.95, 0.595,0.76), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
+par(fig=c(0.525, 0.95, 0.58,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
   
 plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
   axis(2, mgp=c(3, .5, 0))

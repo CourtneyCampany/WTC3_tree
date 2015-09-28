@@ -95,7 +95,7 @@ lights50col <- alpha(lightscol2, alpha=.5)
 leafcol <- c(suncol, shacol)
 leaflab2 <- c("Sun", "Shade")
 collights<-c(lightscol, lightscol, shacol, shacol)
-trtcols <-c(suncol2, suncol2, shacol2, shacol2)
+trtcols <-c(suncol, suncol, shacol, shacol)
 
 ###color combos for legend etc.
 
@@ -122,5 +122,5 @@ sunflecklab <- "Shade \n High Light"
 
 alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
 leaflightlab2 <- c("Sun", "Shade-Low Light", "Shade-High Light")
-allcols=c(suncol2, shacol2, lightscol2, "black", "black")
+allcols=c(suncol, shacol, lightscol2, "black", "black")
 allcols2=c(suncol2, newshade, lightscol2, "black", "black")

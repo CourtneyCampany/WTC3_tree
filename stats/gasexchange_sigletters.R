@@ -73,17 +73,19 @@ gs_leaf <- lme(Cond~ leaf, random=~1|chamber, data=ge_agg, subset=leaflight != "
   anova(gs_leaf)
   visreg(gs_leaf)
   
-gs_sun_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="sun-high")
-  summary(gs_sun_temp)
-  anova(gs_sun_temp)
-  visreg(gs_sun_temp)
+# gs_sun_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="sun-high")
+#   summary(gs_sun_temp)
+#   anova(gs_sun_temp)
+#   visreg(gs_sun_temp)
+#   
+# gs_sha_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="shade-low")
+#   summary(gs_sha_temp)
+#   anova(gs_sha_temp)
+#   visreg(gs_sha_temp)
   
-gs_sha_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="shade-low")
-  summary(gs_sha_temp)
-  anova(gs_sha_temp)
-  visreg(gs_sha_temp)
-  
-
+tukey_gs<- glht(gs_leaf, linfct = mcp(leaf = "Tukey"))
+  gs_siglets<- cld(tukey_gs)
+  gs_siglets2 <- gs_siglets$mcletters$Letters
   
   # library(lme4)
   #  Photo_mod2 <- lmer(Photo ~ leaf * temp + (1|chamber), data=ge_agg, subset=leaflight != "shade-high")

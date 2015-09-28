@@ -1,6 +1,6 @@
- source("functions and packages/packages.R")
- source("functions and packages/functions.R")
- source("master_scripts/plot_objects.R")
+ # source("functions and packages/packages.R")
+ # source("functions and packages/functions.R")
+ # source("master_scripts/plot_objects.R")
 
 
  treatments <- read.csv("raw data/temp_trt.csv")
@@ -40,21 +40,22 @@ xlimdays <- c(xlim1, xlim2)
 dayparlab <- expression(PPFD[day]~~(mols~m^-2~d^-1))
 
 
-#windows(7,7)
-par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(2.5,1,0),mfrow=c(3,1),  
-    omi=c(.5,0,0.1,0.1))
+# windows(7,10)
+
+par(mfrow=c(3,1), las=1, cex.axis=1.21, cex.lab=1.51, mgp=c(2.5,1,0),oma=c(4, 0, 1,0))
 
 #1: PPFD PLOTs
-par(mar=c(0,7,2,2))
-plot(PPFD_day ~ Date, data=PPFD_outside, type='l',col="blue",lwd=2, lty=1,  xlab="", ylab=dayparlab, axes=FALSE)
+par(mar=c(0,5,0,1))
+plot(PPFD_day ~ Date, data=PPFD_outside, type='l',col="blue",lwd=2, lty=1,  xlab="", ylab=dayparlab, axes=FALSE,
+     ylim=c(0,65))
 
 axis(2)
 axis.Date(1, at=xAT, labels=FALSE)
 box()
-text(x=15979, y=62.5, "(a)", cex=1.51)
+text(x=15979, y=64, "(a)",cex=1.51)
 
 #2. VPD
-par(mar=c(0,7,0,2))
+par(mar=c(0,5,0,1))
 plot(VPD.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, ylim=c(0,8.5),
      xlab="", ylab=vpdmax, axes=FALSE)
 points(VPD.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2)
@@ -62,13 +63,13 @@ axis(2)
 axis.Date(1, at=xAT, labels=FALSE)
 box()
 legend("topright",col=c("black","red"),lty=c(1,2),legend=c( "AT", "ET"),inset=.01,  bty='n',cex=1.51)
-text(x=15979, y=8, "(b)", cex=1.51)
+text(x=15979, y=8.25, "(b)", cex=1.51)
 
 #3:temp plot
 
-png(filename = "makepngs/airvars.png", width = 11, height = 8.5, units = "in", res= 400)
+# png(filename = "makepngs/airvars.png", width = 11, height = 8.5, units = "in", res= 400)
 
-par(mar=c(2,7,0,2))
+par(mar=c(0,5,0,1))
 plot(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, ylim=c(0, 50),
      xlab="", ylab=templab, axes=FALSE)
   points(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2)
@@ -78,12 +79,13 @@ plot(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type=
 legend("topright",col=c("black", "black"),lty=c(1,2),legend=c(tmaxlab,tminlab),inset=.01, cex=1.51, bty='n')
   
 axis(2)
-axis.Date(1, at=xAT, labels=TRUE)
+axis.Date(1, at=xAT, labels=TRUE, outer=TRUE)
 box()
 text(x=15979, y=48, "(c)", cex=1.51)
 
- #dev.copy2pdf(file="master_scripts/paper_figures/airvars.pdf")
-dev.off()
+
+# dev.copy2pdf(file="master_scripts/paper_figures/airvars.pdf")
+# dev.off()
 
 
 

@@ -63,15 +63,15 @@ apr4 <- "black"
 legalpha <- c(oct4, dec4, jan4, feb4, mar4, apr4)
 
 ##graph photo, gm and drawdown by temperature
-#windows(8,12)
+ # windows(7,10)
 
-par(mfrow=c(3,1))
-par(mar=c(0,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(mfrow=c(3,1),oma=c(4, 0, 1,0),mgp=c(2.5,1,0),cex=1.25, las=1, cex.axis=.8, cex.lab=1)
 
+par(mar=c(0,4,0,1))
 palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
 
 plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16,
-     ylim=c(5, 25), xlim=c(15,37.5),
+     ylim=c(5, 27), xlim=c(14,37.5),
      xlab="", ylab=satlab, xaxt="n")
   
   palette(c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2))
@@ -79,14 +79,14 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   
   palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
   points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
-  text(x=37.5, y=25, "(a)", cex=.9)
+  text(x=37.5, y=26.5, "(a)", cex=.9)
 
-  legend("topleft", leaflightlab2, pch=16, col=allcols,inset = 0.01, bty='n',cex=.8)
+  legend("topleft", leaflightlab2, pch=16, col=allcols, bty='n',cex=.8)
   
 ##panel 2: gm 
-  par(mar=c(0,4,0,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+  par(mar=c(0,4,0,1))
   palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
-  plot(gm~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16, ylim=c(0, .4),xlim=c(15,37.5),
+  plot(gm~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16, ylim=c(0, .4),xlim=c(14,37.5),
        xlab="", ylab=gmlab,xaxt="n")
   
   palette(c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2))
@@ -94,22 +94,23 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   
   palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
   points(gm~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
-  text(x=37.5, y=.4, "(b)", cex=.9)
+  text(x=37.5, y=.39, "(b)", cex=.9)
   
-  legend("topleft", Morder, pch=16, col=legalpha,inset = 0.01, bty='n',cex=.8)
+  legend("topleft", Morder, pch=16, col=legalpha, bty='n',cex=.8)
   
 ##panel 3: drawdown
-  par(mar=c(4,4,0,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+  par(mar=c(0,4,0,1))
   palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
-  plot(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16, ylim=c(25, 175), xlim=c(15,37.5),
-       xlab=leaftlab, ylab=drawdownlab)
+  plot(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16, ylim=c(25, 175), xlim=c(14,37.5),
+       xlab="", ylab=drawdownlab)
   
   palette(c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2))
   points(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-low",], col=Month, pch=16)
   
   palette(c(octcol3, deccol3, jancol3, febcol3, marcol3, aprcol3))
   points(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
-  text(x=37.5, y=175, "(c)", cex=.9)
+  text(x=37.5, y=170, "(c)", cex=.9)
+  mtext(leaftlab, side=1, outer=TRUE, line=2.5, cex=1.25)
   
 # dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp1.pdf")
 # dev.off()

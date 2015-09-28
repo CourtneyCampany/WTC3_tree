@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 gmes <- read.csv("calculated_data/gmes_wellwatered.csv")

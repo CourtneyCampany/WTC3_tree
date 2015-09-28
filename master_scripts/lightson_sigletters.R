@@ -92,7 +92,7 @@ summary(gs_leaf)
 anova(gs_leaf)
 visreg(gs_leaf)
 
-tukey_gs<- glht(gs_leaf, linfct = mcp(tukeyid = "Tukey"))
+tukey_gs<- glht(gs_leaf2, linfct = mcp(leaflight = "Tukey"))
 gs_lightson_siglets<- cld(tukey_gs)
 gs_lightson_siglets2 <- gs_lightson_siglets$mcletters$Letters
 
