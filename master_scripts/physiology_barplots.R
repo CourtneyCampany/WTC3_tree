@@ -33,7 +33,7 @@ bar(Cond, leaflight, gasex_agg, col=cols, half.errbar=FALSE, ylim=c(0, 0.3),name
 abline(v=2.5, lty=5)
 text(x=.25, y=.2925, "(a)", cex=1.5)
 mtext("Shade \n Low Light", side=1,at=.725, line=3.5 )
-mtext("Sun", side=1,at=1.9, line=2.5 )
+mtext("Sun \n High Light", side=1,at=1.9, line=3.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5 )
 
 ####mesophyll conductance
@@ -42,7 +42,7 @@ bar(gm, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0, 0.
 abline(v=2.5, lty=5)
 text(x=.25, y=.22, "(b)", cex=1.5)
 mtext("Shade \n Low Light", side=1,at=.725, line=3.5 )
-mtext("Sun", side=1,at=1.9, line=2.5 )
+mtext("Sun \n High Light", side=1,at=1.9, line=3.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5 )
 
 ####photosynthesis
@@ -51,8 +51,8 @@ bar(Photo, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0,
 abline(v=2.5, lty=5)
 text(x=.25, y=19.5, "(c)", cex=1.5)
 mtext("Shade \n Low Light", side=1,at=.725, line=3.5  )
-mtext("Sun", side=1,at=1.9, line=2.5 )
+mtext("Sun \n High Light", side=1,at=1.9, line=3.5 )
 mtext("Shade \n High Light", side=1,at=3.15, line=3.5)
 
-#  dev.copy2pdf(file="master_scripts/paper_figures/physiology_bar.pdf")
-#  dev.off()
+ # dev.copy2pdf(file="master_scripts/paper_figures/physiology_bar.pdf")
+ # dev.off()
