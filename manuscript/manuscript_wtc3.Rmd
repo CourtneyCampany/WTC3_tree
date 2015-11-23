@@ -100,22 +100,22 @@ Rates of photosynthesis in C~3~ plants are limited by the [CO~2~] available for 
 Additionally, assessing shade leaf behaviour is made difficult with accounting of short term light fluctuations within a canopy, via sunflecks. How shade leaves utilize sunflecks for short term C gain depends on the combined response time of g~s~ and g~m~ and the underlying photosynthetic biochemistry acclimated to a low light environment [@pearcy1990sunflecks;@tausz2005dynamic]. The utilization of sunflecks is first limited by delayed responses of stomata opening, which may take minutes, effectively limiting the maximum assimilation rate that can be achieved [@pearcy1990sunflecks; @vico2011effects; @way2012sunflecks]. Mesophyll conductance has been shown to respond to environmental factors (e.g. CO~2~, temperature or vapor pressure deficit) at timescales of minutes, possibly faster than g~s~ [@flexas2008mesophyll and references therein], yet short term response to light availability are unclear. For example, g~m~ was found to be independent of light intensity in wheat leaves [@tazoe2009light] but was responsive to light in tobacco [@flexas2007rapid]. Anatomical parameters which regulate g~m~ with changing irradiance such as chloroplast surface area [@terashima2006irradiance] and mesophyll thickness [@boardman1977comparative] are also unlikely to adjust during short light fluctuations. The physiological behaviour of shade leaves to maximize C gain must be assessed as both a degree of acclimation to local irradiance and as a potential response to transitory light availability.
 
 \
-Climate warming may also potentially affect the physiological behaviour of leaves within a canopy. This is because leaves can be exposed to different heat, water and high light stresses as temperature and vapour pressure deficit (VPD) scale positively with canopy light availability [@baldocchi2002environment; @valladares2004photosynthetic; @niinemets2007photosynthesis]. How these stresses affect the diffusion of CO~2~, through either g~s~ or g~m~, will have implications for upscaling A for sun and shade leaves. Additionally, light saturated rates of A are limited by the maximum rate of Rubisco carboxylation (Vc~max~) or the maximum rate of photosynthetic electron transport (J~max~) across a range of temperatures, yet their temperature dependencies are not the same [@farquhar1980biochemical; @medlyn2002temperature]. How these parameters are differentially affected by warming may impact constraints of N distribution and leaf photosynthetic capacity across light gradients. The impacts of warming on plant physiological processes are obviously vast, yet differentiating their impacts on leaf physiology within a canopy will be essential to evaluate whole tree responses to a changing climate.
+Climate warming may also affect the physiological behaviour of leaves within a canopy. This is because leaves can be exposed to different heat, water and high light stresses as temperature and vapour pressure deficit (VPD) vary with canopy light availability [@baldocchi2002environment; @valladares2004photosynthetic; @niinemets2007photosynthesis]. How these stresses affect the diffusion of CO~2~, through either g~s~ or g~m~, will have implications for upscaling A for sun and shade leaves. Additionally, light saturated rates of A are limited by the maximum rate of Rubisco carboxylation (Vc~max~) or the maximum rate of photosynthetic electron transport (J~max~) across a range of temperatures, yet their temperature dependencies are not the same [@farquhar1980biochemical; @medlyn2002temperature]. How these parameters are differentially affected by warming may impact constraints of N distribution and leaf photosynthetic capacity across light gradients. The impacts of warming on plant physiological processes are obviously vast, yet differentiating their impacts on leaf physiology within a canopy will be essential to evaluate whole tree responses to a changing climate.
 
 \
 In this study we use *Eucalyptus tereticornis* Sm. trees, planted in climate controlled whole tree chambers with ambient and elevated temperature (ambient +3&deg;C) treatments, to empirically evaluate the distribution of nitrogen and water supply and leaf physiological behaviour of sun and shade leaves. Our hypotheses are as follows:
 
 \
-1.	If whole tree canopies are optimized for C gain, then leaf N, K and photosynthetic capacity are predicted to be higher in sun leaves compared to shade leaves.
+1.	If whole tree canopies are optimized for C gain, then leaf N, hydraulic conductance and biochemical photosynthetic capacity are predicted to be higher in sun leaves compared to shade leaves.
 
 \
 2.	Stomatal conductance is proportional to A across sun and shade leaves under similar leaf VPD and g~m~ scales positively with photosynthetic capacity.
 
 \
-3.	As shade leaves are constrained by their underlying biochemistry and slow physiological responses, increases in A following sunfleck simulations were not expected to reach rates of full sun leaves.
+3. As shade leaves were expected to develop lower biochemical photosynthetic capacity and leaf physiolgoical responses to light are typically slow (minutes), increases in A following sunfleck simulations were not expected to reach rates of full sun leaves.
 
 \
-4.	The effects of climate warming were predicted to be greater in sun than shade leaves, seen as a decrease in g~s~ and leaf C gain during summer months.
+4.	The effects of climate warming were predicted to be greater in sun than shade leaves, seen as a decrease in g~s~ and leaf C gain during summer months, as increased evaporative demand from higher temperatures will lead to stomatal closure.
 
 # Materials and Methods
 
@@ -144,7 +144,7 @@ Using online C isotope discrimination measurements, the difference  between the 
 (1)
 $$\delta = \left(\frac{R_s}{R_{stnd}} -1\right)1000$$
 
-where R~s~ is the isotopic ratio of the sample and R~stnd~ is the isotopic ratio of the standard Vienna Pee Dee Belemnite. Next, the observed discrimination ($\Delta$~obs~) is calculated from Evans et al. [-@evans1986carbon]:
+where R~s~ is the isotopic ratio of the sample and R~stnd~ is the isotopic ratio of the standard Vienna Pee Dee Belemnite (VPDP). Next, the observed discrimination ($\Delta$~obs~) is calculated from Evans et al. [-@evans1986carbon]:
 
 \
 (2)
@@ -235,10 +235,11 @@ Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were mea
 (12)
 $$K = \frac{E}{\Psi_{pd}~-\Psi_l}$$
 
-Leaf level instantaneous transpiration efficiency (ITE) was calculated as A divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression, where k=0.5 [see @duursma2013near]. 
+Leaf level instantaneous transpiration efficiency (ITE) was calculated as A divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression, where k=0.5 [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use [@lin2015optimal].
 
 ##Data analysis
-Differences in experimental parameters to either the warming treatment or leaf type were analysed by mixed-effects models in R [@RDevelopmentCoreTeam2011] with WTC as a random effect. Explained variance (R^2^) of mixed models were computed as in  [@nakagawa2013general]. Confidence intervals (95 %) of mixed effect linear models were generated using bootstrapping methods with 999 simulations, using the bootMer function in the 'lme4' package [@bates2013lme4]. For non-linear relationships, confidence intervals were estimated by fitting a generalized additive model to the data with the 'mgcv' package, using WTC as a random effect.
+Differences in experimental parameters to either the warming treatment or leaf type were analysed by mixed-effects models in R [@RDevelopmentCoreTeam2011] with WTC as a random effect. Explained variance (R^2^) of mixed models were computed as in  [@nakagawa2013general]. Confidence intervals (95 %) of mixed effect linear models were generated using bootstrapping methods with 999 simulations, using the bootMer function in the 'lme4' package [@bates2013lme4]. For non-linear relationships, confidence intervals were estimated by fitting a generalized additive model to the data with the 'mgcv' package, using WTC as a random effect. All tests of statistical significance were conducted at an alpha of 0.05.
+
 # Results
 
 ## Leaf resource distribution
@@ -296,10 +297,10 @@ If shade leaves "lie in wait" for sunflecks then perhaps we should consider an a
 Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements to the canopy. Although the distribution of resources, such as N and water, define leaf photosynthetic capacity it is the physiological behaviour of individual leaves which actually determine C gain. These findings suggest that current theories of leaf optimal behaviour should be extended to include dynamic light environments, which will have important implications for process based models that predict canopy C gain from rates of leaf photosynthesis. Furthermore, the dynamic nature of g~m~ cannot be simply parameterized in tree growth models and possibly should be excluded until it can be represented properly. Additional empirical data, across multiple tree species, are needed to determine both the mechanisms and the capacity of g~m~ to rapidly increase CO~2~ drawdown. To improve our ability to predict whole canopy C gain future research should prioritize the incorporation of both sun and shade leaf physiology, which may be optimized differently.
 
 # List of Tables
-**Table 1**. *Eucalyptus tereticornis* leaf traits and the distribution of resources between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf Nitrogen~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect of leaf type and temperature treatment on each trait.
+**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf Nitrogen~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
 
 \
-**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect of leaf type, light environment and temperature treatment on each parameter.
+**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
 
 # List of Figures
 
@@ -336,7 +337,7 @@ Here we show that dynamic physiological responses of shade leaves to altered lig
 **Figure S4**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign.
 
 # Tables {.unnumbered}
-**Table 1**. *Eucalyptus tereticornis* leaf traits and the distribution of resources between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf Nitrogen~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect of leaf type and temperature treatment on each trait.
+**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf Nitrogen~area~ are g m^2^, K is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
 
 ```{r, echo=FALSE}
 resourcetab2 <- rbind(resourcetab, c("P value","", as.character(pval)))
@@ -349,7 +350,7 @@ dust(resourcetab2)%>%
 ```
 
 \
-**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect of leaf type, light environment and temperature treatment on each parameter.
+**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
 
 ```{r, echo=FALSE}
 getab2 <- rbind(getab, c("P value","","", as.character(pval2)))
