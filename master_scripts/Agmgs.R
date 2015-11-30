@@ -63,35 +63,46 @@ gsfleck_pred <- predict(fleckmod, newdata=data.frame(Cond=gsfleck_seq), type="li
 fleckupr <- gsfleck_pred$fit + (2*gsfleck_pred$se.fit)
 flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
 
-#### Gm vs A data: use gam for CI of non-linear relationship between A and gs----------------------------------------------
+#### Gm vs A data: use gam for CI of non-linear relationship between A and gm----------------------------------------------
 
 ##read bootstrapped data previosuly ran from sunshade phys script
 agm_sun <-   read.csv( "master_scripts/bootstrap_results/agm_sun.csv")
 agm_sha <-  read.csv( "master_scripts/bootstrap_results/agm_sha.csv") 
 agm_fleck <-  read.csv( "master_scripts/bootstrap_results/agm_fleck.csv") 
 ##testing stats for random model comparison
-#library(nlme)
+# library(nlme)
 ##linear model with chamber as random effect
 
-#gmA_sun_mod <- lme(Photo ~ gm ,random=~1|chamber, data=sundat)
+# gmA_sun_mod <- lme(Photo ~ gm ,random=~1|chamber, data=sundat)
 gmA_sun_mod2 <- lm(Photo ~ gm , data=sundat)
 
-#    summary(gmA_sun_mod)
-#    summary(gmA_sun_mod2)
-#    anova(gmA_sun_mod,gmA_sun_mod2)
+   # summary(gmA_sun_mod)
+   # summary(gmA_sun_mod2)
+   # anova(gmA_sun_mod,gmA_sun_mod2)
 
 #   gmA_sha_mod <- lme(Photo~ gm  ,random=~1|chamber, data=shadat)
 gmA_sha_mod2 <- lm(Photo~ gm  ,data=shadat)
-#    summary(gmA_sha_mod)
-#    summary(gmA_sha_mod2)
-#    anova(gmA_sha_mod,gmA_sha_mod2)
+   # summary(gmA_sha_mod)
+   # summary(gmA_sha_mod2)
+   # anova(gmA_sha_mod,gmA_sha_mod2)
 
 #   gmA_fleck_mod <- lme(Photo~ gm  ,random=~1|chamber, data=fleckdat)
 gmA_fleck_mod2 <- lm(Photo~ gm  ,data=fleckdat)
-#    summary(gmA_fleck_mod)
-#    summary(gmA_fleck_mod2)
-#    anova(gmA_fleck_mod,gmA_fleck_mod2)
+   # summary(gmA_fleck_mod)
+   # summary(gmA_fleck_mod2)
+   # anova(gmA_fleck_mod,gmA_fleck_mod2)
 
+# ###need to test leaflight treatments against each other with A vs gm
+# gmA_leaf <- lm(Photo ~ gm*leaflight, data=gm_agg)
+# gmA_leaf2 <- lme(Photo ~ gm*leaflight ,random=~1|chamber, data=gm_agg)
+# gmA_leaf3 <- aov(Photo ~ gm*leaflight, data=gm_agg)
+# gmA_leaf4 <- aov(Photo ~ gm+leaflight, data=gm_agg)
+# 
+# summary(gmA_leaf)
+# anova(gmA_leaf4)
+# library(visreg)
+# visreg(gmA_leaf)
+# coef(gmA_leaf3)
 
 ###with smoothplot
 palette(c(lightscol, shacol, suncol))

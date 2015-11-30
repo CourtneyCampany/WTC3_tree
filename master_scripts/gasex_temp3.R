@@ -73,6 +73,11 @@ meandraw <-summaryBy(drawdown ~ leaflight, data=gasex_agg, FUN=mean)
 gmt_sun_mod <- lm(gm~ CTleaf , data=gasex_agg, subset=leaflight=="sun-high")
 gmt_sha_mod <- lm(gm~ CTleaf , data=gasex_agg,subset=leaflight=="shade-low")
 gmt_fleck_mod <- lm(gm~ CTleaf , data=gasex_agg,subset=leaflight=="shade-high")
+
+summary(gmt_sun_mod)
+summary(gmt_sha_mod)
+summary(gmt_fleck_mod)
+
 coefsun <- coef(gmt_sun_mod)
 coefsha <- coef(gmt_sha_mod)
 coeffleck <- coef(gmt_fleck_mod)
