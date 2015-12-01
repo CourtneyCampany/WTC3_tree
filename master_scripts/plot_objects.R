@@ -55,6 +55,7 @@ relklab <- expression(K[shade]:K[sun])
 
 leaftlab2 <- ("Leaf Temperature  (C)")
 leaftlab = expression(paste("Temperature  (",degree,"C)")) 
+airtlab <- expression(paste("Max Daily Ambient Air Temperature  (",degree,"C)")) 
 
 templab <- c("AT", "ET")
 leaflab <- c("shade", "sun")

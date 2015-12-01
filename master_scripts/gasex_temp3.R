@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 gasex<- read.csv("calculated_data/gmes_wellwatered.csv")
@@ -73,18 +73,16 @@ meandraw <-summaryBy(drawdown ~ leaflight, data=gasex_agg, FUN=mean)
 gmt_sun_mod <- lm(gm~ CTleaf , data=gasex_agg, subset=leaflight=="sun-high")
 gmt_sha_mod <- lm(gm~ CTleaf , data=gasex_agg,subset=leaflight=="shade-low")
 gmt_fleck_mod <- lm(gm~ CTleaf , data=gasex_agg,subset=leaflight=="shade-high")
-
-summary(gmt_sun_mod)
-summary(gmt_sha_mod)
-summary(gmt_fleck_mod)
-
-coefsun <- coef(gmt_sun_mod)
-coefsha <- coef(gmt_sha_mod)
-coeffleck <- coef(gmt_fleck_mod)
+  # summary(gmt_sun_mod)
+  # summary(gmt_sha_mod)
+  # summary(gmt_fleck_mod)
+  coefsun <- coef(gmt_sun_mod)
+  coefsha <- coef(gmt_sha_mod)
+  coeffleck <- coef(gmt_fleck_mod)
 
 
 ##graph photo, gm and drawdown by temperature---------------------------------------------------------------------------------
-windows(7,10)
+# windows(7,10)
 
 par(mfrow=c(3,1),oma=c(4, 0, 1,0),mgp=c(2.5,1,0),cex=1.25, las=1, cex.axis=.8, cex.lab=1)
 
@@ -152,6 +150,6 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   text(x=37.5, y=170, "(c)", cex=.9)
   mtext(leaftlab, side=1, outer=TRUE, line=2.5, cex=1.25)
   
-# dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp1.pdf")
-# dev.off()
+ # dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp3.pdf")
+ # dev.off()
   
