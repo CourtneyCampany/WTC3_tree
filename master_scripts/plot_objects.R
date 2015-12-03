@@ -59,6 +59,8 @@ airtlab <- expression(paste("Max Daily Ambient Air Temperature  (",degree,"C)"))
 
 templab <- c("AT", "ET")
 leaflab <- c("shade", "sun")
+
+###legends--------------------------------------------------------------------------------------------------
 leglab <-  c(expression(paste(AT, " " ,"sun")), expression(paste(ET, " " ,"sun")),
            expression(paste(AT," " ,"shade")), expression(paste(ET, " " ,"shade")))
 
@@ -75,7 +77,7 @@ acileg <-  c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET")
 
 ltys <- c(1,2, 1,2)
 
-###sun shade colors
+###sun shade colors-------------------------------------------------------------------------------------------
 suncol2 <- "#005300"
 shacol2 <- "#61726C"
 lightscol2 <- "#E68A00"
@@ -125,3 +127,29 @@ alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
 leaflightlab2 <- c("Sun", "Shade-Low Light", "Shade-High Light")
 allcols=c(suncol, shacol, lightscol2, "black", "black")
 allcols2=c(suncol2, newshade, lightscol2, "black", "black")
+
+
+
+###DAte objects
+octdates <- data.frame(campaign = 1, Date = as.Date(c("2013-10-26","2013-10-25","2013-10-26")))
+decdates <- data.frame(campaign = 2, Date = as.Date(c("2013-12-09","2013-12-10","2013-12-11")))
+jandates <- data.frame(campaign = 3, Date = as.Date(c("2014-01-28","2014-01-29","2014-01-30")))
+febdates <- data.frame(campaign = 4, Date = as.Date(c("2014-02-24","2014-02-25","2014-02-26")))
+mardates <- data.frame(campaign = 5, Date = as.Date(c("2014-03-19","2014-03-21","2014-03-30")))
+aprdates <- data.frame(campaign = 6, Date = as.Date(c("2014-04-21","2014-04-22","2014-04-23","2014-04-24")))
+
+campaigndates <- rbind(octdates, decdates, jandates, mardates, aprdates)
+campaigndates_simple <- as.Date(c("2013-10-26","2013-10-25","2013-10-26", "2013-12-09","2013-12-10","2013-12-11","2014-01-28",
+                                  "2014-01-29","2014-01-30","2014-02-24","2014-02-25","2014-02-26","2014-03-19","2014-03-21",
+                                  "2014-03-30","2014-04-21","2014-04-22","2014-04-23","2014-04-24"))
+
+octdate <- as.Date("2013-10-25")
+decdate <- as.Date("2013-12-10")
+jandate <- as.Date("2014-01-28")
+febdate <- as.Date("2014-02-24")
+mardate <- as.Date("2014-03-19")
+aprdate <- as.Date("2014-04-21")
+
+campaigns <- c(octdate, decdate, jandate, febdate, mardate, aprdate)
+campaigns2 <- data.frame(Month = c("Oct", "Dec", "Jan", "Feb", "Mar", "Apr"), Date = campaigns)
+

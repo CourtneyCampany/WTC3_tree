@@ -364,7 +364,7 @@ dust(getab2)%>%
 
 
 # Figures {.unnumbered}
-```{r par, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/par2.R")
 ```  
 
