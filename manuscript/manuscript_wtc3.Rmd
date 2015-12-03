@@ -304,7 +304,7 @@ Here we show that dynamic physiological responses of shade leaves to altered lig
 
 # List of Figures
 
-**Figure 1**. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014. Means &pm; 1 standard error represent integrated PPFD, measured with a ceptometer, at the canopy height of each selected leaf. Each date represents the starting date for each measurement campaign. Points represent the maximum daily air temperature during each campaign period.
+**Figure 1**. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014. Means &pm; 1 standard error represent integrated PPFD, measured with a ceptometer, at the canopy height of each selected leaf. Each date represents the starting date for each measurement campaign. Points represent the mean (&pm; 1 standard error) daily maximum air temperature during each campaign period.
 
 \
 **Figure 2**. (a) ACi curves for sun and shade leaves at elevated (ET) and ambient (AT) temperature treatments. ACi curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between Vc~max~ and mean leaf N~a~ for each chamber, including sun leaves and shade leaves at low light. (c) The relationship between A and leaf N~a~ for sun and shade leaves measured under their ambient light and temperature conditions. For (b,c) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional R^2^ of 0.28 and 0.35 for (b) and 0.24 and 0.33 for (c).
