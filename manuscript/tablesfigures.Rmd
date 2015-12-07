@@ -1,0 +1,182 @@
+---
+title: "tablesfigures"
+author: "Court Campany"
+date: "December 7, 2015"
+output: word_document
+---
+
+```{r global data/sourcing , include=FALSE}
+source("functions and packages/functions.R")
+source("functions and packages/packages.R")
+source("master_scripts/plot_objects.R")
+library(pixiedust)
+
+##read table ready dataframes
+resourcetab <- read.csv("master_scripts/resource_table.csv", stringsAsFactors = FALSE)
+getab <- read.csv("master_scripts/ge_table.csv", stringsAsFactors = FALSE)
+pval <- c(0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973)
+pval2 <- c(0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
+# getab <- read.csv("master_scripts/ge_table.csv")
+
+#treatments <- read.csv("raw data/chamber_trt.csv")
+```
+
+```{r, echo=FALSE}
+
+parfig <- "1"
+acifig <- "2"
+agmgsfig <- "3"
+gebarfig <- "4"
+waterusefig <- "5"
+deltafig <- "6"
+ciccfig <- "7"
+
+airvarfig <- "S1"
+accfig <- "S2"
+get1fig <- "S3"
+get2fig <- "S4"
+
+```
+
+# List of Tables
+**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K~l~ values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf N~area~ are g m^2^, K~l~ is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
+
+\
+**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
+
+# List of Figures
+
+**Figure 1**. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014. Means &pm; 1 standard error represent integrated PPFD, measured with a ceptometer, at the canopy height of each selected leaf. Each date represents the starting date for each measurement campaign. Points represent the mean (&pm; 1 standard error) daily maximum air temperature during each campaign period.
+
+\
+**Figure 2**. (a) ACi curves for sun and shade leaves at elevated (ET) and ambient (AT) temperature treatments. ACi curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between Vc~max~ and mean leaf N~a~ for each chamber, including sun leaves and shade leaves at low light. (c) The relationship between A and leaf N~a~ for sun and shade leaves measured under their ambient light and temperature conditions. For (b,c) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional R^2^ of 0.28 and 0.35 for (b) and 0.24 and 0.33 for (c).
+
+\
+**Figure 3**. The response of A to g~s~ (a) and g~m~ (b) for sun leaves measured at high light and shade leaves measured at both low and high light under their respective elevated and ambient temperature treatments. Lines represent either smoothed regressions from a generalized additive model fit (a) or linear model fits (b). Grey areas are 95% confidence intervals from the mean.
+
+\
+**Figure 4**. The mean &pm; 1 standard error of g~s~ (a), g~m~ (b) and A (c) of sun leaves and shade leaves at both low and high light pooled across six measurement dates.
+
+\
+**Figure 5**. (a) Response of instantaneous transpiration efficiency (ITE) to VPD for sun leaves and shade leaves at both low and high light with elevated and ambient temperature treatments. (b) The relationship between leaf $\delta$^13^C and leaf N~a~ for sun leaves at high light and shade leaves at low light. For (a) VPD is the leaf to air pressure difference inside the gas exchange cuvette and lines represent predictions from the optimal ITE model with a g~1~ value for each leaf type and treatment. For (b) the dashed line represents the significant linear model fit for all leaves with a marginal and conditional R^2^ of 0.41 and 0.45, respectively.
+
+\
+**Figure 6**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis and measured C~i~/C~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
+
+\
+**Figure 7**. The mean &pm; 1 standard error of intercellular CO~2~ concentration (a), CO~2~ concentration in the chloroplasts (b) and CO~2~ drawdown from substomatal cavities to sites of carboxylation of sun leaves and shade leaves at both low and high light.
+
+\
+**Figure S1**. Daily maximum and minimum temperature (a) and total daily PPFD (b) for each chamber across the experiment duration.
+
+\
+**Figure S2**. Photosynthetic CO~2~ response (AC~c~) curves for sun and shade leaves at elevated and ambient temperature treatments. C~c~ values were predicted with g~m~, thus curves represent chloroplastic photosynthetic parameters at 25°C and saturating light (1800 $\mu$mols m^-1^ s^-1^). 
+
+\
+**Figure S3**. Response of A (a), g~m~ (b) and C~i~-C~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with g~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
+
+\
+**Figure S4**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
+
+# Tables {.unnumbered}
+**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K~l~ values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf N~area~ are g m^2^, K~l~ is mmol m^-2^ s^-1^ MPa, WP is MPA and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
+
+```{r, echo=FALSE}
+resourcetab2 <- rbind(resourcetab, c("P value","", as.character(pval)))
+greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
+
+dust(resourcetab2)%>%
+  sprinkle_colnames("Leaf", "Temperature", "LMA", "N~a~", "Vc~max~", "J~max~","K","WP~pre~","WP~mid~", paste0(greeks['delta'],"^13^c")) %>%
+  sprinkle(rows= 1, part="head",bold=TRUE)%>%
+  sprinkle_print_method("markdown")
+```
+
+\
+**Table 2**. Responses of *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for A and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
+
+```{r, echo=FALSE}
+getab2 <- rbind(getab, c("P value","","", as.character(pval2)))
+greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
+
+dust(getab2)%>%
+  sprinkle_colnames("Leaf", "Light","Temperature", "A", "g~s~", "g~m~", "ITE","E","VPD","C~i~", "C~c~") %>%
+  sprinkle(rows= 1, part="head",bold=TRUE)%>%
+  sprinkle_print_method("markdown")
+```
+
+
+# Figures {.unnumbered}
+```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/par2.R")
+```  
+
+**Figure 1**.
+
+```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/aci_vcmaxnitro.R")
+```  
+
+**Figure 2**. 
+
+```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/Agmgs.R")
+```  
+
+**Figure 3**. 
+
+```{r barplots, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/physiology_barplots.R")
+```  
+
+**Figure 4**. 
+
+```{r wateruse, fig.width=7, fig.height=7, echo=FALSE, warning=FALSE, message=FALSE,dev="png", dpi=400}
+source("master_scripts/wateruse.R")
+```  
+
+**Figure 5**.
+
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/delta_cica.R")
+```  
+
+**Figure 6**.  
+
+```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/cicc_bar.R")
+```  
+
+**Figure 7**. 
+
+# Supporting Information {.unnumbered}
+
+```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/air_vars.R")
+```
+
+**Figure S1**
+
+```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/ACc_figure.R")
+```  
+
+**Figure S2**. 
+
+```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/gasex_temp3.R")
+```  
+
+**Figure S3**.
+
+```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/gasex_temp4.R")
+```  
+
+**Figure S4**.
+
+###new phytologist summary
+# Summary
+* Light gradients within tree canopies play a major role in the distribution of plant resources that define photosynthetic capacity of individual leaves. A lack of empirical data relating photosynthesis to leaf physiological behavior within tree canopies, however, impedes our ability to assess the contribution of shade leaves to canopy carbon gain.
+* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with online carbon isotope discrimination to measure net leaf photosynthesis (*A~n~*), stomatal conductance (g~s~) and mesophyll conductance (g~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole tree chambers.
+* Compared to sun leaves, shade leaves had lower A, g~m~, Vc~max~, J~max~ and leaf nitrogen but maintained similar rates of g~s~. When light intensity was increased from low light to high light for shade leaves both g~s~ and g~m~ increased rapidly, leading to increases in A greater than sun leaves at the same PPFD. 
+* Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements and predicting whole canopy carbon gain. We argue that the rapid response of g~m~ with light enables shade leaves to respond quickly to sunflecks. Evidence that g~m~ not only varies within a canopy but can be up-regulated over short time intervals possibly represents a new mechanism underpinning leaf gas exchange responses to light.
