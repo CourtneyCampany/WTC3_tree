@@ -1,5 +1,5 @@
 ---
-title: "Rapid response of mesophyll conductance to light availability allows shade leaves to take advantage of sunflecks"
+title: "Chapter 3 Rapid response of mesophyll conductance to light availability allows shade leaves to take advantage of sunflecks"
 author: ""
 date: ""
 output:
@@ -21,10 +21,10 @@ Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmer
 \
 ^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia
 
-\
-*Corresponding author*: 
-Courtney Campany
-E: courtneycampany@gmail.com
+<!-- \ -->
+<!-- *Corresponding author*: -->
+<!-- Courtney Campany -->
+<!-- E: courtneycampany@gmail.com -->
 
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}
