@@ -246,7 +246,7 @@ Differences in experimental parameters to either the warming treatment or leaf t
 Across six measurement campaigns over the 7 month period PPFD was  reduced on average by >75% in the shade (Figure `r parfig`). Leaf-specific hydraulic conductance (K~l~) was similar across sun and shade leaves (Table `r wtc3tab1`). This was because $\Psi_{pd}$, $\Psi_l$ (Table `r wtc3tab1`) and E (Table `r wtc3tab2`) did not differ between leaf types. Leaf N~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table1). Leaf mass per area was not different between leaf types. No effect of the warming treatment was detected with  PPFD, $\Psi_{pd}$, $\Psi_l$, K~l~, E, N~area~ or LMA either within or across leaf types.
 
 \
-```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/par2.R")
 ```  
 \
@@ -270,7 +270,7 @@ dust(resourcetab2)%>%
 The photosynthetic parameters J~max~ and Vc~max~ were higher in sun compared to shade leaves (Table `r wtc3tab1`), as estimated from AC~i~ curves (Figure `r acifig`a). Within leaf types, no effect of the warming treatment was detected on either parameter. Among the sampled leaves, Vc~max~ was positively related to leaf N~a~ across leaf types and temperature treatments (P = 0.01, Figure `r acifig`b).
 
 \
-```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/aci_vcmaxnitro.R")
 ```  
 \
@@ -296,14 +296,14 @@ dust(getab2)%>%
 On average, g~s~ was 18% higher in shade compared to sun leaves under their local light environment (Table `r wtc3tab2`). Photosynthesis was positively correlated with g~s~ in all leaves measured under high light conditions, however, g~s~ and *A~n~* were not correlated in shade leaves under low light (Figure `r agmgsfig`a). Following increased PPFD, g~s~ of shade leaves was significantly greater than both shade leaves at low light and sun leaves, pooled across all measurement dates (Figure `r gebarfig`a). No effect of the warming treatment was detected on g~s~ within or across leaf types. Stomatal conductance within leaf types and treatments was similar through time and across the range of leaf temperatures measured (Figure `r get2fig`b).
 
 \
-```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Agmgs.R")
 ```  
 \
 **Figure 3.3**. The response of A to g~s~ (a) and g~m~ (b) for sun leaves measured at high light and shade leaves measured at both low and high light under their respective elevated and ambient temperature treatments. Lines represent either smoothed regressions from a generalized additive model fit (a) or linear model fits (b). Grey areas are 95% confidence intervals from the mean.
 
 \
-```{r barplots, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r barplots, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/physiology_barplots.R")
 ```  
 \
@@ -313,7 +313,7 @@ source("master_scripts/physiology_barplots.R")
 Measured under ambient light and temperature conditions leaf ITE was significantly greater in sun leaves than in shade leaves at low light (+21%, P = 0.001). Following an increase in  PPFD to high-light conditions, ITE of shade leaves did not differ from shade leaves at low light and was still significantly lower than sun leaves (P < 0.001). Instantaneous transpiration efficiency in sun leaves was reduced in the warming treatment, but no warming effect was detected in shade leaves measured at low or high light (Table `r wtc3tab2`). The mean estimated g~1~ for sun leaves was 1.51&pm;0.11 and for shade leaves with low and high light was 2.59&pm;0.12 and 2.74&pm;0.04. For all leaf types and light treatments there was a strong response of ITE to VPD and individual data points broadly corresponded to response curves from the optimal ITE model with a g~1~ value for each leaf type and treatment (Figure `r waterusefig`a).  Within leaf types and light treatments the response of VPD to leaf temperature was similar across all measurement campaigns (Figure `r get2fig`a).
 
 \
-```{r wateruse, fig.width=7, fig.height=7, echo=FALSE, warning=FALSE, message=FALSE,dev="png", dpi=400}
+```{r wateruse, fig.width=7, fig.height=7, echo=FALSE, warning=FALSE, message=FALSE,dev="png", dpi=600}
 source("master_scripts/wateruse.R")
 ```  
 \
@@ -326,7 +326,7 @@ Bulk-leaf $\delta$^13^C, as an index of integrated water-use efficiency [@marsha
 The observed carbon isotope discrimination ($\Delta_o$) measured during photosynthesis was positively correlated with C~i~:C~a~ for all leaf types (P < 0.001), with larger $\Delta$~o~ detected for sun leaves and shade leaves at high light than shade leaves at low light (Figure `r deltafig`). Carbon isotope discrimination associated with g~m~ accounted for the majority of $\Delta_o$ (69.7&pm;0.4%) and varied little across measurement temperatures, leaf types, or warming treatments. The remainder $\Delta_o$ consists of the contributions of g~s~, respiration and photorespiration to discrimination. 
 
 \
-```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/delta_cica.R")
 ```  
 \
@@ -339,7 +339,7 @@ Mean g~m~ was higher in sun compared to shade leaves (+27%) under their local li
 Higher rates of g~s~ in shade leaves under low and high light lead to significant increases in C~i~ compared to sun leaves (Figure `r ciccfig`a). The chloroplast CO~2~ partial pressure was comparable between shade leaves when measured at both low and high light conditions (Figure `r ciccfig`c). In sun leaves C~c~ was significantly lower than shade leaves as a likely consequence of a lower C~i~. The drawdown of CO~2~ from intercellular spaces to the chloroplast, C~i~-C~c~, measures the coordination between g~m~ and *A~n~* [@caemmerer2014temperature]. This drawdown was similar between sun and shade leaves measured at their local light environment and increased marginally in shade leaves at high light (Figure `r ciccfig`c). This was the result of the proportional relationship between g~m~ and *A~n~* across all leaves. The CO~2~ drawdown from C~a~ to C~i~ and C~i~ to C~c~ were both relatively stable across the range of temperatures measured and gas exchange campaigns (Figure `r get2fig`c and `r get1fig`c, respectively).
 
 \
-```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/cicc_bar.R")
 ```  
 \
@@ -374,28 +374,28 @@ Here we show that dynamic physiological responses of shade leaves to altered lig
 
 # Supporting Information {.unnumbered}
 
-```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/air_vars.R")
 ```
 \
 **Figure 3.S1**. Daily maximum and minimum temperature (a) and total daily PPFD (b) for each chamber across the experiment duration.
 
 \
-```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/ACc_figure.R")
 ```  
 \
 **Figure 3.S2**. Photosynthetic CO~2~ response (AC~c~) curves for sun and shade leaves at elevated and ambient temperature treatments. C~c~ values were predicted with g~m~, thus curves represent chloroplastic photosynthetic parameters at 25°C and saturating light (1800 $\mu$mols m^-1^ s^-1^).  
 
 \
-```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp3.R")
 ```  
 \
 **Figure 3.S3**. Response of A (a), g~m~ (b) and C~i~-C~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with g~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
 
 \
-```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp4.R")
 ```  
 \

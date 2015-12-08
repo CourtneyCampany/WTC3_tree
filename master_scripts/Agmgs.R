@@ -107,7 +107,7 @@ gmA_fleck_mod2 <- lm(Photo~ gm  ,data=fleckdat)
 ###with smoothplot
 palette(c(lightscol, shacol, suncol))
  
-#windows(10, 12)
+# windows(10, 12)
 par(mfrow=c(2,1))
 #gs
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
