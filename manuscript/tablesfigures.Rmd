@@ -106,43 +106,43 @@ dust(getab2)%>%
 
 
 # Figures {.unnumbered}
-```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/par2.R")
 ```  
 
 **Figure 1**.
 
-```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/aci_vcmaxnitro.R")
 ```  
 
 **Figure 2**. 
 
-```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Agmgs.R")
 ```  
 
 **Figure 3**. 
 
-```{r barplots, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r barplots, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/physiology_barplots.R")
 ```  
 
 **Figure 4**. 
 
-```{r wateruse, fig.width=7, fig.height=7, echo=FALSE, warning=FALSE, message=FALSE,dev="png", dpi=400}
+```{r wateruse, fig.width=7, fig.height=7, echo=FALSE, warning=FALSE, message=FALSE,dev="png", dpi=600}
 source("master_scripts/wateruse.R")
 ```  
 
 **Figure 5**.
 
-```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/delta_cica.R")
 ```  
 
 **Figure 6**.  
 
-```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/cicc_bar.R")
 ```  
 
@@ -150,25 +150,25 @@ source("master_scripts/cicc_bar.R")
 
 # Supporting Information {.unnumbered}
 
-```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/air_vars.R")
 ```
 
 **Figure S1**
 
-```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/ACc_figure.R")
 ```  
 
 **Figure S2**. 
 
-```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp3.R")
 ```  
 
 **Figure S3**.
 
-```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp4.R")
 ```  
 
