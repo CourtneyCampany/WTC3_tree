@@ -10,7 +10,7 @@ output:
   pdf_document: default
   html_document:
     number_sections: yes
-csl: new-phytologist.csl
+csl: tree-physiology.csl
 bibliography: references.bib
 ---
 
