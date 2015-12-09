@@ -12,3 +12,5 @@
 #comment out keywords for thesis
 #comment out author correspondence for thesis
 #leaving co-authors in thesis for now
+
+# airvars fig orginal height=9

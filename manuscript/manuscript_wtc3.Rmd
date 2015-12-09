@@ -14,14 +14,14 @@ csl: new-phytologist.csl
 bibliography: references.bib
 ---
 
-\
-Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
+<!-- \ -->
+<!-- Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^. -->
 
-\
-^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia
+<!-- \ -->
+<!-- ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia -->
 
-\
-^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia
+<!-- \ -->
+<!-- ^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia -->
 
 <!-- \ -->
 <!-- *Corresponding author*: -->
@@ -56,7 +56,7 @@ library(pixiedust)
 ##read table ready dataframes
 resourcetab <- read.csv("master_scripts/resource_table.csv", stringsAsFactors = FALSE)
 getab <- read.csv("master_scripts/ge_table.csv", stringsAsFactors = FALSE)
-pval <- c(0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973)
+pval <- c(0.781, 0.001, 0.028, 0.002, 0.973, 0.3486, 0.6385, 0.001)
 pval2 <- c(0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
 # getab <- read.csv("master_scripts/ge_table.csv")
 
@@ -363,14 +363,14 @@ It is possible that reducing stomatal response time, by sustaining higher g~s~, 
 We found that *A~n~* and g~m~ scaled positively across leaf types and, surprisingly, increased rapidly (within minutes) and proportionately when light intensity was increased in shade leaves.  Research has suggested that aquaporins can facilitate increases in the CO~2~ permeability of the cell membranes resulting in rapid modulation of g~m~ [@hanba2004overexpression; @heinen2009role; @li2014plant]. This provides a potential explanation for the observed rapid increases in g~m~ but the impacts of aquaporins on g~m~ are untested in leaves of tree species. Our findings support a growing wealth of evidence that g~m~ is highly variable and can respond to environmental variables [@flexas2008mesophyll]. Here we provide empirical data showing g~m~ not only varies within a canopy but the up-regulation of g~m~ plays a critical role in the photosynthetic response of shade leaves to sunflecks. 
 
 \
-If shade leaves "lie in wait" for sunflecks then perhaps we should consider an alternate leaf economic strategy to maximize C gain, beyond conventional trade-offs associated with canopy resource distribution. This is because the role of g~s~ in regulating photosynthetic induction impacts the capacity of a leaf to utilize sunflecks [@way2012sunflecks]. If the valuation of sunflecks as a C resource is large enough then costs of sub-optimal stomatal behaviour could be offset over the leaf lifespan. For example, the potential C gain in leaves where sunflecks constitute a large proportion of total daily PFFD may be large enough to tolerate decreases in ITE However, accounting for the heterogeneous nature of light within a canopy remains a current challenge for empirical and modelling studies. Thus, models which predict leaf photosynthesis from N distribution within a canopy will be incomplete unless inclusion of canopy light extinction and the integration of sunflecks on shade leaves are included [@de1997simple].  
+If shade leaves "lie in wait" for sunflecks then perhaps we should consider an alternate leaf economic strategy to maximize C gain, beyond conventional trade-offs associated with canopy resource distribution. This is because the role of g~s~ in regulating photosynthetic induction impacts the capacity of a leaf to utilize sunflecks [@way2012sunflecks]. If the valuation of sunflecks as a C resource is large enough then costs of sub-optimal stomatal behaviour could be offset over the leaf lifespan. For example, the potential C gain in leaves where sunflecks constitute a large proportion of total daily PFFD may be large enough to tolerate decreases in ITE. However, accounting for the heterogeneous nature of light within a canopy remains a current challenge for empirical and modelling studies. Thus, models which predict leaf photosynthesis from N distribution within a canopy will be incomplete unless inclusion of canopy light extinction and the integration of sunflecks on shade leaves are included [@de1997simple].  
 
 ##3.5.3 Conclusions
 Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements to the canopy. Although resource allocation constrains leaf photosynthetic capacity it is the physiological behaviour of individual leaves which actually determine C gain. These findings suggest that current theories of leaf optimal behaviour should be extended to include dynamic light environments, which will have important implications for process-based models that predict canopy C gain from rates of leaf photosynthesis. Furthermore, the dynamic nature of g~m~ cannot be simply parameterized in tree growth models and possibly should be excluded until it can be represented properly. Additional empirical data, across multiple tree species, are needed to determine both the mechanisms and the capacity of g~m~ to rapidly increase CO~2~ drawdown. To improve our ability to predict whole canopy C gain future research should prioritize the incorporation of both sun and shade leaf physiology, which may be optimized differently.
 
 #3.6  Supporting Information
 
-```{r airvars, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
+```{r airvars, fig.width=7, fig.height=8.8, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/air_vars.R")
 ```
 \
