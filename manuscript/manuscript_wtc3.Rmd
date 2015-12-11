@@ -14,19 +14,19 @@ csl: tree-physiology.csl
 bibliography: references.bib
 ---
 
-<!-- \ -->
-<!-- Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^. -->
+\
+Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
 
-<!-- \ -->
-<!-- ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia -->
+\
+^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia
 
-<!-- \ -->
-<!-- ^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia -->
+\
+^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia
 
-<!-- \ -->
-<!-- *Corresponding author*: -->
-<!-- Courtney Campany -->
-<!-- E: courtneycampany@gmail.com -->
+\
+*Corresponding author*:
+Courtney Campany
+E: courtneycampany@gmail.com
 
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}

@@ -1,0 +1,110 @@
+---
+title: "gm methods_revised"
+author: "Court Campany"
+date: "December 11, 2015"
+output: word_document
+---
+
+```{r, results='asis', echo=FALSE, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+
+#from SVCEVANS
+Gas exchange and carbon isotope discrimination measurements were made as described by Tazoe et al. (2011) and Evans & von Caemmerer (2013). Plants were placed in a temperature-controlled growth cabinet together with the measuring heads (6 cm2 chamber with a red blue lightemitting diode light source) of two LI-6400XT gas exchange systems (Li-Cor, Lincoln, NE, USA). These chambers were coupled to a tunable diode laser (TDL;TGA100,Campbell Scientific, Inc., Logan, UT, USA) with a T junction in the match valve tubing. This allowed leaves of two plants to be measured in sequence, with each LI-6400XT sampled by the TDL at 4 min intervals as outlined in Fig. 1 of Tazoe et al. (2011). The LI-6400XT consoles were placed outside the growth chambers. The CO2 in the leaf chamber was set at 380 mol mol−1 in the sample cell, flow rate at 200 mol s−1 and irradiance of 1500 or 1000 mol quantam−2 s−1.N2 andO2 were mixed by mass flow controllers (Omega Engineering Inc., Stamford, CT, USA) to generate 2% O2, which was supplied to the consoles and specified for the LI-6400 calculations. Leaves were stabilized first at 25 °C, then temperature was dropped to 15 °C and then increased in 5 °C steps. Mesophyll conductance was calculated from carbon isotope discrimination with equations and fractionation factors presented in Evans & von Caemmerer (2013) including the ternary corrections proposed by Farquhar & Cernusak (2012). Low O2 partial pressure and high light minimized the contribution of respiratory and photorespiratory fractionation to the carbon isotope signal.
+
+
+Synchronized gas exchange and C isopte discrimination measurements were similarily as described in Evans & von Caemmerer (2013)
+
+
+\
+Leaf level gas exchange was measured with a standard (2 x 3 cm) leaf cuvette using a portable gas exchange system (LI-6400XT, LI-COR, Lincoln, NE, USA).  This system was coupled with a tunable diode laser (TDL; TGA100,Campbell Scientific, Inc., Logan, UT, USA) for concurrent measurements of online C isotope discrimination. The CO~2~ in the leaf cuvette was set at ambient atmospheric [CO~2~] (400 ppm) with a flow rate of 200 $\mu$mol s^-1^. Two identical gas exchanges systems were run simultaneously, one in each of a randomly chosen WTC for each temperature treatment. Leaf temperatures were controlled at the current AT or ET WTC air temperature. PPFD in the cuvette was set to match the individual light environment of each leaf type (explained above). Periods of high irradiance were simulated for shade leaves by increasing the leaf cuvette PPFD (LI-COR red/blue light source) to match the light environment of the full sun leaf in the same tree. The maximum sunfleck response of shade leaves was then recorded once CO~2~ and water vapor fluxes re-stabilized in the leaf cuvette (ca. 25 min). 
+
+\
+Once CO~2~ and water vapor flux values were stable for each leaf measurement, the sample and reference gas lines were diverted to the TDL via T-junctions inserted into the reference gas tube and match valve outlet of the LI-6400. The gas streams were dried by passing through napion gas dryers in the respective gas lines, and then ^12^CO~2~ and ^13^CO~2~ concentrations were measured for each gas stream by the TDL. Reference, sample and two calibration gases were run on alternating 80 s loops (20 s each), one for each AT and ET leaf at a matched canopy position, for a total of 12 min. This allowed for 4-5 measurements per leaf and data were averaged over the last 10 s of reference line and samples line gas streams for calculations. The two calibration gases were drawn from compressed air tanks (330 and 740 ppm CO~2~) in order to correct for gain drift of the TDL on each measurement cycle. Photosynthesis, g~s~, transpiration, VPD and intercellular [CO~2~] (C~i~) were auto-logged every 15 s for each gas exchange system over the same 12 min interval.
+
+\
+Using online C isotope discrimination measurements, the difference  between the observed discrimination and what is predicted for light saturated gas exchange is proportional to g~m~ [@griffiths2013mesophyll]. First, leaf C isotope discrimination was calculated by comparing the isotopic composition of the reference gas entering the leaf cuvette ($\delta$^13^C~e~) with the sample gas ($\delta$^13^C~o~) such that:
+
+\
+(1)
+$$\delta = \left(\frac{R_s}{R_{stnd}} -1\right)1000$$
+
+where R~s~ is the isotopic ratio of the sample and R~stnd~ is the isotopic ratio of the standard Vienna Pee Dee Belemnite (VPDP). Next, the observed discrimination ($\Delta$~obs~) is calculated from Evans et al. [-@evans1986carbon]:
+
+\
+(2)
+$$\Delta_{obs} = \frac{\xi(\delta^13C_o-\delta^13C_e)}{1000+\delta^13C_e-\xi(\delta^13C_o-\delta^13C_e)}$$
+
+where:
+
+\
+(3)
+$$\xi = \frac{C_{e}}{C_{e}-C_{o}}$$
+
+and $\xi$ is the ratio of the CO~2~ entering the well mixed leaf cuvette to the CO~2~ draw down in the gas stream by the leaf.
+
+\
+Second, C isotope discrimination during C~3~ photosynthesis ($\Delta$) is the resultant discrimination from CO~2~ diffusion from the atmosphere to the site of carboxylation, consisting of a series of fractionation steps described in Evans et al. [-@evans1986carbon]. In this experiment, a modified form of this equation presented in Evans & Von Caemmerer [-@evans2013temperature] with ternary effect corrections by Farquhar & Cernusak [-@farquhar2012ternary] was used such that:
+
+\
+(4)
+$$\Delta_o = \Delta_i - \Delta_{gm} - \Delta_e - \Delta_f$$
+
+where $\Delta$~o~ is the observed discrimination and  $\Delta$~i~, $\Delta$~gm~ , $\Delta$~e~ and $\Delta$~f~ are the contributions to fractionation if C~i~ = C~c~, g~m~, respiration and photorespiration, respectively. The equations for each are as follows:
+
+\
+(5)
+$$
+\begin{aligned}
+\Delta_i = &\frac{1}{1-t}a_i+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}
+\end{aligned}
+$$
+
+\
+(6)
+$$
+\begin{aligned}
+\Delta_{gm} = &\frac{1+t}{1-t}\left(b-a'-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}
+\end{aligned}
+$$
+
+\
+(7)
+$$
+\begin{aligned}
+\Delta_e = &\frac{1+t}{1-t}\left(\frac{eR_d}{(A+R_d)C_a}(C_i-\Gamma_*)\right)
+\end{aligned}
+$$
+
+\
+(8)
+$$
+\begin{aligned}
+\Delta_f = & \frac{1+t}{1-t}\left(f\frac{\Gamma_*}{C_a}\right)\\
+\end{aligned}
+$$
+
+where the different fractionation factors include; diffusion through water (a~i~, 1.8&permil;), Rubisco carboxylation (b, 29&permil;), the photorespiratory fractionation (f, 16.2&permil;) and the combined fractionation through the boundary layer and the stomata (a'). a' is defined by:
+
+\
+(9)
+$$a' = \frac{a_b(C_a-C_i)+a(C_s-C_i)}{C_a-C_i}$$
+
+where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. C~a~ and C~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from [@crous2012light]. The ternary effect corrections (t) are described by:
+
+\
+(10)
+$$t = \frac{(1+a')E}{2g^t_{ac}}$$
+
+where E denotes the transpiration rate and $\text{g}^t_{ac}$ is the total conductance to CO~2~ diffusion to both the boundary layer and stomatal conductance.
+
+\
+The CO~2~ diffusion from the intercellular airspace to the chloroplast, g~m~, is given by its relationship to the leaf photosynthesis rate (*A~n~*) by:
+
+\
+(11)
+$$g_m = \frac{*A~n~*}{C_i-C_c}$$
+
+where C~c~ is the chloroplast CO~2~ partial pressure. Once g~m~ was calculated C~c~ and the drawdown of CO~2~ from the intercellular air spaces to the site of carboxylation were then estimated using Equation 11. Examples of this approach to measure gas exchange and C isotope discrimination are presented in Evans and Von Caemmerer [-@evans2013temperature]. The variation in $\Delta$~o~ between sun and shade leaves and the simulated sunfleck where then compared as a function of C~i~:C~a~.  
