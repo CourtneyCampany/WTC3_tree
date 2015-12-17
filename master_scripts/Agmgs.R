@@ -129,6 +129,7 @@ plot(Photo~gm, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gml
   points(Photo~gm, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
 
 text(x=.5, y=24.5, "(b)", cex=1)
+
 # dev.copy2pdf(file="master_scripts/paper_figures/Agmgs.pdf")
 # dev.off()
    

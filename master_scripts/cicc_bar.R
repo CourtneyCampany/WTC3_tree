@@ -40,7 +40,7 @@ cols <- c(shacol2, suncol2, lightscol2)
 
 #1: CI
 
-#windows(12,6)
+# windows(12,6)
 
 par(mfrow=c(1,3))
 

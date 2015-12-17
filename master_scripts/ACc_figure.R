@@ -1,6 +1,6 @@
-source("functions and packages/packages.R")
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
 
 #read in parameters from aci curves with gm included
 coefs <- read.csv("calculated_data/aci_gm_param.csv")
@@ -25,7 +25,8 @@ acishaat$Cc <- with(acishaat, Ci - ALEAF / gm_agg[3,3])
 acishaet$Cc <- with(acishaet, Ci - ALEAF / gm_agg[4,3])
 
 ###plot of model ACC curves
-#windows(8,6)
+# windows(8,6)
+
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=satlab, xlab=cclab)
   points(ALEAF~Cc, data=acisunet,  col=suncol2,type='l',lwd=3, lty=2)
