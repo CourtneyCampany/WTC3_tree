@@ -14,3 +14,7 @@
 #leaving co-authors in thesis for now
 
 # airvars fig orginal height=9
+
+
+#tables
+#1. delta in column names does not bold properly
