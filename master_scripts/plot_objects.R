@@ -11,7 +11,7 @@ lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 
 arealab <- expression(Leaf~Area~~(cm^2))
-narealab <- expression(Leaf~Nitrogen[area]~~(gN~m^-2))
+narealab <- expression(Leaf~N[a]~~(gN~m^-2))
 nsunlab <- expression(Leaf[sun]~Nitrogen[area]~~(gN~m^-2))
 nshadelab <- expression(Leaf[shade]~Nitrogen[area]~~(gN~m^-2))
 
@@ -32,7 +32,7 @@ itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
 
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mu*mol~m^-2~s^-1))
-photolab <- expression(italic(A)~~(mu*mol~m^-2~s^-1))
+photolab <- expression(italic(A[n])~~(mu*mol~m^-2~s^-1))
 trmmollab <- expression(Transpiration~~(mmol~H[2]*O~m^-2~s^-1))
 
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
@@ -43,8 +43,9 @@ cilab <- expression(C[i]~~(ppm))
 cclab <- expression(C[c]~~(ppm))
 cclab2 <- expression(bar(C[c])~~(ppm))
 
-deltalab <-(expression(Delta[obs]))  
+deltalab <-(expression(Delta[o]))  
 cicalab <- "Ci/Ca"
+cicalab2 <- (expression(C[i]/C[a]))
 
 drawdownlab <- expression(paste(CO[2]~drawdown,", ", C[i]-C[c]))
 drawdownlab2 <- expression(paste(CO[2]~drawdown,", ", C[a]-C[i]))

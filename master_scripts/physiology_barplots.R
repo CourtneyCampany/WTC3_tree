@@ -47,7 +47,7 @@ mtext("Shade \n High Light", side=1,at=3.15, line=3.5 )
 
 ####photosynthesis
 bar(Photo, leaflight, gasex_agg, col=cols, xlab="", half.errbar=FALSE, ylim=c(0, 20),names.arg=FALSE,
-    mar=c(5,5,2,2), ylab=satlab,  cex.axis=1.25, cex.lab = 1.5, cex.names=1.5,legend=F)
+    mar=c(5,5,2,2), ylab=photolab,  cex.axis=1.25, cex.lab = 1.5, cex.names=1.5,legend=F)
 abline(v=2.5, lty=5)
 text(x=.25, y=19.5, "(c)", cex=1.5)
 mtext("Shade \n Low Light", side=1,at=.725, line=3.5  )

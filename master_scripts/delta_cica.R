@@ -34,10 +34,11 @@ delta_pred <- (4.4+(27-4.4)*cica_seq)
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(DELTA ~ CiCa, data=DELTA_agg, col=leaflight,  xlim=c(0,.85), ylim=c(0,20),
      xaxs='i', yaxs='i',
-     pch=c(16, 17)[pch=DELTA_agg$temp], ylab=deltalab, xlab=cicalab)
+     pch=c(16, 17)[pch=DELTA_agg$temp], ylab=deltalab, xlab=cicalab2)
      legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
 points(delta_pred~cica_seq, type='l',lwd=2)
 
 
  # dev.copy2pdf(file="master_scripts/paper_figures/delta_cica.pdf")
  # dev.off()
+ 
