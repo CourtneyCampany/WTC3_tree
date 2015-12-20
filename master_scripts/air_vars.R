@@ -37,7 +37,7 @@ vpdmax <- expression(VPD[max]~~(kPa))
 xlim1 <- as.Date(strptime("10-01-2013", format = "%m-%d-%Y", tz=""))
 xlim2 <- as.Date(strptime("05-31-2013", format = "%m-%d-%Y", tz=""))
 xlimdays <- c(xlim1, xlim2)
-dayparlab <- expression(PPFD[day]~~(mols~m^-2~d^-1))
+dayparlab <- expression(PPFD[day]~~(mol~m^-2~d^-1))
 
 
 # windows(7,10)
@@ -62,7 +62,7 @@ points(VPD.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='
 axis(2)
 axis.Date(1, at=xAT, labels=FALSE)
 box()
-legend("topright",col=c("black","red"),lty=c(1,2),legend=c( "AT", "ET"),inset=.01,  bty='n',cex=1.51)
+legend("topright",col=c("black","red"),lty=1,lwd=2,legend=c( "AT", "ET"),inset=.01,  bty='n',cex=1.51)
 text(x=15979, y=8.25, "(b)", cex=1.51)
 
 #3:temp plot
@@ -76,14 +76,14 @@ plot(Tair_al.max ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type=
   points(Tair_al.min ~ Date, data=met_cham_agg[met_cham_agg$temp=="ambient",], type='l',col="black",lwd=2, lty=2)
   points(Tair_al.min ~ Date, data=met_cham_agg[met_cham_agg$temp=="elevated",], type='l',col="red",lwd=2, lty=2)
 
-legend("topright",col=c("black", "black"),lty=c(1,2),legend=c(tmaxlab,tminlab),inset=.01, cex=1.51, bty='n')
+legend("topright",col=c("black", "black"),lty=c(1,2),lwd=2,legend=c(tmaxlab,tminlab),inset=.01, cex=1.51, bty='n')
   
 axis(2)
 axis.Date(1, at=xAT, labels=TRUE, outer=TRUE)
 box()
 text(x=15979, y=48, "(c)", cex=1.51)
 
-
+# 
 # dev.copy2pdf(file="master_scripts/paper_figures/airvars_wtc3.pdf")
 # dev.off()
 

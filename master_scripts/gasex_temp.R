@@ -72,7 +72,7 @@ palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
 
 plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16,
      ylim=c(5, 27), xlim=c(14,37.5),
-     xlab="", ylab=satlab, xaxt="n")
+     xlab="", ylab=photolab, xaxt="n")
   
   palette(c(octcol2, deccol2, jancol2, febcol2, marcol2, aprcol2))
   points(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-low",], col=Month, pch=16)

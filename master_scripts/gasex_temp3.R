@@ -90,7 +90,7 @@ par(mar=c(0,4,0,1))
 palette(c(octcol, deccol, jancol, febcol, marcol, aprcol))
 
 plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, pch=16,
-     ylim=c(5, 27), xlim=c(14,37.5),xlab="", ylab=satlab, xaxt="n", type='n')
+     ylim=c(5, 27), xlim=c(14,37.5),xlab="", ylab=photolab, xaxt="n", type='n')
 
   ablineclip(a=meanA[meanA$leaflight=="sun-high",2],b=0 ,x1=min(gasex_agg$CTleaf), x2=max(gasex_agg$CTleaf), lwd=2, col=suncol2)
   ablineclip(a=meanA[meanA$leaflight=="shade-low",2],b=0 ,x1=min(gasex_agg$CTleaf), x2=max(gasex_agg$CTleaf), lwd=2, col=shacol2)
@@ -149,7 +149,7 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   points(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
   text(x=37.5, y=170, "(c)", cex=.9)
   mtext(leaftlab, side=1, outer=TRUE, line=2.5, cex=1.25)
-  
+ #  
  # dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp3.pdf")
  # dev.off()
   

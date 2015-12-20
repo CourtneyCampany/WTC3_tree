@@ -47,8 +47,8 @@ deltalab <-(expression(Delta[o]))
 cicalab <- "Ci/Ca"
 cicalab2 <- (expression(C[i]/C[a]))
 
-drawdownlab <- expression(paste(CO[2]~drawdown,", ", C[i]-C[c]))
-drawdownlab2 <- expression(paste(CO[2]~drawdown,", ", C[a]-C[i]))
+drawdownlab <- expression(C[i]-C[c]~~(ppm))
+drawdownlab2 <- expression(C[a]-C[i]~~(ppm))
 
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
