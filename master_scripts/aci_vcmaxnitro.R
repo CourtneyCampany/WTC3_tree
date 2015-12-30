@@ -137,7 +137,7 @@ plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xl
 ####panel bottom right 
 par(fig=c(.5, 1, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="sun-high",], col=suncol,  xlim=c(0,4), ylim=c(0,25),
-       pch=c(16, 17)[pch=Anitro$temp], ylab=satlab, xlab=narealab)
+       pch=c(16, 17)[pch=Anitro$temp], ylab=photolab, xlab=narealab)
   points(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="shade-low",], col=shacol,  pch=c(16, 17)[pch=Anitro$temp])
   ablineclip(photoN_mod, x1=min(Anitro$leafN_area), x2=max(Anitro$leafN_area), lwd=2, lty=3)
   #legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)  
