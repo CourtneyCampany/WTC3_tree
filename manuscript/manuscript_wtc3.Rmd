@@ -245,7 +245,7 @@ Differences in experimental parameters to either the warming treatment or leaf t
 #3.4  Results
 
 ##3.4.1 Leaf resource distribution
-Across six measurement campaigns over the 7 month period PPFD was  reduced on average by >75% in the shade (Figure `r parfig`). Leaf-specific hydraulic conductance (K~l~) was similar across sun and shade leaves (Table `r wtc3tab1`). This was because $\Psi_{pd}$, $\Psi_l$ (Table `r wtc3tab1`) and E (Table `r wtc3tab2`) did not differ between leaf types. Leaf N~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table1). Leaf mass per area was not different between leaf types. No effect of the warming treatment was detected with  PPFD, $\Psi_{pd}$, $\Psi_l$, K~l~, E, N~area~ or LMA either within or across leaf types (P > 0.05).
+Across six measurement campaigns over the 7 month period PPFD was  reduced on average by >75% in the shade (Figure `r parfig`). Leaf-specific hydraulic conductance (K~l~) was similar across sun and shade leaves (Table `r wtc3tab1`). This was because $\Psi_{pd}$, $\Psi_l$ (Table `r wtc3tab1`) and E (Table `r wtc3tab2`) did not differ between leaf types. Leaf N~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table `r wtc3tab1`). Leaf mass per area was not different between leaf types. No effect of the warming treatment was detected with  PPFD, $\Psi_{pd}$, $\Psi_l$, K~l~, E, N~area~ or LMA either within or across leaf types (P > 0.05).
 \
 ```{r par, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/par2.R")
