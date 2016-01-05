@@ -1,8 +1,12 @@
 ---
 title: "gm methods_revised"
-author: "Court Campany"
-date: "December 11, 2015"
-output: word_document
+author: 
+date: 
+output:
+  word_document:
+    reference_docx: manuscriptstyle.docx
+csl: new-phytologist.csl
+bibliography: references.bib
 ---
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}
