@@ -1,7 +1,5 @@
 ---
-title: |
-  | Chapter 3 
-  | Rapid response of mesophyll conductance to light availability allows shade leaves to take advantage of sunflecks
+title: Rapid response of mesophyll conductance to light availability allows shade leaves to take advantage of sunflecks
 author: ""
 date: ""
 output:
