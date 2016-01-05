@@ -173,7 +173,7 @@ where $\Delta$~o~ is the observed discrimination and  $\Delta$~i~, $\Delta$~gm~ 
 (5)
 $$
 \begin{aligned}
-\Delta_i = &\frac{1}{1-t}a_i+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}
+\Delta_i = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}
 \end{aligned}
 $$
 
@@ -181,7 +181,7 @@ $$
 (6)
 $$
 \begin{aligned}
-\Delta_{gm} = &\frac{1+t}{1-t}\left(b-a'-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}
+\Delta_{gm} = &\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}
 \end{aligned}
 $$
 
@@ -216,13 +216,24 @@ $$t = \frac{(1+a')E}{2g^t_{ac}}$$
 where E denotes the transpiration rate and $\text{g}^t_{ac}$ is the total conductance to CO~2~ diffusion to both the boundary layer and stomatal conductance.
 
 \
-The CO~2~ diffusion from the intercellular airspace to the chloroplast, g~m~, is given by its relationship to the leaf photosynthesis rate (*A~n~*) by:
+The g~m~ can then be calculated as:
 
 \
 (11)
+$$
+\begin{aligned}
+g_m = \left(\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{C_a}\right) / \left(\Delta_i-\Delta_o-\Delta_e-\Delta_f\right)
+\end{aligned}
+$$
+
+\
+The CO~2~ diffusion from the intercellular airspace to the chloroplast, g~m~, is given by its relationship to the leaf photosynthesis rate (*A~n~*) by:
+
+\
+(12)
 $$g_m = \frac{A_n}{C_i-C_c}$$
 
-where C~c~ is the chloroplast CO~2~ partial pressure. Once g~m~ was calculated C~c~ and the drawdown of CO~2~ from the intercellular air spaces to the site of carboxylation were then estimated using Equation 11. Examples of this approach to measure gas exchange and C isotope discrimination are presented in Evans and Von Caemmerer [-@evans2013temperature]. The variation in $\Delta$~o~ between sun and shade leaves and the simulated sunfleck where then compared as a function of C~i~:C~a~.  
+where C~c~ is the chloroplast CO~2~ partial pressure. Once g~m~ was calculated C~c~ and the drawdown of CO~2~ from the intercellular air spaces to the site of carboxylation were then estimated using Equation 12. Examples of this approach to measure gas exchange and C isotope discrimination are presented in Evans and Von Caemmerer [-@evans2013temperature]. The variation in $\Delta$~o~ between sun and shade leaves and the simulated sunfleck where then compared as a function of C~i~:C~a~.  
 
 ##3.3.3 Biochemical parameters of photosynthesis
 Photosynthetic CO~2~ response (AC~i~) curves were measured at 25 &deg;C for one sun and shade leaf for each WTC prior to the initiation of the drought treatment. Each AC~i~ curve began at the reference [CO~2~] of 400 $\mu$l l^-1^ and then consisted of 12 additional steps from [CO~2~] of 50 to 1800 $\mu$l l^-1^ at 25 &deg;C at saturating light (1800 $\mu$mols m^-1^ s^-1^). From these curves the photosynthetic parameters, J~max~ and Vc~max~, were quantified using the biochemical model of [@farquhar1980biochemical] and fit with the 'plantecophys' package [@duursma2015] in R [@RDevelopmentCoreTeam2011] using default parameters.
@@ -234,7 +245,7 @@ Following gas exchange measurements each leaf was collected, measured for leaf w
 Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were measured for sun and shade leaves during each gas exchange campaign using a PMS 1505D pressure chamber (PMS Instruments, Albany, OR, USA). The leaf closest to the leaf used for gas exchange was sampled for measurement of $\Psi_{pd}$. Predawn leaf water potential was measured before sunrise on the same day as gas exchange measurements. Leaves used for gas exchange were immediately sampled for $\Psi_l$ once measurements were completed. All leaves were detached and immediately stored inside foil covered bags before water potential measurements were performed. Leaf water potential and transpiration (E, mmol^-2^ m^-2^ s^-1^) from gas exchange were then used to calculate leaf-specific hydraulic conductance (K~l~, mmol m^-2^ s^-1^ MPa) with the equation:
 
 \
-(12)
+(13)
 $$K = \frac{E}{\Psi_{pd}~-\Psi_l}$$
 
 Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression, where k=0.5 [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
