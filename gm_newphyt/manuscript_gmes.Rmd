@@ -13,19 +13,34 @@ bibliography: references.bib
 ---
 
 \
-Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
+Courtney E. Campany^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
 
 \
 ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia
-
 \
 ^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia
 
 \
-*Corresponding author*:
-Courtney Campany
-E: courtneycampany@gmail.com
+Author for Correspondence:
+\
+*Courtney Campany*
+\
+*Tel: +61(0)432391114*
+\
+*Email: courtneycampany@gmail.com*
 
+\
+```{r wc, echo=FALSE, warning=FALSE}
+library(pixiedust)
+wc_tab <- data.frame(count = c("Total word count (main body):", "Summary:", "Introduction:", "Materials and Methods:", "Results:",                               "Discussion:", "Acknowledgements:"), 
+                     answer = c(5535, 219, 1207, 1847, 1102, 1359,20),
+                     count2 = c("No. of Figures:", "No of Tables:", "No. of Supporting Information files:"
+                                ,"","","",""),
+                     answer2 = c("6 (all in color)",2,"6 (5 Figures, 1 Methods)", "","","",""))
+#colnames(wc_tab) <- NULL 
+dust(wc_tab)%>%
+sprinkle_print_method("markdown")
+```
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}
 library(knitr)
@@ -73,25 +88,28 @@ ciccfig <- "6"
 airvarfig <- "S1"
 deltafig <- "S2"
 accfig <- "S3"
-get1fig <- "S3"
-get2fig <- "S4"
+get1fig <- "S4"
+get2fig <- "S5"
 
 wtc3tab1 <- "1"
 wtc3tab2 <- "2"
 
 ```
 
-#Abstract
-Light gradients within tree canopies play a major role in the distribution of plant resources that define photosynthetic capacity of individual leaves. A lack of empirical data relating photosynthesis to leaf physiological behavior within tree canopies, however, impedes our ability to assess the contribution of shade leaves to canopy carbon gain. To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with online carbon isotope discrimination to measure net leaf photosynthesis (*A~n~*), stomatal conductance (g~s~) and mesophyll conductance (g~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole tree chambers. Compared to sun leaves, shade leaves had lower *A~n~*, g~m~, Vc~max~, J~max~ and leaf nitrogen but maintained similar rates of g~s~. When light intensity was increased from low light to high light for shade leaves both g~s~ and g~m~ increased rapidly, leading to increases in *A~n~* greater than sun leaves at the same photosynthetic photon flux density. Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements and predicting whole canopy carbon gain. We argue that the rapid response of g~m~ with light enables shade leaves to respond quickly to sunflecks. Evidence that g~m~ not only varies within a canopy but can be up-regulated over short time intervals possibly represents a new mechanism underpinning leaf gas exchange responses to light.
+# Summary
+* Light gradients within tree canopies play a major role in the distribution of plant resources that define leaf photosynthetic capacity. A lack of empirical data relating photosynthesis to leaf physiological behavior within tree canopies, however, impedes our ability to assess the contribution of shade leaves to canopy carbon gain.
+* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with online carbon isotope discrimination to measure net leaf photosynthesis (*A~n~*), stomatal conductance (g~s~) and mesophyll conductance (g~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole tree chambers.
+* Compared to sun leaves, shade leaves had lower A, g~m~, Vc~max~, J~max~ and leaf nitrogen but maintained similar rates of g~s~. When light intensity was increased from low light to high light for shade leaves both g~s~ and g~m~ increased rapidly, leading to increases in A greater than sun leaves. 
+* Here we show that dynamic physiological responses of shade leaves to altered light environments has important implications for upscaling leaf level measurements and predicting whole canopy carbon gain. We argue that the rapid response of g~m~ with light enables shade leaves to respond quickly to sunflecks. Evidence that g~m~ not only varies within a canopy but can be up-regulated over short time intervals possibly represents a new mechanism underpinning leaf gas exchange responses to light.
 
 ##Key words
-photosynthesis, stomatal conductance, mesophyll conductance,  shade, leaf optimal behavior
+leaf optimal behavior, mesophyll conductance, photosynthesis, shade, stomatal conductance,  
 
 #Introduction
 Light availability is one of the most important environmental drivers of leaf carbon (C) uptake in trees. Predicting C uptake of forests usually involves upscaling leaf level measurements to assess whole canopy function. Due to the costs and limitations of efficient light harvesting, plants cannot expose all leaves to full sun [@niinemets2010review], making simple upscaling based on solar irradiance problematic. Incident photosynthetic photon flux density (PPFD) declines exponentially with cumulative leaf area index, creating a steep light gradient from the canopy top to bottom [@monsi2005factor]. Consequently, structural and functional properties of leaves are modified to efficiently use light [@vogelman1996leaves; @valladares2004photosynthetic], as changing irradiance strongly affects rates of leaf photosynthesis (*A~n~*) [@evans1995carbon]. To estimate whole canopy C gain it is thus necessary to account for the non-linear response of *A~n~* to light by distinguishing between shaded and sunlit leaves [@de1997simple; @linderson2012up].
 
 \
-The distribution of resources required for *A~n~*, including leaf nitrogen (N) and supply of water, are also partially defined by canopy light gradients. As *A~n~* has a saturating response with light and maximum rates depend in part on N-rich photosynthetic machinery, it has been argued that leaf N should be proportional to PPFD along the canopy light gradient to maximize canopy C gain at a given total canopy N [@field1983allocating; @field1986photosynthesis; @peltoniemi2012co]. Changes in chlorophyll per unit N, chlorophyll a:b ratios, electron transport capacity per unit chlorophyll, and ratios of electron transport capacity to Rubisco activity can also occur in response to changes in irradiance [@evans2001photosynthetic]. Sun leaves frequently experience greater water limitations in the upper canopy, despite effective vascular systems developed for high radiation loads and transpiration [@sellin2008effects; @niinemets2012optimization]. Higher rates of *A~n~* and stomatal conductance (g~s~) can only be sustained if the leaf specific hydraulic conductance (K~l~) is also large enough to avoid low leaf water potentials [@hubbard2001stomatal]. Optimal photosynthetic N investment in the upper canopy will be ineffective in enhancing *A~n~* if water supply is insufficient [@niinemets2012optimization; @peltoniemi2012co], thus K~l~ should also be higher in the upper canopy to supply sunlit leaves with sufficient water [@burgess2006hydraulic;@sellin2007effects ;@sellin2008effects].
+The distribution of resources required for *A~n~*, including leaf nitrogen (N) and supply of water, are also partially defined by canopy light gradients. As *A~n~* has a saturating response with light and maximum rates depend in part on N-rich photosynthetic machinery, it has been argued that leaf N should be proportional to PPFD along the canopy light gradient to maximize canopy C gain at a given total canopy N [@field1983allocating; @field1986photosynthesis; @peltoniemi2012co]. Changes in chlorophyll per unit N, chlorophyll a:b ratios, electron transport capacity per unit chlorophyll and ratios of electron transport capacity to Rubisco activity can also occur in response to changes in irradiance [@evans2001photosynthetic]. Sun leaves frequently experience greater water limitations in the upper canopy, despite effective vascular systems developed for high radiation loads and transpiration [@sellin2008effects; @niinemets2012optimization]. Higher rates of *A~n~* and stomatal conductance (g~s~) can only be sustained if the leaf specific hydraulic conductance (K~l~) is also large enough to avoid low leaf water potentials [@hubbard2001stomatal]. Optimal photosynthetic N investment in the upper canopy will be ineffective in enhancing *A~n~* if water supply is insufficient [@niinemets2012optimization; @peltoniemi2012co], thus K~l~ should also be higher in the upper canopy to supply sunlit leaves with sufficient water [@burgess2006hydraulic;@sellin2007effects ;@sellin2008effects].
 
 \
 Rates of photosynthesis in C~3~ plants are limited by the [CO~2~] available for fixation by Rubisco within the chloroplast and this [CO~2~] is a function of the drawdown of CO~2~ from the atmosphere to the site of carboxylation [@warren2008stand]. This drawdown consists of multiple resistance pathways to CO~2~ diffusion which include CO~2~ diffusion from the atmosphere through stomata (stomatal conductance, g~s~) and then from these intercellular air spaces into the chloroplast (mesophyll conductance, g~m~). Based on optimal theory, regulation of g~s~ within a tree canopy should act to efficiently utilize available supplies of light, N and water to maximize *A~n~* [@peltoniemi2012co]. This is because stomata are hypothesized to exhibit an optimal behaviour to maximize C gain while simultaneously minimizing water loss through transpiration [@cowan1977stomatal]. Mesophyll conductance can also impose limitations on *A~n~* as large g~s~ [@warren2008stand; @ubierna2011estimation], reducing the efficiency of leaf N use in *A~n~* [@niinemets2007photosynthesis] if g~m~ constrains CO~2~ supply to the chloroplast. Part of the variation in photosynthetic capacity between sun and shade leaves has been proposed to be due to differences in g~m~ [@piel2002effect; @warren2007internal], yet the trade-offs that constrain this diffusion pathway are yet to be explicitly quantified. Stomatal and mesophyll conductance should not be considered independent of each other [@griffiths2013mesophyll], but a lack of empirical data currently hinders are ability to interpreting their coupled responses to *A~n~* across sun and shade leaves. 
@@ -103,7 +121,7 @@ Additionally, accounting for short term light fluctuations within a canopy, via 
 Climate warming may also affect the physiological behaviour of leaves within a canopy. This is because leaves can be exposed to different heat, water and high light stresses as temperature and vapour pressure deficit (VPD) vary with canopy light availability [@baldocchi2002environment; @valladares2004photosynthetic; @niinemets2007photosynthesis]. How these stresses affect the diffusion of CO~2~, through either g~s~ or g~m~, will have implications for upscaling *A~n~* for sun and shade leaves. Additionally, light saturated rates of *A~n~* are limited by the maximum rate of Rubisco carboxylation (Vc~max~) or the maximum rate of photosynthetic electron transport (J~max~) across a range of temperatures, yet their temperature dependencies are not the same [@farquhar1980biochemical; @medlyn2002temperature]. How these parameters are differentially affected by warming may impact constraints of N distribution and leaf photosynthetic capacity across light gradients. The impacts of warming on plant physiological processes are vast, yet differentiating their impacts on leaf physiology within a canopy will be essential to evaluate whole tree responses to a changing climate.
 
 \
-In this study we use *Eucalyptus tereticornis* Sm. trees, planted in climate controlled whole tree chambers with ambient and elevated temperature (ambient +3&deg;C) treatments, to empirically evaluate the distribution of nitrogen and water supply and leaf physiological behaviour of sun and shade leaves. Our hypotheses are as follows:
+In this study we use *Eucalyptus tereticornis* trees, planted in climate controlled whole tree chambers with ambient and elevated temperature (ambient +3&deg;C) treatments, to empirically evaluate the distribution of nitrogen and water supply and leaf physiological behaviour of sun and shade leaves. Our hypotheses are as follows:
 
 \
 1.	If whole tree canopies are optimized for C gain, then leaf N, hydraulic conductance and biochemical photosynthetic capacity are predicted to be higher in sun leaves compared to shade leaves.
@@ -120,7 +138,7 @@ In this study we use *Eucalyptus tereticornis* Sm. trees, planted in climate con
 #Materials and Methods
 
 ##Whole tree chamber experimental design
-Twelve *Eucalyptus tereticornis* seedlings, chosen from a single local Cumberland plain cohort, were planted in March 2013 into 12 whole-tree chambers (WTC) at the Hawkesbury Forest Experiment site near Richmond, NSW, Australia. Each chamber has a height of 9 m and seedlings were grown for 15 months. A detailed description of the WTC operation and design is available in [@barton2010whole]. Six chambers were set to match outside ambient air temperatures (AT) while the remaining 6 experienced an elevated air temperature treatment of +3&deg;C (ET, Figure `r airvarfig`). Trees grew quickly and developed large canopies, with height growth reaching the top of the WTCs over the experiment duration. Trees were watered weekly with 70 L from March 2013 to November 2013. From October 2013 to the end of the experiment trees were watered every 15 days with the mean monthly rainfall amount for Richmond, NSW. In February 2013 half of the chambers (3 each of AT and ET) were subjected to a drought treatment by withholding watering. Due to a limited range of data for the drought treatment only well-watered trees are reported, which reduces the sample size of WTC (n=6 to n=3) for the final 3 months of the experiment.
+Twelve *Eucalyptus tereticornis* Sm. seedlings, chosen from a single local Cumberland plain cohort, were planted in March 2013 into 12 whole-tree chambers (WTC) at the Hawkesbury Forest Experiment site near Richmond, NSW, Australia. Each chamber has a height of 9 m and seedlings were grown for 15 months. A detailed description of the WTC operation and design is available in [@barton2010whole]. Six chambers were set to match outside ambient air temperatures (AT) while the remaining 6 experienced an elevated air temperature treatment of +3&deg;C (ET, Figure `r airvarfig`). Trees grew quickly and developed large canopies, with height growth reaching the top of the WTCs over the experiment duration. Trees were watered weekly with 70 L from March 2013 to November 2013. From October 2013 to the end of the experiment trees were watered every 15 days with the mean monthly rainfall amount for Richmond, NSW. In February 2013 half of the chambers (3 each of AT and ET) were subjected to a drought treatment by withholding watering. Due to a limited range of data for the drought treatment only well-watered trees are reported, which reduces the sample size of WTC (n=6 to n=3) for the final 3 months of the experiment.
 
 \
 Before seedlings were planted into each chamber they were maintained under well-watered conditions in 25 L pots and kept inside each chamber. This allowed for seedlings to gain sufficient size before planting while also allowing them to acclimate to chamber temperature treatments. Seedlings were planted into each chamber after mean seedling height reached ca. 100 cm. The top soils at this site, used in both pots and chambers, are an alluvial formation of low-fertility sandy loam soils (380 and 108 mg kg-1 total N and phosphorus respectively) with low organic matter (0.7 %) and low water holding capacity. A root exclusion barrier extended from chamber walls to the hard layer (ca. 1 m) and roots were allowed to grow freely below the barrier. Leaf gas exchange measurements were initiated in October 2013 when trees had both ample height growth and canopy development for realistic canopy light gradients to be measured. At this point, trees under AT treatment had a mean diameter of 28.2&pm;1.1 mm, height of 348&pm;15.1 cm and an leaf area of 3.9&pm;0.1 m^2^. For ET treatments, trees had a mean diameter of 34.1&pm;2.1 mm, height of 418.3&pm;23.1 cm and an leaf area of 6.2&pm;0.2 m^2^. Leaf area was calculated based on complete leaf counts and mean leaf size from a subsample.
@@ -131,12 +149,11 @@ Leaf gas exchange measurements were performed six times, beginning in October 20
 \
 Prior to gas exchange measurements photosynthetic photon flux density (PPFD) was recorded as a point measurement at the individual leaf level and a spatially averaged measurement at the canopy position for each selected leaf.  A hand-held quantum sensor (LI-COR, Lincoln, NE, USA) was used to record leaf level PPFD to ensure that chosen leaves were positioned in the desired light environment, either full sun or full shade. A ceptometer (AccuPAR LP-80, Decagon Devices, Pullman, USA) was then used to measure a spatially averaged PPFD at the canopy height of each chosen leaf type. Each ceptometer reading integrated an array of 80 sensors over a total length of 84 cm. Five ceptometer readings were recorded at different locations within the canopy, but at the same height and close to each selected leaf. The mean of these readings was assumed to represent the local light environment of sun and shade leaves for each tree. All measurements of PPFD and gas exchange were performed on sunny days between 10:00-14:30 h.
 
-###condensed methods (cite in supplem)
+\
 Synchronized gas exchange and C isotope discrimination measurements were made similarly as described in Tazoe et al. [-@tazoe2011using] and Evans & von Caemmerer [-@evans2013temperature]. Leaf level gas exchange was measured with a standard (2 x 3 cm) leaf cuvette using a portable gas exchange system (LI-6400XT, LI-COR, Lincoln, NE, USA). This system was coupled with a tunable diode laser (TDL; TGA100,Campbell Scientific, Inc., Logan, UT, USA) for concurrent measurements of online C isotope discrimination. The CO~2~ in the leaf cuvette was set at ambient atmospheric [CO~2~] (400 ppm) with a flow rate of 200 $\mu$mol s^-1^. Two identical gas exchanges systems were run simultaneously, one in each of a randomly chosen WTC for each temperature treatment. Leaf temperatures were controlled at the current AT or ET WTC air temperature. PPFD in the cuvette was set to match the individual light environment of each leaf type (explained above). Periods of high irradiance were simulated for shade leaves by increasing the leaf cuvette PPFD (LI-COR red/blue light source) to match the light environment of the full sun leaf in the same tree. The maximum sunfleck response of shade leaves was then recorded once CO~2~ and water vapour fluxes re-stabilized in the leaf cuvette (ca. 25 min). 
 
 \
 Once CO~2~ and water vapour flux values were stable for each leaf measurement, the sample and reference gas lines were diverted to the TDL via T-junctions inserted into the reference gas tube and match valve outlet of the LI-6400XT. The gas streams were dried by passing through napion gas dryers in the respective gas lines, and then ^12^CO~2~ and ^13^CO~2~ concentrations were measured for each gas stream by the TDL. Reference, sample and two calibration gases were run on alternating 80 s loops (20 s each), one for each AT and ET leaf at a matched canopy position, for a total of 12 min. This allowed for 4-5 measurements per leaf and data were averaged over the last 10 s of reference line and samples line gas streams for calculations. The two calibration gases were drawn from compressed air tanks (330 and 740 ppm CO~2~) in order to correct for gain drift of the TDL on each measurement cycle. Photosynthesis, g~s~, transpiration, VPD and intercellular [CO~2~] (C~i~) were auto-logged every 15 s for each gas exchange system over the 12 min interval. 
-
 \
 Mesophyll conductance was calculated from carbon isotope discrimination with equations and fractionation factors as presented in Evans & Von Caemmerer [-@evans2013temperature], including the ternary corrections proposed by Farquhar & Cernusak [-@farquhar2012ternary], such that:
 
@@ -144,11 +161,11 @@ Mesophyll conductance was calculated from carbon isotope discrimination with equ
 (1)
 $$\Delta_o = \Delta_i - \Delta_{gm} - \Delta_e - \Delta_f$$
 
-where $\Delta$~o~ is the observed discrimination and $\Delta$~i~, $\Delta$~gm~ , $\Delta$~e~ and $\Delta$~f~ are the contributions to fractionation if C~i~ = C~c~, g~m~, respiration and photorespiration, respectively. For this study, the CO~2~ compensation point ($\Gamma_{*}$) and respiration during the day (R~d~) parameters originally derived for tobacco plants [@von1994kinetics] were replaced with parameters derived for *Eucalyptus globulus* from Crous et al. [-@crous2012light] when calculating g~m~. Full descriptions of the carbon isotope discrimination equations, with ternary corrections, are available in the Supporting Information. The variation in $\Delta$~o~ between sun and shade leaves and the simulated sunfleck where compared as a function of C~i~:C~a~. Once g~m~ was caluclated the chloroplast CO~2~ partial pressure (C~c~) and the drawdown of CO~2~ from the intercellular air spaces to the site of carboxylation were estimated from the relationship between g~m~ to the leaf photosynthesis rate (*A~n~*) by:
+where $\Delta$~o~ is the observed discrimination and $\Delta$~i~, $\Delta$~gm~ , $\Delta$~e~ and $\Delta$~f~ are the contributions to fractionation if C~i~ = C~c~, g~m~, respiration and photorespiration, respectively. For this study, the CO~2~ compensation point ($\Gamma_{*}$) and respiration during the day (R~d~) parameters originally derived for tobacco plants [@von1994kinetics] were replaced with parameters derived for *Eucalyptus globulus* from Crous et al. [-@crous2012light] when calculating g~m~. Full descriptions of the carbon isotope discrimination equations, with ternary corrections, are presented in Supporting Information Methods S1. The variation in $\Delta$~o~ between sun and shade leaves and the simulated sunfleck where compared as a function of C~i~:C~a~. Once g~m~ was calculated the chloroplast CO~2~ partial pressure (C~c~) and the drawdown of CO~2~ from the intercellular air spaces to the site of carboxylation were estimated from the relationship between g~m~ to the leaf photosynthesis rate (*A~n~*) by:
 
 \
 (2)
-$$g_m = \frac{*A~n~*}{C_i-C_c}$$
+$$g_m = \frac{A_n}{C_i-C_c}$$
 
 
 ##Biochemical parameters of photosynthesis
@@ -164,7 +181,7 @@ Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were mea
 (3)
 $$K = \frac{E}{\Psi_{pd}~-\Psi_l}$$
 
-Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression, where k=0.5 [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
+Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
 
 ##Data analysis
 Differences in experimental parameters to either the warming treatment or leaf type were analysed by mixed-effects models in R [@RDevelopmentCoreTeam2011] with WTC as a random effect. Explained variance (R^2^) of mixed models were computed as in [@nakagawa2013general], in which the marginal R^2^ represents variance explained by fixed factors and the conditional R^2^ by both fixed and random factors. Confidence intervals (95 %) of mixed effect linear models were generated using bootstrapping methods with 999 simulations, using the bootMer function in the 'lme4' package [@bates2013lme4]. For non-linear relationships, confidence intervals were estimated by fitting a generalized additive model to the data with the 'mgcv' package, using WTC as a random effect. All tests of statistical significance were conducted at an $\alpha$ of 0.05.
@@ -174,7 +191,6 @@ Differences in experimental parameters to either the warming treatment or leaf t
 ##Leaf resource distribution
 Across six measurement campaigns over the 7 month period PPFD was  reduced on average by >75% in the shade (Figure `r parfig`). Leaf-specific hydraulic conductance (K~l~) was similar across sun and shade leaves (Table `r wtc3tab1`). This was because $\Psi_{pd}$, $\Psi_l$ (Table `r wtc3tab1`) and E (Table `r wtc3tab2`) did not differ between leaf types. Leaf N~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table `r wtc3tab1`). Leaf mass per area was not different between leaf types. No effect of the warming treatment was detected with  PPFD, $\Psi_{pd}$, $\Psi_l$, K~l~, E, N~area~ or LMA either within or across leaf types (P > 0.05).
 
-\
 ##Photosynthetic capacity and leaf photosynthesis rates 
 The photosynthetic parameters J~max~ and Vc~max~ were higher in sun compared to shade leaves (Table `r wtc3tab1`), as estimated from AC~i~ curves (Figure `r acifig`a). Within leaf types, no effect of the warming treatment was detected on either parameter. Among the sampled leaves, Vc~max~ was positively related to leaf N~a~ across leaf types and temperature treatments (P = 0.01, Figure `r acifig`b).
 
@@ -293,6 +309,12 @@ source("master_scripts/cicc_bar.R")
 \
 **Figure 3.6**. The mean &pm; 1 standard error of (a) intercellular CO~2~ concentration (C~i~), (b) CO~2~ concentration in the chloroplasts (C~c~) and (c) CO~2~ drawdown from substomatal cavities to sites of carboxylation of sun leaves and shade leaves at both low and high light (C~i~-C~c~).
 
+### Acknowledgements
+We thank Craig Barton and Burhan Amiji for maintaining the Whole Tree Chambers experiment and for their outstanding technical assitance.
+
+### Author Contributions
+CC contributed to the design of the research, data analysis, collection, interpretation and writing the manuscript. MT contributed to the design of the research, interpretation  and writing the manuscript. SC contributed to the design of the research, performance of the research and interpretation. RD contributed to the design of the research, data analysis, interpretation and writing the manuscript.
+
 #Supporting Information
 
 ##Figures
@@ -327,7 +349,7 @@ source("master_scripts/gasex_temp4.R")
 \
 **Figure 3.S5**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
 
-##Methods
+##Methods S1
 
 ###Description of the calculation of g~m~ from carbon isotope discrimination during C3 photosynthesis
 \
@@ -418,4 +440,3 @@ g_m = \left(\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{C_a}\ri
 $$
 
 # References {.unnumbered}
-

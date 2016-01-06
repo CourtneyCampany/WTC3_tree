@@ -14,19 +14,19 @@ csl: tree-physiology.csl
 bibliography: references.bib
 ---
 
-\
-Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
+<!-- \ -->
+<!-- Courtney E. Campany^1^, Belinda Medlyn^1^, Mark Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^. -->
 
-\
-^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia
+<!-- \ -->
+<!-- ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia -->
 
-\
-^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia
+<!-- \ -->
+<!-- ^2^ Plant Science Division, Research School of Biology, The Australian National University, Canberra, ACT, Australia -->
 
-\
-*Corresponding author*:
-Courtney Campany
-E: courtneycampany@gmail.com
+<!-- \ -->
+<!-- *Corresponding author*: -->
+<!-- Courtney Campany -->
+<!-- E: courtneycampany@gmail.com -->
 
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}
@@ -93,7 +93,7 @@ Light gradients within tree canopies play a major role in the distribution of pl
 Light availability is one of the most important environmental drivers of leaf carbon (C) uptake in trees. Predicting C uptake of forests usually involves upscaling leaf level measurements to assess whole canopy function. Due to the costs and limitations of efficient light harvesting, plants cannot expose all leaves to full sun [@niinemets2010review], making simple upscaling based on solar irradiance problematic. Incident photosynthetic photon flux density (PPFD) declines exponentially with cumulative leaf area index, creating a steep light gradient from the canopy top to bottom [@monsi2005factor]. Consequently, structural and functional properties of leaves are modified to efficiently use light [@vogelman1996leaves; @valladares2004photosynthetic], as changing irradiance strongly affects rates of leaf photosynthesis (*A~n~*) [@evans1995carbon]. To estimate whole canopy C gain it is thus necessary to account for the non-linear response of *A~n~* to light by distinguishing between shaded and sunlit leaves [@de1997simple; @linderson2012up].
 
 \
-The distribution of resources required for *A~n~*, including leaf nitrogen (N) and supply of water, are also partially defined by canopy light gradients. As *A~n~* has a saturating response with light and maximum rates depend in part on N-rich photosynthetic machinery, it has been argued that leaf N should be proportional to PPFD along the canopy light gradient to maximize canopy C gain at a given total canopy N [@field1983allocating; @field1986photosynthesis; @peltoniemi2012co]. Changes in chlorophyll per unit N, chlorophyll a:b ratios, electron transport capacity per unit chlorophyll, and ratios of electron transport capacity to Rubisco activity can also occur in response to changes in irradiance [@evans2001photosynthetic]. Sun leaves frequently experience greater water limitations in the upper canopy, despite effective vascular systems developed for high radiation loads and transpiration [@sellin2008effects; @niinemets2012optimization]. Higher rates of *A~n~* and stomatal conductance (g~s~) can only be sustained if the leaf specific hydraulic conductance (K~l~) is also large enough to avoid low leaf water potentials [@hubbard2001stomatal]. Optimal photosynthetic N investment in the upper canopy will be ineffective in enhancing *A~n~* if water supply is insufficient [@niinemets2012optimization; @peltoniemi2012co], thus K~l~ should also be higher in the upper canopy to supply sunlit leaves with sufficient water [@burgess2006hydraulic;@sellin2007effects ;@sellin2008effects].
+The distribution of resources required for *A~n~*, including leaf nitrogen (N) and supply of water, are also partially defined by canopy light gradients. As *A~n~* has a saturating response with light and maximum rates depend in part on N-rich photosynthetic machinery, it has been argued that leaf N should be proportional to PPFD along the canopy light gradient to maximize canopy C gain at a given total canopy N [@field1983allocating; @field1986photosynthesis; @peltoniemi2012co]. Changes in chlorophyll per unit N, chlorophyll a:b ratios, electron transport capacity per unit chlorophyll and ratios of electron transport capacity to Rubisco activity can also occur in response to changes in irradiance [@evans2001photosynthetic]. Sun leaves frequently experience greater water limitations in the upper canopy, despite effective vascular systems developed for high radiation loads and transpiration [@sellin2008effects; @niinemets2012optimization]. Higher rates of *A~n~* and stomatal conductance (g~s~) can only be sustained if the leaf specific hydraulic conductance (K~l~) is also large enough to avoid low leaf water potentials [@hubbard2001stomatal]. Optimal photosynthetic N investment in the upper canopy will be ineffective in enhancing *A~n~* if water supply is insufficient [@niinemets2012optimization; @peltoniemi2012co], thus K~l~ should also be higher in the upper canopy to supply sunlit leaves with sufficient water [@burgess2006hydraulic;@sellin2007effects ;@sellin2008effects].
 
 \
 Rates of photosynthesis in C~3~ plants are limited by the [CO~2~] available for fixation by Rubisco within the chloroplast and this [CO~2~] is a function of the drawdown of CO~2~ from the atmosphere to the site of carboxylation [@warren2008stand]. This drawdown consists of multiple resistance pathways to CO~2~ diffusion which include CO~2~ diffusion from the atmosphere through stomata (stomatal conductance, g~s~) and then from these intercellular air spaces into the chloroplast (mesophyll conductance, g~m~). Based on optimal theory, regulation of g~s~ within a tree canopy should act to efficiently utilize available supplies of light, N and water to maximize *A~n~* [@peltoniemi2012co]. This is because stomata are hypothesized to exhibit an optimal behaviour to maximize C gain while simultaneously minimizing water loss through transpiration [@cowan1977stomatal]. Mesophyll conductance can also impose limitations on *A~n~* as large g~s~ [@warren2008stand; @ubierna2011estimation], reducing the efficiency of leaf N use in *A~n~* [@niinemets2007photosynthesis] if g~m~ constrains CO~2~ supply to the chloroplast. Part of the variation in photosynthetic capacity between sun and shade leaves has been proposed to be due to differences in g~m~ [@piel2002effect; @warren2007internal], yet the trade-offs that constrain this diffusion pathway are yet to be explicitly quantified. Stomatal and mesophyll conductance should not be considered independent of each other [@griffiths2013mesophyll], but a lack of empirical data currently hinders are ability to interpreting their coupled responses to *A~n~* across sun and shade leaves. 
@@ -248,7 +248,7 @@ Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were mea
 (13)
 $$K = \frac{E}{\Psi_{pd}~-\Psi_l}$$
 
-Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression, where k=0.5 [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
+Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
 
 ##3.3.5 Data analysis
 Differences in experimental parameters to either the warming treatment or leaf type were analysed by mixed-effects models in R [@RDevelopmentCoreTeam2011] with WTC as a random effect. Explained variance (R^2^) of mixed models were computed as in [@nakagawa2013general], in which the marginal R^2^ represents variance explained by fixed factors and the conditional R^2^ by both fixed and random factors. Confidence intervals (95 %) of mixed effect linear models were generated using bootstrapping methods with 999 simulations, using the bootMer function in the 'lme4' package [@bates2013lme4]. For non-linear relationships, confidence intervals were estimated by fitting a generalized additive model to the data with the 'mgcv' package, using WTC as a random effect. All tests of statistical significance were conducted at an $\alpha$ of 0.05.
