@@ -117,7 +117,7 @@ In this study we use *Eucalyptus tereticornis* Sm. trees, planted in climate con
 3. As shade leaves were expected to develop lower biochemical photosynthetic capacity, increases in *A~n~* following sunfleck simulations were not expected to reach rates of full sun leaves.
 
 \
-4.	The effects of climate warming were predicted to be greater in sun than shade leaves, seen as a decrease in g~s~ and leaf C gain during summer months, as increased evaporation demand from higher temperatures may lead to stomatal closure.
+4.	The effects of climate warming were predicted to be greater in sun than shade leaves, seen as a decrease in g~s~ and leaf C gain during summer months, as increased evaporation demand from higher temperatures lead to stomatal closure.
 
 #3.3  Materials and Methods
 
@@ -278,7 +278,7 @@ dust(resourcetab2)%>%
 ```
 
 \
-**Table 3.2**. *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for *A~n~* and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD are kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
+**Table 3.2**. *Eucalyptus tereticornis* leaf gas exchange parameters for sun and shade leaves under ambient and elevated temperature treatments. Each value reflects the mean (&pm; 1 standard error) for each treatment across gas exchange campaigns (n=6). Units for *A~n~* and E are $\mu$mol m^-2^ s^-1^, for g~s~ and g~m~ are mol m^-2^ s^-1^ and for VPD is kPa. Different letters represent significant differences between leaf type, light environment and temperature treatments. The P value represents the overall effect between each unique combination of leaf type, light environment and temperature treatment for each parameter.
 
 ```{r, echo=FALSE}
 getab2 <- rbind(getab, c("P value","","", as.character(pval2)))
