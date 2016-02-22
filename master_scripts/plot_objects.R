@@ -7,6 +7,7 @@ pchtri <- c(17,17,2,2)
 
 
 gmlab <-expression(g[m]~~(mol~m^-2~s^-1))
+gmlab2 <-expression(g[m]~~(mol~m^-2~s^-1~bar^-1))
 lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 
@@ -49,6 +50,7 @@ cicalab2 <- (expression(C[i]/C[a]))
 
 drawdownlab <- expression(C[i]-C[c]~~(ppm))
 drawdownlab2 <- expression(C[a]-C[i]~~(ppm))
+drawdownlab3 <- expression(C[i]-C[c]~~(paste(mu,bar,sep="")))
 
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])

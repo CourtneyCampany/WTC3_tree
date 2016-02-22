@@ -46,7 +46,7 @@ par(mfrow=c(1,3), cex.axis=1.25,cex.lab = 1.5)
   
 #1. Conductance
 #first empty plot
-plot((1:nrow(ci_mean)),ci_mean$Ci, ylim=c(0, 325), xaxt='n', mar=c(5,5,2,1), ylab=cilab, 
+plot((1:nrow(ci_mean)),ci_mean$Ci, ylim=c(0, 325), xaxt='n', mar=c(5,5,2,1), ylab=expression(C[i]~~(paste(mu,bar,sep=""))), 
        xlim=c(0.5,nrow(ci_mean)+0.5),type='n', xlab="",mgp=c(2.5,1,0))
   
 ##add bar plots as rectangles
@@ -75,7 +75,7 @@ for(i in 1:nrow(ci_mean)){
   
 #2. cc
 #first empty plot
-  plot((1:nrow(cc_mean)),cc_mean$Cc, ylim=c(0, 325), xaxt='n',mar=c(5,5,2,1), ylab=cclab,
+  plot((1:nrow(cc_mean)),cc_mean$Cc, ylim=c(0, 325), xaxt='n',mar=c(5,5,2,1), ylab=expression(C[c]~~(paste(mu,bar,sep=""))),
        xlim=c(0.5,nrow(cc_mean)+0.5),type='n', xlab="",mgp=c(2.5,1,0))
   
 ##add bar plots as rectangles
@@ -104,7 +104,7 @@ for(i in 1:nrow(cc_mean)){
   
 #3.drawdown
 #first empty plot
-plot((1:nrow(draw_mean)),draw_mean$drawdown, ylim=c(0, 140), xaxt='n',mar=c(5,5,2,2), ylab=drawdownlab,
+plot((1:nrow(draw_mean)),draw_mean$drawdown, ylim=c(0, 140), xaxt='n',mar=c(5,5,2,2), ylab=drawdownlab3,
        xlim=c(0.5,nrow(draw_mean)+0.5),type='n',xlab="",mgp=c(2.5,1,0))
   
   ##add bar plots as rectangles
