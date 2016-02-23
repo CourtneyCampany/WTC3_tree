@@ -8,6 +8,9 @@ pchtri <- c(17,17,2,2)
 
 gmlab <-expression(g[m]~~(mol~m^-2~s^-1))
 gmlab2 <-expression(g[m]~~(mol~m^-2~s^-1~bar^-1))
+shagmlab <- expression(g[m]~Low~Light~~(mol~m^-2~s^-1~bar^-1))
+fleckgmlab <- expression(g[m]~High~Light~~(mol~m^-2~s^-1~bar^-1))
+
 lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 

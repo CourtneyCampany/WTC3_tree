@@ -28,7 +28,7 @@ gasex_agg$leaflight <- factor(gasex_agg$leaflight, levels = leaforder)
 cols <- c(shacol2, lightscol2,suncol2)
 
 
-windows(12,6)
+# windows(12,6)
 par(mfrow=c(1,3),cex.axis=1.25, cex.lab = 1.5, mar=c(5,5,2,1))
 
 boxplot(Ci ~leaflight, gasex_agg, col=cols, ylab=expression(C[i]~~(paste(mu,bar,sep=""))), names=FALSE, ylim=c(0,325), outline=FALSE)
@@ -49,5 +49,5 @@ boxplot(drawdown~leaflight, gasex_agg, col=cols, ylab=drawdownlab3, xlab="", nam
   mtext("Sun \n High Light", side=1,at=3, line=3.5)
   text(x=.55, y=325, "(c)", cex=1.5)
   
-dev.copy2pdf(file="master_scripts/paper_figures/cicc_boxplots.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/cicc_boxplots.pdf")
+# dev.off()
