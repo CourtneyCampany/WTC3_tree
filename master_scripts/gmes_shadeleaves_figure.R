@@ -1,6 +1,6 @@
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
-source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
 gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
@@ -31,11 +31,11 @@ shadeleaf <- merge(shadat2, fleckdat2, by=c("chamber", "temp","Month"))
 ##plot
 # windows(7,7)
 
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(fleck_gm~shade_gm, data=shadeleaf, ylim=c(0,.3), xlim=c(0,.3), xlab=shagmlab, ylab=fleckgmlab, 
-     pch=c(16, 17)[shadeleaf$temp])
+     pch=c(16, 17)[shadeleaf$temp], cex=1.25)
 abline(0,1, lty=2)
-legend("topleft", c("AT", "ET"), pch=c(16,17), inset = 0.01, bty='n', title="Shade Leaves", cex=.8)
+legend("topleft", c("AT", "ET"), pch=c(16,17), inset = 0.01, bty='n', title="Shade Leaves", cex=1, pt.cex=1.25,)
 
 # dev.copy2pdf(file="master_scripts/paper_figures/gmshade.pdf")
 # dev.off()
