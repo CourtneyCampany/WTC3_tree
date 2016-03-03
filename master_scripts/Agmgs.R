@@ -6,7 +6,7 @@
 gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
 
 ###get average by id
-gm_agg <- summaryBy(Photo+ Cond + gm ~ chamber+id+leaf +light+temp+leaflight+Month, data=gmes, FUN=mean, keep.names=TRUE)
+gm_agg <- summaryBy(Photo+ Cond + gm_bar ~ chamber+id+leaf +light+temp+leaflight+Month, data=gmes, FUN=mean, keep.names=TRUE)
   gm_agg$leaf <- gsub("s", "S", gm_agg$leaf)
   gm_agg$light <- gsub("high", "Sun-light", gm_agg$light)
   gm_agg$light <- gsub("low", "Shade-light", gm_agg$light)
@@ -74,20 +74,20 @@ agm_fleck <-  read.csv( "master_scripts/bootstrap_results/agm_fleck.csv")
 ##linear model with chamber as random effect
 
 # gmA_sun_mod <- lme(Photo ~ gm ,random=~1|chamber, data=sundat)
-gmA_sun_mod2 <- lm(Photo ~ gm , data=sundat)
+gmA_sun_mod2 <- lm(Photo ~ gm_bar , data=sundat)
 
    # summary(gmA_sun_mod)
    # summary(gmA_sun_mod2)
    # anova(gmA_sun_mod,gmA_sun_mod2)
 
 #   gmA_sha_mod <- lme(Photo~ gm  ,random=~1|chamber, data=shadat)
-gmA_sha_mod2 <- lm(Photo~ gm  ,data=shadat)
+gmA_sha_mod2 <- lm(Photo~ gm_bar  ,data=shadat)
    # summary(gmA_sha_mod)
    # summary(gmA_sha_mod2)
    # anova(gmA_sha_mod,gmA_sha_mod2)
 
 #   gmA_fleck_mod <- lme(Photo~ gm  ,random=~1|chamber, data=fleckdat)
-gmA_fleck_mod2 <- lm(Photo~ gm  ,data=fleckdat)
+gmA_fleck_mod2 <- lm(Photo~ gm_bar  ,data=fleckdat)
    # summary(gmA_fleck_mod)
    # summary(gmA_fleck_mod2)
    # anova(gmA_fleck_mod,gmA_fleck_mod2)
@@ -122,11 +122,11 @@ text(x=.5, y=24.5, "(a)", cex=1)
 
 #gm
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(Photo~gm, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab, ylab=photolab, pch="")
+plot(Photo~gm_bar, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab2, ylab=photolab, pch="")
   predline(gmA_sun_mod2, col=suncol2,lwd=2)
   predline(gmA_sha_mod2, col=shacol2,lwd=2)
   predline(gmA_fleck_mod2, col=lightscol2,lwd=2)
-  points(Photo~gm, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
+  points(Photo~gm_bar, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
 
 text(x=.5, y=24.5, "(b)", cex=1)
 

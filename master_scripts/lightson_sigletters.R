@@ -9,7 +9,7 @@ ITE <- read.csv("calculated_data/ITE.csv")
 ITE$tukeyid <- as.factor(paste(ITE$leaflight, ITE$temp, sep="-"))
 
 ###leaf data
-ge_agg <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
+ge_agg <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm_bar+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
                     data=gasexchange, FUN=mean, keep.names=TRUE)
 ge_agg$tukeyid <- as.factor(paste(ge_agg$leaflight, ge_agg$temp, sep="-"))
 
@@ -101,21 +101,18 @@ write.csv(gs_lightson_siglets2, "master_scripts/sigletters/sl_gs_lightson.csv", 
 
 
 
-
-
-  
 ###mesophyll conductance-----------------------------------------------------------------------------------------
-gm_temp <- lme(gm ~ temp ,random=~1|chamber, data=lightson)
+gm_temp <- lme(gm_bar ~ temp ,random=~1|chamber, data=lightson)
 summary(gm_temp)
 anova(gm_temp)
 
-gm_leaf2 <- lme(gm ~ leaf ,random=~1|chamber, data=ge_agg[ge_agg$leaflight != "shade-high",])
+gm_leaf2 <- lme(gm_bar ~ leaf ,random=~1|chamber, data=ge_agg[ge_agg$leaflight != "shade-high",])
 summary(gm_leaf2)
 anova(gm_leaf2)
 visreg(gm_leaf2)
 
 
-gm_leaf <- lme(gm~ tukeyid, random=~1|chamber, data=ge_agg)
+gm_leaf <- lme(gm_bar~ tukeyid, random=~1|chamber, data=ge_agg)
 summary(gm_leaf)
 anova(gm_leaf)
 visreg(gm_leaf)
@@ -124,7 +121,6 @@ tukey_gm<- glht(gm_leaf, linfct = mcp(tukeyid = "Tukey"))
 gm_lightson_siglets<- cld(tukey_gm)
 gm_lightson_siglets2 <- gm_lightson_siglets$mcletters$Letters
 
-visreg(gm_leaf)
 write.csv(gm_lightson_siglets2, "master_scripts/sigletters/sl_gm_lightson.csv", row.names=FALSE)
 
 ###vpd-----------------------------------------------------------------------------------------

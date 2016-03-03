@@ -6,11 +6,11 @@ gasexchange  <- read.csv("calculated_data/gmes_wtc.csv")
 gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 
 ###leaf data
-ge_agg <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
+ge_agg <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm_bar+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month+drydown, 
                     data=gasexchange, FUN=mean, keep.names=TRUE)
 
 
-ge_overall <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm+VpdL ~ leaf +temp+leaflight+drydown, 
+ge_overall <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm_bar+VpdL ~ leaf +temp+leaflight+drydown, 
                         data=gasexchange, FUN=c(mean, se))
 
 

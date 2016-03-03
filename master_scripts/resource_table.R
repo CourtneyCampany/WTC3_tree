@@ -8,8 +8,12 @@ treatments <- read.csv("raw data/temp_trt.csv")
 ##variables include:  WP*2, K, Narea, 13C, Vcmax, Jmax, lma
 
 ####aci parameters--------------------------------------------------------------------------------------------------
-aciparam <- read.csv("calculated_data/aciparameters.csv")
-aci_agg <- summaryBy(Vcmax+Jmax ~ leaf+temp, data=aciparam, FUN=c(mean, se))
+# aciparam <- read.csv("calculated_data/aciparameters.csv")
+
+##use chorloplastic parameters instead
+acigmparam <- read.csv("calculated_data/aciparameters_gm.csv")
+
+aci_agg <- summaryBy(Vcmax+Jmax ~ leaf+temp, data=acigmparam, FUN=c(mean, se))
 
 
 ####Narea/LMA/13c-----------------------------------------------------------------------------------------------
