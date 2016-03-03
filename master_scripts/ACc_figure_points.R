@@ -73,7 +73,7 @@ plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=photolab,
   points(ALEAF~Cc, data=acisunet,  col=suncol2,type='l',lwd=3, lty=2)
   points(ALEAF~Cc, data=acishaat,  col=lightscol2,type='l',lwd=3)
   points(ALEAF~Cc, data=acishaet,  col=lightscol2,type='l',lwd=3, lty=2)
-  legend("bottomright", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
+  legend("topright", c("Sun-AT", "Sun-ET", "Shade-AT", "Shade-ET"), lty=c(1,2, 1,2),lwd=2,
           col=c(suncol2, suncol2,lightscol2,lightscol2),inset = 0.01, bty='n',cex=.8)
   
 ###Add points from ACi curves, where Cc is predicted
@@ -84,17 +84,23 @@ plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=photolab,
   points(Photo~Cc ,data= tdlaci2,  col=suncol50,  pch=c(16, 17)[pch=tdlaci2$temp])
 
 
-###inset as in aci
-# par(fig=c(0.45, 0.95, 0.15,0.55), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
-# 
-# plot(ALEAF~Cc ,data= acisunat, ylim=c(0, 15.5), xlim=c(45,250), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
-# axis(2, mgp=c(3, .5, 0))
-# axis(1, mgp=c(3, 0, 0))
-# 
-#   points(ALEAF~Cc, col=suncol2, data=acisunat, type="l", lwd=2)
-#   points(ALEAF~Cc, col=suncol2, data=acisunet, type="l", lwd=2, lty=2)
-#   points(ALEAF~Cc, col=lightscol2, data=acishaat, type="l", lwd=2)
-#   points(ALEAF~Cc, col=lightscol2, data=acishaet, type="l", lwd=2, lty=2)  
+###initial curve inset
+par(fig=c(0.45, 0.95, 0.15,0.5), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
+
+plot(ALEAF~Cc ,data= acisunat, ylim=c(0, 15.5), xlim=c(45,250), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
+axis(2, mgp=c(3, .5, 0))
+axis(1, mgp=c(3, 0, 0))
+
+  points(ALEAF~Cc, col=suncol2, data=acisunat, type="l", lwd=2)
+  points(ALEAF~Cc, col=suncol2, data=acisunet, type="l", lwd=2, lty=2)
+  points(ALEAF~Cc, col=lightscol2, data=acishaat, type="l", lwd=2)
+  points(ALEAF~Cc, col=lightscol2, data=acishaet, type="l", lwd=2, lty=2)
+  
+  ###Add points from ACi curves, where Cc is predicted
+  points(Photo~Cc ,data= acishade_clean, col=lights50col, pch=c(16, 17)[pch=acishade_clean$temp])
+  points(Photo~Cc ,data= shade_redo, col=lights50col,  pch=c(16, 17)[pch=shade_redo$temp])
+  points(Photo~Cc ,data= sunaci_clean,  col=suncol50,  pch=c(16, 17)[pch=sunaci_clean$temp])
+  points(Photo~Cc ,data= tdlaci2,  col=suncol50,  pch=c(16, 17)[pch=tdlaci2$temp])
 
 
 dev.copy2pdf(file="master_scripts/paper_figures/Acc_test.pdf")
