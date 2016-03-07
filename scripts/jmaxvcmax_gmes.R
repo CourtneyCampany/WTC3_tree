@@ -1,10 +1,11 @@
 source("functions and packages/functions.R")
-
+library(doBy)
 #####redo aci curves with gmes to get new Jmax and Vcmax
 
 #read in gmes, get simple means by treatment
 gm <- read.csv("calculated_data/gmes_wellwatered.csv")
 gm_agg <-summaryBy(gm ~ leaflight+temp, data=gm, FUN=mean, keep.names=TRUE)
+# write.csv(gm_agg,"gm_means.csv", row.names = FALSE)
 
 #read in temperature treatments
 treatments <- read.csv("raw data/temp_trt.csv") 
@@ -19,6 +20,13 @@ shade_redo <- read.csv("raw data/shadeaci_redo.csv")
 
 #clean from previous script
 acishade_clean <- acishade[!(acishade$chamber %in% c("ch02","ch07","ch09","ch11")),]
+acishade_clean$leaf <- "shade"
+
+
+###make clean shade dfr and write
+# shade_aci <- rbind(shade_redo, acishade_clean)
+# write.csv(shade_aci,"shadeleafaci.csv", row.names = FALSE)
+
 
 ##have to seperates temperature treatment so datasets
 acishade_clean_at <- acishade_clean[acishade_clean$temp == "ambient",]
@@ -55,6 +63,9 @@ tdlaci2 <- read.csv("raw data/tdlaci2.csv")
   tdlaci2 <- droplevels(tdlaci2)
 
 
+# sun_aci <- rbind(sunaci, tdlaci2)  
+# write.csv(sun_aci,"sunleafaci.csv", row.names = FALSE)
+  
 library(plantecophys)
 
 ##fitaci with gmes for sun and shade leaves by temperature treatment----------------------------------------------------------

@@ -317,7 +317,7 @@ source("master_scripts/cicc_boxplots.R")
 **Figure 7**. Boxplots of (a) intercellular CO~2~ concentration (C~i~), (b) CO~2~ concentration in the chloroplasts (C~c~) and (c) CO~2~ drawdown from substomatal cavities to sites of carboxylation of sun leaves and shade leaves at both low and high light (C~i~-C~c~).
 
 ### Acknowledgements
-We thank Craig Barton and Burhan Amiji for maintaining the Whole Tree Chambers experiment and for their outstanding technical assistance.
+We thank Craig Barton and Burhan Amiji for maintaining the Whole Tree Chambers experiment and for their outstanding technical assistance. We thank Sune Linder and the Swedish University for Agricultural Science for providing the whole-tree chambers. 
 
 ### Author Contributions
 CC contributed to the design of the research, data analysis, collection, interpretation and writing the manuscript. MT contributed to the design of the research, interpretation  and writing the manuscript. SC contributed to the design of the research, performance of the research and interpretation. RD contributed to the design of the research, data analysis, interpretation and writing the manuscript.
