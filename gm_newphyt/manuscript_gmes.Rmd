@@ -1,5 +1,5 @@
 ---
-title: Rapid response of mesophyll conductance to light availability allows shade leaves to take advantage of sunflecks
+title: Shade leaves of *Eucalpytus* trees lie in wait to maximize whole canopy carbon gain
 author: ""
 date: ""
 output:
@@ -40,6 +40,7 @@ wc_tab <- data.frame(count = c("Total word count (main body):", "Summary:", "Int
 #colnames(wc_tab) <- NULL 
 dust(wc_tab)%>%
 sprinkle_print_method("markdown")
+#Dynamic respones of shade leaf physiology to light availability increases whole tree carbon gain
 ```
 
 ```{r, results='asis', echo=FALSE, warning=FALSE}
@@ -60,11 +61,21 @@ includeFigs <- TRUE
 # render("manuscript.Rmd", "word_document", "manuscript.docx")
 ```
 
+```{r install packages, echo=FALSE, message=FALSE, warning=FALSE,results="hide"}
+#install needed packages if not already installed
+.packages = c("lubridate", "doBy", "sciplot", "plyr","plotrix", "wesanderson", "plantecophys", "scales","reshape", "pixiedust")
+
+# Install CRAN packages (if not already installed)
+.inst <- .packages %in% installed.packages()
+if(length(.packages[!.inst]) > 0) install.packages(.packages[!.inst], repos = "http://cran.at.r-project.org")
+
+# Load packages into session
+lapply(.packages, library, character.only=TRUE)
+```
+
 ```{r global data/sourcing , include=FALSE}
 source("functions and packages/functions.R")
-source("functions and packages/packages.R")
 source("master_scripts/plot_objects.R")
-library(pixiedust)
 
 ##read table ready dataframes
 resourcetab <- read.csv("master_scripts/resource_table.csv", stringsAsFactors = FALSE)
@@ -88,9 +99,8 @@ ciccfig <- "7"
 
 airvarfig <- "S1"
 deltafig <- "S2"
-accfig <- "S3"
-get1fig <- "S4"
-get2fig <- "S5"
+get1fig <- "S3"
+get2fig <- "S4"
 
 wtc3tab1 <- "1"
 wtc3tab2 <- "2"
@@ -113,7 +123,7 @@ Light availability is one of the most important environmental drivers of leaf ca
 The distribution of resources required for *A~n~*, including leaf nitrogen (N) and supply of water, are also partially defined by canopy light gradients. As *A~n~* has a saturating response with light and maximum rates depend in part on N-rich photosynthetic machinery, it has been argued that leaf N should be proportional to PPFD along the canopy light gradient to maximize canopy C gain at a given total canopy N [@field1983allocating; @field1986photosynthesis; @peltoniemi2012co; @buckley2013does]. Changes in chlorophyll per unit N, chlorophyll a:b ratios, electron transport capacity per unit chlorophyll and ratios of electron transport capacity to Rubisco activity can also occur in response to changes in irradiance [@evans2001photosynthetic]. Sun leaves frequently experience greater water limitations in the upper canopy, despite effective vascular systems developed for high radiation loads and transpiration [@sellin2008effects; @niinemets2012optimization]. Higher rates of *A~n~* and stomatal conductance (g~s~) can only be sustained if the leaf specific hydraulic conductance (K~l~) is also large enough to avoid low leaf water potentials [@hubbard2001stomatal]. Optimal photosynthetic N investment in the upper canopy will be ineffective in enhancing *A~n~* if water supply is insufficient [@niinemets2012optimization; @peltoniemi2012co], thus K~l~ should also be higher in the upper canopy to supply sunlit leaves with sufficient water [@burgess2006hydraulic;@sellin2007effects ;@sellin2008effects].
 
 \
-Rates of photosynthesis in C~3~ plants are limited by the [CO~2~] available for fixation by Rubisco within the chloroplast and this [CO~2~] is a function of the drawdown of CO~2~ from the atmosphere to the site of carboxylation [@warren2008stand]. This drawdown consists of multiple resistance pathways to CO~2~ diffusion which include CO~2~ diffusion from the atmosphere through stomata (stomatal conductance, g~s~) and then from these intercellular air spaces into the chloroplast (mesophyll conductance, g~m~). Based on optimal theory, regulation of g~s~ within a tree canopy should act to efficiently utilize available supplies of light, N and water to maximize *A~n~* [@peltoniemi2012co]. This is because stomata are hypothesized to exhibit an optimal behaviour to maximize C gain while simultaneously minimizing water loss through transpiration [@cowan1977stomatal]. Mesophyll conductance can also impose limitations on *A~n~* as large g~s~ [@warren2008stand; @ubierna2011estimation], reducing the efficiency of leaf N use in *A~n~* [@niinemets2007photosynthesis] if g~m~ constrains CO~2~ supply to the chloroplast. Part of the variation in photosynthetic capacity between sun and shade leaves has been proposed to be due to differences in g~m~ [@piel2002effect; @warren2007internal], yet the trade-offs that constrain this diffusion pathway are yet to be explicitly quantified. Stomatal and mesophyll conductance should not be considered independent of each other [@griffiths2013mesophyll], but a lack of empirical data currently hinders our ability to interpreting their coupled responses to *A~n~* across sun and shade leaves. 
+Rates of photosynthesis in C~3~ plants are limited by the [CO~2~] available for fixation by Rubisco within the chloroplast and this [CO~2~] is a function of the drawdown of CO~2~ from the atmosphere to the site of carboxylation [@warren2008stand]. This drawdown consists of multiple resistance pathways to CO~2~ diffusion which include CO~2~ diffusion from the atmosphere through stomata (stomatal conductance, g~s~) and then from these intercellular air spaces into the chloroplast (mesophyll conductance, g~m~). Based on optimal theory, regulation of g~s~ within a tree canopy should act to efficiently utilize available supplies of light, N and water to maximize *A~n~* [@peltoniemi2012co]. This is because stomata are hypothesized to exhibit an optimal behaviour to maximize C gain while simultaneously minimizing water loss through transpiration [@cowan1977stomatal]. Mesophyll conductance can also impose limitations on *A~n~* as large g~s~ [@warren2008stand; @ubierna2011estimation], reducing the efficiency of leaf N use in *A~n~* [@niinemets2007photosynthesis] if g~m~ constrains CO~2~ supply to the chloroplast. Part of the variation in photosynthetic capacity between sun and shade leaves has been proposed to be due to differences in g~m~ [@piel2002effect; @warren2007internal], yet the trade-offs that constrain this diffusion pathway are yet to be explicitly quantified. It is likely that leaf anatomical costs associated with minimizing the length, diameter and tortuosity of the g~m~ diffusion pathway are necessary to maintain a high g~m~ [@hassiotou2009influence]. Stomatal and mesophyll conductance should not be considered independent of each other [@griffiths2013mesophyll], but a lack of empirical data currently hinders our ability to interpreting their coupled responses to *A~n~* across sun and shade leaves. 
 
 \
 Additionally, accounting for short term light fluctuations within a canopy, via sunflecks, makes assessing shade leaf behaviour difficult. How shade leaves utilize sunflecks for short term C gain depends on the combined response time of g~s~ and g~m~ and the underlying photosynthetic biochemistry acclimated to a low light environment [@pearcy1990sunflecks;@tausz2005dynamic]. The utilization of sunflecks is first limited by delayed responses of stomata opening, which may take minutes, effectively limiting the maximum assimilation rate that can be achieved [@pearcy1990sunflecks; @vicomanz2011; @way2012sunflecks]. Mesophyll conductance has been shown to respond to environmental factors (e.g. CO~2~, temperature or vapor pressure deficit) at timescales of minutes, possibly faster than g~s~ [@flexas2008mesophyll and references therein], yet short term response to light availability are unclear. For example, g~m~ was found to be independent of light intensity in wheat leaves [@tazoe2009light] but was responsive to light in tobacco [@flexas2007rapid]. Anatomical parameters which regulate g~m~ with changing irradiance such as chloroplast surface area [@terashima2006irradiance] and mesophyll thickness [@boardman1977comparative; terashima2001sun; @hanba2002effect] are also unlikely to adjust during short light fluctuations. The physiological behaviour of shade leaves to maximize C gain must be assessed as both a degree of acclimation to local irradiance and as a potential response to transitory light availability.
@@ -143,7 +153,6 @@ Synchronized gas exchange and C isotope discrimination measurements were made si
 
 \
 Once CO~2~ and water vapour flux values were stable for each leaf measurement, the sample and reference gas lines were diverted to the TDL via T-junctions inserted into the reference gas tube and match valve outlet of the LI-6400XT. The gas streams were dried by passing through napion gas dryers in the respective gas lines, and then ^12^CO~2~ and ^13^CO~2~ concentrations were measured for each gas stream by the TDL. Reference, sample and two calibration gases were run on alternating 80 s loops (20 s each), one for each AT and ET leaf at a matched canopy position, for a total of 12 min. This allowed for 4-5 measurements per leaf and data were averaged over the last 10 s of reference line and samples line gas streams for calculations. The two calibration gases were drawn from compressed air tanks (330 and 740 ppm CO~2~) in order to correct for gain drift of the TDL on each measurement cycle. Photosynthesis, g~s~, transpiration, VPD and intercellular [CO~2~] (C~i~) were auto-logged every 15 s for each gas exchange system over the 12 min interval. 
-
 \
 Mesophyll conductance was calculated from carbon isotope discrimination with equations and fractionation factors as presented in Evans & von Caemmerer [-@evans2013temperature], including the ternary corrections proposed by Farquhar & Cernusak [-@farquhar2012ternary], such that:
 
@@ -159,29 +168,19 @@ $$g_m = \frac{A_n}{C_i-C_c}$$
 
 
 ##Biochemical parameters of photosynthesis
-Photosynthetic CO~2~ response (AC~i~) curves were measured at 25 &deg;C for one sun and shade leaf for each WTC prior to the initiation of the drought treatment. Each AC~i~ curve began at the reference [CO~2~] of 400 $\mu$l l^-1^ and then consisted of 12 additional steps from [CO~2~] of 50 to 1800 $\mu$l l^-1^ at 25 &deg;C at saturating light (1800 $\mu$mols m^-1^ s^-1^). 
-
-From these curves the photosynthetic parameters, J~max~ and Vc~max~, were quantified using the biochemical model of [@farquhar1980biochemical] and fit with the 'plantecophys' package [@duursma2015] in R [@RDevelopmentCoreTeam2011] using default parameters. 
-
-As g~m~ was known
-
-An alternate non-rectangular hyperbola version of the biochemical model of [@farquhar1980biochemical], accounting for g~m~, was used to quantify chloroplastic J~max~ and Vc~max~ [@ethier2004need]. All AC~i~ curves were fit with the 'plantecophys' package [@duursma2015] in R [@RDevelopmentCoreTeam2011] using default parameters and treatment specific measured g~m~. Conventional AC~i~ curves, fitted without g~m~, are provided for reference in Supporting Information (Figure `r accfig`).
-
-We also simulated AC~c~ curves to determine if treatment differences in J~max~ and Vc~max~ where instead the result of differences in g~m~. Comparison of AC~c~ curves (Figure `r accfig`) and AC~i~ curves revealed similar differences between sun and shade leaves.
-
-
+Photosynthetic CO~2~ response (AC~i~) curves were measured at 25 &deg;C for one sun and shade leaf for each WTC prior to the initiation of the drought treatment. Each AC~i~ curve began at the reference [CO~2~] of 400 $\mu$l l^-1^ and then consisted of 12 additional steps from [CO~2~] of 50 to 1800 $\mu$l l^-1^ at 25 &deg;C at saturating light (1800 $\mu$mols m^-1^ s^-1^). From these curves the photosynthetic parameters, J~max~ and Vc~max~, were quantified using the biochemical model of [@farquhar1980biochemical] and fit with the 'plantecophys' package [@duursma2015] in R [@RDevelopmentCoreTeam2011] using default parameters. 
 
 ##Leaf chemistry and hydraulic parameters
 Following gas exchange measurements each leaf was collected, measured for leaf water potential (explained below), scanned for leaf area, dried and weighed. These leaves were then milled and analyzed for leaf N content and $\delta$^13^C. Leaf samples were analysed on a Delta V Advantage coupled to a Flash HT and Conflo IV (Thermo Fisher Scientific, Bremen, Germany) in dual-reactor setup. Samples were flash combusted at 1000&deg;C and converted to CO~2~ and N~2~ and then subjected to stable isotope ratio mass spectrometry. Leaf N is reported on an area basis (N~a~, g m^-2^) and isotopic signatures of dry matter are reported relative to standard Vienna Pee Dee Belemnite.
 
 \
-Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were measured for sun and shade leaves during each gas exchange campaign using a PMS 1505D pressure chamber (PMS Instruments, Albany, OR, USA). The leaf closest to the leaf used for gas exchange was sampled for measurement of $\Psi_{pd}$. Predawn leaf water potential was measured before sunrise on the same day as gas exchange measurements. Leaves used for gas exchange were immediately sampled for $\Psi_l$ once measurements were completed. All leaves were detached and immediately stored inside foil covered bags before water potential measurements were performed. Leaf water potential and transpiration (E, mmol^-2^ m^-2^ s^-1^) from gas exchange were then used to calculate leaf-specific hydraulic conductance (K~l~, mmol m^-2^ s^-1^ MPa) with the equation:
+Predawn ($\Psi_{pd}$) and midday ($\Psi_l$) leaf water potentials (MPa) were measured for sun and shade leaves during each gas exchange campaign using a PMS 1505D pressure chamber (PMS Instruments, Albany, OR, USA). The leaf closest to the leaf used for gas exchange was sampled for measurement of $\Psi_{pd}$. Predawn leaf water potential was measured before sunrise on the same day as gas exchange measurements. Leaves used for gas exchange were immediately sampled for $\Psi_l$ once measurements were completed. All leaves were detached and immediately stored inside foil covered bags before water potential measurements were performed. Leaf water potential and transpiration (E, mmol^-2^ m^-2^ s^-1^) from gas exchange in the leaf cuvette were then used to calculate leaf-specific hydraulic conductance (K~l~, mmol m^-2^ s^-1^ MPa) with the equation:
 
 \
 (3)
-$$K = \frac{E}{\Psi_{pd}~-\Psi_l}$$
+$$K_l = \frac{E}{\Psi_{pd}~-\Psi_l}$$
 
-Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
+Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A~n~* divided by E. The g~1~ parameter, describing the plants water-use strategy, was estimated from ITE to VPD response curves by fitting a rearranged optimal g~s~ model for ITE [@medlyn2011reconciling] using non-linear regression [see @duursma2013near]. Small values of g~1~ indicate that transpiration is costly in C terms and plants are then likely to exhibit conservative water use, whereas large values imply a lower C construction cost and decreased water-use efficiency [@lin2015optimal].
 
 ##Data analysis
 Differences in experimental parameters to either the warming treatment or leaf type were analysed by mixed-effects models in R [@RDevelopmentCoreTeam2011] with WTC as a random effect. Explained variance (R^2^) of mixed models were computed as in [@nakagawa2013general], in which the marginal R^2^ represents variance explained by fixed factors and the conditional R^2^ by both fixed and random factors. Confidence intervals (95 %) of mixed effect linear models were generated using bootstrapping methods with 999 simulations, using the bootMer function in the 'lme4' package [@bates2013lme4]. For non-linear relationships, confidence intervals were estimated by fitting a generalized additive model to the data with the 'mgcv' package, using WTC as a random effect. All tests of statistical significance were conducted at an $\alpha$ of 0.05.
@@ -244,14 +243,14 @@ Here we show that dynamic physiological responses of shade leaves to altered lig
 
 #Tables
 
-**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K~l~ values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf N~area~ are g m^2^, K~l~ is mmol m^-2^ s^-1^ MPa, WP is MPa and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
+**Table 1**. *Eucalyptus tereticornis* leaf morphological and physiological traits between full sun and shade leaves under ambient and elevated temperature treatments. Leaf mass per area, N~a~, $\delta$^13^C, $\Psi$~pd~, $\Psi$~l~ and K~l~ values represent treatment mean (&pm; 1 standard error) across measurement campaigns (n=6). Values of Vc~max~ and J~max~ are treatment mean (&pm; 1 standard error) from AC~i~ curves measured in each chamber at saturating light. Units of LMA and Leaf N~area~ are g m^2^, K~l~ is mmol m^-2^ s^-1^ MPa, $\Psi$ is MPa and $\delta$^13^C is &permil;. Different letters represent significant differences between leaf type and temperature treatments. The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
 
 ```{r, echo=FALSE}
 resourcetab2 <- rbind(resourcetab, c("P value","", as.character(pval)))
 greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
 
 dust(resourcetab2)%>%
-  sprinkle_colnames("Leaf", "Temperature", "LMA", "N~a~", "Vc~max~", "J~max~","K","WP~pre~","WP~mid~", paste0("$\\delta$","^13^c")) %>%
+  sprinkle_colnames("Leaf", "Temperature", "LMA", "N~a~", "Vc~max~", "J~max~","K",paste0("$\\Psi$","~pre~"),paste0("$\\Psi$","~l~"), paste0("$\\delta$","^13^C")) %>%
   sprinkle(rows= 1, part="head",bold=TRUE)%>%
   sprinkle_print_method("markdown")
 ```
@@ -279,11 +278,12 @@ source("master_scripts/par2.R")
 **Figure 1**. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014. Means &pm; 1 standard error represent integrated PPFD, measured with a ceptometer, at the canopy height of each selected leaf. Each date represents the starting date for each measurement campaign. Points represent the mean (&pm; 1 standard error) daily maximum air temperature during each campaign period.
 
 \
-# ```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
-# source("master_scripts/aci_vcmaxnitro.R")
-# ```  
- \
- **Figure 2**. (a) ACi curves for sun and shade leaves at elevated (ET) and ambient (AT) temperature treatments. ACi curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between Vc~max~ and mean leaf N~a~ for each chamber, including sun leaves and shade leaves at low light. (c) The relationship between *A~n~* and leaf N~a~ for sun and shade leaves measured under their ambient light and temperature conditions. For (b,c) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional R^2^ of 0.28 and 0.35 for (b) and 0.24 and 0.33 for (c).
+```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
+ source("master_scripts/aci_vcmaxnitro.R")
+```
+
+\
+**Figure 2**. (a) ACi curves for sun and shade leaves at elevated (ET) and ambient (AT) temperature treatments. ACi curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between Vc~max~ and mean leaf N~a~ for each chamber, including sun leaves and shade leaves at low light. (c) The relationship between *A~n~* and leaf N~a~ for sun and shade leaves measured under their ambient light and temperature conditions. For (b,c) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional R^2^ of 0.28 and 0.35 for (b) and 0.24 and 0.33 for (c).
 \
 ```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Agmgs.R")
@@ -308,7 +308,6 @@ source("master_scripts/gmes_shadeleaves_figure.R")
 ```  
 \
 **Figure 6**. The change in measured g~m~ for individual shade leaves following an increase in PPFD to match the light environment of full sun leaves in the same tree. Measurements of g~m~ were recorded once CO~2~ and water vapour fluxes were stable in the leaf cuvette, which took approximately 25 minutes after light intensity was increased. The dashed line is the 1:1 relationship.
-
 \
 ```{r cicc, fig.width=10, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/cicc_boxplots.R")
@@ -338,23 +337,17 @@ source("master_scripts/delta_cica.R")
 \
 **Figure S2**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis ($\Delta_o$) and measured C~i~/C~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
 \
-```{r acc, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
-source("master_scripts/ACc_figure.R")
-```  
-\
-**Figure S3**. Photosynthetic CO~2~ response (AC~c~) curves for sun and shade leaves at elevated and ambient temperature treatments. C~c~ values were predicted with g~m~ and curves represent chloroplastic photosynthetic parameters at 25°C and saturating light (1800 $\mu$mols m^-1^ s^-1^).  
-\
 ```{r gasex_temp3, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp3.R")
 ```  
 \
-**Figure S4**. Response of *A~n~* (a), g~m~ (b) and C~i~-C~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with g~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
+**Figure S3**. Response of *A~n~* (a), g~m~ (b) and C~i~-C~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with g~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
 \
 ```{r gasex_temp4, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/gasex_temp4.R")
 ```  
 \
-**Figure S5**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
+**Figure S4**. Response of VPD (a), g~s~ (b) and C~a~-C~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
 
 ##Methods S1
 
