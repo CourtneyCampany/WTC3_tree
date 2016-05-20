@@ -70,7 +70,7 @@ includeFigs <- TRUE
 
 ```{r install packages, echo=FALSE, message=FALSE, warning=FALSE,results="hide"}
 #install needed packages if not already installed
-.packages = c("lubridate", "doBy", "sciplot", "plyr","plotrix", "wesanderson", "plantecophys", "scales","reshape", "pixiedust")
+.packages = c("lubridate", "doBy", "plyr","plotrix", "wesanderson", "plantecophys", "scales","reshape", "pixiedust")
 
 # Install CRAN packages (if not already installed)
 .inst <- .packages %in% installed.packages()
