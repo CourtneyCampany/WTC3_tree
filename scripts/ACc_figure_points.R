@@ -1,6 +1,6 @@
-source("functions and packages/packages.R")
-source("functions and packages/functions.R")
-source("master_scripts/plot_objects.R")
+# source("functions and packages/packages.R")
+# source("functions and packages/functions.R")
+# source("master_scripts/plot_objects.R")
 library(plantecophys)
 
 ##read data sets----------------------------------------------------------------------------------------------------------------
@@ -22,16 +22,18 @@ fit_shade_at <- fitacis(droplevels(shade[shade$temp == "ambient",]), "chamber")
 fit_shade_et <- fitacis(droplevels(shade[shade$temp == "elevated",]), "chamber")
 
 # simulate from normal Aci curve (use mean values by treatment)----------------------------------------------------------------------
-simaci_sun_at <- Aci(Ci=seq(50,2000,length=101), Vcmax=mean(coef(fit_sun_at)$Vcmax), 
+ci_seq <- seq(50, 2000, length=101)
+
+simaci_sun_at <- Aci(Ci=ci_seq, Vcmax=mean(coef(fit_sun_at)$Vcmax), 
                      Jmax=mean(coef(fit_sun_at)$Jmax), Rd=mean(coef(fit_sun_at)$Rd))
 
-simaci_sun_et <- Aci(Ci=seq(50,2000,length=101), Vcmax=mean(coef(fit_sun_et)$Vcmax), 
+simaci_sun_et <- Aci(Ci=ci_seq, Vcmax=mean(coef(fit_sun_et)$Vcmax), 
                      Jmax=mean(coef(fit_sun_et)$Jmax), Rd=mean(coef(fit_sun_et)$Rd))
 
-simaci_shade_at <- Aci(Ci=seq(50,2000,length=101), Vcmax=mean(coef(fit_shade_at)$Vcmax), 
+simaci_shade_at <- Aci(Ci=ci_seq, Vcmax=mean(coef(fit_shade_at)$Vcmax), 
                        Jmax=mean(coef(fit_shade_at)$Jmax), Rd=mean(coef(fit_shade_at)$Rd))
 
-simaci_shade_et <- Aci(Ci=seq(50,2000,length=101), Vcmax=mean(coef(fit_shade_et)$Vcmax), 
+simaci_shade_et <- Aci(Ci=ci_seq, Vcmax=mean(coef(fit_shade_et)$Vcmax), 
                        Jmax=mean(coef(fit_shade_et)$Jmax), Rd=mean(coef(fit_shade_et)$Rd))
 
 # calculate Cc for the simulated curves using treatment specific gmes----------------------------------------------------------------
@@ -55,10 +57,10 @@ shade_et$Cc <- with(shade_et, Ci - Photo/meso[2,3])
 ###PLotting---------------------------------------------------------------------------------------------------------------
 
 ###plot of model ACC curves
- windows(8,6)
+ # windows(8,6)
 
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(ALEAF~Cc, data=simaci_sun_at, col=suncol2, type='l',lwd=3,ylab=photolab, xlab=cclab,ylim=c(0, 40), xlim=c(0,2000))
+plot(ALEAF~Cc, data=simaci_sun_at, col=suncol2, type='l',lwd=3,ylab=photolab, xlab=cclab, ylim=c(0,40))
   lines(ALEAF~Cc, data=simaci_sun_et,  col=suncol2,lwd=3, lty=2)
   lines(ALEAF~Cc, data=simaci_shade_at,  col=lightscol2,lwd=3)
   lines(ALEAF~Cc, data=simaci_shade_et,  col=lightscol2,lwd=3, lty=2)
@@ -68,7 +70,6 @@ plot(ALEAF~Cc, data=simaci_sun_at, col=suncol2, type='l',lwd=3,ylab=photolab, xl
 ###Add points from ACi curves, where Cc is predicted
   points(Photo~Cc ,data= sun_at, col=suncol50, pch=16)
   points(Photo~Cc ,data= sun_et, col=suncol50,  pch=17)
-  
   points(Photo~Cc ,data= shade_at,  col=lights50col,  pch=16)
   points(Photo~Cc ,data= shade_et,  col=lights50col,  pch=17)
 
@@ -92,5 +93,5 @@ axis(1, mgp=c(3, 0, 0))
   points(Photo~Cc ,data= shade_et,  col=lights50col,  pch=17)
 
 
-dev.copy2pdf(file="master_scripts/paper_figures/Acc_test.pdf")
-dev.off()
+# dev.copy2pdf(file="master_scripts/paper_figures/Acc_test.pdf")
+# dev.off()
