@@ -65,15 +65,9 @@ includeFigs <- TRUE
 ```
 
 ```{r install packages, echo=FALSE, message=FALSE, warning=FALSE,results="hide"}
-#install needed packages if not already installed
-.packages = c("lubridate", "doBy", "plyr","plotrix", "wesanderson", "plantecophys", "scales","reshape", "pixiedust")
-
-# Install CRAN packages (if not already installed)
-.inst <- .packages %in% installed.packages()
-if(length(.packages[!.inst]) > 0) install.packages(.packages[!.inst], repos = "http://cran.at.r-project.org")
-
-# Load packages into session
-lapply(.packages, library, character.only=TRUE)
+r <- require(pacman)
+if(!r)install.packages("pacman")
+pacman::p_load(lubridate, doBy, plyr,plotrix, wesanderson, plantecophys, scales,reshape, pixiedust)
 ```
 
 ```{r global data/sourcing , include=FALSE}
