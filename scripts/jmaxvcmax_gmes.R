@@ -97,13 +97,13 @@ fitacishade_redo_et <- fitacis(shade_redo_et, "chamber", varnames = list(ALEAF="
                       Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
 #sun leaves
-fitacitdlaci2 <- fitacis(tdlaci2, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[5,3],
+fitacitdlaci2 <- fitacis(tdlaci2, "chamber", varnames = list(ALEAF="Photo", 
                              Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacisunaci_clean2_at <- fitacis(sunaci_at, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[5,3],
+fitacisunaci_clean2_at <- fitacis(sunaci_at, "chamber", varnames = list(ALEAF="Photo", 
                                   Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacisunaci_clean2_et <- fitacis(sunaci_et, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[6,3],
+fitacisunaci_clean2_et <- fitacis(sunaci_et, "chamber", varnames = list(ALEAF="Photo", 
                                   Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
 
