@@ -70,28 +70,41 @@ library(plantecophys)
 
 ##fitaci with gmes for sun and shade leaves by temperature treatment----------------------------------------------------------
 
+# Photosynthetic parameters for E. globulus (taken from gmes_functions.R; not documented there!)
+  
+# Do not need Rd; this is estimated (badly) from the A-Ci curves    
+# k25r=0.728, Ea_r = 72.311
+#    x$Rd <- k25r * exp(Ea_r*((x$Tleaf+273.15)-298)/(298*Rgc*(x$Tleaf+273.15)))
+    
+# Estimate GammaStar at 25 degrees, as Tleaf was controlled for 25C.
+Rgc <- 8.314472
+Ea_g <- 20.437
+k25g <- 38.89
+Gstar <- k25g * exp(Ea_g*((25 + 273.15)-298)/(298*Rgc*(25 + 273.15)))
+    
+  
 #shade leaves
-fitacishade_at<-fitacis(acishade_clean_at, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[1,3],
-                Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacishade_at<-fitacis(acishade_clean_at, "chamber", varnames = list(ALEAF="Photo", 
+                Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacishade_et<-fitacis(acishade_clean_et, "chamber", varnames = list(ALEAF="Photo", gmeso = gm_agg[2,3],
-                Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacishade_et<-fitacis(acishade_clean_et, "chamber", varnames = list(ALEAF="Photo", 
+                Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacishade_redo_at <- fitacis(shade_redo_at, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[1,3],
-                      Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacishade_redo_at <- fitacis(shade_redo_at, "chamber", varnames = list(ALEAF="Photo", 
+                      Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacishade_redo_et <- fitacis(shade_redo_et, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[2,3],
-                      Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacishade_redo_et <- fitacis(shade_redo_et, "chamber", varnames = list(ALEAF="Photo", 
+                      Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
 #sun leaves
-fitacitdlaci2 <- fitacis(tdlaci2, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[5,3],
-                             Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacitdlaci2 <- fitacis(tdlaci2, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[5,3],
+                             Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacisunaci_clean2_at <- fitacis(sunaci_at, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[5,3],
-                                  Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacisunaci_clean2_at <- fitacis(sunaci_at, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[5,3],
+                                  Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
-fitacisunaci_clean2_et <- fitacis(sunaci_et, "chamber", varnames = list(ALEAF="Photo", gmes0 = gm_agg[6,3],
-                                  Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), Tcorrect=TRUE)
+fitacisunaci_clean2_et <- fitacis(sunaci_et, "chamber", varnames = list(ALEAF="Photo", #gmes0 = gm_agg[6,3],
+                                  Tleaf = "Tleaf", Ci="Ci", PPFD="PARi"), GammaStar=Gstar)
 
 
 #extract jmax and vcmax (compare to standard aci curves)
