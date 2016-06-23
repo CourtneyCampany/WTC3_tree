@@ -10,7 +10,7 @@ ite <- read.csv("calculated_data/gmes_wellwatered.csv")
 g1_ite <- read.csv("calculated_data/g1_ite.csv")
 
 ###get average by id
-ite_agg <- summaryBy(Photo+Cond+ Trmmol+VpdL ~ chamber+id+leaf +light+temp+leaflight+Month, 
+ite_agg <- summaryBy(Photo+Cond+ Trmmol+VpdL ~ chamber + id + leaf + light + temp + leaflight + Month, 
                      data=ite, FUN=mean, keep.names=TRUE)
 
 #add iWUE

@@ -6,30 +6,29 @@ pch4 <- c(16,16, 1, 1)
 pchtri <- c(17,17,2,2)
 
 
-gmlab <-expression(g[m]~~(mol~m^-2~s^-1))
-gmlab2 <-expression(g[m]~~(mol~m^-2~s^-1~bar^-1))
-shagmlab <- expression(g[m]~Low~Light~~(mol~m^-2~s^-1~bar^-1))
-fleckgmlab <- expression(g[m]~High~Light~~(mol~m^-2~s^-1~bar^-1))
+gmlab <-expression(italic(g)[m]~~(mol~m^-2~s^-1))
+gmlab2 <-expression(italic(g)[m]~~(mol~m^-2~s^-1~bar^-1))
+shagmlab <- expression(italic(g)[m]~Low~Light~~(mol~m^-2~s^-1~bar^-1))
+fleckgmlab <- expression(italic(g)[m]~High~Light~~(mol~m^-2~s^-1~bar^-1))
 
 lmalab <- expression(LMA~~(g~m^-2))
 masslab <- "Leaf Mass  (g)"
 
-arealab <- expression(Leaf~Area~~(cm^2))
-narealab <- expression(Leaf~N[a]~~(gN~m^-2))
-nsunlab <- expression(Leaf[sun]~Nitrogen[area]~~(gN~m^-2))
-nshadelab <- expression(Leaf[shade]~Nitrogen[area]~~(gN~m^-2))
+arealab <- expression(Leaf~area~~(cm^2))
+narealab <- expression(italic(N)[a]~~(gN~m^-2))
+nsunlab <- expression(Sun~leaf~italic(N)[a]~~(gN~m^-2))
+nshadelab <- expression(Shade~leaf~italic(N)[a]~~(gN~m^-2))
 
-ksunlab <- expression(Leaf[sun]~Hyrdaulic~Conductance~~(units))
-kshadelab <- expression(Leaf[shade]~Hyrdaulic~Conductance~~(units))
+ksunlab <- expression(Leaf[sun]~Hydraulic~Conductance~~(units))
+kshadelab <- expression(Leaf[shade]~Hydraulic~Conductance~~(units))
 
 
 c13lab <-expression(paste(Leaf~delta^{13}, "C  (\u2030)"))
 ypos <- c(2.5,1,0)
-satlab <- expression(A~~(mu*mol~m^-2~s^-1))
-vclab <- expression(Vc[max]~~(mu*mol~m^-2~s^-1))
+satlab <- expression(italic(A)[n]~~(mu*mol~m^-2~s^-1))
+vclab <- expression(italic(V)[cmax]~~(mu*mol~m^-2~s^-1))
 
-condlab <- expression(g[s]~~(mol~m^-2~s^-1))
-totcondlab <- expression(Total~Conductance~to~CO[2]~~(mol~m^-2~s^-1))
+condlab <- expression(italic(g)[s]~~(mol~m^-2~s^-1))
 
 vpdlab <- "VPD  (kPa)"
 itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
@@ -37,23 +36,23 @@ itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mu*mol~m^-2~s^-1))
 photolab <- expression(italic(A[n])~~(mu*mol~m^-2~s^-1))
-trmmollab <- expression(Transpiration~~(mmol~H[2]*O~m^-2~s^-1))
+trmmollab <- expression(italic(E)[L]~~(mmol~m^-2~s^-1))
 
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
 cibarlab2 <- expression(bar(Ci)~~(ppm))
 cilab3 <- expression({Ci^i}[shade-sun]~~(ppm))
-cilab <- expression(C[i]~~(ppm))
+cilab <- expression(italic(C)[i]~~(ppm))
 
-cclab <- expression(C[c]~~(ppm))
-cclab2 <- expression(bar(C[c])~~(ppm))
+cclab <- expression(italic(C)[c]~~(ppm))
+cclab2 <- expression(bar(italic(C)[c])~~(ppm))
 
 deltalab <-(expression(Delta[o]))  
 cicalab <- "Ci/Ca"
-cicalab2 <- (expression(C[i]/C[a]))
+cicalab2 <- (expression(italic(C)[i]/italic(C)[a]))
 
-drawdownlab <- expression(C[i]-C[c]~~(ppm))
-drawdownlab2 <- expression(C[a]-C[i]~~(ppm))
-drawdownlab3 <- expression(C[i]-C[c]~~(paste(mu,bar,sep="")))
+drawdownlab <- expression(italic(C)[i]-italic(C)[c]~~(mu*mol~mol^-1))
+drawdownlab2 <- expression(italic(C)[a]-italic(C)[i]~~(mu*mol~mol^-1))
+drawdownlab3 <- expression(italic(C)[i]-italic(C)[c]~~(mu*mol~mol^-1))
 
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
