@@ -1,0 +1,150 @@
+---
+title: Supporting information
+author: ""
+date: ""
+output:
+  word_document:
+    reference_docx: manuscriptstyle.docx
+csl: new-phytologist.csl
+bibliography: references.bib
+---
+
+Article title: Coupled response of stomatal and mesophyll conductance to light enhances photosynthesis of shade leaves under sunflecks.
+
+Authors: Courtney E. Campany, Mark G. Tjoelker, Susanne von Caemmerer, Remko A. Duursma.
+
+```{r, results='asis', echo=FALSE, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Set Flag to include figures in text or not.
+includeFigs <- TRUE
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+source("gm_newphyt/manuscript_preload.R")
+```
+
+
+## Figures
+
+```{r airvars, fig.width=7, fig.height=8.8, echo=FALSE,warning=FALSE,dev="png", dpi=600,  eval=includeFigs, dev.args=list(type="cairo")}
+source("master_scripts/air_vars.R")
+```
+\
+**Figure S1**. Daily maximum and minimum temperature (a), daily maximum VPD (b) and total daily PPFD (c) for each chamber across the experiment duration.
+\
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs, dev.args=list(type="cairo")}
+source("master_scripts/delta_cica.R")
+```  
+\
+**Figure S2**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis ($\Delta_o$) and measured *C*~i~/C~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
+\
+```{r gasex_temp3, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
+source("master_scripts/gasex_temp3.R")
+```  
+\
+**Figure S3**. Response of *A*~n~ (a), *g*~m~ (b) and *C*~i~-*C*~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represent each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with *g*~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
+\
+```{r gasex_temp4, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
+source("master_scripts/gasex_temp4.R")
+```  
+\
+**Figure S4**. Response of VPD (a), *g*~s~ (b) and C~a~-*C*~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
+
+##Methods S1
+
+###Description of the calculation of *g*~m~ from carbon isotope discrimination during C3 photosynthesis
+\
+Using online C isotope discrimination measurements, the difference between the observed discrimination and what is predicted for light saturated gas exchange is proportional to *g*~m~ [@griffiths2013mesophyll]. First, leaf C isotope discrimination was calculated by comparing the isotopic composition of the reference gas entering the leaf cuvette ($\delta$^13^C~e~) with the sample gas ($\delta$^13^C~o~) such that:
+
+\
+(1)
+$$\delta = \left(\frac{R_s}{R_{stnd}} -1\right)1000$$
+
+where R~s~ is the isotopic ratio of the sample and R~stnd~ is the isotopic ratio of the standard Vienna Pee Dee Belemnite (VPDP). Next, the observed discrimination ($\Delta$~o~) is calculated from Evans et al. [-@evans1986carbon]:
+
+\
+(2)
+$$\Delta_{o} = \frac{\xi(\delta^13C_o-\delta^13C_e)}{1000+\delta^13C_e-\xi(\delta^13C_o-\delta^13C_e)}$$
+
+where:
+
+\
+(3)
+$$\xi = \frac{C_{e}}{C_{e}-C_{o}}$$
+
+and $\xi$ is the ratio of the CO~2~ entering the well mixed leaf cuvette to the CO~2~ draw down in the gas stream by the leaf.
+
+\
+Second, C isotope discrimination during C~3~ photosynthesis ($\Delta$) is the resultant discrimination from CO~2~ diffusion from the atmosphere to the site of carboxylation, consisting of a series of fractionation steps described in Evans et al. [-@evans1986carbon]. In this experiment, a modified form of the equation presented in Evans & von Caemmerer [-@evans2013temperature] with ternary effect corrections by Farquhar & Cernusak [-@farquhar2012ternary] was used such that:
+
+\
+(4)
+$$\Delta_o = \Delta_i - \Delta_{gm} - \Delta_e - \Delta_f$$
+
+where $\Delta$~o~ is the observed discrimination and  $\Delta$~i~, $\Delta$~gm~ , $\Delta$~e~ and $\Delta$~f~ are the contributions to fractionation if *C*~i~ = *C*~c~, *g*~m~, respiration and photorespiration, respectively. The equations for each are as follows:
+
+\
+(5)
+$$
+\begin{aligned}
+\Delta_i = &\frac{1}{1-t}a'+\frac{1}{1-t}((1+t)b-a')\frac{C_i}{C_a}
+\end{aligned}
+$$
+
+\
+(6)
+$$
+\begin{aligned}
+\Delta_{gm} = &\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{g_mC_a}
+\end{aligned}
+$$
+
+\
+(7)
+$$
+\begin{aligned}
+\Delta_e = &\frac{1+t}{1-t}\left(\frac{eR_d}{(A+R_d)C_a}(C_i-\Gamma_*)\right)
+\end{aligned}
+$$
+
+\
+(8)
+$$
+\begin{aligned}
+\Delta_f = & \frac{1+t}{1-t}\left(f\frac{\Gamma_*}{C_a}\right)\\
+\end{aligned}
+$$
+
+where the different fractionation factors include; diffusion through water (a~i~, 1.8&permil;), Rubisco carboxylation (b, 29&permil;), the photorespiratory fractionation (f, 16.2&permil;) and the combined fractionation through the boundary layer and the stomata (a'). a' is defined by:
+
+\
+(9)
+$$a' = \frac{a_b(C_a-C_i)+a(C_s-C_i)}{C_a-C_i}$$
+
+where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. C~a~ and *C*~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from Crous et al. [-@crous2012light]. The ternary effect corrections (t) are described by:
+
+\
+(10)
+$$t = \frac{(1+a')E}{2g^t_{ac}}$$
+
+where E denotes the transpiration rate and $\text{g}^t_{ac}$ is the total conductance to CO~2~ diffusion to both the boundary layer and stomatal conductance.
+
+\
+The *g*~m~ can then be calculated as:
+
+\
+(11)
+$$
+\begin{aligned}
+g_m = \left(\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{C_a}\right) / \left(\Delta_i-\Delta_o-\Delta_e-\Delta_f\right)
+\end{aligned}
+$$
+
+Here, *g*~m~ is expressed in units of mol m^-2^ s^-1^ bar^-1^ to be consistent with Evans & von Caemmerer [-@evans2013temperature]. As the pressure term is nearly equal to unity, suitable comparisons between *g*~m~ and *g*~s~ can be made.
+
+# References {.unnumbered}
+
