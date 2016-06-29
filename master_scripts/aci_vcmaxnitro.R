@@ -110,18 +110,19 @@ palette(c(shacol, suncol))
 par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   
 #panel 1: aci curves with inset
-plot(Photo~Ci ,data= acishade_clean, col=lights50col, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, 
+plot(Photo~Ci ,data= acishade_clean, col=lightscol, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, 
        ylab=photolab, pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo, col=lights50col,  pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2,  col=suncol50,  pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2,  col=suncol50,  pch=c(16, 17)[pch=tdlaci2$temp])
+  points(Photo~Ci ,data= shade_redo, col=lightscol,  pch=c(16, 17)[pch=shade_redo$temp])
+  points(Photo~Ci ,data= sunaci_clean2,  col=suncol,  pch=c(16, 17)[pch=sunaci_clean2$temp])
+  points(Photo~Ci ,data= tdlaci2,  col=suncol,  pch=c(16, 17)[pch=tdlaci2$temp])
 
   points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2, cex=1.1,xlab=cilab, ylab="", type="l", lwd=2)
   points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2)
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
   
-  legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), lty=c(1,1, 1,2),
+  legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), 
+         lty=c(1,1, 1,2), lwd=2,
          col=c(suncol, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.7)
   text(x=2040, y=42, "(a)", cex=.7)
   
@@ -151,10 +152,10 @@ plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", y
   axis(2, mgp=c(3, .5, 0))
   axis(1, mgp=c(3, 0, 0))
   
-  points(Photo~Ci ,data= acishade_clean, col=lights50col,pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo,col=lights50col, pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2, col=suncol50, pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2, col=suncol50, pch=c(16, 17)[pch=tdlaci2$temp])
+  points(Photo~Ci ,data= acishade_clean, col=lightscol,pch=c(16, 17)[pch=acishade_clean$temp])
+  points(Photo~Ci ,data= shade_redo,col=lightscol, pch=c(16, 17)[pch=shade_redo$temp])
+  points(Photo~Ci ,data= sunaci_clean2, col=suncol, pch=c(16, 17)[pch=sunaci_clean2$temp])
+  points(Photo~Ci ,data= tdlaci2, col=suncol, pch=c(16, 17)[pch=tdlaci2$temp])
   
   points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,  type="l", lwd=2)
   points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)

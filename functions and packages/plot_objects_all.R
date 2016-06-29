@@ -53,8 +53,8 @@ leglab2<- c(expression(paste(Sun, "-" ,"AT")), expression(paste(Sun, "-" ,"ET"))
             expression(paste(Shade,"-" ,"AT")), expression(paste(Shade, "-" ,"ET")))
 
 ###sun shade colors
-suncol <- alpha("forestgreen", alpha=.75)
-shacol <- alpha("yellow4", alpha=.75)
+suncol <- alpha(rgb(230,159,0,max=255),0.75)   #alpha("forestgreen", alpha=.75)
+shacol <- alpha(rgb(0,114,178,max=255), 0.75)      #alpha("yellow4", alpha=.75)
 leafcol <- c(suncol, shacol)
 leaflab2 <- c("Sun", "Shade")
 
@@ -62,7 +62,7 @@ colaci <-c(suncol, suncol, shacol, shacol)
 
 ###lights on shade cols
 leaflightlab <- c("shade-high", "shade-low", "sun")
-lightscol <- alpha("darkorange2", .75)
+lightscol <- alpha(rgb(230,159,0,max=255),0.75)     #alpha("darkorange2", .75)
 lightlab <- c(lightscol,shacol)
 lightleg <- c("High light", "Low light")
 
