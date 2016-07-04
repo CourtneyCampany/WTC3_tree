@@ -13,7 +13,7 @@ bibliography: references.bib
 ---
 
 \
-Courtney E. Campany^1^, Mark G. Tjoelker^1^, Susanne von Caemmere*R*^2^, Remko A. Duursma^1^.
+Courtney E. Campany^1^, Mark G. Tjoelker^1^, Susanne von Caemmerer^2^, Remko A. Duursma^1^.
 
 \
 ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith 2751 NSW, Australia
