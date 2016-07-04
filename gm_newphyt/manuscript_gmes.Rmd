@@ -92,7 +92,7 @@ wtc3tab2 <- "2"
 
 # Summary
 * Light gradients within tree canopies play a major role in the distribution of plant resources that define the photosynthetic capacity of sun and shade leaves. However, biochemical and diffusional constraints on gas exchange in sun and shade leaves in response to light remain poorly quantified, but critical for predicting carbon and water exchange in canopies.
-* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with  concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in the field in climate controlled whole tree chambers.
+* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in the field in climate controlled whole tree chambers.
 * Compared to sun leaves, shade leaves had lower *A*~n~, *g*~m~, leaf nitrogen and photosynthetic capacity (*V*~cmax~ and *J*~max~), but *g*~s~ was similar. When light intensity was temporarily increased for shade leaves to match that of sun leaves, both *g*~s~ and *g*~m~ increased, and *A*~n~ increased to values greater than sun leaves. 
 * Here we show that dynamic physiological responses of shade leaves to altered light environments have implications for up-scaling leaf level measurements and predicting whole canopy carbon gain. Despite exhibiting reduced photosynthetic capacity, the rapid up-regulation of *g*~m~ with increased light enables shade leaves to respond quickly to sunflecks.
 
@@ -225,7 +225,6 @@ If shade leaves "lie in wait" for sunflecks, then perhaps we should consider an 
 
 ##Conclusions
 Here we show that dynamic physiological responses of shade leaves to altered light environments have important implications for up-scaling leaf level measurements to the canopy. Although resource allocation constrains leaf photosynthetic capacity it is the physiological behaviour of individual leaves that determines C gain. These findings suggest that current theories of leaf optimal behaviour should be extended to include dynamic light environments, which will have implications for process-based models that predict canopy C gain from rates of leaf photosynthesis. Furthermore, the dynamic nature of *g*~m~ cannot be simply parameterized in vegetation models, and possibly should be excluded until it can be represented properly. Additional empirical data, across multiple tree species, are needed to determine both the mechanisms and the capacity of *g*~m~ to respond to environmental drivers. 
-
 
 ### Acknowledgements
 We thank Craig Barton and Burhan Amiji for maintaining the whole-tree chambers experiment and for their outstanding technical assistance. We thank Sune Linder and the Swedish University for Agricultural Science for providing the whole-tree chambers. The complete dataset can be downloaded from *link to figshare will be added*.
