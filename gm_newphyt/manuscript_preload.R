@@ -1,9 +1,11 @@
 
+options(repos="http://cran.rstudio.com/")
 
 r <- require(pacman)
 if(!r)install.packages("pacman")
-pacman:::p_set_cranrepo()
+#pacman:::p_set_cranrepo()
 pacman::p_load(broom,reporttools,lubridate, doBy, plyr,plotrix, wesanderson, plantecophys, scales,reshape, pixiedust)
+
 
 
 source("functions and packages/functions.R")
