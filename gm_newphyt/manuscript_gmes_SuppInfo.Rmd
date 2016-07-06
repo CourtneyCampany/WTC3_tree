@@ -40,19 +40,19 @@ source("master_scripts/air_vars.R")
 source("master_scripts/delta_cica.R")
 ```  
 \
-**Figure S2**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis ($\Delta_o$) and measured *C*~i~/C~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
+**Figure S2**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis ($\Delta_o$) and measured *C*~i~/*C*~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
 \
 ```{r gasex_temp3, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
 source("master_scripts/gasex_temp3.R")
 ```  
 \
-**Figure S3**. Response of *A*~n~ (a), *g*~m~ (b) and *C*~i~-*C*~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represent each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with *g*~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (R^2^ = 0.16 and 0.08, respectively). 
+**Figure S3**. Response of *A*~n~ (a), *g*~m~ (b) and *C*~i~-*C*~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represent each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with *g*~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (*R*^2^ = 0.16 and 0.08, respectively). 
 \
 ```{r gasex_temp4, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
 source("master_scripts/gasex_temp4.R")
 ```  
 \
-**Figure S4**. Response of VPD (a), *g*~s~ (b) and C~a~-*C*~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (R^2^ = 0.73, 0.58 and 0.72, respectively).
+**Figure S4**. Response of VPD (a), *g*~s~ (b) and *C*~a~-*C*~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (*R*^2^ = 0.73, 0.58 and 0.72, respectively).
 
 ##Methods S1
 
@@ -125,7 +125,7 @@ where the different fractionation factors include; diffusion through water (a~i~
 (9)
 $$a' = \frac{a_b(C_a-C_i)+a(C_s-C_i)}{C_a-C_i}$$
 
-where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. C~a~ and *C*~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from Crous et al. [-@crous2012light]. The ternary effect corrections (t) are described by:
+where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. *C*~a~ and *C*~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from Crous et al. [-@crous2012light]. The ternary effect corrections (t) are described by:
 
 \
 (10)

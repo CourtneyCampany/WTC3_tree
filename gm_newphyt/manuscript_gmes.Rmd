@@ -30,19 +30,19 @@ Author for Correspondence:
 *Email: courtneycampany@gmail.com*
 \
 \
-Total word count (excluding summary, references and legends): 5563
+Total word count (excluding summary, references and legends): 5903
 \
 Summary: 200
 \
-Introduction: 1186
+Introduction: 1242
 \
-Materials and Methods: 1863
+Materials and Methods: 2106
 \
-Results: 1098
+Results: 1114
 \
-Discussion: 1380
+Discussion: 1393
 \
-Acknowledgements: 36
+Acknowledgements: 48
 \
 Number of figures: 7 (6 in color)
 \
@@ -91,8 +91,8 @@ wtc3tab2 <- "2"
 ```
 
 # Summary
-* Light gradients within tree canopies play a major role in the distribution of plant resources that define the photosynthetic capacity of sun and shade leaves. However, biochemical and diffusional constraints on gas exchange in sun and shade leaves in response to light remain poorly quantified, but critical for predicting carbon and water exchange in canopies.
-* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in the field in climate controlled whole tree chambers.
+* Light gradients within tree canopies play a major role in the distribution of plant resources that define the photosynthetic capacity of sun and shade leaves. However, biochemical and diffusional constraints on gas exchange in sun and shade leaves in response to light remain poorly quantified, but critical for predicting canopy carbon and water exchange.
+* To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole tree chambers.
 * Compared to sun leaves, shade leaves had lower *A*~n~, *g*~m~, leaf nitrogen and photosynthetic capacity (*V*~cmax~ and *J*~max~), but *g*~s~ was similar. When light intensity was temporarily increased for shade leaves to match that of sun leaves, both *g*~s~ and *g*~m~ increased, and *A*~n~ increased to values greater than sun leaves. 
 * Here we show that dynamic physiological responses of shade leaves to altered light environments have implications for up-scaling leaf level measurements and predicting whole canopy carbon gain. Despite exhibiting reduced photosynthetic capacity, the rapid up-regulation of *g*~m~ with increased light enables shade leaves to respond quickly to sunflecks.
 
@@ -268,12 +268,10 @@ source("master_scripts/par2.R")
 ```  
 \
 **Figure 1**. Environmental conditions during the six measurement campaigns. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014 (as photosynthetic photon flux density, PPFD). Means &pm; 1 standard error represent PPFD measured with a ceptometer at the height of each selected leaf in the canopy. Points connected by a line represent the mean (&pm; 1 standard error) daily maximum air temperature during each campaign period. Each date represents the starting date for each measurement campaign; each campaign was completed in 3 days.
-
 \
 ```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600,message=FALSE, dev.args=list(type="cairo"), eval=includeFigs}
  source("master_scripts/aci_vcmaxnitro.R")
 ```
-
 \
 **Figure 2**. Photosynthetic capacity, photosynthesis rate and leaf nitrogen for sun and shade leaves. (a) A-*C*~i~ curves for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. A-*C*~i~ curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between *V*~cmax~ and mean leaf N per area (*N*~a~) for each chamber, including sun leaves and shade leaves at low light. (c) The relationship between leaf net photosynthesis rate (*A*~n~) and leaf *N*~a~ for sun and shade leaves measured under their ambient light and temperature conditions. For (b,c) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.28 and 0.35 for (b) and 0.24 and 0.33 for (c).
 \
