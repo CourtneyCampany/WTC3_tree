@@ -64,7 +64,6 @@ includeFigs <- FALSE
 
 source("gm_newphyt/manuscript_preload.R")
 
-
 # Make figure PDFs.
 source("gm_newphyt/make_figures.R")
 
