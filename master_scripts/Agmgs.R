@@ -130,9 +130,6 @@ plot(Photo~gm_bar, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab
 
 text(x=.5, y=24.5, "(b)", cex=1)
 
-# dev.copy2pdf(file="master_scripts/paper_figures/Agmgs.pdf")
-# dev.off()
-   
    
 
   

@@ -161,8 +161,5 @@ plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", y
   points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)
   points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2,  type="l", lwd=2)
   points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2,  type="l", lwd=2, lty=2)  
-   
-  
-# dev.copy2pdf(file="master_scripts/paper_figures/aci_nitrovcmax.pdf")
-# dev.off()
+
   

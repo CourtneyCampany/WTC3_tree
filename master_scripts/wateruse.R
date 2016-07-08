@@ -88,7 +88,5 @@ par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
   legend("bottomright", leglab2, pch=c(16,17,16,17), col=trtcols, bty='n',cex=.8)
   text(x=0, y=-26.25 ,"(b)", cex=1)
 
- # dev.copy2pdf(file="master_scripts/paper_figures/ITE_13c.pdf")
- # dev.off()
   
 

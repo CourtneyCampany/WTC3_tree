@@ -83,9 +83,5 @@ axis.Date(1, at=xAT, labels=TRUE, outer=TRUE)
 box()
 text(x=15979, y=48, "(c)", cex=1.51)
 
-# 
-# dev.copy2pdf(file="master_scripts/paper_figures/airvars_wtc3.pdf")
-# dev.off()
-
 
 

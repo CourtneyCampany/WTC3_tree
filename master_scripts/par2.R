@@ -87,5 +87,3 @@ with(met_amb_agg, arrows(Date, Tair_al.max.mean, Date, Tair_al.max.mean-Tair_al.
 axis(4, labels=TRUE) 
 mtexti(airtlab, 4, outer=TRUE, cex=1, off=.5)
      
-# dev.copy2pdf(file="master_scripts/paper_figures/ppfd2.pdf")
-# dev.off()

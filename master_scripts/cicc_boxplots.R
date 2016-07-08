@@ -49,5 +49,3 @@ boxplot(drawdown~leaflight, gasex_agg, col=cols, ylab=drawdownlab3, xlab="", nam
   mtext("Sun \n High Light", side=1,at=3, line=3.5)
   text(x=.55, y=325, "(c)", cex=1.5)
   
-# dev.copy2pdf(file="master_scripts/paper_figures/cicc_boxplots.pdf")
-# dev.off()

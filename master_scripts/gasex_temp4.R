@@ -163,5 +163,3 @@ points(drawdowngs~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], co
 text(y=340, x=37.5, "(c)", cex=.9)
 mtext(leaftlab, side=1, outer=TRUE, line=2.5, cex=1.25)
 
- # dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp4.pdf")
- # dev.off()

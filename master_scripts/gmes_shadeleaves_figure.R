@@ -37,5 +37,3 @@ plot(fleck_gm~shade_gm, data=shadeleaf, ylim=c(0,.3), xlim=c(0,.3), xlab=shagmla
 abline(0,1, lty=2)
 legend("topleft", c("AT", "ET"), pch=c(16,17), inset = 0.01, bty='n', title="Shade Leaves", cex=1, pt.cex=1.25)
 
-# dev.copy2pdf(file="master_scripts/paper_figures/gmshade.pdf")
-# dev.off()

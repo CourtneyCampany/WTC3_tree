@@ -48,7 +48,6 @@ boxplot(Photo ~leaflight, gasex_agg, col=cols, ylab=photolab, xlab="", names=FAL
   mtext("Sun \n High Light", side=1,at=3, line=3.5)
   text(x=.55, y=25, "(c)", cex=1.5)
   
-# dev.copy2pdf(file="master_scripts/paper_figures/physiology_boxplots.pdf")
-# dev.off()
+
 
 

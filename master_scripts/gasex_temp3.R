@@ -149,7 +149,5 @@ plot(Photo~CTleaf, data=gasex_agg[gasex_agg$leaflight=="sun-high",], col=Month, 
   points(drawdown~CTleaf, data=gasex_agg[gasex_agg$leaflight=="shade-high",], col=Month, pch=16)
   text(x=37.5, y=170, "(c)", cex=.9)
   mtext(leaftlab, side=1, outer=TRUE, line=2.5, cex=1.25)
- #  
- # dev.copy2pdf(file="master_scripts/paper_figures/gasex_temp3.pdf")
- # dev.off()
+
   
