@@ -8,7 +8,7 @@ output:
   pdf_document: default
   html_document:
     number_sections: yes
-csl: new-phytologist.csl
+csl: plant-cell-environment.csl
 bibliography: references.bib
 ---
 
@@ -42,10 +42,10 @@ includeFigs <- FALSE
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 
-source("gm_newphyt/manuscript_preload.R")
+source("gm_pce/manuscript_preload.R")
 
 # Make figure PDFs.
-source("gm_newphyt/make_figures.R")
+source("gm_pce/make_figures.R")
 
 ```
 
