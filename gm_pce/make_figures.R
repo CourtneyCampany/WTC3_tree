@@ -13,7 +13,7 @@ source("functions and packages/functions.R")
 source("master_scripts/plot_objects.R")
 
 
-fn <- function(...)file.path("gm_newphyt",...)
+fn <- function(...)file.path("gm_pce",...)
 
 to_pdf(source("master_scripts/par2.R"), fn("Figure1.pdf"), width=7, height=7)
 to_pdf(source("master_scripts/aci_vcmaxnitro.R"), fn("Figure2.pdf"), width=8, height=10)
