@@ -84,11 +84,17 @@ ltys <- c(1,2, 1,2)
 
 ###sun shade colors-------------------------------------------------------------------------------------------
 
-
-suncol <- alpha("#ff7f00",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
-shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.75) 
+#new colors to respond to editors comments
+suncol <- alpha("#3B3A3A",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
+shacol <- newshade <- newshacol <-  alpha("#009E73", 0.75) 
 #rgb(0,114,178,0.75*255,max=255)      #alpha("yellow4", alpha=.75)
-lightscol <- alpha("#4daf4a", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
+lightscol <- alpha("#117CC2", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
+
+
+# suncol <- alpha("#ff7f00",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
+# shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.75) 
+# #rgb(0,114,178,0.75*255,max=255)      #alpha("yellow4", alpha=.75)
+# lightscol <- alpha("#4daf4a", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
 
 suncol2 <- alpha(suncol,1)
 shacol2 <- alpha(shacol,1)

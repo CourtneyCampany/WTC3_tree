@@ -1,6 +1,6 @@
-# source("functions and packages/functions.R")
-# source("functions and packages/packages.R")
-# source("master_scripts/plot_objects.R")
+source("functions and packages/functions.R")
+source("functions and packages/packages.R")
+source("master_scripts/plot_objects.R")
 
 treatments <- read.csv("raw data/temp_trt.csv")
 
