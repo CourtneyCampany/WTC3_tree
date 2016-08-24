@@ -106,6 +106,8 @@ lights50col <- alpha(lightscol2, alpha=.5)
 
 
 leafcol <- c(suncol, shacol)
+leafcol2 <- c(shacol, suncol)
+leafcol3 <- c(lightscol, suncol)
 leaflab2 <- c("Sun", "Shade")
 collights<-c(lightscol, lightscol, shacol, shacol)
 trtcols <-c(suncol, suncol, shacol, shacol)
