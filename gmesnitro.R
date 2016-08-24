@@ -33,13 +33,16 @@ gmhigh <- gm_agg[gm_agg$leaflight != "shade-low",]
 nitrogm_norm <- merge(canopy_chem3, gmnorm)
 nitrogm_high <- merge(canopy_chem3, gmhigh)
 
+windows()
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(gm_bar~leafN_area, data=nitrogm_norm, col=leafcol2[leaf], xlab=narealab, ylab=gmlab2,pch=c(16, 17)[temp])
 legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)
-predline(lm(gm_bar~leafN_area, data=nitrogm_norm[nitrogm_norm$leaf=="sun",]), col=suncol2,lwd=2)
-predline(lm(gm_bar~leafN_area, data=nitrogm_norm[nitrogm_norm$leaf=="shade",]), col=shacol2,lwd=2)
+# predline(lm(gm_bar~leafN_area, data=nitrogm_norm[nitrogm_norm$leaf=="sun",]), col=suncol2,lwd=2)
+# predline(lm(gm_bar~leafN_area, data=nitrogm_norm[nitrogm_norm$leaf=="shade",]), col=shacol2,lwd=2)
 
-predline(lm(gm_bar~leafN_area, data=nitrogm_norm), col="blue",lwd=2)
+predline(lm(gm_bar~leafN_area, data=nitrogm_norm), col="black",lwd=2)
+dev.copy2pdf(file="gmN.pdf")
+dev.off()  
 anova(lm(gm_bar~leafN_area, data=nitrogm_norm))
 
 anova(lm(gm_bar~leafN_area, data=nitrogm_norm[nitrogm_norm$leaf=="sun",]))
