@@ -1,0 +1,46 @@
+---
+title: "Response to referees"
+author: "Court Campany"
+date: "26 August 2016"
+output: word_document
+---
+
+
+```{r, results='asis', echo=FALSE, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+
+*Editor*
+
+
+
+*Referee #1*
+
+
+*Referee #2*
+
+- 1. Wingate et al. 2007:
+
+\
+- 2. The measurements were taken as a closed system with the coupled TDl-Licor 6400, independent from the whole-tree chamber conditions. Additionally, specifically choosen CO~2~ cyclinders used for the Licor 6440 were closer to ambient air 13C (~ 10&permil) instead of standard CO~2~ which are fossil fuel derived (~ 30&permil). Thus the WTC atmosphere or CO~2~ cylinder $\delta$^13^C should not interfer with steady state conditions of the leaf measuremnts. 
+
+__Specific Comments:__
+- line 358:We corrected the text to match stats from Table 2
+
+- line 392: We agree that thermal acclimation is not previosuly discussed before this point is made. However, the experimental design does include a +3C warming treatment, and the potential affects of warming on leaf physiology are mentioned in the introduction. As there were very few effects of climate warming observed in this aspect of the experiment, we feel it is important to address a possible explaination for the lack of observed warming effects using published findings from this experiment.
+
+- Q: Nitrogen concentration in the leaves had a weak postive relationship with measured rates of mesophyll conductance if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed seperately. Since we can only speculate about the effect of aquaporins we do not include gm v. N in the manuscript.
+
+- line 404-415:
+
+- line 412-415: *REMKO*
+
+- Q: On average mesophyll conductance and stomatal might be expected to be correlated when investigating interspecific comparisions, such as in Flexas et al. 2013 (Figure 1). The dynamic responses of leaf physiolgy to environmental conditions within a species/canopy are likely to alter this relationship. In this experiment, you can see a strong postive relationship when only sun leaves are considered (which is commonly what most experiments report), similar to the Flexas paper. However, due to the unexpected stomatal behavior in shade leaves this relationship was reversed. We have attached a quick figure below for the referee, but have not included it in the manuscript as it can be inferred from Table 1 and Figure 3 if necessary.
+
+\
+```{r gmgs, fig.align='center', fig.width=5, fig.height=5, echo=FALSE,warning=FALSE,dev="png",message=FALSE, dpi=600}
+source("master_scripts/gmgs_referee2.R")
+```  
+
