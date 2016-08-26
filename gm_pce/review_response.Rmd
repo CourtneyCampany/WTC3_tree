@@ -13,11 +13,30 @@ opts_knit$set(root.dir = '../')
 
 
 *Editor*
+- 1. These leaves studied in this experiment juvenille leaves, as the *E. tereticornis* trees were grown for ~ 1 year. The fact that LMA was similar within the canopy may not be uncommon for this leaf type and has also been noted in Eucalpt plantations (Nouvellon et al. 2010, cited in discussion). However, we have expanded the discussion to address fixed vs variable contols of leaf physiolgy specific to LMA with additional citiations (see reply to Referee # 2 specific comments).
 
+\
+- 2. We feel that colors are necessary in this document to visualize leaf types (+light), while also showing temperature treatments.  It is near impossible to clearly distinguish all of these with symbols alone, and complicates visualization of confidence intervals on scatter plots.  We have attempted to tone-done the color palette, while also distguishing colors properly for color-blind readers.
 
+\
+- 3/4. After careful thought we have decided to move the information regarding parameters derived ACi curves to the supplement.  We only want to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity.  As such, we have decided to use this data to generate Amax values at a common C~i~ between the leaf types. This very simply shows the point we aim to make. If the derivation and representation of J~max~/V~cmax~ values has distracted the editor from this point, it is likely to also do so to other readers who are plant physiolgists. These two parameters will be reported in the supplementary as additional evidence supporting significant difference in photosynthetic capacity between leaf types.
+  
+*Remko*The fitaci package used here correctly estimates J~max~.
+
+We also acknowledge that AC~i~ response curves were intitally conceived with the notion that g~m~ was small enough to be ignored,     which we now know to not be true.  We spent consideral time fitting AC~C~ curves that generated unrealistic V~cmax~ estimates of up to ~300 mumols m^-2^s^-1^. This will likely be a new issue for the plant physiolgy community as more g~m~ data are generated, and we hope are datasets will eventually help contribute to a solution.
+
+\
+-  5. depth of leaf ----  llyod paper appendix ---add to text as well
 
 *Referee #1*
 
+- 1. This experiment was harvested in May 2014, shortly after our measurements ceased.  Therefore, the suggestion to make diurnal measuremnts is no longer possible.
+
+\
+- 2. Leaves used for gas exchange were sampled and then measured for midday water potentails. This is explained in the first sentence of the subsection "Leaf Nitrogen and hydraulic conductance" in the methods.  The method used here for measureing leaf hydraulic conductance is also one of the three methods described in Flexas et al. 2013, which compared the coordination of leaf hydraulic conductance and mesophyll conductance. 
+
+\
+- 3. Due to Referee #1 concern over cuvette measured transpiration, water potentials and subsequent leaf K calculations, we re-examined the calculation and analyses in the manuscript.  Initially, leaf K was calculated with transpiration rates in shade leaves under low light conditions. As light was then increased in shade leaves and then transpiration re-measured, it is entirely possible that this change could have altered the water status of the leaf and thus subsequent water potential measurements (which we can not determine).  As such we feel that the only leaf K which can properly reported is that of sun leaves vs shade leaves under high light. The data and results in the manuscript now reflect this change. This new data allows us to address aspects of Flexas et al. 2013 (and others) mentioned above, but partially inhibits our ability to test optimization theories from Peltoniemi et al. 2012.
 
 *Referee #2*
 
@@ -27,16 +46,23 @@ opts_knit$set(root.dir = '../')
 - 2. The measurements were taken as a closed system with the coupled TDl-Licor 6400, independent from the whole-tree chamber conditions. Additionally, specifically choosen CO~2~ cyclinders used for the Licor 6440 were closer to ambient air 13C (~ 10&permil) instead of standard CO~2~ which are fossil fuel derived (~ 30&permil). Thus the WTC atmosphere or CO~2~ cylinder $\delta$^13^C should not interfer with steady state conditions of the leaf measuremnts. 
 
 __Specific Comments:__
+
+\
 - line 358:We corrected the text to match stats from Table 2
 
+\
 - line 392: We agree that thermal acclimation is not previosuly discussed before this point is made. However, the experimental design does include a +3C warming treatment, and the potential affects of warming on leaf physiology are mentioned in the introduction. As there were very few effects of climate warming observed in this aspect of the experiment, we feel it is important to address a possible explaination for the lack of observed warming effects using published findings from this experiment.
 
-- Q: Nitrogen concentration in the leaves had a weak postive relationship with measured rates of mesophyll conductance if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed seperately. Since we can only speculate about the effect of aquaporins we do not include gm v. N in the manuscript.
+\
+- Q: Nitrogen concentration in the leaves had a weak postive relationship with measured rates of mesophyll conductance if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed seperately. Since we can only speculate about the effect of aquaporins we have not added gm v. N in the manuscript.
 
-- line 404-415:
+\
+- line 404-405:
 
+\
 - line 412-415: *REMKO*
 
+\
 - Q: On average mesophyll conductance and stomatal might be expected to be correlated when investigating interspecific comparisions, such as in Flexas et al. 2013 (Figure 1). The dynamic responses of leaf physiolgy to environmental conditions within a species/canopy are likely to alter this relationship. In this experiment, you can see a strong postive relationship when only sun leaves are considered (which is commonly what most experiments report), similar to the Flexas paper. However, due to the unexpected stomatal behavior in shade leaves this relationship was reversed. We have attached a quick figure below for the referee, but have not included it in the manuscript as it can be inferred from Table 1 and Figure 3 if necessary.
 
 \

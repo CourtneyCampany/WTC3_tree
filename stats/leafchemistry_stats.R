@@ -74,22 +74,31 @@ anova(lma_sha_temp)
 ####leaf K---------------------------------------------------------------------------------------------------------------
 
 leafK <- read.csv("calculated_data/leafK_nodrought.csv")
+#with highlight instead
+leafK2 <- read.csv("calculated_data/leafK_nodrought_highlight.csv")
 
 #examite data with boxplots, then remove any outliers
 boxplot(leafK~temp, data=leafK[leafK$leaf =="sun",])
 boxplot(leafK~temp, data=leafK[leafK$leaf =="shade",])
 
-leafK_clean <- leafK[leafK$leafK <=4.75,]
+boxplot(leafK~temp, data=leafK2[leafK2$leaf =="sun",])
+boxplot(leafK~temp, data=leafK2[leafK2$leaf =="shade",])
 
-leafK_leaf <- lme(leafK ~ leaf, random=~1|chamber, data=leafK_clean)
+leafK_clean <- leafK[leafK$leafK <=4.75,]
+leafK2_clean <- leafK2[leafK2$leafK <=4.75,]
+
+leafK_leaf <- lme(leafK ~ leaf, random=~1|chamber, data=leafK2_clean)
 summary(leafK_leaf)
 anova(leafK_leaf)
+visreg(leafK_leaf)
 
-leafK_sun_temp <- lme(leafK ~ temp ,random=~1|chamber, data=leafK_clean, subset=leaf=="sun")
+
+##no temperature effects
+leafK_sun_temp <- lme(leafK ~ temp ,random=~1|chamber, data=leafK2_clean, subset=leaf=="sun")
 summary(leafK_sun_temp)
 anova(leafK_sun_temp)
 
-leafK_sha_temp <- lme(leafK ~ temp ,random=~1|chamber, data=leafK_clean, subset=leaf=="shade")
+leafK_sha_temp <- lme(leafK ~ temp ,random=~1|chamber, data=leafK2_clean, subset=leaf=="shade")
 summary(leafK_sha_temp)
 anova(leafK_sha_temp)
 

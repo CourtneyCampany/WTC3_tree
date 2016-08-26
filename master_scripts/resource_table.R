@@ -36,7 +36,7 @@ canopy_agg <- summaryBy(lma+leafN_area+ c13 ~ leaf + temp, data=canopy_chem2, FU
 resoucetab <- merge(aci_agg, canopy_agg)
 
 #### leaf K and water potential
-waterdat <- read.csv("calculated_data/leafK_nodrought.csv")
+waterdat <- read.csv("calculated_data/leafK_nodrought_highlight.csv")
 water_agg <- summaryBy(pre_mp+mid_mp+leafK ~ leaf+temp, data=waterdat, FUN=c(mean,se))
 
 resoucetab <- merge(resoucetab, water_agg)

@@ -89,23 +89,25 @@ write.csv(c13_siglets2, "master_scripts/sigletters/slr_c13.csv", row.names=FALSE
 waterdat <- read.csv("calculated_data/leafK_nodrought.csv")
   waterdat$tukeyid <- as.factor(paste(waterdat$leaf, waterdat$temp, sep="-"))
   
-#5: c13
-k_temp <- lme(leafK ~ temp ,random=~1|chamber, data=waterdat)
-  summary(k_temp)
-  anova(k_temp)
-  visreg(k_temp)
+##leaf K stats moved to newleafK.R in masters scripts and ran with high light shade leaves, new sigletters under same name  
   
-##full model
-k_leaf <- lme(leafK~ tukeyid, random=~1|chamber, data=waterdat)
-  summary(k_leaf)
-  anova(k_leaf)
-  visreg(k_leaf)
-  
-tukey_k<- glht(k_leaf, linfct = mcp(tukeyid = "Tukey"))
-k_siglets<- cld(tukey_k)
-k_siglets2 <- k_siglets$mcletters$Letters
-
-write.csv(k_siglets2, "master_scripts/sigletters/slr_k.csv", row.names=FALSE)
+#5: leafK
+# k_temp <- lme(leafK ~ temp ,random=~1|chamber, data=waterdat)
+#   summary(k_temp)
+#   anova(k_temp)
+#   visreg(k_temp)
+#   
+# ##full model
+# k_leaf <- lme(leafK~ tukeyid, random=~1|chamber, data=waterdat)
+#   summary(k_leaf)
+#   anova(k_leaf)
+#   visreg(k_leaf)
+#   
+# tukey_k<- glht(k_leaf, linfct = mcp(tukeyid = "Tukey"))
+# k_siglets<- cld(tukey_k)
+# k_siglets2 <- k_siglets$mcletters$Letters
+# 
+# write.csv(k_siglets2, "master_scripts/sigletters/slr_k.csv", row.names=FALSE)
 
 #6: wp_pre
 pre_temp <- lme(pre_mp ~ temp ,random=~1|chamber, data=waterdat)
