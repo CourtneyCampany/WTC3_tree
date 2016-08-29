@@ -36,6 +36,7 @@ itelab <- expression(ITE~~(mmol~CO[2]~mol~H[2]*O^-1))
 ratelab <- expression(mol~m^-2~s^-1)
 parlab <- expression(PPFD~~(mu*mol~m^-2~s^-1))
 photolab <- expression(italic(A[n])~~(mu*mol~m^-2~s^-1))
+amaxlab <-expression(A[max]~~(mu*mol~m^-2~s^-1))
 trmmollab <- expression(italic(E)[L]~~(mmol~m^-2~s^-1))
 
 cibarlab <- expression(bar(Ci)[shade-sun]~~(ppm))
@@ -85,16 +86,19 @@ ltys <- c(1,2, 1,2)
 ###sun shade colors-------------------------------------------------------------------------------------------
 
 #new colors to respond to editors comments
-suncol <- alpha("#3B3A3A",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
-shacol <- newshade <- newshacol <-  alpha("#009E73", 0.75) 
-#rgb(0,114,178,0.75*255,max=255)      #alpha("yellow4", alpha=.75)
-lightscol <- alpha("#117CC2", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
-
-
-# suncol <- alpha("#ff7f00",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
-# shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.75) 
+# suncol <- alpha("#3B3A3A",0.75) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
+# shacol <- newshade <- newshacol <-  alpha("#009E73", 0.75) 
 # #rgb(0,114,178,0.75*255,max=255)      #alpha("yellow4", alpha=.75)
-# lightscol <- alpha("#4daf4a", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
+# lightscol <- alpha("#117CC2", 0.75) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
+
+#remkos
+
+#d95f02-sun
+#1b9e77-shl
+
+suncol <- alpha("#ff7f00",0.80) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
+shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.80) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
+lightscol <- alpha("#4daf4a", 0.80) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
 
 suncol2 <- alpha(suncol,1)
 shacol2 <- alpha(shacol,1)
@@ -103,7 +107,6 @@ lightscol2 <- alpha(lightscol,1)
 shacol50 <- alpha(shacol, alpha=.5)
 suncol50 <- alpha(suncol, alpha=.5)
 lights50col <- alpha(lightscol2, alpha=.5)
-
 
 leafcol <- c(suncol, shacol)
 leafcol2 <- c(shacol, suncol)

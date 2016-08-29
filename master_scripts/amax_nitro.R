@@ -1,5 +1,4 @@
 ###Amax versus N
-
 source("functions and packages/packages.R")
 source("functions and packages/functions.R")
 source("master_scripts/plot_objects.R")
@@ -35,32 +34,29 @@ acishade <- merge(acishade, treatments)
   sunaci_clean2 <- sunaci_clean[sunaci_clean$chamber != "ch04", ]
   
   tdlaci2 <- read.csv("raw data/tdlaci2.csv")
-  tdlaci2 <-merge(tdlaci2, treatments)
+    tdlaci2$chamber <- gsub("r", "", tdlaci2$chamber)
+    tdlaci2 <-merge(tdlaci2, treatments)
 
-  #simulate ACi curves at 1800 par
-  sunAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[3,3], Jmax=jvc[3,4],PPFD=1800)
-  sunET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[4,3], Jmax=jvc[4,4], PPFD=1800)
-  shaAT_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[1,3], Jmax=jvc[1,4], PPFD=1800)
-  shaET_sim2 <- Aci(Ci=seq(50,2000,length=101), Vcmax=jvc[2,3], Jmax=jvc[2,4],PPFD=1800)
 
 #Pull Amax at common Ci (1800)
-  shade_clean1800 <- acishade_clean[acishade_clean$CO2R > 1750,]
-  shade_redo1800 <- shade_redo[shade_redo$CO2R > 1750,]
+  shade_clean1800 <- acishade_clean[acishade_clean$CO2R > 1700,]
+  shade_redo1800 <- shade_redo[shade_redo$CO2R > 1700,]
   
-  shademax <- rbind(shade_clean1800[,c("chamber", "Photo", "CO2R")], shade_redo1800[,c("chamber", "Photo", "CO2R")])
+  shademax <- rbind(shade_clean1800[,c("chamber", "Photo", "CO2R", "Ci")], shade_redo1800[,c("chamber", "Photo", "CO2R","Ci")])
+    shademax$leaf <- "shade"
   
-  sunaci_clean1800 <- sunaci_clean[sunaci_clean$CO2R > 1750,]
-  tdlaci1800 <- tdlaci2[tdlaci2$CO2R > 1750,]
+  sunaci_1800 <- sunaci_clean2[sunaci_clean2$CO2R > 1700,]
+  tdlaci1800 <- tdlaci2[tdlaci2$CO2R > 1700,]
   
-  sunmax <- rbind(sunaci_clean1800[,c("chamber", "Photo", "CO2R")], tdlaci1800[,c("chamber", "Photo", "CO2R")])
+  sunmax <- rbind(sunaci_1800[,c("chamber", "Photo", "CO2R", "Ci")], tdlaci1800[,c("chamber", "Photo", "CO2R", "Ci")])
+    sunmax$leaf <- "sun"
   
+amax_dat <- rbind(shademax, sunmax)  
+  amax_dat <- merge(amax_dat, treatments)
   
 ###Narea data------------------------------------------------------------------------------------------------------
 leaf_chem <- read.csv("raw data/leaf_chem.csv")
 leaf_mass <- read.csv("raw data/leaf_data.csv")
-  
-#get vcmax per chamber 
-aciparam <- read.csv("calculated_data/aciparameters.csv")
   
 #calculate nitrogen content in leaves
 canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_chem[, 4:8], by=c("Month", "chamber", "leaf"))
@@ -74,102 +70,52 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
   canopy_chem2 <- canopy_chem[canopy_chem$drydown=="control",]
   canopy_chem3 <- canopy_chem2[, c("chamber", "Month", "leaf", "leafN_area")]
   
-##vcmax and Narea dataset  (with stats for results)----------------------------------------------------------------
-Nagg <- summaryBy(leafN_area ~ chamber + leaf, data=canopy_chem)
-  N_aci <- merge(aciparam, Nagg, by= c("chamber", "leaf"))
+##Amax and Narea dataset  (with stats for results)----------------------------------------------------------------
+Nagg <- summaryBy(leafN_area ~ chamber + leaf, data=canopy_chem, FUN=mean, keep.names = TRUE)
 
+N_amax <- merge(Nagg, amax_dat, by= c("chamber", "leaf"))
+
+nitroamax_mod <- lm(Photo~leafN_area, data=N_amax)
 # library(nlme)
 # library(lme4)
 # library(lmerTest)
 # library(LMERConvenienceFunctions)
-nitrovc_mod <- lm(Vcmax~leafN_area.mean, data=N_aci)
-# nitrovc_mod2 <- lme(Vcmax~leafN_area.mean, random=~1|chamber,data=N_aci)
-# nitrovc_mod3 <- lmer(Vcmax~leafN_area.mean+ (1|chamber),data=N_aci)
+# nitrovc_mod3 <- lmer(Photo~leafN_area+ (1|chamber),data=N_amax)
 # anova(nitrovc_mod3)
 # summary(nitrovc_mod3)
 # mcp.fnc(nitrovc_mod3)
 # source("functions and packages/r2glmm.R")
 # rsquared.glmm(nitrovc_mod3)
+
+##Amax vs Narea
+par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+plot(Photo~leafN_area, data=N_amax, col=leafcol3[as.factor(leaf)],xlim=c(1.5,3.5),ylim=c(15,35),
+       pch=c(16, 17)[pch=N_amax$temp],xlab=narealab, ylab=amaxlab, cex=1.25)
+
+ablineclip(nitroamax_mod, x1=min(N_amax$leafN_area), x2=max(N_amax$leafN_area), lwd=2, lty=3)
+
+legend("topleft", leglab2, pch=c(16,17,16,17), col=c(suncol,suncol, lightscol, lightscol),inset = 0.01, bty='n',cex=1, pt.cex=1.25) 
+
+  
+##Amax stats for manuscript----------------------------------------------------------------------------------------------------  
+# amax_dat$tukeyid <- as.factor(paste(amax_dat$leaf, amax_dat$temp, sep="-"))
+
+# #no temp
+# amax_temp <- lme(Photo ~ temp ,random=~1|chamber, data=amax_dat)
+# summary(amax_temp)
+# anova(amax_temp)
 # 
-# summary(nitrovc_mod)
-# summary(nitrovc_mod2)
-# anova(nitrovc_mod,nitrovc_mod3)
-
-####photosynthesis and narea dataset (with stats)--------------------------------------------------------------------
-###merge photo with leaf N datasets
-
-Anitro <- merge(photo2, canopy_chem3, by=c("chamber", "Month", "leaf"))  
-
-photoN_mod <- lm(Photo~leafN_area, data=Anitro[Anitro$leaflight != "shade-high",])
-# photoN_mod2 <- lme(Photo~leafN_area, random=~1|chamber,data=Anitro[Anitro$leaflight != "shade-high",])
-# photoN_mod3<- lmer(Photo~leafN_area+ (1|chamber), data=Anitro[Anitro$leaflight != "shade-high",])
-# anova(photoN_mod3)
-# summary(photoN_mod3)
-# mcp.fnc(photoN_mod3)
-# rsquared.glmm(photoN_mod3)
+# ##full model (sun_shade diff)
+# amax_leaf <- lme(Photo ~ tukeyid, random=~1|chamber, data=amax_dat)
+# summary(amax_leaf)
+# anova(amax_leaf)
+# library(visreg)
+# visreg(amax_leaf)
 # 
-# summary(photoN_mod)
-# summary(photoN_mod2)
+# tukey_amax<- glht(amax_leaf, linfct = mcp(tukeyid = "Tukey"))
+# amax_siglets<- cld(tukey_amax)
+# amax_siglets2 <- amax_siglets$mcletters$Letters
 
-
-###plotting
-palette(c(shacol, suncol))
-  
-# windows(8,10)
-
-par(fig=c(0, 1, .5, 1),mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-  
-#panel 1: aci curves with inset
-plot(Photo~Ci ,data= acishade_clean, col=lightscol, ylim=c(0, 42), xlim=c(0,2000), xlab=cilab, 
-       ylab=photolab, pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo, col=lightscol,  pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2,  col=suncol,  pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2,  col=suncol,  pch=c(16, 17)[pch=tdlaci2$temp])
-
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2, cex=1.1,xlab=cilab, ylab="", type="l", lwd=2)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2, cex=1.1,xlab="", ylab="", type="l", lwd=2, lty=2)
-  
-  legend("topleft", c("Sun", "Shade-High Light", "AT", "ET"), pch=c(-1,-1, 16,17), 
-         lty=c(1,1, 1,2), lwd=2,
-         col=c(suncol, lightscol2, "black", "black"),inset = 0.01, bty='n',cex=.7)
-  text(x=2040, y=42, "(a)", cex=.7)
-  
-###panel 2: leafNarea ~ vcmax (bottom left)
-par(fig=c(0, .5, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-
-plot(Vcmax~leafN_area.mean, data=N_aci, col=as.factor(leaf),  ylim=c(40, 133),xlim=c(1,3.5),
-       pch=c(16, 17)[pch=N_aci$temp],xlab=narealab, ylab=vclab)
-  ablineclip(nitrovc_mod, x1=min(N_aci$leafN_area.mean), x2=max(N_aci$leafN_area.mean), lwd=2, lty=3)
-  legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.7)
-  text(x=3.475, y=133, "(b)", cex=.7)
-  
-####panel bottom right 
-par(fig=c(.5, 1, 0, .5),new=T,mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="sun-high",], col=suncol,  xlim=c(0,4), ylim=c(0,25),
-       pch=c(16, 17)[pch=Anitro$temp], ylab=photolab, xlab=narealab)
-  points(Photo ~ leafN_area, data=Anitro[Anitro$leaflight=="shade-low",], col=shacol,  pch=c(16, 17)[pch=Anitro$temp])
-  ablineclip(photoN_mod, x1=min(Anitro$leafN_area), x2=max(Anitro$leafN_area), lwd=2, lty=3)
-  #legend("topleft", leglab2, pch=c(16,17,16,17), col=trtcols,inset = 0.01, bty='n',cex=.8)  
-  text(x=3.95, y=25, "(c)", cex=.7)
- 
-  
-###inset figure  
-par(fig=c(0.525, 0.95, 0.58,0.75), mar=c(2,2,0,0),new=T, cex=.7, las=1,  cex.axis=.7, cex.lab=.7, tcl=-.25)
-  
-plot(Photo~Ci ,data= acishade_clean, ylim=c(0, 15.5), xlim=c(45,300), xlab="", ylab="",xaxt="n", yaxt="n", pch="")
-  axis(2, mgp=c(3, .5, 0))
-  axis(1, mgp=c(3, 0, 0))
-  
-  points(Photo~Ci ,data= acishade_clean, col=lightscol,pch=c(16, 17)[pch=acishade_clean$temp])
-  points(Photo~Ci ,data= shade_redo,col=lightscol, pch=c(16, 17)[pch=shade_redo$temp])
-  points(Photo~Ci ,data= sunaci_clean2, col=suncol, pch=c(16, 17)[pch=sunaci_clean2$temp])
-  points(Photo~Ci ,data= tdlaci2, col=suncol, pch=c(16, 17)[pch=tdlaci2$temp])
-  
-  points(sunAT_sim2$Ci, sunAT_sim2$ALEAF, col=suncol2,  type="l", lwd=2)
-  points(sunET_sim2$Ci, sunET_sim2$ALEAF, col=suncol2,  type="l", lwd=2, lty=2)
-  points(shaAT_sim2$Ci, shaAT_sim2$ALEAF, col=lightscol2,  type="l", lwd=2)
-  points(shaET_sim2$Ci, shaET_sim2$ALEAF, col=lightscol2,  type="l", lwd=2, lty=2)  
-
+#write.csv(lma_siglets2, "master_scripts/sigletters/slr_amax.csv", row.names=FALSE)
+#amax_agg <- summaryBy(Photo ~ leaf, data=amax_dat, FUN=c(mean, se))
   

@@ -57,8 +57,6 @@ E_fleck <- subset(E_dat, transp_agg$leaflight !=  "shade-low")
   E_fleck$chamber<- as.factor(E_fleck$chamber)
   E_fleck$leaf<- as.factor(E_fleck$leaf)
   
-
-
 #merge each of these files with water potential data and calculate leaf K-------------------------------------------------
 leafK_norm <- merge(E_norm, WP)
   leafK_norm$wpdiff <- with(leafK_norm, abs(mid_mp - pre_mp))
@@ -70,8 +68,8 @@ leafK_fleck <- merge(E_fleck ,WP)
   leafK_fleck$wpdiff <- with(leafK_fleck, abs(mid_mp - pre_mp))
   leafK_fleck$leafK <- with(leafK_fleck, Trmmol/wpdiff)
   
-write.csv(leafK_norm, "calculated_data/leafK_nodrought.csv", row.names = FALSE)
-write.csv(leafK_fleck,"calculated_data/leafK_nodrought_highlight.csv", row.names = FALSE)  
+# write.csv(leafK_norm, "calculated_data/leafK_nodrought.csv", row.names = FALSE)
+# write.csv(leafK_fleck,"calculated_data/leafK_nodrought_highlight.csv", row.names = FALSE)  
 
 #prelim plotting---------------------------------------------------------------------------------------------------------
 ypos <- c(2.5,1,0)

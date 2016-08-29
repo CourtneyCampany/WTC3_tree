@@ -27,32 +27,52 @@ includeFigs <- TRUE
 source("gm_pce/manuscript_preload.R")
 ```
 
+## Tables
+*jmax vcmax values*
+**Table S1**. Leaf morphological and physiological traits of sun and shade leaves under ambient and elevated temperature treatments for *Eucalyptus tereticornis*. Values of *V*~cmax~ and *J*~max~ are treatment mean (&pm; 1 standard error) from A-*C*~i~ curves measured in each chamber at 25 &deg;C and saturating light. Different letters represent significant differences between leaf type and temperature treatments (based on a Tukey test). The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
+
+```{r, echo=FALSE}
+resourcetab2 <- rbind(resourcetab[,c(1:2, 5:6)], c("P value","", as.character(pval_aci)))
+
+dust(resourcetab2)%>%
+  sprinkle_colnames("Leaf", "Temperature", "*V*~cmax~", "*J*~max~") %>%
+  sprinkle(rows= 1, part="head",bold=TRUE)%>%
+  sprinkle_print_method("markdown")
+```
+
 
 ## Figures
 
-```{r airvars, fig.width=7, fig.height=8.8, echo=FALSE,warning=FALSE,dev="png", dpi=600,  eval=includeFigs, dev.args=list(type="cairo")}
+```{r airvars, fig.width=7, fig.height=8.8, echo=FALSE,warning=FALSE,dev="png", dpi=600,  eval=includeFigs}
 source("master_scripts/air_vars.R")
 ```
 \
 **Figure S1**. Daily maximum and minimum temperature (a), daily maximum VPD (b) and total daily PPFD (c) for each chamber across the experiment duration.
 \
-```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs, dev.args=list(type="cairo")}
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs}
 source("master_scripts/delta_cica.R")
 ```  
 \
 **Figure S2**. Relationship between the observed discrimination of ^13^CO~2~ measured during photosynthesis ($\Delta_o$) and measured *C*~i~/*C*~a~ for sun leaves measured at high light and shade leaves measured at both low and high light. The solid line represents the theoretical line for C3 plants from Evans et al. [-@evans1986carbon].
 \
-```{r gasex_temp3, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
+```{r gasex_temp3, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs}
 source("master_scripts/gasex_temp3.R")
 ```  
 \
 **Figure S3**. Response of *A*~n~ (a), *g*~m~ (b) and *C*~i~-*C*~c~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represent each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Weak negative relationships with *g*~m~ and increasing leaf temperature were detected with sun and shade leaves under their local light environment (*R*^2^ = 0.16 and 0.08, respectively). 
 \
-```{r gasex_temp4, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo"), eval=includeFigs}
+```{r gasex_temp4, fig.width=7, fig.height=9, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs}
 source("master_scripts/gasex_temp4.R")
 ```  
 \
 **Figure S4**. Response of VPD (a), *g*~s~ (b) and *C*~a~-*C*~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (*R*^2^ = 0.73, 0.58 and 0.72, respectively).
+
+<!-- \ -->
+<!-- ```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600,message=FALSE, eval=includeFigs} -->
+<!--  source("master_scripts/aci_vcmaxnitro.R") -->
+<!-- ``` -->
+<!-- \ -->
+<!-- **Figure S5**. Photosynthetic capacity, photosynthesis rate and leaf nitrogen for sun and shade leaves. (a) A-*C*~i~ curves for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. A-*C*~i~ curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between *V*~cmax~ and mean leaf N per area (*N*~a~) for each chamber, including sun leaves and shade leaves at low light.  For (b) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.28 and 0.35. -->
 
 ##Methods S1
 
@@ -145,6 +165,11 @@ g_m = \left(\frac{1+t}{1-t}\left(b-a_i-\frac{eR_d}{A+R_d}\right)\frac{A}{C_a}\ri
 $$
 
 Here, *g*~m~ is expressed in units of mol m^-2^ s^-1^ bar^-1^ to be consistent with Evans & von Caemmerer [-@evans2013temperature]. As the pressure term is nearly equal to unity, suitable comparisons between *g*~m~ and *g*~s~ can be made.
+
+##Methods S2
+
+###Photosynthetic parameters from A-*C*~i~ curves
+From each A-*C*~i~ curve the photosynthetic parameters, *J*~max~ and *V*~cmax~, were quantified using the photosynthesis model of Farquhar et al. [-@farquhar1980biochemical]. We used the 'fitaci' function in the 'plantecophys' package in R, see Duursma [-@duursma2015] for detailed description of the fitting methods. This method uses non-linear regression to estimate *J*~max~, *V*~cmax~ and *R*~dark~ simultaneously. Because there was considerable practical difficulty in fitting A-*C*~c~ curves, we report standard *C*~i~-based *J*~max~ and *V*~cmax~, which effectively include a mesophyll conductance component. When fitting the A-*C*~i~ curves, we calculated $\Gamma_{*}$ with the same methods as for *g*~m~, described above (the estimated value at 25&deg;C was 38.9 $\mu$mol mol^-1^), and the combined Michaelis-Menten coefficient (*K*~m~) was estimated from Medlyn et al. [-@medlyn2002temperature] (713.4 $\mu$mol mol^-1^ at 25&deg;C, using a *K*~c~ of 405 $\mu$mol mol^-1^, with an atmospheric pressure of 100 kPa). The temperature response parameters for *J*~max~, *V*~cmax~ and *K*~m~ are not relevant since *T*~leaf~ was kept constant at 25&deg;C.
 
 # References {.unnumbered}
 
