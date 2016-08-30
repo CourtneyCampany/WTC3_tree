@@ -13,17 +13,17 @@ opts_knit$set(root.dir = '../')
 
 
 *Editor*
-- 1. These leaves studied in this experiment juvenille leaves, as the *E. tereticornis* trees were grown for ~ 1 year. The fact that LMA was similar within the canopy may not be uncommon for this leaf type and has also been noted in Eucalpt plantations (Nouvellon et al. 2010, cited in discussion). However, we have expanded the discussion to address fixed vs variable contols of leaf physiolgy specific to LMA with additional citiations (see reply to Referee # 2 specific comments).
+- 1. These leaves studied in this experiment juvenille leaves, as the *E. tereticornis* trees were grown for ~ 1 year. The fact that LMA was similar within the canopy may be common in juvenille leaves and similar LMA within canopies has also been noted in Eucalpt plantations (Nouvellon et al. 2010, cited in discussion). However, we have expanded the discussion to address fixed vs variable contols of leaf physiolgy specific to LMA with additional citiations (see reply to Referee # 2 specific comments).
 
 \
-- 2. We feel that colors are necessary in this document to visualize leaf types (+light), while also showing temperature treatments.  It is near impossible to clearly distinguish all of these with symbols alone, and complicates visualization of confidence intervals on scatter plots.  We have attempted to tone-done the color palette, while also distguishing colors properly for color-blind readers.
+- 2. We feel that colors are necessary in this document to visualize leaf types (+light), while also showing temperature treatments.  It is very messy to distinguish all of these with symbols alone, and complicates visualization of confidence intervals on scatter plots.  We have attempted to tone-done the color palette, while still distguishing colors properly for color-blind readers.
 
 \
-- 3/4. After careful thought we have decided to move the information regarding parameters derived ACi curves to the supplement.  We only want to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity.  As such, we have decided to use this data to generate Amax values at a common C~i~ between the leaf types. This very simply shows the point we aim to make. If the derivation and representation of J~max~/V~cmax~ values has distracted the editor from this point, it is likely to also do so to other readers who are plant physiolgists. These two parameters will be reported in the supplementary as additional evidence supporting significant difference in photosynthetic capacity between leaf types.
+- 3/4. After careful thought we have decided to move the information regarding parameters derived AC~i~ curves to the supplementary information. We only want to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity. As such, we have decided present Amax values, from these CO~2~ response curves, between the leaf types. This very simply shows the point we aim to make. If the derivation and representation of J~max~/V~cmax~ values has distracted the editor from this point, it is likely to also distract readers who are plant physiolgists. J~max~ and V~cmax~ values are still described and reported in the supplementary as additional evidence to support differences in photosynthetic capacity between leaf types.
   
 *Remko*The fitaci package used here correctly estimates J~max~.
 
-We also acknowledge that AC~i~ response curves were intitally conceived with the notion that g~m~ was small enough to be ignored,     which we now know to not be true.  We spent consideral time fitting AC~C~ curves that generated unrealistic V~cmax~ estimates of up to ~300 mumols m^-2^s^-1^. This will likely be a new issue for the plant physiolgy community as more g~m~ data are generated, and we hope are datasets will eventually help contribute to a solution.
+We also acknowledge that AC~i~ response curves were intitally conceived with the notion that g~m~ was small enough to be ignored,     which we now know is untrue.  We spent consideral time attempting to fit AC~C~ curves, which generated unrealistic V~cmax~ estimates of up to ~300 mumols m^-2^s^-1^. This represents a new issue for the plant physiolgy community as more g~m~ data are generated, and we hope our datasets will eventually help contribute to a solution.
 
 \
 -  5. depth of leaf ----  llyod paper appendix ---add to text as well
@@ -40,10 +40,12 @@ We also acknowledge that AC~i~ response curves were intitally conceived with the
 
 *Referee #2*
 
-- 1. Wingate et al. 2007:
+- 1. Wingate et al. 2007: accountd for by evan and cammereer 2012? (griffiths paper)
 
 \
 - 2. The measurements were taken as a closed system with the coupled TDl-Licor 6400, independent from the whole-tree chamber conditions. Additionally, specifically choosen CO~2~ cyclinders used for the Licor 6440 were closer to ambient air 13C (~ 10&permil) instead of standard CO~2~ which are fossil fuel derived (~ 30&permil). Thus the WTC atmosphere or CO~2~ cylinder $\delta$^13^C should not interfer with steady state conditions of the leaf measuremnts. 
+
+- 3. fixed vs variable controls of g~m~ .....
 
 __Specific Comments:__
 
@@ -57,7 +59,7 @@ __Specific Comments:__
 - Q: Nitrogen concentration in the leaves had a weak postive relationship with measured rates of mesophyll conductance if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed seperately. Since we can only speculate about the effect of aquaporins we have not added gm v. N in the manuscript.
 
 \
-- line 404-405:
+- line 404-405: added Brooks et al. 1996 reference explaining patterns of morphology and physiology of when sun leaves become shaded.
 
 \
 - line 412-415: *REMKO*
