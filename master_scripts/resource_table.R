@@ -33,19 +33,23 @@ canopy_chem2 <- canopy_chem[canopy_chem$drydown=="control",]
 
 canopy_agg <- summaryBy(lma+leafN_area+ c13 ~ leaf + temp, data=canopy_chem2, FUN=c(mean, se))
 
-resoucetab <- merge(aci_agg, canopy_agg)
+resourcetab <- merge(aci_agg, canopy_agg)
 
 #### leaf K and water potential
 waterdat <- read.csv("calculated_data/leafK_nodrought_highlight.csv")
 water_agg <- summaryBy(pre_mp+mid_mp+leafK ~ leaf+temp, data=waterdat, FUN=c(mean,se))
 
-resoucetab <- merge(resoucetab, water_agg)
+resourcetab <- merge(resourcetab, water_agg)
+
+###Amax
+amax <- read.csv("calculated_data/amax.csv")
+resourcetab <- merge(resourcetab, amax)
 
 
 ####order, split into mean/se, fix rounding, and paste mean(se)
 
 #order variables
-leaf_table <- resoucetab[, c(1:2,7:8, 3:4, 15, 13:14, 9, 10:11, 5:6, 18, 16:17, 12)]
+leaf_table <- resourcetab[, c(1:2,7,19,8,15,13,14,9,10,20,11,18,16,17,12)]
 leaf_table <- leaf_table[c(3:4, 1:2),]
 
 leaf_vars <- leaf_table[, 1:2]
@@ -55,21 +59,18 @@ leaf_vars <- leaf_table[, 1:2]
 
 leaf_vars2 <-data.frame(Leaf = c("Sun", "", "Shade", ""), Temperature = c("AT", "ET", "AT","ET"))  
   
-  
 ##split means and SE
-leaf_means <- leaf_table[, 3:10]
-leaf_se <- leaf_table[, 11:18]
+leaf_means <- leaf_table[, 3:9]
+leaf_se <- leaf_table[, 10:16]
 
 ###paste and round means and se together
 v1 <- data.frame(paste0(sprintf("%2.1f", round(leaf_means[,1], 1)), " (", sprintf("%2.1f", round(leaf_se[,1],1)),")"))
-v2 <- data.frame(paste0(sprintf("%1.2f", round(leaf_means[,2], 3)), " (", sprintf("%1.2f", round(leaf_se[,2],3)),")"))
-v3 <- data.frame(paste0(sprintf("%2.1f", round(leaf_means[,3], 3)), " (", sprintf("%2.1f", round(leaf_se[,3],3)),")"))
-v4 <- data.frame(paste0(sprintf("%3.1f", round(leaf_means[,4], 1)), " (", sprintf("%2.1f", round(leaf_se[,4],1)),")"))
+v2 <- data.frame(paste0(sprintf("%2.1f", round(leaf_means[,2], 3)), " (", sprintf("%2.1f", round(leaf_se[,2],3)),")"))
+v3 <- data.frame(paste0(sprintf("%1.2f", round(leaf_means[,3], 3)), " (", sprintf("%1.2f", round(leaf_se[,3],3)),")"))
+v4 <- data.frame(paste0(sprintf("%1.2f", round(leaf_means[,4], 2)), " (", sprintf("%1.2f", round(leaf_se[,4],2)),")"))
 v5 <- data.frame(paste0(sprintf("%1.2f",round(leaf_means[,5], 2)), " (", sprintf("%1.2f", round(leaf_se[,5],2)),")"))
 v6 <- data.frame(paste0(sprintf("%2.2f",round(leaf_means[,6],2)), " (", sprintf("%1.2f",round(leaf_se[,6],2)),")"))
-v7 <- data.frame(paste0(sprintf("%3.2f",round(leaf_means[,7], 1)), " (", sprintf("%1.2f",round(leaf_se[,7],2)),")"))
-v8 <- data.frame(paste0(sprintf("%3.1f",round(leaf_means[,8], 1)), " (", sprintf("%1.2f",round(leaf_se[,8],2)),")"))
-
+v7 <- data.frame(paste0(sprintf("%3.1f",round(leaf_means[,7], 1)), " (", sprintf("%1.2f",round(leaf_se[,7],2)),")"))
 
 leaf_table2 <- cbind(leaf_vars2, v1)
 leaf_table2 <- cbind(leaf_table2, v2)
@@ -78,7 +79,6 @@ leaf_table2 <- cbind(leaf_table2, v4)
 leaf_table2 <- cbind(leaf_table2, v5)
 leaf_table2 <- cbind(leaf_table2, v6)
 leaf_table2 <- cbind(leaf_table2, v7)
-leaf_table2 <- cbind(leaf_table2, v8)
 
 ###add sigletters (order of sig letters is shade AT, ET then sun AT:ET)-----------------------------------------------------
 
@@ -98,26 +98,19 @@ siglet2 <- lapply(siglet, function(x) as.data.frame(x))
 
 ###do I need to match the sigletters order with that of datatable?
 siglet3 <- list()
-for(i in 1:8) {
+for(i in 1:7) {
   siglet3[[i]] <- siglet2[[i]][c(3,4,1,2),] 
 }
 
 ###add sigletters to table--------------------------------------------------------------------------------------------------
 
 leaf_table2[[3]] <- paste(leaf_table2[[3]], siglet3[[4]][,1])
-leaf_table2[[4]] <- paste(leaf_table2[[4]], siglet3[[6]][,1])
-leaf_table2[[5]] <- paste(leaf_table2[[5]], siglet3[[8]][,1])
-leaf_table2[[6]] <- paste(leaf_table2[[6]], siglet3[[2]][,1])
-leaf_table2[[7]] <- paste(leaf_table2[[7]], siglet3[[3]][,1])
-leaf_table2[[8]] <- paste(leaf_table2[[8]], siglet3[[7]][,1])
-leaf_table2[[9]] <- paste(leaf_table2[[9]], siglet3[[5]][,1])
-leaf_table2[[10]] <- paste(leaf_table2[[10]], siglet3[[1]][,1])
-
-##add pval at bottom
-
-# pval <- as.vector(c("P value","Container Effect",0.785, 0.001, 0.028, 0.002, 0.001, 0.3486, 0.6385, 0.973))
-# 
-# test <- rbind(leaf_table2, pval)
+leaf_table2[[4]] <- paste(leaf_table2[[4]], siglet3[[1]][,1])
+leaf_table2[[5]] <- paste(leaf_table2[[5]], siglet3[[6]][,1])
+leaf_table2[[6]] <- paste(leaf_table2[[6]], siglet3[[3]][,1])
+leaf_table2[[7]] <- paste(leaf_table2[[7]], siglet3[[7]][,1])
+leaf_table2[[8]] <- paste(leaf_table2[[8]], siglet3[[5]][,1])
+leaf_table2[[9]] <- paste(leaf_table2[[9]], siglet3[[2]][,1])
 
 write.csv(leaf_table2, "master_scripts/resource_table.csv", row.names=FALSE)
 

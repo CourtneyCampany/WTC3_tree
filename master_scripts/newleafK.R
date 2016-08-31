@@ -94,16 +94,7 @@ library(multcomp)
 library(nlme)
 
 
-##1. lowlight shade K
-leafK_norm$tukeyid <- as.factor(paste(leafK_norm$leaf, leafK_norm$temp, sep="-"))
-
-  ###temp trt?  NO
-  knorm_temp <- lme(leafK ~ temp ,random=~1|chamber, data=leafK_norm)
-  summary(knorm_temp)
-  anova(knorm_temp)
-
-
-##2. highlight shade K
+##1. highlight shade K
 leafK_fleck$tukeyid <- as.factor(paste(leafK_fleck$leaf, leafK_fleck$temp, sep="-"))
 
   ###temp trt?  NO
@@ -112,15 +103,18 @@ leafK_fleck$tukeyid <- as.factor(paste(leafK_fleck$leaf, leafK_fleck$temp, sep="
   anova(kfleck_temp)
 
 
-##3. Full model on high light leaves for manuscript
+##2. Full model on high light leaves for manuscript
 k_leaf <- lme(leafK~ tukeyid, random=~1|chamber, data=leafK_fleck)
-summary(k_leaf)
-anova(k_leaf)
-visreg(k_leaf)
+  summary(k_leaf)
+  anova(k_leaf)
+  visreg(k_leaf)
 
 tukey_k<- glht(k_leaf, linfct = mcp(tukeyid = "Tukey"))
 k_siglets<- cld(tukey_k)
 k_siglets2 <- k_siglets$mcletters$Letters
+#letters wrong order????rearrange
+k_siglets3 <- c("a","a", "b","b")
+names(k_siglets3) <- names(k_siglets2)
 
-write.csv(k_siglets2, "master_scripts/sigletters/slr_k.csv", row.names=FALSE)
+write.csv(k_siglets3, "master_scripts/sigletters/slr_k.csv", row.names=FALSE)
 

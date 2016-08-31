@@ -14,7 +14,6 @@ source("master_scripts/plot_objects.R")
 ##read table ready dataframes
 resourcetab <- read.csv("master_scripts/resource_table.csv", stringsAsFactors = FALSE)
 getab <- read.csv("master_scripts/ge_table.csv", stringsAsFactors = FALSE)
-pval <- c(0.781, 0.001, 0.001, 0.3486, 0.6385, 0.001)
-pval_aci <- c( 0.028, 0.002)
+pval <- c(0.781, 0.001, 0.001, 0.001, 0.3486, 0.6385, 0.001)
 pval2 <- c(0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
 

@@ -104,18 +104,18 @@ legend("topleft", leglab2, pch=c(16,17,16,17), col=c(suncol,suncol, lightscol, l
 # amax_temp <- lme(Photo ~ temp ,random=~1|chamber, data=amax_dat)
 # summary(amax_temp)
 # anova(amax_temp)
-# 
+#
 # ##full model (sun_shade diff)
 # amax_leaf <- lme(Photo ~ tukeyid, random=~1|chamber, data=amax_dat)
 # summary(amax_leaf)
 # anova(amax_leaf)
 # library(visreg)
 # visreg(amax_leaf)
-# 
+#
 # tukey_amax<- glht(amax_leaf, linfct = mcp(tukeyid = "Tukey"))
 # amax_siglets<- cld(tukey_amax)
 # amax_siglets2 <- amax_siglets$mcletters$Letters
-
-#write.csv(lma_siglets2, "master_scripts/sigletters/slr_amax.csv", row.names=FALSE)
-#amax_agg <- summaryBy(Photo ~ leaf, data=amax_dat, FUN=c(mean, se))
-  
+# 
+# write.csv(amax_siglets2, "master_scripts/sigletters/slr_amax.csv", row.names=FALSE)
+# amax_agg <- summaryBy(Photo ~ leaf+temp, data=amax_dat, FUN=c(mean, se))
+# write.csv(amax_agg, "calculated_data/amax.csv", row.names = FALSE)

@@ -4,14 +4,11 @@ library(visreg)
 library(multcomp)
 library(nlme)
 
-
 treatments <- read.csv("raw data/temp_trt.csv") 
 
 ####generate sig letters for data tables for wtc3 manuscript
 
 ##variables include:  WP*2, K, Narea, 13C, Vcmax, Jmax
-
-
 
 ####Narea/LMA/13c--------------------------------------------------------------------------------------------------------
 leaf_chem <- read.csv("raw data/leaf_chem.csv")

@@ -27,20 +27,6 @@ includeFigs <- TRUE
 source("gm_pce/manuscript_preload.R")
 ```
 
-## Tables
-*jmax vcmax values*
-**Table S1**. Leaf morphological and physiological traits of sun and shade leaves under ambient and elevated temperature treatments for *Eucalyptus tereticornis*. Values of *V*~cmax~ and *J*~max~ are treatment mean (&pm; 1 standard error) from A-*C*~i~ curves measured in each chamber at 25 &deg;C and saturating light. Different letters represent significant differences between leaf type and temperature treatments (based on a Tukey test). The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
-
-```{r, echo=FALSE}
-resourcetab2 <- rbind(resourcetab[,c(1:2, 5:6)], c("P value","", as.character(pval_aci)))
-
-dust(resourcetab2)%>%
-  sprinkle_colnames("Leaf", "Temperature", "*V*~cmax~", "*J*~max~") %>%
-  sprinkle(rows= 1, part="head",bold=TRUE)%>%
-  sprinkle_print_method("markdown")
-```
-
-
 ## Figures
 
 ```{r airvars, fig.width=7, fig.height=8.8, echo=FALSE,warning=FALSE,dev="png", dpi=600,  eval=includeFigs}
@@ -66,13 +52,6 @@ source("master_scripts/gasex_temp4.R")
 ```  
 \
 **Figure S4**. Response of VPD (a), *g*~s~ (b) and *C*~a~-*C*~i~ to leaf temperature for sun leaves and shade leaves at low and high light. Shaded symbols represents each monthly measurement campaign. Solid lines, colored by leaf and light type, are fitted line for the relationship with each parameter and leaf temperature across all measurement campaigns. All parameters with no relationship are fitted with zero slope and the overall mean value for each treatment combination. Leaf VPD inside the gas exchange cuvette was positively correlated with increasing leaf temperature for sun leaves and shade leaves at low and high light (*R*^2^ = 0.73, 0.58 and 0.72, respectively).
-
-<!-- \ -->
-<!-- ```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600,message=FALSE, eval=includeFigs} -->
-<!--  source("master_scripts/aci_vcmaxnitro.R") -->
-<!-- ``` -->
-<!-- \ -->
-<!-- **Figure S5**. Photosynthetic capacity, photosynthesis rate and leaf nitrogen for sun and shade leaves. (a) A-*C*~i~ curves for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. A-*C*~i~ curves were measured once on all trees, in February 2014, at 25°C and at saturating light (1800 $\mu$mols m^-1^ s^-1^). (b) The relationship between *V*~cmax~ and mean leaf N per area (*N*~a~) for each chamber, including sun leaves and shade leaves at low light.  For (b) the dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.28 and 0.35. -->
 
 ##Methods S1
 

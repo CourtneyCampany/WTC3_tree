@@ -132,8 +132,8 @@ where $\Delta$~o~ is the observed discrimination and $\Delta$~i~, $\Delta$~gm~ ,
 (2)
 $$g_m = \frac{A_n}{C_i-C_c}$$
 
-##Photosynthetic capacity from A-*C*~i~ curves
-Photosynthetic CO~2~ response (A-*C*~i~) curves were measured for one sun and shade leaf for each WTC in February 2014, when all trees were well-watered in each temperature treatment (*n*=6). Each A-*C*~i~ curve began at the reference [CO~2~] of 400 $\mu$l l^-1^ and then consisted of 12 additional steps from [CO~2~] of 50 to 1800 $\mu$l l^-1^ with leaf temperature (*T*~leaf~) held constant at 25 &deg;C, and saturating PPFD (1800 $\mu$mols m^-1^ s^-1^). From these curves the photosynthetic capacity of each leaf (*A*~max~) was determined as the maximum rate of photosynthesis measured at the highest observed *C*~i~. The photosynthetic parameters, *J*~max~ and *V*~cmax~, were also generated from each A-*C*~i~ curve and their derivations are presented in Supporting Information Methods S2.
+##Photosynthetic capacity
+Photosynthetic capacity (*A*~max~) of sun and shade leaves were measured at saturating light and [CO~2~] for one sun and shade leaf for each WTC. Measurements were completed in February 2014, when all trees were well-watered in each temperature treatment (*n*=6). *A*~max~ measurements were made at a PPFD of 1800 $\mu$mol m^-1^ s^-1^ and [CO~2~] of 1800 $\mu$l l^-1^, with leaf temperature (*T*~leaf~) held constant at 25 &deg;C .
 
 ##Leaf nitrogen and hydraulic conductance
 Following gas exchange measurements, each leaf was collected, measured for leaf water potential (explained below), scanned for leaf area, oven-dried and weighed. These leaves were then milled and analyzed for leaf N content and $\delta$^13^C. Leaf samples were analysed on a Delta V Advantage coupled to a Flash HT and Conflo IV (Thermo Fisher Scientific, Bremen, Germany) in dual-reactor setup. Samples were flash combusted at 1000 &deg;C and converted to CO~2~ and N~2~ and then subjected to stable isotope ratio mass spectrometry. Leaf N is reported on an area basis (*N*~a~, g m^-2^) and isotopic signatures of dry matter are reported relative to standard Vienna Pee Dee Belemnite.
@@ -145,6 +145,10 @@ Prior to the gas exchange measurements, predawn ($\Psi_{pd}$) leaf water potenti
 (3)
 $$K_L = \frac{E_L}{\Psi_{pd}~-\Psi_L}$$
 
+\
+As light intensity was increased for shade leaves before they were detached, the *E*~L~ measured at high light was used to to calculate *K*~L~ for all shade leaves.
+
+\
 Leaf level instantaneous transpiration efficiency (ITE) was calculated as *A*~n~ divided by *E*~L~. The *g*~1~ parameter, describing plant water-use strategy, was estimated from ITE vs. VPD response curves by fitting a rearranged optimal *g*~s~ model for ITE [@medlyn2011reconciling] using non-linear regression [see @duursma2013near]. Small values of *g*~1~ indicate that transpiration is comparatively costly in C terms and reflecting conservative water use (increased water-use efficiency), whereas large values imply a lower C cost and decreased water-use efficiency [@lin2015optimal].
 
 ##Data analysis
@@ -153,17 +157,13 @@ Differences in responses of dependent variables to either the warming treatment 
 #Results
 
 ##Leaf resource distribution
-Across six measurement campaigns over the 7 month period, PPFD was reduced on average by >75% in the shade (Figure `r parfig`). Leaf *N*~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table `r wtc3tab1`). Leaf mass per area (LMA) was not different between leaf types (Table `r wtc3tab1`).
-
-*Leaf-specific hydraulic conductance (*K*~L~) was similar across sun and shade leaves (Table `r wtc3tab1`). This was because neither leaf water potentials ($\Psi_{pd}$ and $\Psi_L$, Table `r wtc3tab1`) nor transpiration rates (*E*~L~ , Table `r wtc3tab2`) differed between leaf types.*
-
- No effect of the warming treatment was detected on  PPFD, $\Psi_{pd}$, $\Psi_L$, *K*~L~, *E*~L~, *N*~a~ or LMA either within or across leaf types (P > 0.05).
+Across six measurement campaigns over the 7 month period, PPFD was reduced on average by >75% in the shade (Figure `r parfig`). Leaf *N*~a~ was approximately 20% higher in sun leaves compared to shade leaves (Table `r wtc3tab1`). Leaf mass per area (LMA) was not different between leaf types (Table `r wtc3tab1`). Leaf-specific hydraulic conductance (*K*~L~) was significantly higher in shade leaves (+58%) compared to sun leaves (Table `r wtc3tab1`). This was due to differences in transpiration rates (*E*~L~ , Table `r wtc3tab2`) between leaf types at high light, as neither leaf water potentials ($\Psi_{pd}$ and $\Psi_L$, Table `r wtc3tab1`) differed between leaf types. No effect of the warming treatment was detected on  PPFD, $\Psi_{pd}$, $\Psi_L$, *K*~L~, *E*~L~, *N*~a~ or LMA either within or across leaf types (P > 0.05).
 
 ##Photosynthetic capacity and leaf photosynthesis rates 
-Mean photosynthetic capacity (*A*~max~) of sun leaves  was significantly higher (+27%, P = 0.001) compared to shade leaves, when measured at saturating light and 25 &deg;C. Within leaf types, no effect of the warming treatment was detected on *A*~max~. *A*~max~ was positively related to leaf *N*~a~ across leaf types and temperature treatments (P = 0.01, Figure `r amaxfig`). Similarly, the the photosynthetic parameters *J*~max~ and *V*~cmax~ were higher in sun compared to shade leaves (Supplementary Table 1).
+Mean photosynthetic capacity (*A*~max~) of sun leaves  was significantly higher (+27%) compared to shade leaves, when measured at 25 &deg;C (Table `r wtc3tab1`). Within leaf types, no effect of the warming treatment was detected on *A*~max~. *A*~max~ was positively related to mean leaf *N*~a~ across leaf types and temperature treatments (P = 0.01, Figure `r amaxfig`).
 
 \
-Mean *A*~n~ was significantly higher in sun compared to shade leaves (+23%), when measured at their local light environment and temperatures (Table `r wtc3tab2`). Additionally, *A*~n~ was positively related to *N*~a~ across gas exchange campaigns and leaf types measured under ambient light and temperature conditions (P < 0.001, Figure `r acifig`c). Following an increase in light intensity to match high-light conditions ('sunfleck simulations'), *A*~n~ of shade leaves increased to values significantly greater than sun leaves at high light (P < 0.001, Table `r wtc3tab2`). No effect of the warming treatment was detected on *A*~n~ of sun leaves measured at high light or shade leaves at either low or high light. Photosynthesis within leaf types and warming treatments was similar through time and across the range of leaf temperatures measured (Figure `r get1fig`a).
+Mean *A*~n~ was significantly higher in sun compared to shade leaves (+23%), when measured at their local light environment and temperatures (Table `r wtc3tab2`). Following an increase in light intensity to match high-light conditions ('sunfleck simulations'), *A*~n~ of shade leaves increased to values significantly greater than sun leaves at high light (P < 0.001, Table `r wtc3tab2`). No effect of the warming treatment was detected on *A*~n~ of sun leaves measured at high light or shade leaves at either low or high light. Photosynthesis within leaf types and warming treatments was similar through time and across the range of leaf temperatures measured (Figure `r get1fig`a).
 
 ##Stomatal conductance and leaf water-use efficiency
 On average, *g*~s~ was 18% higher in shade compared to sun leaves under their local light environment (Table `r wtc3tab2`). Photosynthesis was positively correlated with *g*~s~ in all leaves measured under high light conditions, however, *g*~s~ and *A*~n~ were not correlated in shade leaves under low light (Figure `r agmgsfig`a). In high light, *g*~s~ of shade leaves was significantly greater than both shade leaves at low light and sun leaves, pooled across all measurement dates (Figure `r gebarfig`a). No effect of the warming treatment was detected on *g*~s~ within or across leaf types. Stomatal conductance within leaf types and treatments was similar through time and across the range of leaf temperatures measured (Figure `r get2fig`b).
@@ -222,11 +222,10 @@ We thank Craig Barton and Burhan Amiji for maintaining the whole-tree chambers e
 **Table 1**. Leaf morphological and physiological traits of sun and shade leaves under ambient and elevated temperature treatments for *Eucalyptus tereticornis*. Leaf mass per area (LMA, g m^2^), leaf nitrogen per unit area (*N*~a~, gN m^-2^), $\delta$^13^C (&permil;), pre-dawn leaf water potential ($\Psi$~pd~, MPa), midday leaf water potential ($\Psi$~L~, MPa) and leaf-specific hydraulic conductance (*K*~L~, mmol m^-2^ s^-1^ MPa^-1^) are given as treatment means (&pm; 1 standard error) across six measurement campaigns. Values of *V*~cmax~ and *J*~max~ are treatment mean (&pm; 1 standard error) from A-*C*~i~ curves measured in each chamber at 25 &deg;C and saturating light. Different letters represent significant differences between leaf type and temperature treatments (based on a Tukey test). The P value represents the overall effect between each unique combination of leaf type and temperature treatment for each trait.
 
 ```{r, echo=FALSE}
-resourcetab2 <- rbind(resourcetab[, c(1:4,7:10)], c("P value","", as.character(pval)))
-greeks=c(alpha='\u03b1', Delta='\u0394', Sigma='\u03A3', mu='\u03bc',delta = '\u03b4')
+resourcetab2 <- rbind(resourcetab, c("P value","", as.character(pval)))
 
 dust(resourcetab2)%>%
-  sprinkle_colnames("Leaf", "Temperature", "LMA", "*N*~a~", "K",paste0("$\\Psi$","~pd~"),paste0("$\\Psi$","~L~"),  paste0("$\\delta$","^13^C")) %>%
+  sprinkle_colnames("Leaf", "Temperature", "LMA", "*A*~max~", "*N*~a~", "*K*~l~",paste0("$\\Psi$","~pd~"),paste0("$\\Psi$","~L~"),  paste0("$\\delta$","^13^C")) %>%
   sprinkle(rows= 1, part="head",bold=TRUE)%>%
   sprinkle_print_method("markdown")
 ```

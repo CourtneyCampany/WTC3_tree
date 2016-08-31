@@ -22,5 +22,4 @@ to_pdf(source("master_scripts/physiology_boxplots.R"), fn("Figure4.pdf"), width=
 to_pdf(source("master_scripts/wateruse.R"), fn("Figure5.pdf"), width=7, height=7)
 to_pdf(source("master_scripts/gmes_shadeleaves_figure.R"), fn("Figure6.pdf"), width=6, height=6)
 to_pdf(source("master_scripts/cicc_boxplots.R"), fn("Figure7.pdf"), width=10, height=6)
-#suppl aci
-to_pdf(source("master_scripts/aci_vcmaxnitro.R"), fn("SuppplementaryFigure1.pdf"), width=8, height=10)
+
