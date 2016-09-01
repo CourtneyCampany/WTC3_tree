@@ -240,7 +240,7 @@ gmcalc_func2 <- function(x, a=4.4, ab= 2.9, e=30, b=29, f=16.2,del_growth = -8 ,
   #fractionation where Ci=Cc in the absence ot respiratory fractionation
   x$delta_i <- (x$t2*x$a_prime)+(x$t2*((1+x$t)*b-x$a_prime)*x$CiCa)
   
-  #fractionation associated with the diffusion of CO2 from intercellular airsoace to chloroplast 
+  #fractionation associated with the diffusion of CO2 from intercellular airspace to chloroplast 
   x$delta_gm = x$t3*(b - x$a_prime - (e*x$Rd)/(x$Photo+x$Rd)) * (x$Photo/(x$gm * x$CO2R))
   
   #most of the fractionation associated with respiration
@@ -256,8 +256,8 @@ gmcalc_func2 <- function(x, a=4.4, ab= 2.9, e=30, b=29, f=16.2,del_growth = -8 ,
 ### new e
 gmcalc_func3 <- function(x, a=4.4, ab= 2.9, b=29, f=16.2,del_growth = -8 , delR=-5, 
                         k25r=0.728, k25g=38.89, Ea_r = 72.311, Ea_g = 20.437,Rgc=8.314472){
-  
-  e = del_growth - delR
+
+  e = delR - del_growth
   
   x$CiCa <- x$Ci/x$CO2R
   x$a_prime <- (ab*(x$CO2S-x$C2sfc)+a*(x$C2sfc-x$Ci))/(x$CO2S-x$Ci)
@@ -286,5 +286,34 @@ gmcalc_func3 <- function(x, a=4.4, ab= 2.9, b=29, f=16.2,del_growth = -8 , delR=
   
   x$gm <- x$t3 * (b - 1.8 - x$Rd * e / (x$Rd+x$Photo)) * x$Photo/x$CO2S/(x$DiminusDo - x$rd_term2 - x$f_term2)
   x$gm_bar <- x$gm*100/x$Press
+  
+  #different fractionation components as outputs--------------------------------------------------------------------
+  
+  #fractionation where Ci=Cc in the absence ot respiratory fractionation
+  x$delta_i <- (x$t2*x$a_prime)+(x$t2*((1+x$t)*b-x$a_prime)*x$CiCa)
+  
+  #fractionation associated with the diffusion of CO2 from intercellular airspace to chloroplast 
+  x$delta_gm = x$t3*(b - x$a_prime - (e*x$Rd)/(x$Photo+x$Rd)) * (x$Photo/(x$gm * x$CO2R))
+  
+  #most of the fractionation associated with respiration
+  x$delta_e <- x$t3 * (((e * x$Rd)/((x$Photo + x$Rd) * x$CO2R))*(x$Ci - x$Gstar))
+  
+  #fractionation associated with photorespiration
+  x$delta_f <- x$t3 * (f * (x$Gstar/x$CO2R))
+  
   return(x)
+}
+
+###extract 13C of refernce gas from cylinder to use as delR in gmes equation----------------------------------------------------
+
+tank13 <- function(x){ #run on tdl formatted lists
+  #remove reference gases
+  dat <- x[x$SiteOutput != 3 & x$SiteOutput != 4, c("SiteOutput","Corrdel13C_Avg")]
+  #subset odd gas lines as they are the first reference line from cylinder
+  is.odd <- function(v) v %% 2 != 0
+  dat2 <- dat[which(is.odd(dat$SiteOutput)),]
+  #caluclate mean corr del from gmes eq
+  dat3 <- mean(dat2$Corrdel13C_Avg)
+  dat3 <- as.data.frame(dat3)
+  return(dat3)
 }

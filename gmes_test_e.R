@@ -44,7 +44,12 @@ licor_times <- timerange_func(licor_gmes)
   })
 
   oct_formatted <- llply(oct_files, tdlformat_func)
-
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_oct <- ldply(oct_formatted, function(x) tank13(x))
+  oct_delR <- mean(c13tank_oct[,1])
+  
+  #calculate xsi
   xsi_oct <- llply(oct_formatted, function(x)  xsicalc_func(x))
   xsi_oct_dfr <- llply(xsi_oct, function(x) data.frame(x))
   #actual file names
@@ -52,7 +57,7 @@ licor_times <- timerange_func(licor_gmes)
 
   ##for now run gmes functions for each licor #
   oct_H4 <- lapply(xsi_oct_dfr2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
-  oct_gm <- lapply(oct_H4, gmcalc_func3)
+  oct_gm <- lapply(oct_H4, function(x) (gmcalc_func3(x, delR = oct_delR)))
 
 
   ####december
@@ -65,6 +70,10 @@ licor_times <- timerange_func(licor_gmes)
   })
 
   dec_formatted <- llply(dec_files, tdlformat_func)
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_dec <- ldply(dec_formatted, function(x) tank13(x))
+  dec_delR <- mean(c13tank_dec[,1])
 
   xsi_dec <- llply(dec_formatted, function(x)  xsicalc_func(x))
   xsi_dec_dfr <- llply(xsi_dec, function(x) data.frame(x))
@@ -78,8 +87,8 @@ licor_times <- timerange_func(licor_gmes)
   dec_h4 <- lapply(xsi_dec_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
   dec_h2 <- lapply(xsi_dec_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
 
-  dec_gm_h4 <- lapply(dec_h4, gmcalc_func3)
-  dec_gm_h2 <- lapply(dec_h2, gmcalc_func3)
+  dec_gm_h4 <- lapply(dec_h4, function(x) (gmcalc_func3(x, delR = dec_delR)))
+  dec_gm_h2 <- lapply(dec_h2, function(x) (gmcalc_func3(x, delR = dec_delR)))
 
 
   ####january
@@ -91,6 +100,10 @@ licor_times <- timerange_func(licor_gmes)
     dat=read.csv(filename)})
 
   jan_formatted <- llply(jan_files, tdlformat_func)
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_jan <- ldply(jan_formatted, function(x) tank13(x))
+  jan_delR <- mean(c13tank_jan[,1])
   
   xsi_jan <- llply(jan_formatted, function(x)  xsicalc_func(x))
   xsi_jan_dfr <- llply(xsi_jan, function(x) data.frame(x))
@@ -104,9 +117,8 @@ licor_times <- timerange_func(licor_gmes)
   jan_h2<- lapply(xsi_jan_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
   jan_h3 <- lapply(xsi_jan_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H3"))
 
-  jan_gm_h2 <- lapply(jan_h2, gmcalc_func3)
-  jan_gm_h3 <- lapply(jan_h3, gmcalc_func3)
-
+  jan_gm_h2 <- lapply(jan_h2, function(x) (gmcalc_func3(x, delR = jan_delR)))
+  jan_gm_h3 <- lapply(jan_h3, function(x) (gmcalc_func3(x, delR = jan_delR)))
 
 
   ####february
@@ -118,6 +130,10 @@ licor_times <- timerange_func(licor_gmes)
     dat=read.csv(filename)})
 
   feb_formatted <- llply(feb_files, tdlformat_func)
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_feb <- ldply(feb_formatted, function(x) tank13(x))
+  feb_delR <- mean(c13tank_feb[,1])
 
   xsi_feb <- llply(feb_formatted, function(x)  xsicalc_func(x))
   xsi_feb_dfr <- llply(xsi_feb, function(x) data.frame(x))
@@ -131,8 +147,8 @@ licor_times <- timerange_func(licor_gmes)
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
   feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="H4"))
 
-  feb_gm_r1 <- lapply(feb_r1, gmcalc_func3)
-  feb_gm_h4 <- lapply(feb_h4, gmcalc_func3)
+  feb_gm_r1 <- lapply(feb_r1, function(x) (gmcalc_func3(x, delR = feb_delR)))
+  feb_gm_h4 <- lapply(feb_h4, function(x) (gmcalc_func3(x, delR = feb_delR)))
 
 ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE)
@@ -143,6 +159,10 @@ licor_times <- timerange_func(licor_gmes)
    dat=read.csv(filename)})
 
   mar_formatted <- llply(mar_files, tdlformat_func)
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_mar <- ldply(mar_formatted, function(x) tank13(x))
+  mar_delR <- mean(c13tank_mar[,1])
 
   xsi_mar <- llply(mar_formatted, function(x)  xsicalc_func(x))
   xsi_mar_dfr <- llply(xsi_mar, function(x) data.frame(x))
@@ -161,11 +181,10 @@ licor_times <- timerange_func(licor_gmes)
   mar_h1 <- lapply(xsi_mar_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   mar_h4 <- lapply(xsi_mar_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
   
-  mar_gm_h3 <- lapply(mar_h3, gmcalc_func3)
-  mar_gm_h2 <- lapply(mar_h2, gmcalc_func3)
-  mar_gm_h1 <- lapply(mar_h1, gmcalc_func3)
-  mar_gm_h4 <- lapply(mar_h4, gmcalc_func3)
-
+  mar_gm_h3 <- lapply(mar_h3, function(x) (gmcalc_func3(x, delR = mar_delR)))
+  mar_gm_h2 <- lapply(mar_h2, function(x) (gmcalc_func3(x, delR = mar_delR)))
+  mar_gm_h1 <- lapply(mar_h1, function(x) (gmcalc_func3(x, delR = mar_delR)))
+  mar_gm_h4 <- lapply(mar_h4, function(x) (gmcalc_func3(x, delR = mar_delR)))
 
 
   ####april
@@ -177,6 +196,10 @@ licor_times <- timerange_func(licor_gmes)
    dat=read.csv(filename)})
 
   apr_formatted <- llply(apr_files, tdlformat_func)
+  
+  #need 13Ctank from tdl to input into gmes functions
+  c13tank_apr <- ldply(apr_formatted, function(x) tank13(x))
+  apr_delR <- mean(c13tank_apr[,1])
 
   xsi_apr <- llply(apr_formatted, function(x)  xsicalc_func(x))
   xsi_apr_dfr <- llply(xsi_apr, function(x) data.frame(x))
@@ -193,10 +216,9 @@ licor_times <- timerange_func(licor_gmes)
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
   apr_h4 <- lapply(xsi_apr_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
 
-  apr_gm_h1 <- lapply(apr_h1, gmcalc_func3)
-  apr_gm_h3 <- lapply(apr_h3, gmcalc_func3)
-  apr_gm_h4 <- lapply(apr_h4, gmcalc_func3)
-
+  apr_gm_h1 <- lapply(apr_h1, function(x) (gmcalc_func3(x, delR = apr_delR)))
+  apr_gm_h3 <- lapply(apr_h3, function(x) (gmcalc_func3(x, delR = apr_delR)))
+  apr_gm_h4 <- lapply(apr_h4, function(x) (gmcalc_func3(x, delR = apr_delR)))
 
 
 #### combine all gm runs into one dfr
@@ -216,7 +238,6 @@ apr2 <- rbind.fill(apr_gm_h3)
 apr3 <- rbind.fill(apr_gm_h4)
 
 ###master gm dataset
-
 gm_WTC <- rbind.fill(oct, dec1)
 gm_WTC <- rbind.fill(gm_WTC, dec2)
 gm_WTC <- rbind.fill(gm_WTC, jan1)
@@ -251,10 +272,10 @@ gm_wtc_pair <- merge(gm_WTC2, uniquepair)
 
 ###for analysis first subset well watered and drought treatments--------------------------------------------------------
 gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
-# write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
+write.csv(gm_drought, "calculated_data/gmes_drought2.csv", row.names=FALSE)
 
 gm_water <- gm_WTC2[gm_WTC2$drydown == "control",]
-# write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
+write.csv(gm_water, "calculated_data/gmes_wellwatered2.csv", row.names=FALSE)
 
 
 ####DATA SUMMARY----------------------------------------------------------------------------------------------------
@@ -264,30 +285,28 @@ gm_agg <- summaryBy(gm+Photo+Cond+gm_bar+chamber ~ id+leaflight+ temp+leaf, data
 ##means by leaf and treatment
 gm_agg2 <- summaryBy(gm+Photo+Cond+gm_bar ~ leaflight+ temp, data=gm_agg, FUN=c(mean, se))
 
-write.csv(gm_agg, "newgmtest.csv", row.names = FALSE)
+#write.csv(gm_agg, "newgmtest.csv", row.names = FALSE)
 
 
-gm_agg$tukeyid <- as.factor(paste(gm_agg$leaflight, gm_agg$temp, sep="-"))
-
-
-###mesophyll conductance-----------------------------------------------------------------------------------------
+###mesophyll conductance stats-----------------------------------------------------------------------------------------
 library(visreg)
 library(multcomp)
 library(nlme)
+gm_agg$tukeyid <- as.factor(paste(gm_agg$leaflight, gm_agg$temp, sep="-"))
 
 gm_temp <- lme(gm_bar ~ temp ,random=~1|chamber, data=gm_agg)
-summary(gm_temp)
-anova(gm_temp)
+  summary(gm_temp)
+  anova(gm_temp)
 
 gm_leaf2 <- lme(gm_bar ~ leaf ,random=~1|chamber, data=gm_agg[gm_agg$leaflight != "shade-high",])
-summary(gm_leaf2)
-anova(gm_leaf2)
-visreg(gm_leaf2)
+  summary(gm_leaf2)
+  anova(gm_leaf2)
+  visreg(gm_leaf2)
 
 gm_leaf <- lme(gm_bar~ tukeyid, random=~1|chamber, data=gm_agg)
-summary(gm_leaf)
-anova(gm_leaf)
-visreg(gm_leaf)
+  summary(gm_leaf)
+  anova(gm_leaf)
+  visreg(gm_leaf)
 
 tukey_gm<- glht(gm_leaf, linfct = mcp(tukeyid = "Tukey"))
 gm_lightson_siglets<- cld(tukey_gm)

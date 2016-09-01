@@ -145,10 +145,5 @@ $$
 
 Here, *g*~m~ is expressed in units of mol m^-2^ s^-1^ bar^-1^ to be consistent with Evans & von Caemmerer [-@evans2013temperature]. As the pressure term is nearly equal to unity, suitable comparisons between *g*~m~ and *g*~s~ can be made.
 
-##Methods S2
-
-###Photosynthetic parameters from A-*C*~i~ curves
-From each A-*C*~i~ curve the photosynthetic parameters, *J*~max~ and *V*~cmax~, were quantified using the photosynthesis model of Farquhar et al. [-@farquhar1980biochemical]. We used the 'fitaci' function in the 'plantecophys' package in R, see Duursma [-@duursma2015] for detailed description of the fitting methods. This method uses non-linear regression to estimate *J*~max~, *V*~cmax~ and *R*~dark~ simultaneously. Because there was considerable practical difficulty in fitting A-*C*~c~ curves, we report standard *C*~i~-based *J*~max~ and *V*~cmax~, which effectively include a mesophyll conductance component. When fitting the A-*C*~i~ curves, we calculated $\Gamma_{*}$ with the same methods as for *g*~m~, described above (the estimated value at 25&deg;C was 38.9 $\mu$mol mol^-1^), and the combined Michaelis-Menten coefficient (*K*~m~) was estimated from Medlyn et al. [-@medlyn2002temperature] (713.4 $\mu$mol mol^-1^ at 25&deg;C, using a *K*~c~ of 405 $\mu$mol mol^-1^, with an atmospheric pressure of 100 kPa). The temperature response parameters for *J*~max~, *V*~cmax~ and *K*~m~ are not relevant since *T*~leaf~ was kept constant at 25&deg;C.
-
 # References {.unnumbered}
 
