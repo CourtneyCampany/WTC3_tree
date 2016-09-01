@@ -160,7 +160,7 @@ gmesdata_func <- function(xsi_dfr, licor_dfr, times_dfr, licorrows=5, whichlicor
 gmcalc_func <- function(x, a=4.4, ab= 2.9, b=29, f=16.2,del_growth = -8 , delR=-38, 
                         k25r=0.728, k25g=38.89, Ea_r = 72.311, Ea_g = 20.437,Rgc=8.314472){
   
-  e = del_growth - delR
+  e = delR - del_growth
   
   x$CiCa <- x$Ci/x$CO2R
   x$a_prime <- (ab*(x$CO2S-x$C2sfc)+a*(x$C2sfc-x$Ci))/(x$CO2S-x$Ci)

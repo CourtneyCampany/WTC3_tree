@@ -52,7 +52,7 @@ licor_times <- timerange_func(licor_gmes)
 
   ##for now run gmes functions for each licor #
   oct_H4 <- lapply(xsi_oct_dfr2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
-  oct_gm <- lapply(oct_H4, function(x) (gmcalc_func3(x, delR = oct_delR)))
+  oct_gm <- lapply(oct_H4, function(x) (gmcalc_func3(x, delR = oct_delR, del_growth=-10)))
 
 
   ####december
@@ -82,8 +82,8 @@ licor_times <- timerange_func(licor_gmes)
   dec_h4 <- lapply(xsi_dec_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
   dec_h2 <- lapply(xsi_dec_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
 
-  dec_gm_h4 <- lapply(dec_h4, function(x) (gmcalc_func3(x, delR = dec_delR)))
-  dec_gm_h2 <- lapply(dec_h2, function(x) (gmcalc_func3(x, delR = dec_delR)))
+  dec_gm_h4 <- lapply(dec_h4, function(x) (gmcalc_func3(x, delR = dec_delR, del_growth=-10)))
+  dec_gm_h2 <- lapply(dec_h2, function(x) (gmcalc_func3(x, delR = dec_delR, del_growth=-10)))
 
 
   ####january
@@ -142,8 +142,8 @@ licor_times <- timerange_func(licor_gmes)
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
   feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="H4"))
 
-  feb_gm_r1 <- lapply(feb_r1, function(x) (gmcalc_func3(x, delR = feb_delR)))
-  feb_gm_h4 <- lapply(feb_h4, function(x) (gmcalc_func3(x, delR = feb_delR)))
+  feb_gm_r1 <- lapply(feb_r1, function(x) (gmcalc_func3(x, delR = feb_delR, del_growth=-10)))
+  feb_gm_h4 <- lapply(feb_h4, function(x) (gmcalc_func3(x, delR = feb_delR, del_growth=-10)))
 
 ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE)
@@ -176,10 +176,10 @@ licor_times <- timerange_func(licor_gmes)
   mar_h1 <- lapply(xsi_mar_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   mar_h4 <- lapply(xsi_mar_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
   
-  mar_gm_h3 <- lapply(mar_h3, function(x) (gmcalc_func3(x, delR = mar_delR)))
-  mar_gm_h2 <- lapply(mar_h2, function(x) (gmcalc_func3(x, delR = mar_delR)))
-  mar_gm_h1 <- lapply(mar_h1, function(x) (gmcalc_func3(x, delR = mar_delR)))
-  mar_gm_h4 <- lapply(mar_h4, function(x) (gmcalc_func3(x, delR = mar_delR)))
+  mar_gm_h3 <- lapply(mar_h3, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=-10)))
+  mar_gm_h2 <- lapply(mar_h2, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=-10)))
+  mar_gm_h1 <- lapply(mar_h1, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=-10)))
+  mar_gm_h4 <- lapply(mar_h4, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=-10)))
 
 
   ####april
@@ -211,9 +211,9 @@ licor_times <- timerange_func(licor_gmes)
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
   apr_h4 <- lapply(xsi_apr_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
 
-  apr_gm_h1 <- lapply(apr_h1, function(x) (gmcalc_func3(x, delR = apr_delR)))
-  apr_gm_h3 <- lapply(apr_h3, function(x) (gmcalc_func3(x, delR = apr_delR)))
-  apr_gm_h4 <- lapply(apr_h4, function(x) (gmcalc_func3(x, delR = apr_delR)))
+  apr_gm_h1 <- lapply(apr_h1, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=-10)))
+  apr_gm_h3 <- lapply(apr_h3, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=-10)))
+  apr_gm_h4 <- lapply(apr_h4, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=-10)))
 
 
 #### combine all gm runs into one dfr
