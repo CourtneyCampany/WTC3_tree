@@ -10,7 +10,7 @@ source("functions and packages/packages.R")
 
 
 ###read and format gmes data------------------------------------------------------------------------------------------
-gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
+gasex <- read.csv("calculated_data/gmes_wellwatered2.csv")
 
 gasex_agg <- summaryBy(Photo+gm+Cond~ chamber+id+leaf +light+temp+leaflight, data=gasex, FUN=mean, keep.names=TRUE)
   gasex_agg$leaflight <- gsub("shade-low", "Shade", gasex_agg$leaflight)

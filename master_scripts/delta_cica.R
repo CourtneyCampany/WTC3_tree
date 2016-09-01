@@ -1,13 +1,13 @@
-# source("functions and packages/functions.R")
-# source("master_scripts/plot_objects.R")
-# source("functions and packages/packages.R")
+source("functions and packages/functions.R")
+source("master_scripts/plot_objects.R")
+source("functions and packages/packages.R")
 
 # library(visreg)
 # library(multcomp)
 # library(nlme)
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
-DELTA <- read.csv("calculated_data/gmes_wellwatered.csv")
+DELTA <- read.csv("calculated_data/gmes_wellwatered2.csv")
 
 ###get average by id
 DELTA_agg <- summaryBy(DELTA + CiCa ~ chamber+id+leaf +light+temp+leaflight+Month, data=DELTA, FUN=mean, keep.names=TRUE)

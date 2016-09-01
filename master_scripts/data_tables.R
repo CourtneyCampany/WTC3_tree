@@ -1,7 +1,9 @@
 source("functions and packages/functions.R")
 library(doBy)
 
-gasexchange  <- read.csv("calculated_data/gmes_wtc.csv")
+# gasexchange  <- read.csv("calculated_data/gmes_wtc.csv")
+#new wingate gm
+gasexchange  <- read.csv("calculated_data/gmes_wellwatered2.csv")
 ##calculate CC
 gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 
@@ -106,8 +108,6 @@ ge_vars2 <- data.frame(Leaf=c("Sun", "", "Shade", "","",""),
                        Temperature=c("AT", "ET", "AT", "ET", "AT", "ET"))
 
 ge_table4 <- cbind(ge_vars2, ge_table3[,4:11])
-
-
 
 #pvals2 <- c("P value", "",	0.001,	0.001,	0.001,	0.001,	0.001,	0.005,	0.001,	0.001)
 

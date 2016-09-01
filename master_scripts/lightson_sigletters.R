@@ -1,7 +1,8 @@
 source("functions and packages/functions.R")
 library(doBy)
 
-gasexchange  <- read.csv("calculated_data/gmes_wellwatered.csv")
+#well watered2 used gm with wingate correction
+gasexchange  <- read.csv("calculated_data/gmes_wellwatered2.csv")
   ##calculate CC
   gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 
@@ -98,7 +99,6 @@ gs_lightson_siglets2 <- gs_lightson_siglets$mcletters$Letters
 
 visreg(gs_leaf)
 write.csv(gs_lightson_siglets2, "master_scripts/sigletters/sl_gs_lightson.csv", row.names=FALSE)
-
 
 
 ###mesophyll conductance-----------------------------------------------------------------------------------------
