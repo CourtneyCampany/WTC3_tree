@@ -35,7 +35,7 @@ source("master_scripts/air_vars.R")
 \
 **Figure S1**. Daily maximum and minimum temperature (a), daily maximum VPD (b) and total daily PPFD (c) for each chamber across the experiment duration.
 \
-```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs}
+```{r deltacica, fig.width=6, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=600, eval=includeFigs, message=FALSE}
 source("master_scripts/delta_cica.R")
 ```  
 \
@@ -124,7 +124,7 @@ where the different fractionation factors include; diffusion through water (a~i~
 (9)
 $$a' = \frac{a_b(C_a-C_i)+a(C_s-C_i)}{C_a-C_i}$$
 
-where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. *C*~a~ and *C*~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from Crous et al. [-@crous2012light]. The ternary effect corrections (t) are described by:
+where C~s~ is the CO~2~ partial pressure at the leaf surface, a~b~ is the fractionation from boundary layer diffusion (2.9&permil;) and a is the fractionation due to diffusion in air (4.4&permil;) [@evans1986carbon]. We calculate discrimination during day respiration (e) following Wingate et al. [-@wingate2007variations] as e = $\delta^13C_{tank}$ - $\delta^13C_{atmosphere}$. In this study, $\delta^13C_{tank}$ was -4 to -6&permil; and $\delta^13C_{atmosphere}$ was -12&permil;. $\delta^13C_{atmosphere}$ represents the mean whole-tree chamber $\delta^13C$ measured in a seperate experiment (data not shown), during similar diurnal time periods as the gas exchange campaigns presented here. *C*~a~ and *C*~i~ are the atmospheric and intercellular partial pressures and $\Gamma_{*}$ is the compensation point in the absence of mitochondrial respiration in the light (R~d~). In this experiment both $\Gamma_{*}$ and R~d~ were derived using a standard Arrhenius function with parameters for *Eucalyptus globulus* from Crous et al. [-@crous2012light]. The ternary effect corrections (t) are described by:
 
 \
 (10)

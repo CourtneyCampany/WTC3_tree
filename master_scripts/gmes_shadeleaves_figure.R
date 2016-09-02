@@ -27,9 +27,9 @@ names(fleckdat2)[4] <- "fleck_gm"
 
 #merge
 shadeleaf <- merge(shadat2, fleckdat2, by=c("chamber", "temp","Month"))
-# gm_increase <- (mean(shadeleaf$shade_gm)-mean(shadeleaf$fleck_gm))/mean(shadeleaf$shade_gm)
+ # gm_increase <- (mean(shadeleaf$fleck_gm)-mean(shadeleaf$shade_gm))/mean(shadeleaf$shade_gm)
 
-##plot
+##plot---------------------------------------------------------------------------------------------------------------
 # windows(7,7)
 
 par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))

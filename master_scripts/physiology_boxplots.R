@@ -30,19 +30,21 @@ cols <- c(shacol2, lightscol2,suncol2)
 # windows(12,6)
 par(mfrow=c(1,3),cex.axis=1.25, cex.lab = 1.5, mar=c(5,5,2,1))
 
-boxplot(Cond ~leaflight, gasex_agg, col=cols, ylab=condlab, names=FALSE, outline=FALSE, ylim=c(0, .5))
+#col=cols,
+
+boxplot(Cond ~leaflight, gasex_agg,  ylab=condlab, names=FALSE, outline=FALSE, ylim=c(0, .5))
   mtext("Shade \n Low Light", side=1,at=1, line=3.5)
   mtext("Shade \n High Light", side=1,at=2, line=3.5)
   mtext("Sun \n High Light", side=1,at=3, line=3.5)
   text(x=.55, y=.5, "(a)", cex=1.5)
 
-boxplot(gm ~leaflight, gasex_agg, col=cols, ylab=gmlab2, names=FALSE, outline=FALSE,ylim=c(0, .5))
+boxplot(gm ~leaflight, gasex_agg, ylab=gmlab2, names=FALSE, outline=FALSE,ylim=c(0, .5))
   mtext("Shade \n Low Light", side=1,at=1, line=3.5)
   mtext("Shade \n High Light", side=1,at=2, line=3.5)
   mtext("Sun \n High Light", side=1,at=3, line=3.5)
   text(x=.55, y=.5, "(b)", cex=1.5)
 
-boxplot(Photo ~leaflight, gasex_agg, col=cols, ylab=photolab, xlab="", names=FALSE, outline=FALSE, ylim=c(0, 25))
+boxplot(Photo ~leaflight, gasex_agg, ylab=photolab, xlab="", names=FALSE, outline=FALSE, ylim=c(0, 25))
   mtext("Shade \n Low Light", side=1,at=1, line=3.5)
   mtext("Shade \n High Light", side=1,at=2, line=3.5)
   mtext("Sun \n High Light", side=1,at=3, line=3.5)

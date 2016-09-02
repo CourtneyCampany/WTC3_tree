@@ -119,7 +119,7 @@ licor_times <- timerange_func(licor_gmes)
 
 
   ####february
-   feb_names<- list.files(path="tdl_files/february/",pattern="tdl",full.names=TRUE)
+  feb_names<- list.files(path="tdl_files/february/",pattern="tdl",full.names=TRUE)
   feb_names2 <- gsub("tdl_files/february/", "", feb_names)
   feb_names2 <- gsub(".csv", "", feb_names2)
   

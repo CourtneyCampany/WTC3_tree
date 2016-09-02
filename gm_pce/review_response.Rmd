@@ -31,27 +31,27 @@ These leaves studied in this experiment were very liekly juvenille leaves, as th
 \
 - 2. *Stylistic concerns with colors* 
 \
-We feel that colors are necessary in this macnuscript to visualize leaf types (+light), while also differentiating temperature treatments. We attempted to use only symbols, which makes it neear impossible to distinguish all of the treatments. It also complicates visualization of confidence intervals on scatter plots. We have attempted to tone-done the color palette, while still distinguishing colors properly for color-blind readers. (*need to try colors again/drop orange??*)
+We feel that colors are necessary in this macnuscript to visualize leaf types (+light), while also differentiating temperature treatments. We attempted to use only symbols, which makes it near impossible to distinguish all of the treatments. It also complicates visualization of confidence intervals on scatter plots. The choice of color palette is also used to distinguish colors properly for color-blind readers. We have dropped the use of colors for figures with boxplots, as they are not essential. (*need to try colors again/drop orange??*)
 
 \
 - 3/4. *Concerns over parameters derived from AC~i~ curves* 
 \
-After careful thought we have decided to remove parameters derived from AC~i~ curves from the manuscript. Our main goal is to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity. As such, we have decided to instead present *A*~max~ values between the leaf types. This provides simple robust measurements of photosynthetic capacity, that reach our intended goal in a more straight forward manner. If the derivation and representation of *J*~max~/*V*~cmax~ values has distracted the editor from our main point, it is likely to also distract readers who are plant physiolgists. Figure 2. now shows the relationship between  Amax and leaf *N*~a~ and *A*~max~ values are reported in Table 1.
+After careful thought we have decided to remove parameters derived from AC~i~ curves from the manuscript. Our main goal is to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity. As such, we have decided to instead present *A*~max~ values between the leaf types. This provides simple robust measurements of photosynthetic capacity, that reach our intended goal in a more straight forward manner. If specific derivation or representations of *J*~max~/*V*~cmax~ values has distracted the editor from our main point, it is likely to also distract readers who are plant physiolgists. Figure 2. now shows the relationship between Amax and leaf *N*~a~ and *A*~max~ values are also reported in Table 1.
 
 \
-We also acknowledge that AC~i~ response curves were intitally conceived with the notion that g~m~ was small enough to be ignored,     which we now know is untrue. We spent consideral time attempting to fit AC~C~ curves, which often generated unrealistic V~cmax~ estimates. This represents a new issue for the plant physiolgy community as more g~m~ data are generated, and we hope our dataset will eventually help contribute to a solution.
+We also acknowledge that AC~i~ response curves were intitally conceived with the notion that *g*~m~ was small enough to be ignored,     which we now know is untrue. This represents a new issue for the plant physiolgy community as more *g*~m~ data are continually  generated. We hope this dataset can eventually help be used to address this problem, but it is beyond the scope of this paper. 
 
 \
 - 5. *Does light penetration deeper in a shade leaf impact gm?* 
 \
-This question raises theoritical issues about how/if photosynthetic machinery are optimallty distributed along intraleaf light gradient. To our knowledge, these issues have yet to resolved empirically and are still a relevant question for most leaf-level experiments. For example, it is possible that Jmax/Vcmax could be partitioned within the leaf according to light gradients (see Llyod et al. 1992), which could affect estimates of g~m~ at low light.  Alternatively, greater light penetration in to the leaf but longer pathlengths for CO~2~ diffusion could interact to affect estimates of g~m~ at high light. Although we acknowledge that this question is relevant to this study and many others, we do not have the tools to address it further in the manuscript.
+This question raises theoritical issues about how/if photosynthetic machinery are optimallty distributed along intraleaf light gradient. To our knowledge, these issues have yet to resolved empirically and are still a relevant question for most leaf-level experiments. For example, it is possible that *J*~max~/*V*~cmax~ could be partitioned within the leaf according to light gradients (see Llyod et al. 1992), which could affect estimates of *g*~m~ at low light.  Alternatively, greater light penetration in to the leaf but longer pathlengths for CO~2~ diffusion might interact to affect estimates of *g*~m~ at high light. Although we acknowledge that this question is relevant to this study and many others, we do not have the tools to address it further in the manuscript.
 
 ### **Referee #1**
 
 \
 - 1. *Difficulty in conciliating optimal resource distribution without an enhancement of leaf hydraulic conductance*
 \
-Due to Referee #1 concern over cuvette measured transpiration, water potentials and subsequent leaf K calculations, we have re-examined the calculation and analyses in the manuscript. Initially, leaf K was calculated with transpiration rates in shade leaves under low light conditions. As shade leave were allowed to stablize under high light conditions before they were detached, the leaf water status reflected these conditions and not those of low light. We have corrected the calculation of *K*~l~ and made tje subsequent changes in the results and discussion of the manuscript. *K*~l~ is now signicantly higher in shade leaves, which makes sense in relation to the maintaing hydraullic supply to the observed stomatal behavior. We believe this actually makes the optimization of resources story much clearer throughout the manuscript, and we greatly appreciate the referee's comments. These corrected values now allow us to additionally address the possible coordination of *K*~l~ and *g*~m~ reported by Flexas et al. 2013 in the discussion.
+Due to Referee #1 concern over cuvette measured transpiration, water potentials and subsequent *K*~l~ calculations, we have re-examined the calculation and subsequent analyses in the manuscript. Initially, *K*~l~ was calculated with transpiration rates in shade leaves under low light conditions. As shade leave were allowed to stablize under high light conditions before they were detached, the leaf water status reflected these conditions and not those of low light. We have corrected the calculation of *K*~l~ and made changes in the results and discussion sections. *K*~l~ is now signicantly higher in shade leaves, which makes sense in relation to the maintaing hydraullic supply to the observed stomatal behavior. We believe this actually makes the optimization of resources story much clearer throughout the manuscript, and we greatly appreciate the referee's comments. These corrected values also allow us to address the possible coordination of *K*~l~ and *g*~m~ reported by Flexas et al. 2013.
 
 \
 - 2. *Diurnal cycles of photosynthesis, stomatal conductance and light within the canopy* 
@@ -68,7 +68,7 @@ The method used here for measureing *K*~l~ is also one of the three methods desc
 \
 - 1. *Referee #2 correctly points out that the issues raised by Wingate et al. 2007 were not addressed*
 \
-We have recalculated the respiratory fractionation component 'e', according to Evans and von Caemmerer 2013, which addresses Wingate et al. 2007. This correction increased values of *g*~m~ but does not alter observed patterns.
+We have recalculated the respiratory fractionation component 'e', according to Evans and von Caemmerer 2013, which addresses Wingate et al. 2007. This correction increased values of *g*~m~ but does not alter observed patterns. The correct calculation of 'e' has been added to the supplementary methods.  This correction also addresses comment #3 below.
 
 \
 - 2. *Estimating turnover time of the pools*
@@ -78,7 +78,7 @@ We agree that this concept would be great for the plant physiological community.
 \
 - 3. *Was the chamber $\delta$^13^C measured?*
 \
-Measurements of chamber 13C throughout the day were measured for this experiment, but not at the same time as these measurements. A brief inspection of these data show that chamber $\delta$^13^C varied from around -9 to -12 &permil, likely depending on many factors. Although these values are different from the assumption that the $\delta$^13^C of the atmopshere is -8‰, we do not have a robust way to assign specific values to our measurements at each time point. Therefore we still assume that $\delta$^13^C of the atmopshere is -8‰ as most other studies in glass house conditions do also. Additionally, we used CO~2~ cyclinders for the Licor 6440 that were closer to much ambient air $\delta$^13^C instead of standard cylinders with  $\delta$^13^C > 30&permil, which also slightly improves calculations.
+Measurements of chamber $\delta$^13^C throughout the day were measured for this experiment during the same week as each gas exchange campaigns presented here. Since these measurements do not explicitly overlap, we do not have a robust way to assign specific values to each chamber at each time point. Instead, we took the mean chamber $\delta$^13^C for all chambers flux campaigns between 10am and 2 pm, to coincide with the timing of gas exchange campaigns. This gives a more realistic value than the steady state assumption of -8‰. This change is included in the corrections mentioned above. Additionally, we used CO~2~ cyclinders for the Licor 6400 that were much closer to ambient air $\delta$^13^C, instead of standard cylinders with  $\delta$^13^C > 30&permil, which slightly improves calculations.
 
 \
 - 4. *Referee #1 Specific Comments:*
