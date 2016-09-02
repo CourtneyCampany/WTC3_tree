@@ -3,7 +3,7 @@ source("master_scripts/plot_objects.R")
 source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
-gmes <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gmes <- read.csv("calculated_data/gmes_wellwatered.csv")
 
 ###get average by id
 gm_agg <- summaryBy(Photo+ Cond + gm_bar ~ chamber+id+leaf +light+temp+leaflight+Month, data=gmes, FUN=mean, keep.names=TRUE)

@@ -3,7 +3,7 @@ source("master_scripts/plot_objects.R")
 source("functions and packages/packages.R")
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
-gasex<- read.csv("calculated_data/gmes_wellwatered2.csv")
+gasex<- read.csv("calculated_data/gmes_wellwatered.csv")
   ##calculate CC
   gasex$Cc<- with(gasex, Ci-Photo/gm)
   ##calculate drawdown

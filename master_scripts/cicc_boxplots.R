@@ -5,7 +5,7 @@ source("master_scripts/plot_objects.R")
 source("functions and packages/packages.R")
 
 
-gasex <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
 
 ##calculate CC
 gasex$Cc<- with(gasex, Ci-Photo/gm)

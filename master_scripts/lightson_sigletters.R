@@ -2,7 +2,7 @@ source("functions and packages/functions.R")
 library(doBy)
 
 #well watered2 used gm with wingate correction
-gasexchange  <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gasexchange  <- read.csv("calculated_data/gmes_wellwatered.csv")
   ##calculate CC
   gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 

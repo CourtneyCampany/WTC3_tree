@@ -3,7 +3,7 @@ library(doBy)
 
 # gasexchange  <- read.csv("calculated_data/gmes_wtc.csv")
 #new wingate gm
-gasexchange  <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gasexchange  <- read.csv("calculated_data/gmes_wellwatered.csv")
 ##calculate CC
 gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
 

@@ -7,7 +7,7 @@ source("functions and packages/packages.R")
 # library(nlme)
 
 #read in gm data set (no drought) and Cibar(discrimination)-------------------------------------------------------
-DELTA <- read.csv("calculated_data/gmes_wellwatered2.csv")
+DELTA <- read.csv("calculated_data/gmes_wellwatered.csv")
 
 ###get average by id
 DELTA_agg <- summaryBy(DELTA + CiCa ~ chamber+id+leaf +light+temp+leaflight+Month, data=DELTA, FUN=mean, keep.names=TRUE)

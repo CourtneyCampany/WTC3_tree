@@ -246,15 +246,15 @@ gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
 ##add pair ids
 gm_wtc_pair <- merge(gm_WTC2, uniquepair)
-write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_pair.csv", row.names=FALSE)
+# write.csv(gm_wtc_pair, "calculated_data/gmes_wtc_pair.csv", row.names=FALSE)
 
 
 ###for analysis first subset well watered and drought treatments--------------------------------------------------------
-gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
-write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
-
-gm_water <- gm_WTC2[gm_WTC2$drydown == "control",]
-write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
+# gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
+# write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
+# 
+# gm_water <- gm_WTC2[gm_WTC2$drydown == "control",]
+# write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
 
 
 ####DATA SUMMARY----------------------------------------------------------------------------------------------------
