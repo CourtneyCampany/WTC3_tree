@@ -1,5 +1,5 @@
 source("functions and packages/functions.R")
-source("functions and packages/packages.R")
+# source("functions and packages/packages.R")
 source("master_scripts/plot_objects.R")
 
 treatments <- read.csv("raw data/temp_trt.csv")
@@ -20,14 +20,13 @@ metcampaigns <- met[met$Date %in% campaigndates_simple,]
 
 met_amb <- metcampaigns[metcampaigns$temp == "ambient",]
   ##extract month and create a mean for each campaign
-  library(lubridate)
-  met_amb$Month <- as.character(month(met_amb$Date, label=TRUE))
+  met_amb$Month <- as.character(lubridate::month(met_amb$Date, label=TRUE))
   ##keep only variables i need (for ease of NA removal later)
   met_amb2 <- met_amb[, c(1:2, 4,6, 8:10)]
   met_amb2 <- met_amb2[complete.cases(met_amb2),]
 
-  ##this is chamber avg temp by campaingn (use this to plot with start dates)
-  met_amb_agg <- summaryBy(Tair_al.mean + Tair_al.max ~ Month, data= met_amb2, FUN=c(mean, se))
+##this is chamber avg temp by campaingn (use this to plot with start dates)
+met_amb_agg <- summaryBy(Tair_al.mean + Tair_al.max ~ Month, data= met_amb2, FUN=c(mean, se))
   ##merge start date with this dataframe
   met_amb_agg <- merge(met_amb_agg, campaigns2)
   ##order by date
@@ -36,9 +35,8 @@ met_amb <- metcampaigns[metcampaigns$temp == "ambient",]
 
 ####read PAR data and remake figure----------------------------------------------------------------------------
 par <- read.csv("raw data/par.csv")
-
-#format function
-par<- parformat(par)
+  #format function
+  par<- parformat(par)
 
 par_leaf <- subset(par, ID !="shade-high")
 par_leaf2 <- par_leaf[par_leaf$drydown == "control",]
