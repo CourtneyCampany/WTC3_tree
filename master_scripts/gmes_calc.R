@@ -54,7 +54,7 @@ licor_times <- timerange_func(licor_gmes)
 
   ##for now run gmes functions for each licor #
   oct_H4 <- lapply(xsi_oct_dfr2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
-  oct_gm <- lapply(oct_H4, function(x) (gmcalc_func3(x, delR = oct_delR, del_growth=mean13chamber)))
+  oct_gm <- lapply(oct_H4, function(x) (gmcalc_func(x, delR = oct_delR, del_growth=mean13chamber)))
 
 
   ####december
@@ -84,8 +84,8 @@ licor_times <- timerange_func(licor_gmes)
   dec_h4 <- lapply(xsi_dec_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H4"))
   dec_h2 <- lapply(xsi_dec_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
 
-  dec_gm_h4 <- lapply(dec_h4, function(x) (gmcalc_func3(x, delR = dec_delR, del_growth=mean13chamber)))
-  dec_gm_h2 <- lapply(dec_h2, function(x) (gmcalc_func3(x, delR = dec_delR, del_growth=mean13chamber)))
+  dec_gm_h4 <- lapply(dec_h4, function(x) (gmcalc_func(x, delR = dec_delR, del_growth=mean13chamber)))
+  dec_gm_h2 <- lapply(dec_h2, function(x) (gmcalc_func(x, delR = dec_delR, del_growth=mean13chamber)))
 
 
   ####january
@@ -114,8 +114,8 @@ licor_times <- timerange_func(licor_gmes)
   jan_h2<- lapply(xsi_jan_h2, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H2"))
   jan_h3 <- lapply(xsi_jan_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=1, whichlicor="H3"))
 
-  jan_gm_h2 <- lapply(jan_h2, function(x) (gmcalc_func3(x, delR = jan_delR, del_growth=mean13chamber)))
-  jan_gm_h3 <- lapply(jan_h3, function(x) (gmcalc_func3(x, delR = jan_delR, del_growth=mean13chamber)))
+  jan_gm_h2 <- lapply(jan_h2, function(x) (gmcalc_func(x, delR = jan_delR, del_growth=mean13chamber)))
+  jan_gm_h3 <- lapply(jan_h3, function(x) (gmcalc_func(x, delR = jan_delR, del_growth=mean13chamber)))
 
 
   ####february
@@ -144,8 +144,8 @@ licor_times <- timerange_func(licor_gmes)
   feb_r1<- lapply(xsi_feb_r1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="R1"))
   feb_h4 <- lapply(xsi_feb_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=3, whichlicor="H4"))
 
-  feb_gm_r1 <- lapply(feb_r1, function(x) (gmcalc_func3(x, delR = feb_delR, del_growth=mean13chamber)))
-  feb_gm_h4 <- lapply(feb_h4, function(x) (gmcalc_func3(x, delR = feb_delR, del_growth=mean13chamber)))
+  feb_gm_r1 <- lapply(feb_r1, function(x) (gmcalc_func(x, delR = feb_delR, del_growth=mean13chamber)))
+  feb_gm_h4 <- lapply(feb_h4, function(x) (gmcalc_func(x, delR = feb_delR, del_growth=mean13chamber)))
 
 ####march
   mar_names<- list.files(path="tdl_files/march/",pattern="tdl",full.names=TRUE)
@@ -178,10 +178,10 @@ licor_times <- timerange_func(licor_gmes)
   mar_h1 <- lapply(xsi_mar_h1, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H1"))
   mar_h4 <- lapply(xsi_mar_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
   
-  mar_gm_h3 <- lapply(mar_h3, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=mean13chamber)))
-  mar_gm_h2 <- lapply(mar_h2, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=mean13chamber)))
-  mar_gm_h1 <- lapply(mar_h1, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=mean13chamber)))
-  mar_gm_h4 <- lapply(mar_h4, function(x) (gmcalc_func3(x, delR = mar_delR, del_growth=mean13chamber)))
+  mar_gm_h3 <- lapply(mar_h3, function(x) (gmcalc_func(x, delR = mar_delR, del_growth=mean13chamber)))
+  mar_gm_h2 <- lapply(mar_h2, function(x) (gmcalc_func(x, delR = mar_delR, del_growth=mean13chamber)))
+  mar_gm_h1 <- lapply(mar_h1, function(x) (gmcalc_func(x, delR = mar_delR, del_growth=mean13chamber)))
+  mar_gm_h4 <- lapply(mar_h4, function(x) (gmcalc_func(x, delR = mar_delR, del_growth=mean13chamber)))
 
 
   ####april
@@ -213,9 +213,9 @@ licor_times <- timerange_func(licor_gmes)
   apr_h3 <- lapply(xsi_apr_h3, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H3"))
   apr_h4 <- lapply(xsi_apr_h4, function(x) gmesdata_func(x, licor_gmes, licor_times, licorrows=5, whichlicor="H4"))
 
-  apr_gm_h1 <- lapply(apr_h1, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=mean13chamber)))
-  apr_gm_h3 <- lapply(apr_h3, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=mean13chamber)))
-  apr_gm_h4 <- lapply(apr_h4, function(x) (gmcalc_func3(x, delR = apr_delR, del_growth=mean13chamber)))
+  apr_gm_h1 <- lapply(apr_h1, function(x) (gmcalc_func(x, delR = apr_delR, del_growth=mean13chamber)))
+  apr_gm_h3 <- lapply(apr_h3, function(x) (gmcalc_func(x, delR = apr_delR, del_growth=mean13chamber)))
+  apr_gm_h4 <- lapply(apr_h4, function(x) (gmcalc_func(x, delR = apr_delR, del_growth=mean13chamber)))
 
 
 #### combine all gm runs into one dfr
@@ -257,45 +257,34 @@ plotsumm_id <- unique(pairs2[, c(1:4, 7)])
   
 ####add plotsummarys and treatments first
 gm_WTC2 <- merge(gm_WTC, plotsumm_id, by="id")
-gm_WTC2 <-add_Month(gm_WTC2)
-gm_WTC2 <- addtrt_func(gm_WTC2)
-gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
+  gm_WTC2 <-add_Month(gm_WTC2)
+  gm_WTC2 <- addtrt_func(gm_WTC2)
+  gm_WTC2$leaflight <- as.factor(paste(gm_WTC2$leaf, gm_WTC2$light, sep="-"))
 
+gm_clean <- gm_WTC2[gm_WTC2$id != "3-ch12-sun-high",] #removes one leaf with really bad data
 
+#all data
+write.csv(gm_clean, "calculated_data/gmes_wtc.csv", row.names=FALSE)
 
-gm_clean <- gm_agg[gm_agg$gm_bar > .06,]
-write.csv(gm_WTC2, "calculated_data/gmes_wtc.csv", row.names=FALSE)
-##add pair ids
-gm_wtc_pair <- merge(gm_WTC2, uniquepair)
-
-###for analysis first subset well watered and drought treatments--------------------------------------------------------
-
-
-gm_drought <- gm_WTC2[gm_WTC2$drydown == "drought",]
+###for analysis subset well watered and drought treatments---------------------------------------------------------
+gm_drought <- gm_clean[gm_clean$drydown == "drought",]
 write.csv(gm_drought, "calculated_data/gmes_drought.csv", row.names=FALSE)
 
-
-gm_water <- gm_WTC2[gm_clean$drydown == "control",]
+gm_water <- gm_clean[gm_clean$drydown == "control",]
 write.csv(gm_water, "calculated_data/gmes_wellwatered.csv", row.names=FALSE)
-
 
 ####DATA SUMMARY----------------------------------------------------------------------------------------------------
 
-###mean of ID so no pseudoreplication
-gm_agg <- summaryBy(gm+Photo+Cond+gm_bar+chamber ~ id+leaflight+ temp+leaf, data=gm_water, FUN=c(mean), keep.names=TRUE)
-##means by leaf and treatment
-gm_agg2 <- summaryBy(gm+Photo+Cond+gm_bar ~ leaflight+ temp, data=gm_agg, FUN=c(mean, se))
-
-#write.csv(gm_agg, "newgmtest.csv", row.names = FALSE)
-
-
-###mesophyll conductance stats-----------------------------------------------------------------------------------------
+# ###mean of ID so no pseudoreplication
+# gm_agg <- summaryBy(gm+Photo+Cond+gm_bar+chamber ~ id+leaflight+ temp+leaf, data=gm_water, FUN=c(mean), keep.names=TRUE)
+# ##means by leaf and treatment
+# gm_agg2 <- summaryBy(gm+Photo+Cond+gm_bar ~ leaflight+ temp, data=gm_agg, FUN=c(mean, se))
+# 
+# 
+# ###mesophyll conductance stats on well watered trees------------------------------------------------------------------
 # library(visreg)
 # library(multcomp)
 # library(nlme)
-# 
-# gm_clean <- gm_agg[gm_agg$gm_bar > .06,]
-# boxplot(gm_bar~leaflight, data=gm_clean)
 # 
 # gm_agg$tukeyid <- as.factor(paste(gm_agg$leaflight, gm_agg$temp, sep="-"))
 # 
@@ -305,18 +294,18 @@ gm_agg2 <- summaryBy(gm+Photo+Cond+gm_bar ~ leaflight+ temp, data=gm_agg, FUN=c(
 # 
 # gm_leaf2 <- lme(gm_bar ~ leaf ,random=~1|chamber, data=gm_agg[gm_agg$leaflight != "shade-high",])
 #   summary(gm_leaf2)
-#   anova(gm_leaf2)
+#   anova(gm_leaf2) #sun leaevs higher than shade leaves under ambient light environments
 #   visreg(gm_leaf2)
 # 
-# gm_leaf <- lme(gm_bar~ tukeyid, random=~1|chamber, data=gm_clean)
+# gm_leaf <- lme(gm_bar~ tukeyid, random=~1|chamber, data=gm_agg)
 #   summary(gm_leaf)
 #   anova(gm_leaf)
 #   visreg(gm_leaf)
 # 
 # tukey_gm<- glht(gm_leaf, linfct = mcp(tukeyid = "Tukey"))
-# gm_lightson_siglets<- cld(tukey_gm)
-# gm_lightson_siglets2 <- gm_lightson_siglets$mcletters$Letters
-# visreg(gm_leaf)
+#   gm_lightson_siglets<- cld(tukey_gm)
+#   gm_lightson_siglets2 <- gm_lightson_siglets$mcletters$Letters
+
 
 
 
