@@ -1,8 +1,6 @@
 source("functions and packages/functions.R")
 library(doBy)
 
-# gasexchange  <- read.csv("calculated_data/gmes_wtc.csv")
-#new wingate gm
 gasexchange  <- read.csv("calculated_data/gmes_wellwatered.csv")
 ##calculate CC
 gasexchange$Cc<- with(gasexchange, Ci-Photo/gm)
@@ -19,8 +17,6 @@ ge_overall <- summaryBy(Photo+Cond+Ci+Cc+Trmmol+gm_bar+VpdL ~ leaf +temp+leaflig
 ###split by drought and then rearrange
 ge_wet <- ge_overall[ge_overall$drydown == "control",]
 ge_wet <- droplevels(ge_wet)
-
-ge_dry <- ge_overall[ge_overall$drydown == "drought",]
 
 
 ###add ITE------------------------------------------------------------------------------------------------------------------- 

@@ -19,56 +19,56 @@ Plant, Cell and Environment
 \
 Dear Professor Mott,
 
-We are grateful for the opportunity to resubmit our manuscript. We thank the reviewers for providing insightful comments to improve our manuscript. We have responded in detail to each comment, which we feel has improved the overall quality of the manuscript.  Below, we have itemized our response to each coomment from the Editor and both reviewers.
+We are grateful for the opportunity to resubmit our manuscript. We thank the reviewers for providing insightful comments to improve our manuscript. We have responded in detail to each comment, which we feel has improved the overall quality of the manuscript.  Below, we have itemized our response to each comment from the Editor and both reviewers.
 
 ### **Editor**
 
 \
 - 1. *Where these mature/isobilateral leaves and does this affect the outcome?*
 \
-These leaves studied in this experiment were very liekly juvenille leaves, as the *E. tereticornis* trees were grown for ~ 1 year. Consequently, the fact that LMA was similar within the canopy is different from other reports as the editor notes. Similar LMA within canopies has been noted before in Eucalpt plantations (Nouvellon et al. 2010), which is cited in the discussion. We have expanded the discussion to address the possible fixed contols of LMA on leaf physiology (see reply to Referee # 2 specific comments for full details).
+These leaves studied in this experiment were very likely juvenile leaves, as the *E. tereticornis* trees were grown for ~ 1 year. Consequently, the fact that LMA was similar within the canopy is different from other reports as the editor notes. Similar LMA within canopies has been noted before in Eucalpt plantations (Nouvellon et al. 2010), which is cited in the discussion. We have expanded the discussion to address the possible fixed controls of LMA on leaf physiology (see reply to Referee # 2 specific comments for full details).
 
 \
 - 2. *Stylistic concerns with colors* 
 \
-We feel that colors are necessary in this macnuscript to visualize leaf types (+light), while also differentiating temperature treatments. We attempted to use only symbols, which makes it near impossible to distinguish all of the treatments. It also complicates visualization of confidence intervals on scatter plots. The choice of color palette is also used to distinguish colors properly for color-blind readers. We have dropped the use of colors for figures with boxplots, as they are not essential. (*need to try colors again/drop orange??*)
+We feel that colors are necessary in this manuscript to visualize leaf types (+light), while also differentiating temperature treatments. We attempted to use only symbols, which makes it near impossible to distinguish all of the treatments. It also complicates visualization of confidence intervals on scatter plots. The choice of color palette is also used to distinguish colors properly for color-blind readers. We have dropped the use of colors for figures with box plots, as they are not essential. (*need to try colors again/drop orange??*)
 
 \
 - 3/4. *Concerns over parameters derived from AC~i~ curves* 
 \
-After careful thought we have decided to remove parameters derived from AC~i~ curves from the manuscript. Our main goal is to show that sun and shade leaves were fundamentaly different in their photosyntheitic capacity. As such, we have decided to instead present *A*~max~ values between the leaf types. This provides simple robust measurements of photosynthetic capacity, that reach our intended goal in a more straight forward manner. If specific derivation or representations of *J*~max~/*V*~cmax~ values has distracted the editor from our main point, it is likely to also distract readers who are plant physiolgists. Figure 2. now shows the relationship between Amax and leaf *N*~a~ and *A*~max~ values are also reported in Table 1.
+After careful thought we have decided to remove parameters derived from AC~i~ curves from the manuscript. Our main goal is to show that sun and shade leaves were fundamental different in their photosynthetic capacity. As such, we have decided to instead present *A*~max~ values between the leaf types. This provides simple robust measurements of photosynthetic capacity, that reach our intended goal in a more straight forward manner. If specific derivation or representations of *J*~max~/*V*~cmax~ values has distracted the editor from our main point, it is likely to also distract readers who are plant physiologists. Figure 2. now shows the relationship between *A*~max~ and leaf *N*~a~ and *A*~max~ values are also reported in Table 1.
 
 \
-We also acknowledge that AC~i~ response curves were intitally conceived with the notion that *g*~m~ was small enough to be ignored,     which we now know is untrue. This represents a new issue for the plant physiolgy community as more *g*~m~ data are continually  generated. We hope this dataset can eventually help be used to address this problem, but it is beyond the scope of this paper. 
+We also acknowledge that AC~i~ response curves were initially conceived with the notion that *g*~m~ was small enough to be ignored,     which we now know is untrue. This represents a new issue for the plant physiology community as more *g*~m~ data are continually  generated. We hope this data set can eventually help be used to address this problem, but it is beyond the scope of this paper. 
 
 \
-- 5. *Does light penetration deeper in a shade leaf impact gm?* 
+- 5. *Does light penetration deeper in a shade leaf impact mesophyll conductance?* 
 \
-This question raises theoritical issues about how/if photosynthetic machinery are optimallty distributed along intraleaf light gradient. To our knowledge, these issues have yet to resolved empirically and are still a relevant question for most leaf-level experiments. For example, it is possible that *J*~max~/*V*~cmax~ could be partitioned within the leaf according to light gradients (see Llyod et al. 1992), which could affect estimates of *g*~m~ at low light.  Alternatively, greater light penetration in to the leaf but longer pathlengths for CO~2~ diffusion might interact to affect estimates of *g*~m~ at high light. Although we acknowledge that this question is relevant to this study and many others, we do not have the tools to address it further in the manuscript.
+This question raises theoretical issues about how/if photosynthetic machinery are optimally distributed along intraleaf light gradient. To our knowledge, these issues have yet to resolved empirically and are still a relevant question for most leaf-level experiments. For example, it is possible that *J*~max~/*V*~cmax~ could be partitioned within the leaf according to light gradients (see Llyod et al. 1992), which could affect estimates of *g*~m~ at low light.  Alternatively, greater light penetration in to the leaf but longer path lengths for CO~2~ diffusion might interact to affect estimates of *g*~m~ at high light. Although we acknowledge that this question is relevant to this study and many others, we do not have the tools to address it further in the manuscript.
 
 ### **Referee #1**
 
 \
 - 1. *Difficulty in conciliating optimal resource distribution without an enhancement of leaf hydraulic conductance*
 \
-Due to Referee #1 concern over cuvette measured transpiration, water potentials and subsequent *K*~l~ calculations, we have re-examined the calculation and subsequent analyses in the manuscript. Initially, *K*~l~ was calculated with transpiration rates in shade leaves under low light conditions. As shade leave were allowed to stablize under high light conditions before they were detached, the leaf water status reflected these conditions and not those of low light. We have corrected the calculation of *K*~l~ and made changes in the results and discussion sections. *K*~l~ is now signicantly higher in shade leaves, which makes sense in relation to the maintaing hydraullic supply to the observed stomatal behavior. We believe this actually makes the optimization of resources story much clearer throughout the manuscript, and we greatly appreciate the referee's comments. These corrected values also allow us to address the possible coordination of *K*~l~ and *g*~m~ reported by Flexas et al. 2013.
+Due to Referee #1 concern over cuvette measured transpiration, water potentials and subsequent *K*~l~ calculations, we have re-examined the calculation and subsequent analyses in the manuscript. Initially, *K*~l~ was calculated with transpiration rates in shade leaves under low light conditions. As shade leave were allowed to stabilize under high light conditions before they were detached, the leaf water status reflected these conditions and not those of low light. We have corrected the calculation of *K*~l~ and made changes in the results and discussion sections. *K*~l~ is now significantly higher in shade leaves, which makes sense in relation to the maintain hydraulic supply to the observed stomatal behavior. We believe this actually makes the optimization of resources story much clearer throughout the manuscript, and we greatly appreciate the referee's comments. These corrected values also allow us to address the possible coordination of *K*~l~ and *g*~m~ reported by Flexas et al. 2013.
 
 \
 - 2. *Diurnal cycles of photosynthesis, stomatal conductance and light within the canopy* 
 \
-This experiment was harvested in May 2014, shortly after our measurements ceased. Therefore, the suggestion to make diurnal measuremnts is no longer possible.
+This experiment was harvested in May 2014, shortly after our measurements ceased. Therefore, the suggestion to make diurnal measurements is no longer possible.
 
 \
 - 3. *Concern over methods to measure leaf hydraulic conductance*
 \
-The method used here for measureing *K*~l~ is also one of the three methods described in Flexas et al. 2013, which compared the coordination of leaf hydraulic conductance and mesophyll conductance. Leaves used for gas exchange were indeed sampled and then immediately measured for midday water potential. This is explained in the first sentence of the subsection "Leaf Nitrogen and hydraulic conductance" in the methods. 
+The method used here for measuring *K*~l~ is also one of the three methods described in Flexas et al. 2013, which compared the coordination of leaf hydraulic conductance and mesophyll conductance. Leaves used for gas exchange were indeed sampled and then immediately measured for midday water potential. This is explained in the first sentence of the subsection "Leaf Nitrogen and hydraulic conductance" in the methods. 
 
 ### **Referee #2**
 
 \
 - 1. *Referee #2 correctly points out that the issues raised by Wingate et al. 2007 were not addressed*
 \
-We have recalculated the respiratory fractionation component 'e', according to Evans and von Caemmerer 2013, which addresses Wingate et al. 2007. This correction increased values of *g*~m~ but does not alter observed patterns. The correct calculation of 'e' has been added to the supplementary methods.  This correction also addresses comment #3 below.
+We have recalculated the respiratory fractional component 'e', according to Evans and von Caemmerer 2013, which addresses Wingate et al. 2007. This correction increased values of *g*~m~ but does not alter observed patterns. The correct calculation of 'e' has been added to the supplementary methods.  This correction also addresses comment #3 below.
 
 \
 - 2. *Estimating turnover time of the pools*
@@ -78,7 +78,7 @@ We agree that this concept would be great for the plant physiological community.
 \
 - 3. *Was the chamber $\delta$^13^C measured?*
 \
-Measurements of chamber $\delta$^13^C throughout the day were measured for this experiment during the same week as each gas exchange campaigns presented here. Since these measurements do not explicitly overlap, we do not have a robust way to assign specific values to each chamber at each time point. Instead, we took the mean chamber $\delta$^13^C for all chambers flux campaigns between 10am and 2 pm, to coincide with the timing of gas exchange campaigns. This gives a more realistic value than the steady state assumption of -8‰. This change is included in the corrections mentioned above. Additionally, we used CO~2~ cyclinders for the Licor 6400 that were much closer to ambient air $\delta$^13^C, instead of standard cylinders with  $\delta$^13^C > 30&permil, which slightly improves calculations.
+Measurements of chamber $\delta$^13^C throughout the day were measured for this experiment during the same week as each gas exchange campaigns presented here. Since these measurements do not explicitly overlap, we do not have a robust way to assign specific values to each chamber at each time point. Instead, we took the mean chamber $\delta$^13^C for all chambers flux campaigns between 10am and 2 pm, to coincide with the timing of gas exchange campaigns. This gives a more realistic value than the steady state assumption of -8‰. This change is included in the corrections mentioned above. Additionally, we used CO~2~ cylinders for the Licor 6400 that were much closer to ambient air $\delta$^13^C, instead of standard cylinders with  $\delta$^13^C > 30‰, which slightly improves calculations.
 
 \
 - 4. *Referee #1 Specific Comments:*
@@ -87,10 +87,10 @@ Measurements of chamber $\delta$^13^C throughout the day were measured for this 
 - line 358: We corrected the text to match stats from Table 2
 
 \
-- line 392: We agree that thermal acclimation is not previosuly discussed before this point is made. However, the experimental design does include a +3C warming treatment, and the potential affects of warming on leaf physiology are mentioned in the introduction. As there were very few effects of climate warming observed in this aspect of the experiment, we feel it is important to address a possible explaination for the lack of observed warming effects using published findings from this experiment.
+- line 392: We agree that thermal acclimation is not previously discussed before this point is made. However, the experimental design does include a +3C warming treatment, and the potential affects of warming on leaf physiology are mentioned in the introduction. As there were very few effects of climate warming observed in this aspect of the experiment, we feel it is important to address a possible explanation for the lack of observed warming effects using published findings from this experiment.
 
 \
-- Q: Nitrogen concentration in the leaves had a weak postive relationship with measured rates of *g*~m~ if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed seperately. Since we can only speculate about the effect of aquaporins we have not further addresssed *g*~m~ versus nitrogen in the manuscript.
+- Q: Nitrogen concentration in the leaves had a weak postie relationship with measured rates of *g*~m~ if all leaves were considered. This weak relationship disappeared if sun and shade leaves were analyzed separately. Since we can only speculate about the effect of aquaporins we have not further addressed *g*~m~ versus nitrogen in the manuscript.
 
 \
 - line 404-405: added Brooks et al. 1996 citation explaining observed patterns of morphology and physiology when sun leaves become shaded.
@@ -99,7 +99,7 @@ Measurements of chamber $\delta$^13^C throughout the day were measured for this 
 - line 412-415: *REMKO*
 
 \
-- Q: On average mesophyll conductance and stomatal might be expected to be correlated when investigating interspecific comparisions, such as in Flexas et al. 2013 (Figure 1). The dynamic responses of leaf physiology to environmental conditions within a species/canopy are likely to alter this relationship. In this experiment, you can see a postive relationship when only sun leaves are considered, similar to the Flexas paper. Due to the unexpected stomatal behavior, however, this relationship was reversed in shade leaves. We have attached a quick figure below for the referee, but have not included it in the manuscript as it can be inferred from Table 1 and Figure 3 if necessary.
+- Q: On average mesophyll conductance and stomatal might be expected to be correlated when investigating inter-specific comparisons, such as in Flexas et al. 2013 (Figure 1). The dynamic responses of leaf physiology to environmental conditions within a species/canopy are likely to alter this relationship. In this experiment, you can see a postie relationship when only sun leaves are considered, similar to the Flexas paper. Due to the unexpected stomatal behavior, however, this relationship was reversed in shade leaves. We have attached a quick figure below for the referee, but have not included it in the manuscript as it can be inferred from Table 1 and Figure 3 if necessary.
 
 \
 ```{r gmgs, fig.align='center', fig.width=5, fig.height=5, echo=FALSE,warning=FALSE,dev="png",message=FALSE, dpi=600}

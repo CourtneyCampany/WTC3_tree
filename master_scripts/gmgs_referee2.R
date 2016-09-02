@@ -3,7 +3,7 @@ source("master_scripts/plot_objects.R")
 source("functions and packages/packages.R")
 
 ##read format phys data------------------------------------------------------------------------------------------------
-gasex <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gasex <- read.csv("calculated_data/gmes_wellwatered.csv")
 gm_agg <- summaryBy(gm_bar+Cond+Photo ~ chamber+id+leaf +light+temp+leaflight+Month, 
                     data=gasex, FUN=mean, keep.names=TRUE)
 

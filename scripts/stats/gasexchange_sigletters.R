@@ -50,44 +50,4 @@ tukey_photo<- glht(A_leaf, linfct = mcp(leaf = "Tukey"))
   photo_siglets2 <- photo_siglets$mcletters$Letters
 write.csv(photo_siglets2, "master_scripts/sigletters/sl_photo.csv", row.names=FALSE)
 
-  
-#mesophyll conductance-----------------------------------------------------------------------------------------------------
-gm_sun_temp <- lme(gm ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="sun-high")
-  summary(gm_sun_temp)
-  anova(gm_sun_temp)
-  visreg(gm_sun_temp)
 
-gm_sha_temp <- lme(gm ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="shade-low")
-  summary(gm_sha_temp)
-  anova(gm_sha_temp)
-  visreg(gm_sha_temp)
-
-gm_leaf <- lme(gm~ leaf, random=~1|chamber, data=ge_agg, subset=leaflight != "shade-high")
-  summary(gm_leaf)
-  anova(gm_leaf)
-  visreg(gm_leaf)
-
-#stomatal conducatnce----------------------------------------------------------------------------
-gs_leaf <- lme(Cond~ leaf, random=~1|chamber, data=ge_agg, subset=leaflight != "shade-high")
-  summary(gs_leaf)
-  anova(gs_leaf)
-  visreg(gs_leaf)
-  
-# gs_sun_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="sun-high")
-#   summary(gs_sun_temp)
-#   anova(gs_sun_temp)
-#   visreg(gs_sun_temp)
-#   
-# gs_sha_temp <- lme(Cond ~ temp ,random=~1|chamber, data=ge_agg, subset=leaflight=="shade-low")
-#   summary(gs_sha_temp)
-#   anova(gs_sha_temp)
-#   visreg(gs_sha_temp)
-  
-tukey_gs<- glht(gs_leaf, linfct = mcp(leaf = "Tukey"))
-  gs_siglets<- cld(tukey_gs)
-  gs_siglets2 <- gs_siglets$mcletters$Letters
-  
-  # library(lme4)
-  #  Photo_mod2 <- lmer(Photo ~ leaf * temp + (1|chamber), data=ge_agg, subset=leaflight != "shade-high")
-  #  summary(Photo_mod2)
-  #  anova(Photo_mod2)
