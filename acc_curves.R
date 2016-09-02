@@ -5,7 +5,7 @@ source("master_scripts/plot_objects.R")
 treatments <- read.csv("raw data/temp_trt.csv")
 
 #####redo aci curves with gmes 
-gm <- read.csv("calculated_data/gmes_wellwatered2.csv")
+gm <- read.csv("calculated_data/gmes_wellwatered.csv")
 gm_agg <-summaryBy(gm ~ leaflight+temp, data=gm, FUN=mean, keep.names=TRUE)
 
 #read ACi datasets 

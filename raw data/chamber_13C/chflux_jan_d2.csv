@@ -1,4 +1,4 @@
-flux_campaign,day,Date,TIMESTAMP,RECORD,SiteOutput,SiteCount_Avg,ConcA_Avg,ConcB_Avg,TGApressure_Avg,SamplePress_Avg,BypassPress_Avg,ExcessFlow_Avg,SampleFlow_Avg,One_Tot,CorrConcA_Avg,CorrConcB_Avg,Corrdel13C_Avg
+flux_campaign,day,Date,time,RECORD,SiteOutput,SiteCount_Avg,ConcA_Avg,ConcB_Avg,TGApressure_Avg,SamplePress_Avg,BypassPress_Avg,ExcessFlow_Avg,SampleFlow_Avg,One_Tot,CorrConcA_Avg,CorrConcB_Avg,Corrdel13C_Avg
 3,2,18/01/2014,9:52:20 AM,1,3,150.5,760.9102,8.281111,19.99969,400.0544,457.3279,139.849,196.4565,100,3060.808,27.96604,-182.7305
 3,2,18/01/2014,9:52:40 AM,2,4,150.5,313.9979,3.429975,19.99798,399.9855,457.0704,119.7861,196.597,100,313.7551,3.42948,-22.29555
 3,2,18/01/2014,9:53:00 AM,3,11,150.5,398.8201,4.472493,20.00029,400.0062,437.9957,100.9129,197.0684,100,408.1811,4.52102,-9.273882
