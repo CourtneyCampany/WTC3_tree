@@ -8,3 +8,8 @@
 *.dat
 
 /wtc_met
+
+*.docx
+!thesis/manuscriptstyle.docx
+!thesis/manuscriptstyle_thesis.docx
+!gm_pce/manuscriptstyle_pce.docx
