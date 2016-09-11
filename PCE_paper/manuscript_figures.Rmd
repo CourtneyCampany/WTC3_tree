@@ -1,0 +1,13 @@
+---
+title:
+output: pdf_document
+---
+
+
+```{r, results='asis', echo=FALSE, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+
+\includegraphics[width=6]{Figure3.pdf}

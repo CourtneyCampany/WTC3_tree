@@ -24,7 +24,7 @@ includeFigs <- TRUE
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
-source("gm_pce/manuscript_preload.R")
+source("PCE_paper/manuscript_preload.R")
 ```
 
 ## Figures

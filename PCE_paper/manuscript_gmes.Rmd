@@ -42,15 +42,15 @@ opts_knit$set(root.dir = '../')
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Set Flag to include figures in text or not.
-includeFigs <- FALSE
+includeFigs <- TRUE
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 
-source("gm_pce/manuscript_preload.R")
+source("PCE_paper/manuscript_preload.R")
 
 # Make figure PDFs.
-source("gm_pce/make_figures.R")
+source("PCE_paper/make_figures.R")
 
 ```
 
@@ -76,7 +76,7 @@ wtc3tab2 <- "2"
 ```
 
 # Abstract
-Light gradients within tree canopies play a major role in the distribution of plant resources that define the photosynthetic capacity of sun and shade leaves. However, biochemical and diffusional constraints on gas exchange in sun and shade leaves in response to light remain poorly quantified, but critical for predicting canopy carbon and water exchange. To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole-tree chambers. Compared to sun leaves, shade leaves had lower *A*~n~, *g*~m~, leaf nitrogen and photosynthetic capacity (*A*~max~, i.e. *A*~n~ at saturating [CO~2~]), but *g*~s~ was similar. When light intensity was temporarily increased for shade leaves to match that of sun leaves, both *g*~s~ and *g*~m~ increased, and *A*~n~ increased to values greater than sun leaves. Here we show that dynamic physiological responses of shade leaves to altered light environments have implications for up-scaling leaf level measurements and predicting whole canopy carbon gain. Despite exhibiting reduced photosynthetic capacity, the rapid up-regulation of *g*~m~ with increased light enables shade leaves to respond quickly to sunflecks.
+Light gradients within tree canopies play a major role in the distribution of plant resources that define the photosynthetic capacity of sun and shade leaves. However, biochemical and diffusional constraints on gas exchange in sun and shade leaves in response to light remain poorly quantified, but critical for predicting canopy carbon and water exchange. To investigate the CO~2~ diffusion pathway of sun and shade leaves, leaf gas exchange was coupled with concurrent measurements of carbon isotope discrimination to measure net leaf photosynthesis (*A*~n~), stomatal conductance (*g*~s~) and mesophyll conductance (*g*~m~) in *Eucalyptus tereticornis* trees grown in climate controlled whole-tree chambers. Compared to sun leaves, shade leaves had lower *A*~n~, *g*~m~, leaf nitrogen and photosynthetic capacity (*A*~max~, i.e. *A*~n~ at saturating [CO~2~]), but *g*~s~ was similar. When light intensity was temporarily increased for shade leaves to match that of sun leaves, both *g*~s~ and *g*~m~ increased, and *A*~n~ increased to values greater than sun leaves. We show that dynamic physiological responses of shade leaves to altered light environments have implications for up-scaling leaf level measurements and predicting whole canopy carbon gain. Despite exhibiting reduced photosynthetic capacity, the rapid up-regulation of *g*~m~ with increased light enables shade leaves to respond quickly to sunflecks.
 
 ##Keyword index
 *Eucalyptus tereticornis*, mesophyll conductance, photosynthesis, stomatal conductance, sunflecks
@@ -197,7 +197,7 @@ Photosynthesis is also limited by the ability to supply water to the upper canop
 Unexpected higher *g*~s~ in shade leaves compared to sun leaves led to decreased ITE in shade leaves throughout the experiment. Consistently lower leaf $\delta$^13^C in shade leaves also suggests that observed higher *C*~i~ and *C*~c~ in shade leaves was prevalent long term (Figure `r deltafig`) [@marshall2007sources], despite the observation that *g*~m~ accounted for nearly 70% of the variation in $\Delta$~o~. Higher *g*~s~ in shade leaves relative to the differences in *A*~n~, appears to result in inefficient water use as more water is used per unit photosynthesis. As whole canopy C gain integrates the efficiency of all leaves, this raises the question of why shade leaves maintain a lower water-use efficiency compared to sun leaves.
 
 \
-In sun leaves, *A*~n~ and *g*~s~ were strongly correlated, exhibiting behaviour broadly consistent with optimal stomatal theory (Fig. 5). However, lower rates of *A*~n~ in shade leaves were not coupled with decreases in *g*~s~, leading to the observed decreases in ITE. This is significant as optimal stomatal regulation to balance C gain with water loss has been reported across a wide range of ecosystems and plant functional types; however, empirical data is often collected only on sun leaves [e.g. @prentice2014balancing; @lin2015optimal]. Consistent with our results, Buckley et al. [-@2014] found that shade leaves exhibited higher *g*~s~ than expected based on their environment. In our study, higher *g*~s~ in shade leaves may in part be explained by higher *K*~L~, which effectively reduces the cost of water transport, allowing more profligate water use in shade leaves. 
+In sun leaves, *A*~n~ and *g*~s~ were strongly correlated, exhibiting behaviour broadly consistent with optimal stomatal theory (Fig. 5). However, lower rates of *A*~n~ in shade leaves were not coupled with decreases in *g*~s~, leading to the observed decreases in ITE. This is significant as optimal stomatal regulation to balance C gain with water loss has been reported across a wide range of ecosystems and plant functional types; however, empirical data is often collected only on sun leaves [e.g. @prentice2014balancing; @lin2015optimal]. Consistent with our results, Buckley et al. [-@buckley2014] found that shade leaves exhibited higher *g*~s~ than expected based on their environment. In our study, higher *g*~s~ in shade leaves may in part be explained by higher *K*~L~, which effectively reduces the cost of water transport, allowing more profligate water use in shade leaves. 
 
 \
 It is also possible that higher *g*~s~ in shade leaves is a strategy to take advantage of high light quickly in shade leaves, avoiding the delay with stomatal opening [@tausz2005dynamic;@vicomanz2011]. Our results support this hypothesis, as shade leaves increased *A*~n~ to values equal or even outperforming sun leaves when subjected to a brief period of identical high-light intensity. Transpiration-induced cooling in shade leaves, by keeping stomata open, has also been suggested as an effective strategy to reduce sunfleck-induced rapid increase in leaf temperature [@schymanski2013stomatal], which has been shown to inhibit C gain [@leakey2003high]. However, this response likely occurs at very high air temperatures and may not explain the observed *g*~s~ in shade leaves across the large natural seasonal range of temperatures included in our study. How prevalent each of these strategies are within tree canopies is still unknown, as empirical studies assessing photosynthetic responses to sunflecks generally focus on seedlings [@kuppers1993leaf;@pepin1997rates;@leakey2002relative] and understory plants, often in deep shade [@chazdon1991importance; @allen2000stomatal; @brantley2009contribution], though leaves within a forest canopy exhibited a similar uncoupling of *A*~n~ and *g*~s~ across a light gradient [@tjoelker1995interaction]. Thus, our findings highlight a critical need for empirical measurements of shade leaves under dynamic light environments in order to accurately scale C gain from leaf to canopy [see @de1997simple].
@@ -248,8 +248,8 @@ source("master_scripts/par2.R")
 \
 **Figure 1**. Environmental conditions during the six measurement campaigns. Bars represent the local light environment for sun and shade leaves during six gas exchange campaigns from October 2013 to April 2014 (as photosynthetic photon flux density, PPFD). Means &pm; 1 standard error represent PPFD measured with a ceptometer at the height of each selected leaf in the canopy. Points connected by a line represent the mean (&pm; 1 standard error) daily maximum air temperature during each campaign period. Each date represents the starting date for each measurement campaign; each campaign was completed in 3 days.
 \
-```{r acicurves, fig.width=8, fig.height=10, warning=FALSE,echo=FALSE,dev="png", dpi=600,message=FALSE, eval=includeFigs}
- source("master_scripts/aci_vcmaxnitro.R")
+```{r amaxnitro, fig.width=6, fig.height=6, warning=FALSE,echo=FALSE,dev="png", dpi=600,message=FALSE, eval=includeFigs}
+ source("master_scripts/amax_nitro.R")
 ```
 \
 **Figure 2**. Photosynthetic capacity (*A*~max~) was positively correlated with mean leaf N per area (*N*~a~) for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. Leaf *N*~a~ is the mean of each leaf type sampled across gas exchange campaigns in each whole-tree chamber. *A*~max~ was measured once on all trees for each leaf type, in February 2014, at 25°C and at both saturating light and [CO~2~]. The dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.59 and 0.62.

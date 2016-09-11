@@ -96,8 +96,11 @@ ltys <- c(1,2, 1,2)
 #d95f02-sun
 #1b9e77-shl
 
+#shadelow: 377eb8
+
+
 suncol <- alpha("#ff7f00",0.80) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
-shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.80) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
+shacol <- newshade <- newshacol <-  alpha("#235176", 0.80) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
 lightscol <- alpha("#4daf4a", 0.80) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
 
 suncol2 <- alpha(suncol,1)
