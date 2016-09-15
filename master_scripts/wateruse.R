@@ -56,6 +56,7 @@ chem_leaf <- lm(c13 ~ leafN_area, data=canopy_chem)
 
 #### Multi panel plot of WUE and 13C--------------------------------------------------------------------------------------
 # windows(7,7)
+#png(filename = "figpic/wue.png", width = 11, height = 8.5, units = "in", res= 400)
 
 par(mfrow=c(2,1))
  

@@ -88,6 +88,9 @@ nitroamax_mod <- lm(Photo~leafN_area, data=N_amax)
 # rsquared.glmm(nitrovc_mod3)
 
 ##Amax vs Narea
+#png(filename = "figpic/amax.png", width = 11, height = 8.5, units = "in", res= 400)
+
+
 par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(Photo~leafN_area, data=N_amax, col=leafcol3[as.factor(leaf)],xlim=c(1.5,3.5),ylim=c(15,35),
        pch=c(16, 17)[pch=N_amax$temp],xlab=narealab, ylab=amaxlab, cex=1.25)
@@ -96,7 +99,7 @@ ablineclip(nitroamax_mod, x1=min(N_amax$leafN_area), x2=max(N_amax$leafN_area), 
 
 legend("topleft", leglab2, pch=c(16,17,16,17), col=c(suncol,suncol, lightscol, lightscol),inset = 0.01, bty='n',cex=1, pt.cex=1.25) 
 
-  
+#dev.off()
 ##Amax stats for manuscript----------------------------------------------------------------------------------------------------  
 # amax_dat$tukeyid <- as.factor(paste(amax_dat$leaf, amax_dat$temp, sep="-"))
 

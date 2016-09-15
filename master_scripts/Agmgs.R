@@ -108,6 +108,8 @@ gmA_fleck_mod2 <- lm(Photo~ gm_bar  ,data=fleckdat)
 palette(c(lightscol, shacol, suncol))
  
 # windows(10, 12)
+#png(filename = "figpic/agmgs.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mfrow=c(2,1))
 #gs
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))

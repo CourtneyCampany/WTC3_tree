@@ -29,6 +29,8 @@ cols <- c(shacol2, lightscol2,suncol2)
 
 
 # windows(12,6)
+#png(filename = "figpic/drawdown.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mfrow=c(1,3),cex.axis=1.25, cex.lab = 1.5, mar=c(5,5,2,1))
 
 boxplot(Ci ~leaflight, gasex_agg, col=cols,ylab=expression(C[i]~~(paste(mu,bar,sep=""))), names=FALSE, ylim=c(0,325), outline=FALSE)

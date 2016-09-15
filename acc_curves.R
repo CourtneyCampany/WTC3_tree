@@ -115,6 +115,8 @@ acishaet$Cc <- with(acishaet, Ci - ALEAF / gm_agg[4,3])
 
 ###plot of model ACC curves
 windows(8,6)
+#png(filename = "figpic/acc.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(ALEAF~Cc, data=acisunat, pch=16, col=suncol2, type='l',lwd=3,ylab=satlab, xlab=cclab)
   points(ALEAF~Cc, data=acisunet, pch=17, col=suncol2,type='l',lwd=3, lty=2)

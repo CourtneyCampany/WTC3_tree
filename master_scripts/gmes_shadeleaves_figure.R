@@ -31,6 +31,7 @@ shadeleaf <- merge(shadat2, fleckdat2, by=c("chamber", "temp","Month"))
 
 ##plot---------------------------------------------------------------------------------------------------------------
 # windows(7,7)
+#png(filename = "figpic/gm_shade.png", width = 11, height = 8.5, units = "in", res= 400)
 
 par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(fleck_gm~shade_gm, data=shadeleaf, ylim=c(0,.3), xlim=c(0,.3), xlab=shagmlab, ylab=fleckgmlab, 

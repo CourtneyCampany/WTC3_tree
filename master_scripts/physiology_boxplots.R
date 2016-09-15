@@ -28,6 +28,8 @@ cols <- c(shacol2, lightscol2,suncol2)
 ####PLOTTING boxplots--------------------------------------------------------------------------------
 
 # windows(12,6)
+#png(filename = "figpic/phys_barplot.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mfrow=c(1,3),cex.axis=1.25, cex.lab = 1.5, mar=c(5,5,2,1))
 
 boxplot(Cond ~leaflight, gasex_agg,  col=cols,ylab=condlab, names=FALSE, outline=FALSE, ylim=c(0, .5))

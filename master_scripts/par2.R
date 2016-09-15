@@ -65,7 +65,9 @@ se_dat2 <- se_dat[c(1,7,2,8,3,9,4,10,5,11,6,12)]
 
 ###plot PPFD and air temp-------------------------------------------------------------------------------------------------
 
- # windows(7,7)
+# windows(7,7)
+#png(filename = "figpic/par.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mar=c(5,5,1,5), mgp=c(2.5,1,0), las=1,cex.axis=.8, cex.lab=1)
 PAR_bar <- barplot(par_dat, beside=TRUE, names.arg=par_agg$leaf_type, ylim=c(0, 2550), col=c(shacol,suncol), 
                      xaxt='n', ylab=parlab)
