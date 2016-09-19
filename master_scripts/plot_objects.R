@@ -97,15 +97,16 @@ ltys <- c(1,2, 1,2)
 #1b9e77-shl
 
 #shadelow: 377eb8
+##02401B (green i like) (old=#4daf4a)
 
 
 suncol <- alpha("#ff7f00",0.80) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
 shacol <- newshade <- newshacol <-  alpha("#235176", 0.80) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
-lightscol <- alpha("#4daf4a", 0.80) #rgb(86,180,233,0.75*255,max=255)     #alpha("darkorange2", .75)
+lightscol <- alpha("#4daf4a", 0.80) #rgb(86,180,233,0.75*255,max=255) #alpha("darkorange2", .75)
 
-suncol2 <- alpha(suncol,1)
-shacol2 <- alpha(shacol,1)
-lightscol2 <- alpha(lightscol,1)
+suncol2 <- "#ff7f00"
+lightscol2 <- "#4daf4a"
+shacol2 <- "#235176"
 
 shacol50 <- alpha(shacol, alpha=.5)
 suncol50 <- alpha(suncol, alpha=.5)
@@ -114,6 +115,7 @@ lights50col <- alpha(lightscol2, alpha=.5)
 leafcol <- c(suncol, shacol)
 leafcol2 <- c(shacol, suncol)
 leafcol3 <- c(lightscol, suncol)
+leafcol4 <- c(lightscol2, suncol2)
 leaflab2 <- c("Sun", "Shade")
 collights<-c(lightscol, lightscol, shacol, shacol)
 trtcols <-c(suncol, suncol, shacol, shacol)
