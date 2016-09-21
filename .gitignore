@@ -9,8 +9,5 @@
 
 /wtc_met
 
-*.docx
-!thesis/manuscriptstyle.docx
-!thesis/manuscriptstyle_thesis.docx
-!gm_pce/manuscriptstyle_pce.docx
-!gm_pce/manuscriptstyle_pce2.docx
+*manuscript_gmes.docx
+
