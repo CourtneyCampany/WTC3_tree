@@ -69,7 +69,7 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
   
   canopy_chem2 <- canopy_chem[canopy_chem$drydown=="control",]
   canopy_chem3 <- canopy_chem2[, c("chamber", "Month", "leaf", "leafN_area")]
-  
+
 ##Amax and Narea dataset  (with stats for results)----------------------------------------------------------------
 Nagg <- summaryBy(leafN_area ~ chamber + leaf, data=canopy_chem, FUN=mean, keep.names = TRUE)
 
@@ -90,9 +90,10 @@ nitroamax_mod <- lm(Photo~leafN_area, data=N_amax)
 ##Amax vs Narea
 #png(filename = "figpic/amax.png", width = 11, height = 8.5, units = "in", res= 400)
 
+#xlim=c(1.5,3.5),ylim=c(15,35),
 
 par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
-plot(Photo~leafN_area, data=N_amax, col=leafcol3[as.factor(leaf)],xlim=c(1.5,3.5),ylim=c(15,35),
+plot(Photo~leafN_area, data=N_amax, col=leafcol3[as.factor(leaf)],xlim=c(01.5,3.5),ylim=c(15,35),
        pch=c(16, 17)[pch=N_amax$temp],xlab=narealab, ylab=amaxlab, cex=1.25)
 
 ablineclip(nitroamax_mod, x1=min(N_amax$leafN_area), x2=max(N_amax$leafN_area), lwd=2, lty=3)

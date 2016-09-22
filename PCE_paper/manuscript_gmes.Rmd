@@ -252,7 +252,7 @@ source("master_scripts/par2.R")
  source("master_scripts/amax_nitro.R")
 ```
 \
-**Figure 2**. Photosynthetic capacity (*A*~max~) was positively correlated with mean leaf N per area (*N*~a~) for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. Leaf *N*~a~ is the mean of each leaf type sampled across six gas exchange campaigns in each whole-tree chamber. *A*~max~ was measured once on all trees for each leaf type, in February 2014, at 25°C and at both saturating light and [CO~2~]. The dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.59 and 0.62.
+**Figure 2**. Photosynthetic capacity (*A*~max~) was positively correlated with mean leaf N per area (*N*~a~) for sun and shade leaves grown under elevated (ET) and ambient (AT) temperature treatments. Leaf *N*~a~ is the mean of each leaf type, in well-watered treatments, sampled across six gas exchange campaigns in each whole-tree chamber. *A*~max~ was measured once on all trees for each leaf type, before the initiation of the drought treatment, at 25°C and at both saturating light and [CO~2~]. The dashed line represents the significant linear model fit for all leaves, with a marginal and conditional *R*^2^ of 0.59 and 0.62.
 \
 ```{r Agmgs, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,message=FALSE,dev="png", dpi=600, eval=includeFigs}
 source("master_scripts/Agmgs.R")
