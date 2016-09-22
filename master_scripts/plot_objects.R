@@ -146,7 +146,7 @@ sunflecklab <- "Shade \n High Light"
 
 alllab <- c("Sun", "Shade-Low Light", "Shade-High Light", "AT", "ET")
 leaflightlab2 <- c("Sun", "Shade-Low Light", "Shade-High Light")
-allcols=c(suncol, shacol, lightscol2, "black", "black")
+allcols=c(suncol, shacol, lightscol, "black", "black")
 allcols2=c(suncol2, newshade, lightscol2, "black", "black")
 
 
