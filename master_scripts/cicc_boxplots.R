@@ -25,7 +25,7 @@ leaforder <- c("Shade", "Sunfleck", "Sun")
 gasex_agg$leaflight <- factor(gasex_agg$leaflight, levels = leaforder)
 
 
-cols <- c(shacol2, lightscol2,suncol2)
+cols <- c(shacol, lightscol,suncol)
 
 
 # windows(12,6)

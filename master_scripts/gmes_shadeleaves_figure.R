@@ -35,7 +35,8 @@ shadeleaf <- merge(shadat2, fleckdat2, by=c("chamber", "temp","Month"))
 
 par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(fleck_gm~shade_gm, data=shadeleaf, ylim=c(0,.3), xlim=c(0,.3), xlab=shagmlab, ylab=fleckgmlab, 
-     pch=c(16, 17)[shadeleaf$temp], cex=1.25)
+     pch=c(21, 24)[shadeleaf$temp], cex=1.25, lwd=1.25)
 abline(0,1, lty=2)
-legend("topleft", c("AT", "ET"), pch=c(16,17), inset = 0.01, bty='n', title="Shade Leaves", cex=1, pt.cex=1.25)
+legend("topleft", c("AT", "ET"), pch=c(21,24), inset = 0.01, bty='n', title="Shade Leaves", cex=1, 
+       pt.cex=1.25, pt.lwd=1.25)
 

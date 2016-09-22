@@ -116,7 +116,7 @@ par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(Photo~Cond, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab="", ylab="",pch="")
 par(new=TRUE)
 smoothplot(Cond, Photo, leaflight,data=gm_agg, kgam=5, R="chamber",ylim=c(5,25), xlim=c(0,.5),
-             linecol=c(lightscol2, shacol2,suncol2),pch="", ylab=photolab, xlab=condlab)
+             linecol=c(lightscol, shacol,suncol),pch="", ylab=photolab, xlab=condlab)
 points(Photo~Cond, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
   
 legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
@@ -125,9 +125,9 @@ text(x=.5, y=24.5, "(a)", cex=1)
 #gm
 par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(Photo~gm_bar, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab2, ylab=photolab, pch="")
-  predline(gmA_sun_mod2, col=suncol2,lwd=2)
-  predline(gmA_sha_mod2, col=shacol2,lwd=2)
-  predline(gmA_fleck_mod2, col=lightscol2,lwd=2)
+  predline(gmA_sun_mod2, col=suncol,lwd=2)
+  predline(gmA_sha_mod2, col=shacol,lwd=2)
+  predline(gmA_fleck_mod2, col=lightscol,lwd=2)
   points(Photo~gm_bar, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
 
 text(x=.5, y=24.5, "(b)", cex=1)

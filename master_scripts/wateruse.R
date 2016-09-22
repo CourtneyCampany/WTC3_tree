@@ -76,7 +76,7 @@ plot(ite~VpdL, data=ite_sunsha, subset=leaflight=="sun-high",  col=suncol, xlab=
   
   text(x=0, y=15.5 ,"(a)", cex=1)
   
-  legend("topright", alllab, pch=c(16,16,16,16,17), col=c(suncol, shacol, lightscol2, "black", "black"),lty=c(-1,-1,-1,1,2),
+  legend("topright", alllab, pch=c(16,16,16,16,17), col=c(suncol, shacol, lightscol, "black", "black"),lty=c(-1,-1,-1,1,2),
          bty='n',cex=.8)
 
 ##panel2

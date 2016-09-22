@@ -23,7 +23,7 @@ gasex_agg$leaflight <- factor(gasex_agg$leaflight, levels = leaforder)
 
 #lightson <- gasex_agg[gasex_agg$leaflight != "sun-high",]
 
-cols <- c(shacol2, lightscol2,suncol2)
+cols <- c(shacol, lightscol, suncol)
 
 ####PLOTTING boxplots--------------------------------------------------------------------------------
 

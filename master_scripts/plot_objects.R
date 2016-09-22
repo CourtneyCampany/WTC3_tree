@@ -96,17 +96,18 @@ ltys <- c(1,2, 1,2)
 #d95f02-sun
 #1b9e77-shl
 
-#shadelow: 377eb8
-##02401B (green i like) (old=#4daf4a)
+#shadelow: #377eb8
+#shaehigh: #4daf4a
 
 
-suncol <- alpha("#ff7f00",0.80) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
-shacol <- newshade <- newshacol <-  alpha("#235176", 0.80) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
-lightscol <- alpha("#4daf4a", 0.80) #rgb(86,180,233,0.75*255,max=255) #alpha("darkorange2", .75)
+suncol <- alpha("#ff7f00",0.85) #rgb(230,159,0,0.75*255,max=255)   #alpha("forestgreen", alpha=.75)
+shacol <- newshade <- newshacol <-  alpha("#377eb8", 0.85) #rgb(0,114,178,0.75*255,max=255)  #alpha("yellow4", alpha=.75)
+lightscol <- alpha("#47a244", 0.85) #rgb(86,180,233,0.75*255,max=255) #alpha("darkorange2", .75)
 
 suncol2 <- "#ff7f00"
-lightscol2 <- "#4daf4a"
-shacol2 <- "#235176"
+lightscol2 <- "#47a244"
+shacol2 <- "#377eb8"
+#shacol2 <- "#235176"
 
 shacol50 <- alpha(shacol, alpha=.5)
 suncol50 <- alpha(suncol, alpha=.5)
