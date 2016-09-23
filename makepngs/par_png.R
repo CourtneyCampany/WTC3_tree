@@ -65,16 +65,16 @@ se_dat2 <- se_dat[c(1,7,2,8,3,9,4,10,5,11,6,12)]
 
 ###plot PPFD and air temp-------------------------------------------------------------------------------------------------
 
-# windows(7,7)
-par(mar=c(5,5,1,5), mgp=c(2.5,1,0), las=1,cex.axis=.8, cex.lab=1)
+png(filename = "makepngs/par.png", width = 11, height = 8.5, units = "in", res= 400)
+
+par(mar=c(5,5.5,1,5), mgp=c(3,1,0), las=1,cex.axis=1.25, cex.lab=1.75)
 PAR_bar <- barplot(par_dat, beside=TRUE, names.arg=par_agg$leaf_type, ylim=c(0, 2550), col=c(shacol,suncol), 
                      xaxt='n', ylab=parlab)
 arrows(PAR_bar, mean_dat2, PAR_bar, mean_dat2+se_dat2, length=0.1, angle=90)
 arrows(PAR_bar, mean_dat2, PAR_bar, mean_dat2-se_dat2, length=0.1, angle=90)
 box()
-legend("topright",barleg, pch = c(22,22,22), bty='n', pt.bg=c(shacol,suncol,"black"), cex=1, pt.cex=1.25,inset=.005)
+legend("topright",barleg, pch = c(22,22,22), bty='n', pt.bg=c(shacol,suncol,"black"), cex=1.5, pt.cex=1.25,inset=.005)
 
-#axis(side=1, at=c(2.5, 6.5, 10.5, 14.5), labels=boxlab, padj=.75, cex.axis=1.25)
 text(y=-175, x=c(1.5 , 4.5 , 7.5, 10.5 ,13.5 ,16.5), labels = campaigns, srt=45, xpd=TRUE)
 
 par(new=T)
@@ -83,6 +83,6 @@ with(met_amb_agg, arrows(Date, Tair_al.max.mean, Date, Tair_al.max.mean+Tair_al.
 with(met_amb_agg, arrows(Date, Tair_al.max.mean, Date, Tair_al.max.mean-Tair_al.max.se, angle=90, length=0.03, cex=1))
 
 axis(4, labels=TRUE) 
-mtexti(airtlab, 4, outer=TRUE, cex=1, off=.5)
+mtexti(airtlab, 4, outer=TRUE, cex=1.75, off=.75)
      
-# dev.off()
+dev.off()

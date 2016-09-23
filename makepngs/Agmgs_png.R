@@ -69,70 +69,62 @@ flecklwr <- gsfleck_pred$fit - (2*gsfleck_pred$se.fit)
 agm_sun <-   read.csv( "master_scripts/bootstrap_results/agm_sun.csv")
 agm_sha <-  read.csv( "master_scripts/bootstrap_results/agm_sha.csv") 
 agm_fleck <-  read.csv( "master_scripts/bootstrap_results/agm_fleck.csv") 
-##testing stats for random model comparison
-# library(nlme)
-##linear model with chamber as random effect
 
-# gmA_sun_mod <- lme(Photo ~ gm ,random=~1|chamber, data=sundat)
 gmA_sun_mod2 <- lm(Photo ~ gm_bar , data=sundat)
 
-   # summary(gmA_sun_mod)
-   # summary(gmA_sun_mod2)
-   # anova(gmA_sun_mod,gmA_sun_mod2)
-
-#   gmA_sha_mod <- lme(Photo~ gm  ,random=~1|chamber, data=shadat)
 gmA_sha_mod2 <- lm(Photo~ gm_bar  ,data=shadat)
-   # summary(gmA_sha_mod)
-   # summary(gmA_sha_mod2)
-   # anova(gmA_sha_mod,gmA_sha_mod2)
 
-#   gmA_fleck_mod <- lme(Photo~ gm  ,random=~1|chamber, data=fleckdat)
 gmA_fleck_mod2 <- lm(Photo~ gm_bar  ,data=fleckdat)
-   # summary(gmA_fleck_mod)
-   # summary(gmA_fleck_mod2)
-   # anova(gmA_fleck_mod,gmA_fleck_mod2)
 
-# ###need to test leaflight treatments against each other with A vs gm
-# gmA_leaf <- lm(Photo ~ gm*leaflight, data=gm_agg)
-# gmA_leaf2 <- lme(Photo ~ gm*leaflight ,random=~1|chamber, data=gm_agg)
-# gmA_leaf3 <- aov(Photo ~ gm*leaflight, data=gm_agg)
-# gmA_leaf4 <- aov(Photo ~ gm+leaflight, data=gm_agg)
-# 
-# summary(gmA_leaf)
-# anova(gmA_leaf4)
-# library(visreg)
-# visreg(gmA_leaf)
-# coef(gmA_leaf3)
 
-###with smoothplot
+##Ags first slide----------------------------------------------------------------------------------------------
+palette(c(shacol, suncol))
+ags1 <- gm_agg[gm_agg$leaflight != "shade-high",]
+
+png(filename = "makepngs/ags_sunshade.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mar=c(5,5.5,1,1),  mgp=c(3,1,0), las=1,cex.axis=1.5, cex.lab=1.75)
+plot(Photo~Cond, data=ags1,  col=leaflight, ylim=c(5,25), xlim=c(0,.4), xlab="", ylab="",pch="")
+par(new=TRUE)
+smoothplot(Cond, Photo, leaflight,data=ags1, kgam=5, R="chamber",ylim=c(5,25), xlim=c(0,.4),
+           linecol=c(shacol,suncol),pch="", ylab=photolab, xlab=condlab)
+points(Photo~Cond, data=ags1,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2)
+
+legend("topleft", c("Sun", "Shade-Low Light", "AT", "ET"), 
+       pch=c(16,16,16,17), col=c(suncol, shacol, "black", "black"),inset = 0.01, bty='n',cex=1.25)
+
+dev.off()
+
+##Ags second slide----------------------------------------------------------------------------------------------
 palette(c(lightscol, shacol, suncol))
- 
-# windows(10, 12)
 
-par(mfrow=c(2,1))
-#gs
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+png(filename = "makepngs/ags.png", width = 11, height = 8.5, units = "in", res= 400)
+par(mar=c(5,5.5,1,1),  mgp=c(3,1,0), las=1,cex.axis=1.5, cex.lab=1.75)
 plot(Photo~Cond, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab="", ylab="",pch="")
 par(new=TRUE)
 smoothplot(Cond, Photo, leaflight,data=gm_agg, kgam=5, R="chamber",ylim=c(5,25), xlim=c(0,.5),
-             linecol=c(lightscol, shacol,suncol),pch="", ylab=photolab, xlab=condlab)
-points(Photo~Cond, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
-  
-legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=.8)
-text(x=.5, y=24.5, "(a)", cex=1)
+           linecol=c(lightscol,shacol,suncol),pch="", ylab=photolab, xlab=condlab)
+points(Photo~Cond, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2)
+
+legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=1.25)
+
+dev.off()
+
+
+#Agm-----------------------------------------------------------------------------------------------------------
+png(filename = "makepngs/agm.png", width = 11, height = 8.5, units = "in", res= 400)
+palette(c(lightscol, shacol, suncol))
 
 #gm
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(mar=c(5,5.5,1,1),  mgp=c(3,1,0), las=1,cex.axis=1.5, cex.lab=1.75)
 plot(Photo~gm_bar, data=gm_agg,  col=leaflight, ylim=c(5,25), xlim=c(0,.5), xlab=gmlab2, ylab=photolab, pch="")
   predline(gmA_sun_mod2, col=suncol,lwd=2)
   predline(gmA_sha_mod2, col=shacol,lwd=2)
   predline(gmA_fleck_mod2, col=lightscol,lwd=2)
-  points(Photo~gm_bar, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp])
+  points(Photo~gm_bar, data=gm_agg,  col=leaflight, pch=c(16, 17)[gm_sunsha$temp], cex=2)
+  
+  legend("topleft", alllab, pch=c(16,16,16,16,17), col=allcols,inset = 0.01, bty='n',cex=1.25)
 
-text(x=.5, y=24.5, "(b)", cex=1)
-
-   
-
+dev.off()
   
 
   

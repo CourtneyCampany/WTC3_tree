@@ -76,49 +76,18 @@ Nagg <- summaryBy(leafN_area ~ chamber + leaf, data=canopy_chem, FUN=mean, keep.
 N_amax <- merge(Nagg, amax_dat, by= c("chamber", "leaf"))
 
 nitroamax_mod <- lm(Photo~leafN_area, data=N_amax)
-# library(nlme)
-# library(lme4)
-# library(lmerTest)
-# library(LMERConvenienceFunctions)
-# nitrovc_mod3 <- lmer(Photo~leafN_area+ (1|chamber),data=N_amax)
-# anova(nitrovc_mod3)
-# summary(nitrovc_mod3)
-# mcp.fnc(nitrovc_mod3)
-# source("functions and packages/r2glmm.R")
-# rsquared.glmm(nitrovc_mod3)
+
 
 ##Amax vs Narea
-#xlim=c(1.5,3.5),ylim=c(15,35),
+png(filename = "makepngs/amaxnitro.png", width = 11, height = 8.5, units = "in", res= 400)
 
-par(mar=c(4,4,1,1), las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(mar=c(5,5.5,1,5), mgp=c(3,1,0), las=1,cex.axis=1.25, cex.lab=1.75)
 plot(Photo~leafN_area, data=N_amax, col=leafcol3[as.factor(leaf)],xlim=c(01.5,3.5),ylim=c(15,35),
-       pch=c(16, 17)[pch=N_amax$temp],xlab=narealab, ylab=amaxlab, cex=1.25)
+       pch=c(16, 17)[pch=N_amax$temp],xlab=narealab, ylab=amaxlab, cex=2)
 
 ablineclip(nitroamax_mod, x1=min(N_amax$leafN_area), x2=max(N_amax$leafN_area), lwd=2, lty=3)
 
 legend("topleft", leglab2, pch=c(16,17,16,17), col=c(suncol,suncol, 
-      lightscol, lightscol),inset = 0.01, bty='n',cex=1, pt.cex=1.25) 
+      lightscol, lightscol),inset = 0.01, bty='n',cex=1.25) 
 
-#dev.off()
-##Amax stats for manuscript----------------------------------------------------------------------------------------------------  
-# amax_dat$tukeyid <- as.factor(paste(amax_dat$leaf, amax_dat$temp, sep="-"))
-
-# #no temp
-# amax_temp <- lme(Photo ~ temp ,random=~1|chamber, data=amax_dat)
-# summary(amax_temp)
-# anova(amax_temp)
-#
-# ##full model (sun_shade diff)
-# amax_leaf <- lme(Photo ~ tukeyid, random=~1|chamber, data=amax_dat)
-# summary(amax_leaf)
-# anova(amax_leaf)
-# library(visreg)
-# visreg(amax_leaf)
-#
-# tukey_amax<- glht(amax_leaf, linfct = mcp(tukeyid = "Tukey"))
-# amax_siglets<- cld(tukey_amax)
-# amax_siglets2 <- amax_siglets$mcletters$Letters
-# 
-# write.csv(amax_siglets2, "master_scripts/sigletters/slr_amax.csv", row.names=FALSE)
-# amax_agg <- summaryBy(Photo ~ leaf+temp, data=amax_dat, FUN=c(mean, se))
-# write.csv(amax_agg, "calculated_data/amax.csv", row.names = FALSE)
+dev.off()
