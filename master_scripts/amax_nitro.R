@@ -54,6 +54,8 @@ acishade <- merge(acishade, treatments)
 amax_dat <- rbind(shademax, sunmax)  
   amax_dat <- merge(amax_dat, treatments)
   
+write.csv(amax_dat, "calculated_data/amax_raw.csv", row.names=FALSE)
+  
 ###Narea data------------------------------------------------------------------------------------------------------
 leaf_chem <- read.csv("raw data/leaf_chem.csv")
 leaf_mass <- read.csv("raw data/leaf_data.csv")

@@ -30,6 +30,7 @@ canopy_chem <- merge(leaf_mass[leaf_mass$wp_type=="mid",c(1, 3:4, 7:8)], leaf_ch
   canopy_chem<- add_campaign(canopy_chem)
 
 canopy_chem2 <- canopy_chem[canopy_chem$drydown=="control",]
+# write.csv(canopy_chem2, "calculated_data/leaftraits_figshare.csv", row.names=FALSE)
 
 canopy_agg <- summaryBy(lma+leafN_area+ c13 ~ leaf + temp, data=canopy_chem2, FUN=c(mean, se))
 
