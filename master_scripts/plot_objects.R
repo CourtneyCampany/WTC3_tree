@@ -52,8 +52,8 @@ cicalab <- "Ci/Ca"
 cicalab2 <- (expression(italic(C)[i]/italic(C)[a]))
 
 drawdownlab <- expression(italic(C)[i]-italic(C)[c]~~(mu*mol~mol^-1))
-drawdownlab2 <- expression(italic(C)[a]-italic(C)[i]~~(mu*mol~mol^-1))
-drawdownlab3 <- expression(italic(C)[i]-italic(C)[c]~~(mu*mol~mol^-1))
+drawdownlab2 <- expression(italic(C)[a]-italic(C)[i]~~(paste(mu,bar,sep="")))
+drawdownlab3 <- expression(italic(C)[i]-italic(C)[c]~~(paste(mu,bar,sep="")))
 
 relparlab <- expression(l[shade]:l[sun])
 relnitrolab <- expression(N[shade]:N[sun])
