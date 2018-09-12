@@ -42,7 +42,7 @@ opts_knit$set(root.dir = '../')
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Set Flag to include figures in text or not.
-includeFigs <- FALSE
+includeFigs <- TRUE
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}

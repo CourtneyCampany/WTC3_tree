@@ -185,12 +185,13 @@ gmcalc_func <- function(x, a=4.4, ab= 2.9, b=29, f=16.2,del_growth = -8 , delR=-
       x$t3 <- (1+x$t)/(1-x$t)
                         
       x$Di <- x$a_prime * x$t2+ (x$t3 * b-x$a_prime * x$t2) * x$CiCa
-      x$DiminusDo <- x$Dix$DELTA
+      x$DiminusDo <- x$Di - x$DELTA
                           
       x$rd_term2 <- x$t3- x$rd_term
-      x$f_term2 <- x$t3x$f_term
+      x$f_term2 <- x$t3 - x$f_term
                             
-      x$gm <- x$t3 * (b1.8x$Rd * e / (x$Rd+x$Photo)) * x$Photo/x$CO2S/(x$DiminusDox$rd_term2x$f_term2)
+      x$gm <- x$t3 * (b1.8x$Rd * e / (x$Rd+x$Photo)) * x$Photo/x$CO2S/(x$DiminusDo - 
+                      x$rd_term2 - x$f_term2)
       x$gm_bar <- x$gm*100/x$Press
                               
       #different fractionation components as outputs--------------------------------------------------------------------
