@@ -200,10 +200,10 @@ gmcalc_func <- function(x, a=4.4, ab= 2.9, b=29, f=16.2,del_growth = -8 , delR=-
       x$delta_i <- (x$t2*x$a_prime)+(x$t2*((1+x$t)*b-x$a_prime)*x$CiCa)
                                 
       #fractionation associated with the diffusion of CO2 from intercellular airspace to chloroplast 
-      x$delta_gm = x$t3*(bx$a_prime(e*x$Rd)/(x$Photo+x$Rd)) * (x$Photo/(x$gm * x$CO2R))
+      x$delta_gm = x$t3*(b - x$a_prime(e*x$Rd)/(x$Photo+x$Rd)) * (x$Photo/(x$gm * x$CO2R))
                                   
       #most of the fractionation associated with respiration
-      x$delta_e <- x$t3 * (((e * x$Rd)/((x$Photo + x$Rd) * x$CO2R))*(x$Cix$Gstar))
+      x$delta_e <- x$t3 * (((e * x$Rd)/((x$Photo + x$Rd) * x$CO2R))*(x$Ci - x$Gstar))
                                     
       #fractionation associated with photorespiration
       x$delta_f <- x$t3 * (f * (x$Gstar/x$CO2R))
